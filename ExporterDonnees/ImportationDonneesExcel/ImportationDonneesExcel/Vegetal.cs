@@ -4,7 +4,17 @@ using System.Text;
 
 namespace ImportationDonneesExcel
 {
-    class Vegetal
+    internal class Vegetal
     {
+        private string saison;
+        private string typeVegetal;
+        private string nomVegetal;
+        private int joursConservation;
+        private string fonctionnement;
+
+        public override string ToString()
+        {
+
+        }
     }
 }
