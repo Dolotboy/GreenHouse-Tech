@@ -1,4 +1,3 @@
-INSERT INTO tblVegetal (saison, typeVegetal, nomVegetal, joursConservation, fonctionnement) VALUES (cm entre les plants, cm entre les rangs,Légumes,Jours de maturation,Voisinage favorable)
 INSERT INTO tblVegetal (saison, typeVegetal, nomVegetal, joursConservation, fonctionnement) VALUES (10, 30,Ail,80,Betterave, céleri, chou, laitue, pomme de terre, tomate)
 INSERT INTO tblVegetal (saison, typeVegetal, nomVegetal, joursConservation, fonctionnement) VALUES (40, 60,Aubergine,70,Haricot, piment, pois, pomme de terre)
 INSERT INTO tblVegetal (saison, typeVegetal, nomVegetal, joursConservation, fonctionnement) VALUES (, ,,,)
