@@ -64,19 +64,23 @@ namespace OutilImportation
 
         static string CreateTestJson(List<Vegetal> veggies)
         {
-            string jsonContent = "";
+            string jsonContent = "{ \n\"vegetals\":[";
             foreach (Vegetal veg in veggies)
             {
                 PropertyInfo[] props = veg.GetProperties();
                 for (int i = 0; i < 50; i++)
                 {
                     jsonContent += "\n\n{";
-                    foreach (PropertyInfo prop in props)
-                        jsonContent += "\n\t\"" + prop.ToString() + "\" : \"" + prop.GetValue(veg) + "\",";
-                    jsonContent += "\n}";
+                    for(int j = 0; j < props.Length; j++)
+                    {
+                        jsonContent += "\n\t\"" + props[j].ToString().Split(' ')[1] + "\" : \"" + props[j].GetValue(veg) + "\"";
+                        if (j != props.Length - 1)
+                            jsonContent += ",";
+                    }
+                    jsonContent += "\n},";
                 }
             }
-            return jsonContent;
+            return jsonContent += "\n]\n}";
         }
 
         static void SaveTestJson(string jsonContent)
