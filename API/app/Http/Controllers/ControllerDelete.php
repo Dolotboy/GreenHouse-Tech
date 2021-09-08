@@ -7,4 +7,4 @@ use Illuminate\Http\Request;
 class ControllerDelete extends Controller
 {
     //
-}
+} 
