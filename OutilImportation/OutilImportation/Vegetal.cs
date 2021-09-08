@@ -9,16 +9,27 @@ namespace OutilImportation
 {
     public class Vegetal
     {
-        public string Saison { get; set; }
-        public string TypeVegetal { get; set; }
-        public string NomVegetal { get; set; }
-        public string JoursConservation { get; set; }
-        public string Fonctionnement { get; set; }
+        public string Neighborhood { get; set; }
+        public string ConservationDays { get; set; }
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public string Comment { get; set; }
+        public string TempMin { get; set; }
+        public string TempMax { get; set; }
+        public string HumidityMin { get; set; }
+        public string HumidityMax { get; set; }
+        public string Light { get; set; }
+        public string LengthBetweenPlantsMin { get; set; }
+        public string LengthBetweenPlantsMax { get; set; }
+        public string MaturationDays { get; set; }
+        public string GroundType { get; set; }
 
         public override string ToString()
         {
-            return $"INSERT INTO tblVegetal (saison, typeVegetal, nomVegetal, joursConservation, fonctionnement) " +
-                   $"VALUES ({Saison}, {TypeVegetal},{NomVegetal},{JoursConservation},{Fonctionnement})";
+            return $"INSERT INTO tblVegetal (conservationDays, type,name, comment, tempMin, tempMax, humidityMin, humidityMax, Light, LengthBetweenPlantsMin" +
+                   $"LengthBetweenPlantsMax, MaturationDays, GroundType, eighborhood)n " +
+                   $"VALUES ({ConservationDays},{Type},{Name},{Comment},{TempMin},{TempMax},{HumidityMin},{HumidityMax},{Light}," +
+                   $"{LengthBetweenPlantsMin},{LengthBetweenPlantsMax},{MaturationDays},{GroundType}, {Neighborhood})";
         }
 
         public PropertyInfo[] GetProperties()
