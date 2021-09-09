@@ -79,6 +79,16 @@ Route::post('/delete/favorite', [ControllerDelete::class, 'indexProblem'])->name
 
 Route::get("/delete/favorite/{id}", [ControllerDelete::class, 'deleteFavorite'],function ($id){})->name('deleteFavorite');
 
+
+Route::post('/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('newAssignProblem');
+
+Route::get('/assign/problem/{id}', [ControllerAssign::class, 'assignProblem'],function ($id){})->name('assignProblem');
+
+
+Route::post('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('deleteUnassignProblem');
+
+Route::get('/unassign/problem/{id}', [ControllerUnassign::class, 'unassignProblem'],function ($id){})->name('unassignProblem');
+
 // ***************** PROBLEM *******************
 
 // ***************** PROFIL *******************
@@ -103,3 +113,36 @@ Route::post('/delete/profil', [ControllerDelete::class, 'indexProfil'])->name('d
 Route::get("/delete/profil/{id}", [ControllerDelete::class, 'deleteProfil'],function ($id){})->name('deleteProfil');
 
 // ***************** PROFIL *******************
+
+// ***************** FAVORABLE CONDITION *******************
+
+Route::post('/new/condition', [ControllerAdd::class, 'indexFavCondition'])->name('newFavCondition');
+
+Route::post('/new/condition/addFavCondition', [ControllerAdd::class, 'addFavCondition'])->name('addFavCondition');
+
+
+Route::post('/edit/condition', [ControllerEdit::class, 'indexFavCondition'])->name('editSearchFavCondition');
+
+Route::post('/edit/condition/editFavCondition', [ControllerEdit::class, 'EditFavCondition'])->name('editFavCondition');
+
+
+Route::post('/search/condition', [ControllerDetail::class, 'indexFavCondition'])->name('searchFavCondition');
+
+Route::get("search/condition/{id}", [ControllerDetail::class, 'searchFavCondition'],function ($id){})->name('detailFavCondition');
+
+
+Route::post('/delete/condition', [ControllerDelete::class, 'indexFavCondition'])->name('deleteSearchFavCondition');
+
+Route::get("/delete/condition/{id}", [ControllerDelete::class, 'deleteFavCondition'],function ($id){})->name('deleteFavCondition');
+
+
+Route::post('/assign/condition', [ControllerAssign::class, 'indexFavCondition'])->name('newAssignFavCondition');
+
+Route::get('/assign/condition/{id}', [ControllerAssign::class, 'assignFavCondition'],function ($id){})->name('assignFavCondition');
+
+
+Route::post('/unassign/condition', [ControllerUnassign::class, 'indexFavCondition'])->name('deleteUnassignFavCondition');
+
+Route::get('/unassign/condition/{id}', [ControllerUnassign::class, 'unassignFavCondition'],function ($id){})->name('unassignFavCondition');
+
+// ***************** FAVORABLE CONDITION *******************

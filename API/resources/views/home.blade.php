@@ -107,6 +107,60 @@
                 </div>
             </div>
 
+            <div class='midContainer'>
+                <div class='cbtn'>
+                    <a href="{{route('newFavCondition')}}">
+                        <h2>Ajouter une condition favorable</h2> 
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('editSearchFavCondition')}}">
+                        <h2>Modifier une condition favorable</h2> 
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('searchFavCondition')}}">
+                        <h2>Chercher une condition favorable</h2>
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('deleteSearchFavCondition')}}">
+                        <h2>Supprimer une condition favorable</h2>
+                    </a>
+                </div>
+            </div>
+
+            <div class='midContainer'>
+                <div class='cbtn'>
+                    <a href="{{route('newAssignFavCondition')}}">
+                        <h2>Assigner une condition favorable</h2> 
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('deleteUnassignFavCondition')}}">
+                        <h2>Désassigner une condition favorable</h2> 
+                    </a>
+                </div>
+            </div>
+
+            <div class='midContainer'>
+                <div class='cbtn'>
+                    <a href="{{route('newAssignProblem')}}">
+                        <h2>Assigner un problème</h2> 
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('deleteUnassignProblem')}}">
+                        <h2>Désassigner un problème</h2> 
+                    </a>
+                </div>
+            </div>
+
         </div>
 @endsection
 
