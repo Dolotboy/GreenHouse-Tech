@@ -24,9 +24,9 @@ Route::get('/', function () {
 
 // ***************** VEGETABLE *******************
 
-Route::post('/new/vegetable', [ControllerAdd::class, 'indexVegetable'])->name('newVegetable');
+Route::get('/new/vegetable', [ControllerAdd::class, 'indexVegetable'])->name('newVegetable');
 
-Route::post('/new/vegetable/addVegetable', [ControllerAdd::class, 'addVegetable'])->name('addVegetable');
+
 
 
 Route::post('/edit/vegetable', [ControllerEdit::class, 'indexVegetable'])->name('editSearchVegetable');
