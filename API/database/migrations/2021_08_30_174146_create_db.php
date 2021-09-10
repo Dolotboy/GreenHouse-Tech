@@ -13,77 +13,98 @@ class CreateDb extends Migration
      */
     public function up()
     {
-        Schema::create('tblVegetal', function (Blueprint $table) {
-            $table->bigIncrements('idVegetal');
-            $table->string('nomVegetal');
-            $table->string('saison');
-            $table->string('typeVegetal');
-            $table->string('typeSol');
-            $table->integer('joursConservation');
-            $table->longText('fonctionnement');
-            $table->integer('tblConditionFavorable_idConditionFavorable'); // Foreign à tblConditionFavorable
-            $table->integer('tblVegetalSemi_idSemi'); // Foreign à tblVegetalSemi
+        Schema::create('tblPlant', function (Blueprint $table) {
+            $table->bigIncrements('idPlant');
+            $table->string('plantName');
+            $table->string('season');
+            $table->string('plantType');
+            $table->string('groundType');
+            $table->integer('daysConservation');
+            $table->longText('functioning');
+            $table->integer('tblPlantSowing_idSowing'); // Foreign à tblPlantSowing
         });
 
-        Schema::create('tblVegetalSemi', function (Blueprint $table) {
-            $table->bigIncrements('idSemi');
-            $table->date('dateSemi');
+ 
+
+        Schema::create('tblPlantSowing', function (Blueprint $table) {
+            $table->bigIncrements('idSowing');
+            $table->date('dateSowing');
         });
+
+ 
 
         Schema::create('tblFruit', function (Blueprint $table) {
-            $table->integer('tblVegetal_idVegetal'); // Foreign à tblVegetal
+            $table->integer('tblPlant_idVegetable'); // Foreign à tblPlant
         });
 
-        Schema::create('tblLegume', function (Blueprint $table) {
-            $table->integer('tblVegetal_idVegetal'); // Foreign à tblVegetal
+ 
+
+        Schema::create('tblVegetable', function (Blueprint $table) {
+            $table->integer('tblPlant_idPlant'); // Foreign à tblPlant
         });
 
-        Schema::create('tblVegetale_tblProbleme', function (Blueprint $table) {
-            $table->integer('tblVegetale_idVegetal'); // Foreign à tblVegetal
-            $table->integer('tblProbleme_idProbleme'); // Foreign à tblProbleme
+ 
+
+        Schema::create('tblPlant_tblProblem', function (Blueprint $table) {
+            $table->integer('tblPlant_idPlant'); // Foreign à tblPlant
+            $table->integer('tblProblem_idProblem'); // Foreign à tblProblem
         });
 
-        Schema::create('tblProbleme', function (Blueprint $table) {
-            $table->bigIncrements('idProbleme');
-            $table->string('typeProbleme');
+ 
+
+        Schema::create('tblProblem', function (Blueprint $table) {
+            $table->bigIncrements('idProblem');
+            $table->string('typeProblem');
             $table->integer('importance');
             $table->string('description');
         });
 
-        Schema::create('tblFavoris', function (Blueprint $table) {
-            $table->integer('tblVegetale_idVegetal'); // Foreign à tblVegetal
-            $table->integer('tblProfil_idProfil'); // Foreign à tblProfil
+ 
+
+        Schema::create('tblFavorites', function (Blueprint $table) {
+            $table->integer('tblPlant_idPlant'); // Foreign à tblPlant
+            $table->integer('tblProfile_idProfile'); // Foreign à tblProfile
         });
 
-        Schema::create('tblProfil', function (Blueprint $table) {
-            $table->bigIncrements('idProfil');
+ 
+
+        Schema::create('tblProfile', function (Blueprint $table) {
+            $table->bigIncrements('idProfile');
             $table->string('email');
-            $table->binary('mdp');
-            $table->string('sel');
-            $table->string('prenom');
-            $table->string('nom');
+            $table->binary('password');
+            $table->string('salt');
+            $table->string('firstName');
+            $table->string('lastName');
         });
 
-        Schema::create('tblVegetal_tblConditionFavorableRangeDate', function (Blueprint $table) {
-            $table->integer('tblVegetal_idVegetal');
-            $table->integer('tblConditionFavorableRangeDate_idRangeDate');
+ 
+
+        Schema::create('tblDateRangeFavorableCondition', function (Blueprint $table) {
+            $table->integer('tblPlant_idPlant');
+            $table->integer('tbltblDateRangeFavorableCondition_idRangeDate');
         });
 
-        Schema::create('tblConditionFavorableRangeDate', function (Blueprint $table) {
+ 
+
+        Schema::create('tblDateRangeFavorableCondition', function (Blueprint $table) {
             $table->bigIncrements('idRangeDate');
             $table->string('variableEvalue');
-            $table->date('debut');
-            $table->date('fin'); 
+            $table->date('begin');
+            $table->date('end'); 
         });
 
-        Schema::create('tblVegetal_tblConditionFavorableRangeNb', function (Blueprint $table) {
-            $table->integer('tblVegetal_idVegetal');
-            $table->integer('tblConditionFavorableRangeDate_idRangeNb');
+ 
+
+        Schema::create('tblPlant_tblDateRangeFavorableConditionNb', function (Blueprint $table) {
+            $table->integer('tblPlant_idPlant');
+            $table->integer('tblDateRangeFavorableCondition_idRangeNb');
         });
 
-        Schema::create('tblConditionFavorableRangeNb', function (Blueprint $table) {
+ 
+
+        Schema::create('tblRangeFavorableConditionNb', function (Blueprint $table) {
             $table->bigIncrements('idRangeNb');
-            $table->string('variableEvalue');
+            $table->string('rangeType');
             $table->double('min');
             $table->double('max'); 
             $table->string('unite'); 
