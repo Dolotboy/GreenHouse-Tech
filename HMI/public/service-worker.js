@@ -1,6 +1,8 @@
 var urlsToCache = [
   '/',
-  'testIndexedDb.js'
+  'testIndexedDb.js',
+  'index.html',
+  'JsonContent.json'
 ];
 
 self.addEventListener('install', (event) => {
