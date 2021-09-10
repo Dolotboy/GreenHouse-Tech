@@ -24,33 +24,23 @@ class CreateDb extends Migration
             $table->integer('tblPlantSowing_idSowing'); // Foreign à tblPlantSowing
         });
 
- 
-
         Schema::create('tblPlantSowing', function (Blueprint $table) {
             $table->bigIncrements('idSowing');
             $table->date('dateSowing');
         });
 
- 
-
         Schema::create('tblFruit', function (Blueprint $table) {
             $table->integer('tblPlant_idVegetable'); // Foreign à tblPlant
         });
-
- 
 
         Schema::create('tblVegetable', function (Blueprint $table) {
             $table->integer('tblPlant_idPlant'); // Foreign à tblPlant
         });
 
- 
-
         Schema::create('tblPlant_tblProblem', function (Blueprint $table) {
             $table->integer('tblPlant_idPlant'); // Foreign à tblPlant
             $table->integer('tblProblem_idProblem'); // Foreign à tblProblem
         });
-
- 
 
         Schema::create('tblProblem', function (Blueprint $table) {
             $table->bigIncrements('idProblem');
@@ -59,14 +49,10 @@ class CreateDb extends Migration
             $table->string('description');
         });
 
- 
-
         Schema::create('tblFavorites', function (Blueprint $table) {
             $table->integer('tblPlant_idPlant'); // Foreign à tblPlant
             $table->integer('tblProfile_idProfile'); // Foreign à tblProfile
         });
-
- 
 
         Schema::create('tblProfile', function (Blueprint $table) {
             $table->bigIncrements('idProfile');
@@ -77,15 +63,6 @@ class CreateDb extends Migration
             $table->string('lastName');
         });
 
- 
-
-        Schema::create('tblDateRangeFavorableCondition', function (Blueprint $table) {
-            $table->integer('tblPlant_idPlant');
-            $table->integer('tbltblDateRangeFavorableCondition_idRangeDate');
-        });
-
- 
-
         Schema::create('tblDateRangeFavorableCondition', function (Blueprint $table) {
             $table->bigIncrements('idRangeDate');
             $table->string('variableEvalue');
@@ -93,14 +70,10 @@ class CreateDb extends Migration
             $table->date('end'); 
         });
 
- 
-
         Schema::create('tblPlant_tblDateRangeFavorableConditionNb', function (Blueprint $table) {
             $table->integer('tblPlant_idPlant');
             $table->integer('tblDateRangeFavorableCondition_idRangeNb');
         });
-
- 
 
         Schema::create('tblRangeFavorableConditionNb', function (Blueprint $table) {
             $table->bigIncrements('idRangeNb');
@@ -109,12 +82,6 @@ class CreateDb extends Migration
             $table->double('max'); 
             $table->string('unite'); 
         });
-
-        /*Schema::create('', function (Blueprint $table) {
-            $table->id('');
-            $table->int('');
-            $table->int('');
-        });*/
     }
 
     /**
