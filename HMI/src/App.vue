@@ -1,8 +1,9 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <ul>
+    <li><router-link to="/">Acceuil</router-link></li> 
+    <li><router-link to="/about">À propos</router-link></li>
+    <li style="float:left"><router-link to="/login">Se connecter</router-link></li>
+  </ul>
   <router-view/>
 </template>
 
@@ -12,19 +13,39 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
 }
 
-#nav {
-  padding: 30px;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #4E5754 ;
+  display: flex;
+  justify-content: center;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+li {
+  float: left;
+  border-right: 1px solid darkgrey;
+  border-left: 1px solid darkgrey; 
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 15px;
 }
+
+li a:hover{
+  background-color: black;
+}
+
+.active {
+  background-color : cyan;
+}
+
 </style>

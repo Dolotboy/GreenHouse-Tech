@@ -1,18 +1,43 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <h1>Ceci est la page d'acceuil</h1> 
+  <Details></Details>
+  <!-- #####LOOP TO DISPLAY EVERY PLANT
+    <ul>
+      {foreach $plants as $plant}
+      <li>{@plant}</li>
+      {/foreach}
+    </ul>
+  -->
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Details from '../components/Details.vue'
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
-  }
+  components:{
+    Details
+  }, 
+  data(){
+      return{
+          products : ""
+      }
+  },
+  mounted(){
+      //this.GetAllPlants()
+  },
+  methods :{
+    GetAllPlants(url){
+      $.get(url, function(donnees, status){
+          for(const [key, value] of Object.entries(donnees.results))
+              ships.push(value);
+          if(donnees.next != null)
+              GetAllPlants(donnees.next);
+      })   
+    }
+  }   
 }
 </script>
+
+<style>
+
+</style>
