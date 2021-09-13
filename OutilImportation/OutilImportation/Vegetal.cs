@@ -26,10 +26,23 @@ namespace OutilImportation
 
         public override string ToString()
         {
-            return $"INSERT INTO tblVegetal (conservationDays, type,name, comment, tempMin, tempMax, humidityMin, humidityMax, Light, LengthBetweenPlantsMin" +
-                   $"LengthBetweenPlantsMax, MaturationDays, GroundType, eighborhood)n " +
-                   $"VALUES ({ConservationDays},{Type},{Name},{Comment},{TempMin},{TempMax},{HumidityMin},{HumidityMax},{Light}," +
-                   $"{LengthBetweenPlantsMin},{LengthBetweenPlantsMax},{MaturationDays},{GroundType}, {Neighborhood})";
+            string tblPlant = $"INSERT INTO tblPlant (plantName, plantType, groundType, daysConservation, functioning)" +
+                              $"VALUES ('{Name}','{Type}','{GroundType}',{ConservationDays},'{Comment}');";
+            string temp = $"INSERT INTO tblRangeFavorableConditionNb (rangeType, min, max, unit) VALUES ('temperature',{TempMin},{TempMax},'°C');";
+            string hum = $"INSERT INTO tblRangeFavorableConditionNb (rangeType, min, max, unit) VALUES ('humidity',{HumidityMin},{HumidityMax},'%');";
+            string lengthBetweenPlants = $"INSERT INTO tblRangeFavorableConditionNb (rangeType, min, max, unit) VALUES ('plantsSpacing','{LengthBetweenPlantsMin}','{LengthBetweenPlantsMax}','cm');";
+            string declareTempId = $"SET @tempId = (SELECT idRangeNb FROM tblRangeFavorableConditionNb ORDER BY idRangeNb DESC LIMIT 1);";
+            string declareHumId = $"SET @humId = (SELECT idRangeNb FROM tblRangeFavorableConditionNb ORDER BY idRangeNb DESC LIMIT 1);";
+            string declareLengthId = $"SET @lengthId = (SELECT idRangeNb FROM tblRangeFavorableConditionNb ORDER BY idRangeNb DESC LIMIT 1);";
+            string declarePlantId = $"SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1);";
+            string insertForeigns = $"INSERT INTO tblPlant_tblRangeFavorableConditionNb (tblPlant_idPlant, tblDateRangeFavorableCondition_idRangeNb) " +
+                                    $"VALUES (@plantId, @tempId);\n" +
+                                    $"INSERT INTO tblPlant_tblRangeFavorableConditionNb (tblPlant_idPlant, tblDateRangeFavorableCondition_idRangeNb) " +
+                                    $"VALUES (@plantId, @humId);\n" +
+                                    $"INSERT INTO tblPlant_tblRangeFavorableConditionNb (tblPlant_idPlant, tblDateRangeFavorableCondition_idRangeNb) " +
+                                    $"VALUES (@plantId, @lengthId);\n";
+
+            return $"{temp} \n {declareTempId} \n {hum} \n {declareHumId} \n {lengthBetweenPlants} \n {declareLengthId} \n {tblPlant} \n {declarePlantId} \n {insertForeigns} \n";
         }
 
         public PropertyInfo[] GetProperties()
