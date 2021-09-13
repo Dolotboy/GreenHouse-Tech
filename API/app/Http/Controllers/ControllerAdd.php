@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Plant;
 use App\Models\Problem;
-use App\Models\FavorableCondition;
+use App\Models\FavorableConditionDate;
+use App\Models\FavorableConditionNb;
 use App\Models\Favorite;
 use App\Models\Profile;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class ControllerAdd extends Controller
@@ -85,8 +87,11 @@ class ControllerAdd extends Controller
 
         $profile = new Profile();
 
-        $profile->tblPlant_idPlant = $request->tblPlant_idPlant;
-        $profile->tblProfile_idProfile = $request->tblProfile_idProfile;
+        $profile->email = $request->email;
+        $profile->password = $request->password;
+        $profile->salt = Hash::make($request->password);
+        $profile->firstName = $request->firstName;
+        $profile->lastName = $request->lastName;
         
         $profile->save();
 
@@ -98,7 +103,30 @@ class ControllerAdd extends Controller
         return view('');
     }
 
-    public function addFavCondition(Request $request)
+    public function addFavCondition(Request $request, $type)
     {
+        $request =  json_decode(file_get_contents('php://input'));
+
+        if ($type == 1)
+        {
+            $favorableCondition = new FavorableConditionDate();
+
+            $favorableCondition->variableEvalue = $request->variableEvalue;
+            $favorableCondition->begin = $request->begin;
+            $favorableCondition->end = $request->end;
+        }
+        else if ($type == 2)
+        {
+            $favorableCondition = new FavorableConditionNb();
+
+            $favorableCondition->rangeType = $request->rangeType;
+            $favorableCondition->min = $request->min;
+            $favorableCondition->max = $request->max;
+            $favorableCondition->unit = $request->unit;
+        }
+        
+        $favorableCondition->save();
+
+        return ("La condition favorable a été ajouté");
     }
 }

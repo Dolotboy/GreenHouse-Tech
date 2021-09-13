@@ -16,7 +16,7 @@ use App\Http\Controllers\ControllerDelete;
 
 Route::post('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('addPlant');
 
-Route::put('/edit/plant/editPlant', [ControllerEdit::class, 'EditPlant'])->name('editPlant');
+Route::put('/edit/plant/editPlant', [ControllerEdit::class, 'editPlant'])->name('editPlant');
 
 Route::get("search/plant/{id}", [ControllerDetail::class, 'searchPlant'],function ($id){})->name('detailPlant');
 
@@ -28,7 +28,7 @@ Route::delete("/delete/plant/{id}", [ControllerDelete::class, 'deletePlant'],fun
 
 Route::post('/new/problem/addProblem', [ControllerAdd::class, 'addProblem'])->name('addProblem');
 
-Route::put('/edit/problem/editProblem', [ControllerEdit::class, 'EditProblem'])->name('editProblem');
+Route::put('/edit/problem/editProblem', [ControllerEdit::class, 'editProblem'])->name('editProblem');
 
 Route::get("search/problem/{id}", [ControllerDetail::class, 'searchProblem'],function ($id){})->name('detailProblem');
 
@@ -52,7 +52,7 @@ Route::delete("/delete/favorite/{id}", [ControllerDelete::class, 'deleteFavorite
 
 Route::post('/new/profile/addProfile', [ControllerAdd::class, 'addProfile'])->name('addProfile');
 
-Route::put('/edit/profile/editVegetable', [ControllerEdit::class, 'EditProfile'])->name('editProfile');
+Route::put('/edit/profile/editVegetable', [ControllerEdit::class, 'editProfile'])->name('editProfile');
 
 Route::get("search/profile/{id}", [ControllerDetail::class, 'searchProfile'],function ($id){})->name('detailProfile');
 
@@ -62,9 +62,9 @@ Route::delete("/delete/profile/{id}", [ControllerDelete::class, 'deleteProfile']
 
 // ***************** FAVORABLE CONDITION *******************
 
-Route::post('/new/condition/addFavCondition', [ControllerAdd::class, 'addFavCondition'])->name('addFavCondition');
+Route::post('/new/condition/addFavCondition/{type}', [ControllerAdd::class, 'addFavCondition'],function ($type){})->name('addFavCondition');
 
-Route::put('/edit/condition/editFavCondition', [ControllerEdit::class, 'EditFavCondition'])->name('editFavCondition');
+Route::put('/edit/condition/editFavCondition', [ControllerEdit::class, 'editFavCondition'])->name('editFavCondition');
 
 Route::get("search/condition/{id}", [ControllerDetail::class, 'searchFavCondition'],function ($id){})->name('detailFavCondition');
 
