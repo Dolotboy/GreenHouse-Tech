@@ -29,15 +29,24 @@ namespace OutilImportation
             Excel.Worksheet ws = (Excel.Worksheet)wb.Sheets[1];
             Excel.Range range = ws.UsedRange;
 
-            for (int i = 2; i < range.Rows.Count; i++)
+            for (int i = 2; i < 6; i++)
             {
                 Vegetal veg = new Vegetal()
                 {
-                    Saison = ConvertCellToString(range.Cells[i, 2]),
-                    TypeVegetal = ConvertCellToString(range.Cells[i, 3]),
-                    NomVegetal = ConvertCellToString(range.Cells[i, 1]),
-                    JoursConservation = ConvertCellToString(range.Cells[i, 4]),
-                    Fonctionnement = ConvertCellToString(range.Cells[i, 5])
+                    Name = ConvertCellToString(range.Cells[i, 1]),
+                    TempMin = ConvertCellToString(range.Cells[i, 2]),
+                    TempMax = ConvertCellToString(range.Cells[i, 3]),
+                    HumidityMin = ConvertCellToString(range.Cells[i, 4]),
+                    HumidityMax = ConvertCellToString(range.Cells[i, 5]),
+                    Light = ConvertCellToString(range.Cells[i, 6]),
+                    LengthBetweenPlantsMin = ConvertCellToString(range.Cells[i, 7]),
+                    LengthBetweenPlantsMax = ConvertCellToString(range.Cells[i, 8]),
+                    MaturationDays = ConvertCellToString(range.Cells[i, 9]),
+                    Neighborhood = ConvertCellToString(range.Cells[i, 10]),
+                    Comment = ConvertCellToString(range.Cells[i, 11]),
+                    GroundType = ConvertCellToString(range.Cells[i, 12]),
+                    ConservationDays = ConvertCellToString(range.Cells[i, 13]),
+                    Type = ConvertCellToString(range.Cells[i, 14])
                 };
                 veggies.Add(veg);
                 if (i % 5 == 0)
@@ -64,19 +73,23 @@ namespace OutilImportation
 
         static string CreateTestJson(List<Vegetal> veggies)
         {
-            string jsonContent = "";
+            string jsonContent = "{ \n\"vegetals\":[";
             foreach (Vegetal veg in veggies)
             {
                 PropertyInfo[] props = veg.GetProperties();
                 for (int i = 0; i < 50; i++)
                 {
                     jsonContent += "\n\n{";
-                    foreach (PropertyInfo prop in props)
-                        jsonContent += "\n\t\"" + prop.ToString() + "\" : \"" + prop.GetValue(veg) + "\",";
-                    jsonContent += "\n}";
+                    for(int j = 0; j < props.Length; j++)
+                    {
+                        jsonContent += "\n\t\"" + props[j].ToString().Split(' ')[1] + "\" : \"" + props[j].GetValue(veg) + "\"";
+                        if (j != props.Length - 1)
+                            jsonContent += ",";
+                    }
+                    jsonContent += "\n},";
                 }
             }
-            return jsonContent;
+            return jsonContent += "\n]\n}";
         }
 
         static void SaveTestJson(string jsonContent)

@@ -4,7 +4,7 @@
 @parent
     <div id='mainContainer'>
         
-        <form action='{{route('addVegetable')}}' method='POST'>
+        <form action='{{route('addVegetal')}}' method='POST'>
             @csrf
             @method('PUT')
 

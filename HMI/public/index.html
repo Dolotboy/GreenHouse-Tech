@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="">
+<html manifest="=iosManifest.cfm" lang="">
   <head>
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+    <!--ios support-->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -15,21 +16,22 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script src="testIndexedDb.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
     navigator.serviceWorker.register('service-worker.js').then(function(registration) {
     // Registration was successful
-    console.log('Registered!');
+    alert('Registered!');
     }, function(err) {
     // registration failed :(
-    console.log('ServiceWorker registration failed: ', err);
+    alert('ServiceWorker registration failed: ', err);
     }).catch(function(err) {
-    console.log(err);
+    alert(err);
     });
     });
     } else {
-    console.log('service worker is not supported');
+    alert('service worker is not supported');
     }
 
   navigator.serviceWorker.ready.then(function(registration) {

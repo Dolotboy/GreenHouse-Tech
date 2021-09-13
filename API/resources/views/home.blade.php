@@ -17,26 +17,26 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newVegetable')}}">
-                        <h2>Ajouter un vegetal</h2> 
+                    <a href="{{route('newPlant')}}">
+                        <h2>Ajouter une plante</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('editSearchVegetable')}}">
-                        <h2>Modifier un vegetal</h2> 
+                    <a href="{{route('editSearchPlant')}}">
+                        <h2>Modifier une plante</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('searchVegetable')}}">
-                        <h2>Chercher un vegetal</h2>
+                    <a href="{{route('searchPlant')}}">
+                        <h2>Chercher une plante</h2>
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteSearchVegetable')}}">
-                        <h2>Supprimer un vegetal</h2>
+                    <a href="{{route('deleteSearchPlant')}}">
+                        <h2>Supprimer une plante</h2>
                     </a>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('editSearchVegetable')}}">
+                    <a href="{{route('editSearchProblem')}}">
                         <h2>Modifier un problème</h2> 
                     </a>
                 </div>
