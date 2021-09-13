@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Plant;
 use App\Models\Problem;
 use App\Models\FavorableCondition;
+use App\Models\Favorite;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
 class ControllerAdd extends Controller
@@ -18,19 +20,19 @@ class ControllerAdd extends Controller
     {
         $request =  json_decode(file_get_contents('php://input'));
 
-        $vegetal = new Plant();
+        $plant = new Plant();
 
-        $vegetal->plantName = $request->plantName;
-        $vegetal->season = $request->season;
-        $vegetal->plantType = $request->plantType;
-        $vegetal->groundType = $request->groundType;
-        $vegetal->daysConservation = $request->daysConservation;
-        $vegetal->functionning = $request->functionning;
-        $vegetal->tblPlantSowing_idSowing = $request->tblPlantSowing_idSowing;
+        $plant->plantName = $request->plantName;
+        $plant->season = $request->season;
+        $plant->plantType = $request->plantType;
+        $plant->groundType = $request->groundType;
+        $plant->daysConservation = $request->daysConservation;
+        $plant->functioning = $request->functioning;
+        $plant->tblPlantSowing_idSowing = $request->tblPlantSowing_idSowing;
         
-        $vegetal->save();
+        $plant->save();
 
-        return ("Le produit#$vegetal->id a été ajouté");
+        return ("La plante#$plant->idPlant a été ajouté");
     }
 
     public function indexProblem(Request $request)
@@ -40,6 +42,17 @@ class ControllerAdd extends Controller
 
     public function addProblem(Request $request)
     {
+        $request =  json_decode(file_get_contents('php://input'));
+
+        $problem = new Problem();
+
+        $problem->typeProblem = $request->typeProblem;
+        $problem->importance = $request->importance;
+        $problem->description = $request->description;
+        
+        $problem->save();
+
+        return ("Le problème#$problem->idProblem a été ajouté");
     }
 
     public function indexFavorite(Request $request)
@@ -49,15 +62,35 @@ class ControllerAdd extends Controller
 
     public function addFavorite(Request $request)
     {
+        $request =  json_decode(file_get_contents('php://input'));
+
+        $favorite = new Favorite();
+
+        $favorite->tblPlant_idPlant = $request->tblPlant_idPlant;
+        $favorite->tblProfile_idProfile = $request->tblProfile_idProfile;
+        
+        $favorite->save();
+
+        return ("Le favoris a été ajouté");
     }
 
-    public function indexProfil(Request $request)
+    public function indexProfile(Request $request)
     {
         return view('');
     }
 
-    public function addProfil(Request $request)
+    public function addProfile(Request $request)
     {
+        $request =  json_decode(file_get_contents('php://input'));
+
+        $profile = new Profile();
+
+        $profile->tblPlant_idPlant = $request->tblPlant_idPlant;
+        $profile->tblProfile_idProfile = $request->tblProfile_idProfile;
+        
+        $profile->save();
+
+        return ("Le profil a été ajouté");
     }
 
     public function indexFavCondition(Request $request)
