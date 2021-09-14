@@ -53,7 +53,9 @@ namespace OutilImportation
                     Comment = ConvertCellToString(range.Cells[i, 11]),
                     GroundType = ConvertCellToString(range.Cells[i, 12]),
                     ConservationDays = ConvertCellToString(range.Cells[i, 13]),
-                    Type = ConvertCellToString(range.Cells[i, 14])
+                    Type = ConvertCellToString(range.Cells[i, 14]),
+                    PHMin = ConvertCellToString(range.Cells[i,15]),
+                    PHMax = ConvertCellToString(range.Cells[i,16])
                 };
                 veggies.Add(veg);
                 if (i % 5 == 0)
