@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class FavorableConditionDate extends Model
 {
     protected $table = 'tblDateRangeFavorableCondition';
+    protected $primaryKey = 'idRangeDate';
 }

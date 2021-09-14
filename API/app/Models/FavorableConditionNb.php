@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class FavorableConditionNb extends Model
 {
     protected $table = 'tblRangeFavorableConditionNb';
+    protected $primaryKey = 'idRangeNb';
 }

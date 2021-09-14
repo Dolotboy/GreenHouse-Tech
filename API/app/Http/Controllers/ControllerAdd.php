@@ -24,6 +24,7 @@ class ControllerAdd extends Controller
 
         $plant = new Plant();
 
+        $plant->imgPlant = $request->imgPlant;
         $plant->plantName = $request->plantName;
         $plant->season = $request->season;
         $plant->plantType = $request->plantType;
@@ -62,14 +63,23 @@ class ControllerAdd extends Controller
         return view('');
     }
 
-    public function addFavorite(Request $request)
+    public function addFavorite(/*Request $request, */$idPlant, $idProfile)
     {
-        $request =  json_decode(file_get_contents('php://input'));
+        //$request =  json_decode(file_get_contents('php://input'));
 
         $favorite = new Favorite();
 
-        $favorite->tblPlant_idPlant = $request->tblPlant_idPlant;
+        $favorite->tblPlant_idPlant = $idPlant;
+        $favorite->tblProfile_idProfile = $idProfile;
+
+        /*$favorite->tblPlant_idPlant = $request->tblPlant_idPlant;
         $favorite->tblProfile_idProfile = $request->tblProfile_idProfile;
+
+        {   
+            "tblPlant_idPlant": 1,  
+            "tblProfile_idProfile": 1 
+        }  
+        */
         
         $favorite->save();
 
@@ -111,7 +121,7 @@ class ControllerAdd extends Controller
         {
             $favorableCondition = new FavorableConditionDate();
 
-            $favorableCondition->variableEvalue = $request->variableEvalue;
+            $favorableCondition->rangeType = $request->rangeType;
             $favorableCondition->begin = $request->begin;
             $favorableCondition->end = $request->end;
         }

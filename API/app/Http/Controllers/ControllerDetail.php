@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plant;
+use App\Models\Problem;
+use App\Models\FavorableConditionDate;
+use App\Models\FavorableConditionNb;
+use App\Models\Favorite;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
 class ControllerDetail extends Controller
@@ -11,8 +17,27 @@ class ControllerDetail extends Controller
         return view('newPlant');
     }
 
-    public function searchPlant(Request $request)
+    public function searchPlant($id)
     {
+        $plant = Plant::find($id);
+
+        $idPlant = $plant->idPlant;
+        $imgPlant = $plant->imgPlant;
+        $plantName = $plant->plantName;
+        $season = $plant->season;
+        $plantType = $plant->plantType;
+        $groundType = $plant->groundType;
+        $daysConservation = $plant->daysConservation;
+        $functioning = $plant->functioning;
+        $tblPlantSowing_idSowing = $plant->tblPlantSowing_idSowing;
+        $createdAt = $plant->created_at;
+        $updatedAt = $plant->updated_at;
+
+        
+        $array = array('idPlant' => $idPlant, 'imgPlant' => $imgPlant, 'plantName' => $plantName, 'season' => $season, 'plantType' => $plantType, 'groundType' => $groundType, 'daysConservation' => $daysConservation, 'functioning' => $functioning, 'tblPlantSowing_idSowing' => $tblPlantSowing_idSowing, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        $json = json_encode($array);
+    
+        return ("$json");
     }
 
     public function indexProblem(Request $request)
@@ -20,8 +45,22 @@ class ControllerDetail extends Controller
         return view('');
     }
 
-    public function searchProblem(Request $request)
+    public function searchProblem($id)
     {
+        $problem = Problem::find($id);
+
+        $idProblem = $problem->idProblem;
+        $typeProblem = $problem->typeProblem;
+        $importanceLvl = $problem->importanceLvl;
+        $description = $problem->description;
+        $createdAt = $problem->created_at;
+        $updatedAt = $problem->updated_at;
+
+        
+        $array = array('idProblem' => $idProblem, 'typeProblem' => $typeProblem, 'importanceLvl' => $importanceLvl, 'description' => $description, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        $json = json_encode($array);
+    
+        return ("$json");
     }
 
     public function indexProfile(Request $request)
@@ -29,8 +68,22 @@ class ControllerDetail extends Controller
         return view('');
     }
 
-    public function searchProfile(Request $request)
+    public function searchProfile($id)
     {
+        $profile = Profile::find($id);
+
+        $idProfile = $profile->idProfile;
+        $email = $profile->email;
+        $firstName = $profile->firstName;
+        $lastName = $profile->lastName;
+        $createdAt = $profile->created_at;
+        $updatedAt = $profile->updated_at;
+
+        
+        $array = array('idProfile' => $idProfile, 'email' => $email, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        $json = json_encode($array);
+    
+        return ("$json");
     }
 
     public function indexFavCondition(Request $request)
@@ -38,7 +91,39 @@ class ControllerDetail extends Controller
         return view('');
     }
 
-    public function searchFavCondition(Request $request)
+    public function searchFavCondition($type, $id)
     {
+        if ($type == 1)
+        {
+            $favorableCondition = FavorableConditionDate::find($id);
+
+            $idRangeDate = $favorableCondition->idRangeDate;
+            $rangeType = $favorableCondition->rangeType;
+            $begin = $favorableCondition->begin;
+            $end = $favorableCondition->end;
+            $createdAt = $favorableCondition->created_at;
+            $updatedAt = $favorableCondition->updated_at;
+
+            $array = array('idRangeDate' => $idRangeDate, 'rangeType' => $rangeType, 'begin' => $begin, 'end' => $end, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+
+        }
+        else if($type == 2)
+        {
+            $favorableCondition = FavorableConditionNb::find($id);
+
+            $idRangeNb = $favorableCondition->idRangeNb;
+            $rangeType = $favorableCondition->rangeType;
+            $min = $favorableCondition->min;
+            $max = $favorableCondition->max;
+            $unit = $favorableCondition->unit;
+            $createdAt = $favorableCondition->created_at;
+            $updatedAt = $favorableCondition->updated_at;
+
+            $array = array('idRangeNb' => $idRangeNb, 'rangeType' => $rangeType, 'min' => $min, 'max' => $max, 'unit' => $unit, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        }
+
+        $json = json_encode($array);
+    
+        return ("$json");
     }
 }

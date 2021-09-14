@@ -15,6 +15,7 @@ class CreateDb extends Migration
     {
         Schema::create('tblPlant', function (Blueprint $table) {
             $table->bigIncrements('idPlant');
+            $table->longText('imgPlant');
             $table->string('plantName');
             $table->string('season');
             $table->string('plantType');
@@ -73,13 +74,13 @@ class CreateDb extends Migration
 
         Schema::create('tblPlant_tblDateRangeFavorableCondition', function (Blueprint $table) {
             $table->integer('tblPlant_idPlant');
-            $table->integer('tbltblDateRangeFavorableCondition_idRangeDate');
+            $table->integer('tblDateRangeFavorableCondition_idRangeDate');
             $table->timestamps();
         });
 
         Schema::create('tblDateRangeFavorableCondition', function (Blueprint $table) {
             $table->bigIncrements('idRangeDate');
-            $table->string('variableEvalue');
+            $table->string('rangeType');
             $table->date('begin');
             $table->date('end'); 
             $table->timestamps();
@@ -87,7 +88,7 @@ class CreateDb extends Migration
 
         Schema::create('tblPlant_tblRangeFavorableConditionNb', function (Blueprint $table) {
             $table->integer('tblPlant_idPlant');
-            $table->integer('tblDateRangeFavorableCondition_idRangeNb');
+            $table->integer('tblRangeFavorableConditionNb_idRangeNb');
             $table->timestamps();
         });
 
