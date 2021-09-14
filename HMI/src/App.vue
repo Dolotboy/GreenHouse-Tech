@@ -1,10 +1,12 @@
 <template>
-  <ul>
-    <li><router-link to="/">Acceuil</router-link></li> 
-    <li><router-link to="/about">À propos</router-link></li>
-    <li style="float:left"><router-link to="/login">Se connecter</router-link></li>
-  </ul>
-  <router-view/>
+  <div>
+    <ul>
+      <li><router-link to="/">Acceuil</router-link></li> 
+      <li><router-link to="/about">À propos</router-link></li>
+      <li style="float:left"><router-link to="/login">Se connecter</router-link></li>
+    </ul>
+    <router-view/>
+  </div>
 </template>
 
 <style>

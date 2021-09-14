@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="=iosManifest.cfm" lang="">
+<html>
   <head>
     <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
     <!--ios support-->
@@ -16,7 +16,8 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
-  <script src="testIndexedDb.js"></script>
+
+  <script src="testIndexedDb.js"></script> 
   <script>
     if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
