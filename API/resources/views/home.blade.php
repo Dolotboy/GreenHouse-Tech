@@ -83,25 +83,25 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newProfil')}}">
+                    <a href="{{route('newProfile')}}">
                         <h2>Ajouter un profil</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('editSearchProfil')}}">
+                    <a href="{{route('editSearchProfile')}}">
                         <h2>Modifier un profil</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('searchProfil')}}">
+                    <a href="{{route('searchProfile')}}">
                         <h2>Chercher un profil</h2>
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteSearchProfil')}}">
+                    <a href="{{route('deleteSearchProfile')}}">
                         <h2>Supprimer un profil</h2>
                     </a>
                 </div>
