@@ -24,7 +24,7 @@ class ControllerAssign extends Controller
             $assignFavorableCondition = new AssignConditionDate();
 
             $assignFavorableCondition->tblPlant_idPlant = $idPlant;
-            $assignFavorableCondition->tblDateRangeFavorableCondition_idRangeDate = $idCondition;
+            $assignFavorableCondition->tblDateRangeFav_idRangeDate = $idCondition;
 
             /*$assignFavorableCondition->tblPlant_idPlant = $request->tblPlant_idPlant;
             $assignFavorableCondition->tblDateRangeFavorableCondition_idRangeDate = $request->tblDateRangeFavorableCondition_idRangeDate;
@@ -40,7 +40,7 @@ class ControllerAssign extends Controller
             $assignFavorableCondition = new AssignConditionNb();
 
             $assignFavorableCondition->tblPlant_idPlant = $idPlant;
-            $assignFavorableCondition->tblRangeFavorableConditionNb_idRangeNb = $idCondition;
+            $assignFavorableCondition->tblNbRangeFav_idRangeNb = $idCondition;
 
             /*$assignFavorableCondition->tblPlant_idPlant = $request->tblPlant_idPlant;
             $assignFavorableCondition->tblRangeFavorableConditionNb_idRangeNb = $request->tblRangeFavorableConditionNb_idRangeNb;

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AssignConditionNb extends Model
 {
-    protected $table = 'tblPlant_tblRangeFavorableConditionNb';
-    protected $primaryKey = ['tblPlant_idPlant', 'tblRangeFavorableConditionNb_idRangeNb'];
+    protected $table = 'tblPlant_tblNbRangeFav';
+    protected $primaryKey = ['tblPlant_idPlant', 'tblNbRangeFav_idRangeNb'];
     public $incrementing = false;
 }
