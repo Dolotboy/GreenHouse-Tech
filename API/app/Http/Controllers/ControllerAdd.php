@@ -27,10 +27,9 @@ class ControllerAdd extends Controller
         $plant->imgPlant = $request->imgPlant;
         $plant->plantName = $request->plantName;
         $plant->season = $request->season;
-        $plant->plantType = $request->plantType;
         $plant->groundType = $request->groundType;
         $plant->daysConservation = $request->daysConservation;
-        $plant->functioning = $request->functioning;
+        $plant->description = $request->description;
         $plant->tblPlantSowing_idSowing = $request->tblPlantSowing_idSowing;
         
         $plant->save();
@@ -50,7 +49,7 @@ class ControllerAdd extends Controller
         $problem = new Problem();
 
         $problem->typeProblem = $request->typeProblem;
-        $problem->importance = $request->importance;
+        $problem->importanceLvl = $request->importanceLvl;
         $problem->description = $request->description;
         
         $problem->save();
@@ -100,6 +99,7 @@ class ControllerAdd extends Controller
         $profile->email = $request->email;
         $profile->password = $request->password;
         $profile->salt = Hash::make($request->password);
+        $profile->username = $request->username;
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
         

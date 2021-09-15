@@ -20,7 +20,7 @@ Route::post('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('ad
 
 Route::put('/edit/plant/editPlant', [ControllerEdit::class, 'editPlant'])->name('editPlant');
 
-Route::get("search/plant/{id}", [ControllerDetail::class, 'searchPlant'],function ($id){})->name('detailPlant');
+Route::middleware(['cors'])->group(function () { Route::get("search/plant/{id}", [ControllerDetail::class, 'searchPlant'],function ($id){})->name('detailPlant'); });
 
 Route::delete("/delete/plant/{id}", [ControllerDelete::class, 'deletePlant'],function ($id){})->name('deletePlant');
 
@@ -46,7 +46,7 @@ Route::delete('/unassign/problem/{idPlant}/{idProblem}', [ControllerUnassign::cl
 
 Route::post('/new/favorite/{idPlant}/{idProfile}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
 
-Route::delete("/delete/favorite/{id}", [ControllerDelete::class, 'deleteFavorite'],function ($id){})->name('deleteFavorite');
+Route::delete("/delete/favorite/{idPlant}/{idProfile}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite');
 
 // ***************** FAVORITE *******************
 
@@ -70,7 +70,7 @@ Route::put('/edit/condition/editFavCondition', [ControllerEdit::class, 'editFavC
 
 Route::get("search/condition/{type}/{id}", [ControllerDetail::class, 'searchFavCondition'],function ($type, $id){})->name('detailFavCondition');
 
-Route::delete("/delete/condition/{id}", [ControllerDelete::class, 'deleteFavCondition'],function ($id){})->name('deleteFavCondition');
+Route::delete("/delete/condition/{type}/{idCondition}", [ControllerDelete::class, 'deleteFavCondition'],function ($type, $idCondition){})->name('deleteFavCondition');
 
 Route::post('/assign/condition/{type}/{idPlant}/{idCondition}', [ControllerAssign::class, 'assignFavCondition'],function ($type, $idPlant, $idCondition){})->name('assignFavCondition');
 

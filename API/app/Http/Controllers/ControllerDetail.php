@@ -25,16 +25,15 @@ class ControllerDetail extends Controller
         $imgPlant = $plant->imgPlant;
         $plantName = $plant->plantName;
         $season = $plant->season;
-        $plantType = $plant->plantType;
         $groundType = $plant->groundType;
         $daysConservation = $plant->daysConservation;
-        $functioning = $plant->functioning;
+        $description = $plant->description;
         $tblPlantSowing_idSowing = $plant->tblPlantSowing_idSowing;
         $createdAt = $plant->created_at;
         $updatedAt = $plant->updated_at;
 
         
-        $array = array('idPlant' => $idPlant, 'imgPlant' => $imgPlant, 'plantName' => $plantName, 'season' => $season, 'plantType' => $plantType, 'groundType' => $groundType, 'daysConservation' => $daysConservation, 'functioning' => $functioning, 'tblPlantSowing_idSowing' => $tblPlantSowing_idSowing, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        $array = array('idPlant' => $idPlant, 'imgPlant' => $imgPlant, 'plantName' => $plantName, 'season' => $season, 'groundType' => $groundType, 'daysConservation' => $daysConservation, 'description' => $description, 'tblPlantSowing_idSowing' => $tblPlantSowing_idSowing, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
         $json = json_encode($array);
     
         return ("$json");
@@ -74,13 +73,14 @@ class ControllerDetail extends Controller
 
         $idProfile = $profile->idProfile;
         $email = $profile->email;
+        $username = $profile->username;
         $firstName = $profile->firstName;
         $lastName = $profile->lastName;
         $createdAt = $profile->created_at;
         $updatedAt = $profile->updated_at;
 
         
-        $array = array('idProfile' => $idProfile, 'email' => $email, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        $array = array('idProfile' => $idProfile, 'email' => $email, 'username' => $username, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
         $json = json_encode($array);
     
         return ("$json");
