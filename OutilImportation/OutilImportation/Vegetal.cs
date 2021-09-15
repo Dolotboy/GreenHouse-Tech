@@ -28,28 +28,15 @@ namespace OutilImportation
 
         public override string ToString()
         {
-            string tblPlant = $"INSERT INTO tblPlant (plantName, plantType, groundType, daysConservation, functioning)" +
-                              $"VALUES ('{Name}','{Type}','{GroundType}',{ConservationDays},'{Comment}');";
-            //string temp = $"INSERT INTO tblRangeFavorableConditionNb (rangeType, min, max, unit) VALUES ('temperature',{TempMin},{TempMax},'°C');";
+            string tblPlant = $"INSERT INTO tblPlant (plantName, groundType, daysConservation, description)" +
+                              $"VALUES ('{Name}','{GroundType}',{ConservationDays},'{Comment}');";
             string temp = GetRangeNbQuery("'temperature'", TempMin, TempMax, "'°C'");
-            //string hum = $"INSERT INTO tblRangeFavorableConditionNb (rangeType, min, max, unit) VALUES ('humidity',{HumidityMin},{HumidityMax},'%');";
             string hum = GetRangeNbQuery("'humidity'", HumidityMin, HumidityMax, "'%'");
-            //string lengthBetweenPlants = $"INSERT INTO tblRangeFavorableConditionNb (rangeType, min, max, unit) VALUES ('plantsSpacing','{LengthBetweenPlantsMin}','{LengthBetweenPlantsMax}','cm');";
             string lengthBetweenPlants = GetRangeNbQuery("'plantsSpacing'", LengthBetweenPlantsMin, LengthBetweenPlantsMax, "'cm'");
-            //string declareTempId = $"SET @tempId = (SELECT idRangeNb FROM tblRangeFavorableConditionNb ORDER BY idRangeNb DESC LIMIT 1);";
             string declareTempId = GetDeclareIdQuery("tempId", "idRangeNb");
-            //string declareHumId = $"SET @humId = (SELECT idRangeNb FROM tblRangeFavorableConditionNb ORDER BY idRangeNb DESC LIMIT 1);";
             string declareHumId = GetDeclareIdQuery("humId", "idRangeNb");
-            //string declareLengthId = $"SET @lengthId = (SELECT idRangeNb FROM tblRangeFavorableConditionNb ORDER BY idRangeNb DESC LIMIT 1);";
             string declareLengthId = GetDeclareIdQuery("lengthId", "idRangeNb");
             string declarePlantId = $"SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1);";
-            //string declarePlantId = GetDeclareIdQuery("plantId", "idPlant");
-            //string insertForeigns = $"INSERT INTO tblPlant_tblRangeFavorableConditionNb (tblPlant_idPlant, tblDateRangeFavorableCondition_idRangeNb) " +
-            //                        $"VALUES (@plantId, @tempId);\n" +
-            //                        $"INSERT INTO tblPlant_tblRangeFavorableConditionNb (tblPlant_idPlant, tblDateRangeFavorableCondition_idRangeNb) " +
-            //                        $"VALUES (@plantId, @humId);\n" +
-            //                        $"INSERT INTO tblPlant_tblRangeFavorableConditionNb (tblPlant_idPlant, tblDateRangeFavorableCondition_idRangeNb) " +
-            //                        $"VALUES (@plantId, @lengthId);\n";
             string insertForeigns = GetForeignQuery("plantId", "tempId") + GetForeignQuery("plantId", "humId") + GetForeignQuery("plantId", "lengthId") + GetForeignQuery("plantId", "plantId");
             string insertChildTable = GetChildPlantQuery(Type, "plantId");
 
@@ -58,27 +45,27 @@ namespace OutilImportation
 
         private string GetRangeNbQuery(string type, string min, string max, string unit)
         {
-            const string tblName = "tblRangeFavorableConditionNb";
+            const string tblName = "tblNbRangeFav";
             return $"INSERT INTO {tblName} (rangeType, min, max, unit) VALUES ({type},{min},{max},{unit});";
         }
 
         private string GetDeclareIdQuery(string idName, string id)
         {
-            const string tblName = "tblRangeFavorableConditionNb";
+            const string tblName = "tblNbRangeFav";
             return $"SET @{idName} = (SELECT {id} FROM {tblName} ORDER BY {id} DESC LIMIT 1);";
         }
 
         private string GetForeignQuery(string idPlant, string idRange)
         {
-            const string tblName = "tblPlant_tblRangeFavorableConditionNb";
-            return $"INSERT INTO {tblName} (tblPlant_idPlant, tblRangeFavorableConditionNb_idRangeNb) " +
+            const string tblName = "tblPlant_tblNbRangeFav";
+            return $"INSERT INTO {tblName} (tblPlant_idPlant, tblNbRangeFav_idRangeNb) " +
                                     $"VALUES (@{idPlant}, @{idRange});";
         }
 
         private string GetChildPlantQuery(string plantType, string plantId)
         {
             if (plantType == "Fruit")
-                return $"INSERT INTO tblFruit (tblPlant_idVegetable) VALUES (@{plantId});";
+                return $"INSERT INTO tblFruit (tblPlant_idPlant) VALUES (@{plantId});";
             else
                 return $"INSERT INTO tblVegetable (tblPlant_idPlant) VALUES (@{plantId});";
         }
