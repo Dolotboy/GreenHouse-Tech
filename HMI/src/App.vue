@@ -9,6 +9,72 @@
   </div>
 </template>
 
+<script>
+import $ from '../node_modules/jquery/dist/jquery.js'
+export default {
+  data(){
+      return{
+          plants : []
+      }
+  },
+  mounted(){
+      this.Initialisation()
+  },
+  methods :{
+    async Initialisation(){
+      await this.GetAllPlants("http://localhost:8000/api/search/plant/3");
+      
+      let db = await SetDb();
+      let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
+      let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
+      for(let i = 0; i < this.plants.length; i++){
+        console.log(JSON.stringify(this.plants[i]));
+        entrepot.add(JSON.stringify(this.plants[i]));
+      }
+    },
+    GetAllPlants(url){
+      let that = this;
+      return new Promise(resolve => {
+        $.get(url, function(donnees, status){
+          let json = JSON.parse(donnees);
+          that.plants.push(JSON.parse(donnees));
+          resolve();
+        })
+      })
+    },
+    SetDb(){
+      return new Promise(resolve =>{
+      window.requete = indexedDB.open("GreenHouseTech",2);
+
+      window.requete.onupgradeneeded = function(event){
+            db = event.target.result;
+            let options = {
+                keyPath : "primaryKey",
+                autoIncrement : true
+            };
+            let entrepot = db.createObjectStore("GreenHouseTech_Entrepot2",options);
+            entrepot.createIndex("index", "primaryKey");
+            resolve(db);
+        }
+
+        // Gestion des erreurs d'ouverture
+        window.requete.onerror = function(event){
+            console.log(event.target.errorCode);
+            console.log("error");
+            resolve(db);
+        };
+
+        // En cas de succès, "bd" contient la connexion
+        window.requete.onsuccess = function(event){
+            db = event.target.result;
+            resolve(db);
+        }
+      });
+    }
+  }   
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

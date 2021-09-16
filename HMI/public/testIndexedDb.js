@@ -1,6 +1,6 @@
 let db;
     let data;
-    main();
+    //main();
 
     async function main(){
       data = await getData();
