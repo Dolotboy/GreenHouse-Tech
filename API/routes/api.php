@@ -7,6 +7,8 @@ use App\Http\Controllers\ControllerAdd;
 use App\Http\Controllers\ControllerEdit;
 use App\Http\Controllers\ControllerDetail;
 use App\Http\Controllers\ControllerDelete;
+use App\Http\Controllers\ControllerAssign;
+use App\Http\Controllers\ControllerUnassign;
 
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -17,6 +19,8 @@ use App\Http\Controllers\ControllerDelete;
 Route::post('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('addPlant');
 
 Route::put('/edit/plant/editPlant', [ControllerEdit::class, 'editPlant'])->name('editPlant');
+
+//Route::middleware(['cors'])->group(function () { Route::get("search/plant/{id}", [ControllerDetail::class, 'searchPlant'],function ($id){})->name('detailPlant'); });
 
 Route::get("search/plant/{id}", [ControllerDetail::class, 'searchPlant'],function ($id){})->name('detailPlant');
 
@@ -34,17 +38,17 @@ Route::get("search/problem/{id}", [ControllerDetail::class, 'searchProblem'],fun
 
 Route::delete("/delete/problem/{id}", [ControllerDelete::class, 'deleteProblem'],function ($id){})->name('deleteProblem');
 
-Route::post('/assign/problem/{id}', [ControllerAssign::class, 'assignProblem'],function ($id){})->name('assignProblem');
+Route::post('/assign/problem/{idPlant}/{idProblem}', [ControllerAssign::class, 'assignProblem'],function ($idPlant, $idProblem){})->name('assignProblem');
 
-Route::delete('/unassign/problem/{id}', [ControllerUnassign::class, 'unassignProblem'],function ($id){})->name('unassignProblem');
+Route::delete('/unassign/problem/{idPlant}/{idProblem}', [ControllerUnassign::class, 'unassignProblem'],function ($idPlant, $idProblem){})->name('unassignProblem');
 
 // ***************** PROBLEM *******************
 
 // ***************** FAVORITE *******************
 
-Route::post('/new/favorite/addFavorite', [ControllerAdd::class, 'addFavorite'])->name('addFavorite');
+Route::post('/new/favorite/{idPlant}/{idProfile}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
 
-Route::delete("/delete/favorite/{id}", [ControllerDelete::class, 'deleteFavorite'],function ($id){})->name('deleteFavorite');
+Route::delete("/delete/favorite/{idPlant}/{idProfile}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite');
 
 // ***************** FAVORITE *******************
 
@@ -66,12 +70,12 @@ Route::post('/new/condition/addFavCondition/{type}', [ControllerAdd::class, 'add
 
 Route::put('/edit/condition/editFavCondition', [ControllerEdit::class, 'editFavCondition'])->name('editFavCondition');
 
-Route::get("search/condition/{id}", [ControllerDetail::class, 'searchFavCondition'],function ($id){})->name('detailFavCondition');
+Route::get("search/condition/{type}/{id}", [ControllerDetail::class, 'searchFavCondition'],function ($type, $id){})->name('detailFavCondition');
 
-Route::delete("/delete/condition/{id}", [ControllerDelete::class, 'deleteFavCondition'],function ($id){})->name('deleteFavCondition');
+Route::delete("/delete/condition/{type}/{idCondition}", [ControllerDelete::class, 'deleteFavCondition'],function ($type, $idCondition){})->name('deleteFavCondition');
 
-Route::post('/assign/condition/{id}', [ControllerAssign::class, 'assignFavCondition'],function ($id){})->name('assignFavCondition');
+Route::post('/assign/condition/{type}/{idPlant}/{idCondition}', [ControllerAssign::class, 'assignFavCondition'],function ($type, $idPlant, $idCondition){})->name('assignFavCondition');
 
-Route::delete('/unassign/condition/{id}', [ControllerUnassign::class, 'unassignFavCondition'],function ($id){})->name('unassignFavCondition');
+Route::delete('/unassign/condition/{type}/{idPlant}/{idCondition}', [ControllerUnassign::class, 'unassignFavCondition'],function ($type, $idPlant, $idCondition){})->name('unassignFavCondition');
 
 // ***************** FAVORABLE CONDITION *******************

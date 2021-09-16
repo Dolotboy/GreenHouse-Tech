@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class FavorableConditionNb extends Model
 {
-    protected $table = 'tblRangeFavorableConditionNb';
+    protected $table = 'tblNbRangeFav';
+    protected $primaryKey = 'idRangeNb';
 }

@@ -43,7 +43,7 @@ Route::post('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->n
 
 Route::post('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
 
-Route::post('/delete/favorite', [ControllerDelete::class, 'indexProblem'])->name('deleteSearchFavorite');
+Route::post('/delete/favorite', [ControllerDelete::class, 'indexFavorite'])->name('deleteSearchFavorite');
 
 // ***************** FAVORITE *******************
 
