@@ -39,6 +39,15 @@ class ControllerDetail extends Controller
         return ("$json");
     }
 
+    public function searchAllPlant()
+    {
+        $plant = Plant::All();
+
+        $json = json_encode($plant);
+
+        return ("$json");
+    }
+
     public function indexProblem(Request $request)
     {
         return view('');
@@ -59,6 +68,15 @@ class ControllerDetail extends Controller
         $array = array('idProblem' => $idProblem, 'typeProblem' => $typeProblem, 'importanceLvl' => $importanceLvl, 'description' => $description, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
         $json = json_encode($array);
     
+        return ("$json");
+    }
+
+    public function searchAllProblem()
+    {
+        $problem = Problem::All();
+
+        $json = json_encode($problem);
+
         return ("$json");
     }
 
@@ -83,6 +101,15 @@ class ControllerDetail extends Controller
         $array = array('idProfile' => $idProfile, 'email' => $email, 'username' => $username, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
         $json = json_encode($array);
     
+        return ("$json");
+    }
+
+    public function searchAllProfile()
+    {
+        $profile = Profile::All();
+
+        $json = json_encode($profile);
+
         return ("$json");
     }
 
@@ -125,5 +152,25 @@ class ControllerDetail extends Controller
         $json = json_encode($array);
     
         return ("$json");
+    }
+
+    public function searchAllFavCondition($type)
+    {
+        if ($type == 1)
+        {
+            $favCondition = FavorableConditionDate::All();
+
+            $json = json_encode($favCondition);
+    
+            return ("$json");
+        }
+        else if ($type ==2)
+        {
+            $favCondition = FavorableConditionNb::All();
+
+            $json = json_encode($favCondition);
+    
+            return ("$json");
+        }
     }
 }

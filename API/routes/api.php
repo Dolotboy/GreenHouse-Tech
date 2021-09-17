@@ -24,6 +24,8 @@ Route::put('/edit/plant/editPlant', [ControllerEdit::class, 'editPlant'])->name(
 
 Route::get("search/plant/{id}", [ControllerDetail::class, 'searchPlant'],function ($id){})->name('detailPlant');
 
+Route::get("searchAll/plant", [ControllerDetail::class, 'searchAllPlant'],function (){})->name('detailAllPlant');
+
 Route::delete("/delete/plant/{id}", [ControllerDelete::class, 'deletePlant'],function ($id){})->name('deletePlant');
 
 // ***************** PLANT *******************
@@ -35,6 +37,8 @@ Route::post('/new/problem/addProblem', [ControllerAdd::class, 'addProblem'])->na
 Route::put('/edit/problem/editProblem', [ControllerEdit::class, 'editProblem'])->name('editProblem');
 
 Route::get("search/problem/{id}", [ControllerDetail::class, 'searchProblem'],function ($id){})->name('detailProblem');
+
+Route::get("searchAll/problem", [ControllerDetail::class, 'searchAllProblem'],function (){})->name('detailAllProblem');
 
 Route::delete("/delete/problem/{id}", [ControllerDelete::class, 'deleteProblem'],function ($id){})->name('deleteProblem');
 
@@ -60,6 +64,8 @@ Route::put('/edit/profile/editVegetable', [ControllerEdit::class, 'editProfile']
 
 Route::get("search/profile/{id}", [ControllerDetail::class, 'searchProfile'],function ($id){})->name('detailProfile');
 
+Route::get("searchAll/profile", [ControllerDetail::class, 'searchAllProfile'],function (){})->name('detailAllProfile');
+
 Route::delete("/delete/profile/{id}", [ControllerDelete::class, 'deleteProfile'],function ($id){})->name('deleteProfile');
 
 // ***************** PROFILE *******************
@@ -70,7 +76,9 @@ Route::post('/new/condition/addFavCondition/{type}', [ControllerAdd::class, 'add
 
 Route::put('/edit/condition/editFavCondition', [ControllerEdit::class, 'editFavCondition'])->name('editFavCondition');
 
-Route::get("search/condition/{type}/{id}", [ControllerDetail::class, 'searchFavCondition'],function ($type, $id){})->name('detailFavCondition');
+Route::get("search/condition/{type}/{idCondition}", [ControllerDetail::class, 'searchFavCondition'],function ($type, $idCondition){})->name('detailFavCondition');
+
+Route::get("searchAll/condition/{type}", [ControllerDetail::class, 'searchAllFavCondition'],function ($type){})->name('detailAllFavCondition');
 
 Route::delete("/delete/condition/{type}/{idCondition}", [ControllerDelete::class, 'deleteFavCondition'],function ($type, $idCondition){})->name('deleteFavCondition');
 
