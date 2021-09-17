@@ -22,15 +22,18 @@ export default {
   },
   methods :{
     async Initialisation(){
-      await this.GetAllPlants("http://localhost:8000/api/search/plant/3");
+      await this.GetAllPlants("http://apitestenv.pcst.xyz/api/search/plant/3");
+      // await this.GetAllPlants("http://localhost:8000/api/search/plant/3");
       
       let db = await SetDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
       for(let i = 0; i < this.plants.length; i++){
-        console.log(JSON.stringify(this.plants[i]));
-        entrepot.add(JSON.stringify(this.plants[i]));
+        entrepot.add(this.GeneratePlant(this.plants[i]));
       }
+
+      this.plants = null;
+      this.plants = this.fetchData();
     },
     GetAllPlants(url){
       let that = this;
@@ -40,6 +43,29 @@ export default {
           that.plants.push(JSON.parse(donnees));
           resolve();
         })
+      })
+    },
+    GeneratePlant(proxyPlant){
+      return {
+          plantType : proxyPlant.plantName,
+          daysConservation : proxyPlant.daysConservation,
+          description : proxyPlant.description,
+          groundType : proxyPlant.groundType,
+          idPlant : proxyPlant.idPlant,
+          imgPlant : proxyPlant.imgPlant,
+          plantName : proxyPlant.plantName,
+          season : proxyPlant.season,
+          tblPlantSowing_idSowing : proxyPlant.tblPlantSowing_idSowing
+      };
+    },
+    fetchData(){
+      return new Promise(resolve => {
+        let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
+        let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");
+        let requete = entrepot.getAll();
+        requete.onsuccess = function(event){
+          resolve(event.target.result);
+        }
       })
     },
     SetDb(){
