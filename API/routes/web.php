@@ -1,31 +1,38 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ControllerAdd;
 use App\Http\Controllers\ControllerEdit;
 use App\Http\Controllers\ControllerDetail;
 use App\Http\Controllers\ControllerDelete;
 
+
+// ***************** HOME *******************
+
 Route::get('/', function () {
     return view('home');
 });
+// ***************** HOME *******************
 
 // ***************** PLANT *******************
 
-Route::get('/new/plant', [ControllerAdd::class, 'indexPlant'])->name('newPlant');
+Route::get('/new/plant/', [ControllerAdd::class, 'indexPlant'])->name('newPlant');
 
-Route::post('/edit/plant', [ControllerEdit::class, 'indexPlant'])->name('editSearchPlant');
+//Route::post('/edit/plant/', [ControllerEdit::class, 'indexPlant'])->name('editSearchPlant');
+Route::get('/edit/plant/', [ControllerEdit::class, 'indexPlant'])->name('editSearchPlant');
 
-Route::post('/search/plant', [ControllerDetail::class, 'indexPlant'])->name('searchPlant');
+//Route::post('/search/plant/', [ControllerDetail::class, 'indexPlant'])->name('searchPlant');
+Route::get('/search/plant/', [ControllerDetail::class, 'indexPlant'])->name('searchPlant');
 
-Route::post('/delete/plant', [ControllerDelete::class, 'indexPlant'])->name('deleteSearchPlant');
+//Route::post('/delete/plant/', [ControllerDelete::class, 'indexPlant'])->name('deleteSearchPlant');
+Route::get('/delete/plant/', [ControllerDelete::class, 'indexPlant'])->name('deleteSearchPlant');
 
 // ***************** PLANT *******************
 
 // ***************** PROBLEM *******************
 
-Route::post('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem');
+//Route::post('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem');
+Route::get('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem');
 
 Route::post('/edit/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem');
 
@@ -41,23 +48,25 @@ Route::post('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->n
 
 // ***************** FAVORITE *******************
 
-Route::post('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
+//Route::post('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
+Route::get('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
 
 Route::post('/delete/favorite', [ControllerDelete::class, 'indexProblem'])->name('deleteSearchFavorite');
 
 // ***************** FAVORITE *******************
 
-// ***************** PROFIL *******************
+// ***************** PROFILE *******************
 
-Route::post('/new/profil', [ControllerAdd::class, 'indexProfil'])->name('newProfil');
+//Route::post('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile');
+Route::get('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile');
 
-Route::post('/edit/profil', [ControllerEdit::class, 'indexProfil'])->name('editSearchProfil');
+Route::post('/edit/profile', [ControllerEdit::class, 'indexProfile'])->name('editSearchProfile');
 
-Route::post('/search/profil', [ControllerDetail::class, 'indexProfil'])->name('searchProfil');
+Route::post('/search/profile', [ControllerDetail::class, 'indexProfile'])->name('searchProfile');
 
-Route::post('/delete/profil', [ControllerDelete::class, 'indexProfil'])->name('deleteSearchProfil');
+Route::post('/delete/profile', [ControllerDelete::class, 'indexProfile'])->name('deleteSearchProfile');
 
-// ***************** PROFIL *******************
+// ***************** PROFILE *******************
 
 // ***************** FAVORABLE CONDITION *******************
 
@@ -74,3 +83,13 @@ Route::post('/assign/condition', [ControllerAssign::class, 'indexFavCondition'])
 Route::post('/unassign/condition', [ControllerUnassign::class, 'indexFavCondition'])->name('deleteUnassignFavCondition');
 
 // ***************** FAVORABLE CONDITION *******************
+
+// ***************** GET ALL *******************
+
+Route::get('/getAll/Plant', [ControllerAdd::class, 'indexFavCondition'])->name('getAllPlant');
+
+Route::get('/getAll/Problem', [ControllerEdit::class, 'indexFavCondition'])->name('getAllProblem');
+
+Route::get('/getAll/Profile', [ControllerDelete::class, 'indexFavCondition'])->name('getAllProfile');
+
+// ***************** GET ALL *******************

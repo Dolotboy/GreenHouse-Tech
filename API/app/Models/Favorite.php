@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Problem extends Model
+class Favorite extends Model
 {
-    protected $table = 'tblProblem';
+    protected $table = 'tblFavorites';
 }

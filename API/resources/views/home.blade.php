@@ -15,6 +15,8 @@
 @parent
         <div id='mainContainer'>
 
+            // ****************** FIRST LINE ********************//
+
             <div class='midContainer'>
                 <div class='cbtn'>
                     <a href="{{route('newPlant')}}">
@@ -40,6 +42,8 @@
                     </a>
                 </div>
             </div>
+
+            // ****************** SECOND LINE ********************//
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -67,6 +71,8 @@
                 </div>
             </div>
 
+            // ****************** THIRD LINE ********************//
+
             <div class='midContainer'>
                 <div class='cbtn'>
                     <a href="{{route('newFavorite')}}">
@@ -81,31 +87,35 @@
                 </div>
             </div>
 
+            // ****************** FOURTH LINE ********************//
+
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newProfil')}}">
+                    <a href="{{route('newProfile')}}">
                         <h2>Ajouter un profil</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('editSearchProfil')}}">
+                    <a href="{{route('editSearchProfile')}}">
                         <h2>Modifier un profil</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('searchProfil')}}">
+                    <a href="{{route('searchProfile')}}">
                         <h2>Chercher un profil</h2>
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteSearchProfil')}}">
+                    <a href="{{route('deleteSearchProfile')}}">
                         <h2>Supprimer un profil</h2>
                     </a>
                 </div>
             </div>
+
+            // ****************** FIFTH LINE ********************//
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -133,6 +143,8 @@
                 </div>
             </div>
 
+            // ****************** SEVENTH LINE ********************//
+
             <div class='midContainer'>
                 <div class='cbtn'>
                     <a href="{{route('newAssignFavCondition')}}">
@@ -147,6 +159,8 @@
                 </div>
             </div>
 
+            // ****************** EIGHTH LINE ********************//
+
             <div class='midContainer'>
                 <div class='cbtn'>
                     <a href="{{route('newAssignProblem')}}">
@@ -156,6 +170,36 @@
 
                 <div class='cbtn'>
                     <a href="{{route('deleteUnassignProblem')}}">
+                        <h2>Désassigner un problème</h2> 
+                    </a>
+                </div>
+            </div>
+
+            // ****************** NINTH LINE ********************//
+
+            <div class='midContainer'>
+                <div class='cbtn'>
+                    <a href="{{route('getAllPlant')}}">
+                        <h2>Assigner un problème</h2> 
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('getAllProblem')}}">
+                        <h2>Désassigner un problème</h2> 
+                    </a>
+                </div>
+            </div>
+
+            <div class='midContainer'>
+                <div class='cbtn'>
+                    <a href="{{route('getAllFavorite')}}">
+                        <h2>Assigner un problème</h2> 
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('getAllProfile')}}">
                         <h2>Désassigner un problème</h2> 
                     </a>
                 </div>
