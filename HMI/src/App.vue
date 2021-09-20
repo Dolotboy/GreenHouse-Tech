@@ -1,29 +1,41 @@
 <template>
   <div>
-    <ul>
-      <li><router-link to="/">Acceuil</router-link></li> 
-      <li><router-link to="/about">À propos</router-link></li>
-      <li style="float:left"><router-link to="/login">Se connecter</router-link></li>
-    </ul>
+    <nav>
+      <ul>
+        <li><router-link to="/">Acceuil</router-link></li> 
+        <li><router-link to="/about">À propos</router-link></li>
+        <li><a id="btnLogin" @click="toggleLogin">Se connecter</a></li>
+      </ul>
+    </nav>
     <router-view/>
+    <Login v-if="showLogin"/>
   </div>
 </template>
 
 <script>
 import $ from '../node_modules/jquery/dist/jquery.js'
+import Login from './components/Login.vue'
+
 export default {
+  components :{
+    Login
+  },
   data(){
       return{
-          plants : []
+          plants : [],
+          showLogin : false
       }
   },
   mounted(){
       this.Initialisation()
   },
   methods :{
+    toggleLogin(){
+      this.showLogin = !this.showLogin;
+    },
     async Initialisation(){
-      await this.GetAllPlants("http://apitestenv.pcst.xyz/api/search/plant/3");
-      // await this.GetAllPlants("http://localhost:8000/api/search/plant/3");
+      //await this.GetAllPlants("http://apitestenv.pcst.xyz/api/search/plant/3");
+      await this.GetAllPlants("http://localhost:8000/api/search/plant/3");
       
       let db = await SetDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
@@ -140,6 +152,20 @@ li a:hover{
 
 .active {
   background-color : cyan;
+}
+
+nav{
+  position : relative;
+}
+
+#btnLogin{
+  position : absolute;
+  top : 0;
+  right : 0;
+}
+
+#btnLogin:hover{
+  cursor: pointer;
 }
 
 </style>

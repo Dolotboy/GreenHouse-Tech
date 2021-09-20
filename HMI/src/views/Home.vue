@@ -1,29 +1,37 @@
 <template>
   <h1>Ceci est la page d'acceuil</h1> 
-    <div v-for='plant in plants'>
-      <p>{{ plant.plantName }} test</p>
+    <div class="productsGrid">
+      <Plant class="plant" @click="toggleDetails(2)" v-for='plant in plants' :plant="plant"/>
     </div>
+    <Details v-if="showDetails" :plant="detailedPlant"/>
 </template>
-
 
 <script>
 import Details from '../components/Details.vue'
+import Plant from '../components/Plant.vue'
 import $ from '../../node_modules/jquery/dist/jquery.js'
 
 export default {
   name: 'Home',
   components:{
-    Details
+    Details,
+    Plant
   }, 
   data(){
     return {
-      plants : []
+      plants : [],
+      detailedPlant : Object,
+      showDetails : false
     }
   },
   mounted(){
     this.initialisation();
   },
   methods : {
+    toggleDetails(num){
+      this.showDetails = !this.showDetails;
+      this.detailedPlant = this.plants[num];
+    },
     async initialisation(){
       let db = await this.setDb();
       this.plants = await this.fetchData(db);
@@ -72,5 +80,15 @@ export default {
 </script>
 
 <style>
+.productsGrid{
+  display : grid;
+  grid-template-columns: 50% 50%;
+  width : 50vw;
+  margin-left : 25vw;
+}
 
+.plant:hover{
+  background: lightgray;
+  cursor : pointer;
+}
 </style>
