@@ -51,7 +51,7 @@ class ControllerDelete extends Controller
 
         if (is_null($problem))
         {
-            return('Error, assignation not found');
+            return('Error, problem not found');
         }
         else
         {
@@ -107,7 +107,24 @@ class ControllerDelete extends Controller
 
     public function deleteProfile($idProfile)
     {
+        $profile = Problem::Find($idProfile);
 
+        if (is_null($profile))
+        {
+            return('Error, profile not found');
+        }
+        else
+        {
+            try
+            {
+                Profile::destroy($idProfile);
+                return ("Profile deleted !");
+            }
+            catch(Exception $e)
+            {
+                return('Error while deleting'.$e);
+            }
+        }
     }
 
     public function indexFavCondition()
@@ -117,6 +134,47 @@ class ControllerDelete extends Controller
 
     public function deleteFavCondition($type, $idCondition)
     {
+        if ($type == 1)
+        {
+            $favorableCondition = FavorableConditionDate::Find($idCondition);
 
+            if (is_null($idCondition))
+            {
+                return('Error, favorable condition not found');
+            }
+            else
+            {
+                try
+                {
+                    FavorableConditionDate::destroy($idCondition);
+                    return ("Favorable condition deleted !");
+                }
+                catch(Exception $e)
+                {
+                    return('Error while deleting'.$e);
+                }
+            }
+        }
+        else if ($type == 2)
+        {
+            $favorableCondition = FavorableConditionNb::Find($idCondition);
+
+            if (is_null($idCondition))
+            {
+                return('Error, favorable condition not found');
+            }
+            else
+            {
+                try
+                {
+                    FavorableConditionNb::destroy($idCondition);
+                    return ("Favorable condition deleted !");
+                }
+                catch(Exception $e)
+                {
+                    return('Error while deleting'.$e);
+                }
+            }
+        }
     }
 } 
