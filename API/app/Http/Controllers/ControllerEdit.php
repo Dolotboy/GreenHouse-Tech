@@ -34,7 +34,7 @@ class ControllerEdit extends Controller
 
         $plant->save();
 
-        return ("Le produit#$plant->id a été modifié");
+        return ("La plante#$plant->id a été modifié");
     }
 
     public function indexProblem()
@@ -54,7 +54,7 @@ class ControllerEdit extends Controller
 
         $problem->save();
 
-        return ("Le produit#$problem->id a été modifié");
+        return ("Le problème#$problem->id a été modifié");
     }
 
     public function indexProfile()
@@ -75,7 +75,7 @@ class ControllerEdit extends Controller
 
         $profile->save();
 
-        return ("Le produit#$profile->id a été modifié");
+        return ("Le profile#$profile->id a été modifié");
     }
 
     public function indexFavCondition()
@@ -83,8 +83,30 @@ class ControllerEdit extends Controller
         return view('');
     }
 
-    public function editFavCondition()
+    public function editFavCondition($type, $idCondition)
     {
+        $request =  json_decode(file_get_contents('php://input'));
+
+        if ($type == 1)
+        {
+            $favorableCondition = FavorableConditionDate::find($idCondition);
+
+            $favorableCondition->rangeType = $request->rangeType;
+            $favorableCondition->begin = $request->begin;
+            $favorableCondition->end = $request->end;
+        }
+        else if ($type == 2)
+        {
+            $favorableCondition = FavorableConditionNb::find($idCondition);
+
+            $favorableCondition->rangeType = $request->rangeType;
+            $favorableCondition->min = $request->min;
+            $favorableCondition->max = $request->max;
+            $favorableCondition->unit = $request->unit;
+        }
         
+        $favorableCondition->save();
+
+        return ("La condition favorable a été sauvegardé");
     }
 }
