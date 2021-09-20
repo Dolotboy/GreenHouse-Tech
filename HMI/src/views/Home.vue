@@ -17,43 +17,7 @@ export default {
   name: 'Home',
   components:{
     Details
-  }, 
-  data(){
-      return{
-          products : ""
-      }
-  },
-  mounted(){
-      this.Initialisation()
-  },
-  methods :{
-    async Initialisation(){
-      console.log("test start");
-      await this.GetAllPlants("http://www.apitestenv.pcst.xyz/api/search/plant/1");
-      console.log("test end");
-      console.log(this.products);
-    },
-    GetAllPlants(url){
-      return new Promise(resolve => {
-        //create XMLHttpRequest object
-        let xhr = new XMLHttpRequest();
-        //Initialize request xhr.open("GET",'/chose/an/url');
-        xhr.open("GET",url);
-        //Response type
-        xhr.responseType = "json";
-        //Send request to API
-        xhr.send();
-        // $.get(url, function(donnees, status){
-        //   for(const [key, value] of Object.entries(donnees.results))
-        //       products.push(value);
-        //   if(donnees.next != null)
-        //       GetAllPlants(donnees.next);
-        // })
-        console.log("test end get plants")
-        resolve();
-      })
-    }
-  }   
+  }
 }
 </script>
 

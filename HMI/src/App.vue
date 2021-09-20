@@ -1,13 +1,43 @@
 <template>
   <div>
-    <ul>
-      <li><router-link to="/">Acceuil</router-link></li> 
-      <li><router-link to="/about">À propos</router-link></li>
-      <li style="float:left"><router-link to="/login">Se connecter</router-link></li>
-    </ul>
+    <nav>
+      <ul>
+        <div id="BasicNav">
+          <li><router-link to="/">Acceuil</router-link></li> 
+          <li><router-link to="/about">À propos</router-link></li>
+        </div>
+        <div id="Login">
+          <li>Se connecter</li>
+        </div>
+      </ul>
+    </nav>
+    <Popuplogin></Popuplogin>  
     <router-view/>
+    <button v-if="!loginShow" @click="toggleLogin">Se Connecter</button>
   </div>
 </template>
+
+<script>
+import PopupLogin from './components/PopupLogin.vue'
+
+export default {
+  name  : 'App' ,
+  components : {
+    PopupLogin
+  },
+  data(){
+    return {
+      loginShow : false
+    } 
+  },
+  methods: {
+    toggleLogin(){
+      this.loginShow = !this.loginShow;
+    }
+  }
+}
+</script>
+
 
 <style>
 #app {
@@ -18,6 +48,10 @@
   color: black;
 }
 
+nav > ul{
+  position : relative;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -26,6 +60,13 @@ ul {
   background-color: #4E5754 ;
   display: flex;
   justify-content: center;
+  
+}
+
+#Login {
+  position: absolute;
+  right: 0%;
+  top: 0%;
 }
 
 li {
