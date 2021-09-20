@@ -1,26 +1,94 @@
 <template>
   <h1>Ceci est la page d'acceuil</h1> 
-  <!--<Details></Details>-->
-  <!-- #####LOOP TO DISPLAY EVERY PLANT
-    <ul>
-      {foreach $plants as $plant}
-      <li>{@plant}</li>
-      {/foreach}
-    </ul>
-  -->
+    <div class="productsGrid">
+      <Plant class="plant" @click="toggleDetails(2)" v-for='plant in plants' :plant="plant"/>
+    </div>
+    <Details v-if="showDetails" :plant="detailedPlant"/>
 </template>
-
 
 <script>
 import Details from '../components/Details.vue'
+import Plant from '../components/Plant.vue'
+import $ from '../../node_modules/jquery/dist/jquery.js'
+
 export default {
   name: 'Home',
   components:{
-    Details
+    Details,
+    Plant
+  }, 
+  data(){
+    return {
+      plants : [],
+      detailedPlant : Object,
+      showDetails : false
+    }
+  },
+  mounted(){
+    this.initialisation();
+  },
+  methods : {
+    toggleDetails(num){
+      this.showDetails = !this.showDetails;
+      this.detailedPlant = this.plants[num];
+    },
+    async initialisation(){
+      let db = await this.setDb();
+      this.plants = await this.fetchData(db);
+    },
+    fetchData(db){
+      return new Promise(resolve => {
+        let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
+        let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");
+        let requete = entrepot.getAll();
+        requete.onsuccess = function(event){
+          resolve(event.target.result);
+        }
+      })
+    },
+    setDb(){
+      return new Promise(resolve =>{
+      window.requete = indexedDB.open("GreenHouseTech",2);
+
+      window.requete.onupgradeneeded = function(event){
+            db = event.target.result;
+            let options = {
+                keyPath : "primaryKey",
+                autoIncrement : true
+            };
+            let entrepot = db.createObjectStore("GreenHouseTech_Entrepot2",options);
+            entrepot.createIndex("index", "primaryKey");
+            resolve(db);
+        }
+
+        // Gestion des erreurs d'ouverture
+        window.requete.onerror = function(event){
+            console.log(event.target.errorCode);
+            console.log("error");
+            resolve(db);
+        };
+
+        // En cas de succès, "bd" contient la connexion
+        window.requete.onsuccess = function(event){
+            db = event.target.result;
+            resolve(db);
+        }
+      });
+    }
   }
 }
 </script>
 
 <style>
+.productsGrid{
+  display : grid;
+  grid-template-columns: 50% 50%;
+  width : 50vw;
+  margin-left : 25vw;
+}
 
+.plant:hover{
+  background: lightgray;
+  cursor : pointer;
+}
 </style>

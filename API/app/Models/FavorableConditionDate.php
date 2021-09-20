@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FavorableCondition extends Model
+class FavorableConditionDate extends Model
 {
-    use HasFactory;
+    protected $table = 'tblDateRangeFav';
+    protected $primaryKey = 'idRangeDate';
 }

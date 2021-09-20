@@ -11,33 +11,111 @@
         </div>
       </ul>
     </nav>
-    <Popuplogin></Popuplogin>  
     <router-view/>
-    <button v-if="!loginShow" @click="toggleLogin">Se Connecter</button>
+    <Login v-if="showLogin"/>
   </div>
 </template>
 
 <script>
-import PopupLogin from './components/PopupLogin.vue'
+import $ from '../node_modules/jquery/dist/jquery.js'
+import Login from './components/Login.vue'
 
 export default {
-  name  : 'App' ,
-  components : {
-    PopupLogin
+  components :{
+    Login
   },
   data(){
-    return {
-      loginShow : false
-    } 
+      return{
+          plants : [],
+          showLogin : false
+      }
   },
-  methods: {
+  mounted(){
+      this.Initialisation()
+  },
+  methods :{
     toggleLogin(){
-      this.loginShow = !this.loginShow;
+      this.showLogin = !this.showLogin;
+    },
+    async Initialisation(){
+      //await this.GetAllPlants("http://apitestenv.pcst.xyz/api/search/plant/3");
+      await this.GetAllPlants("http://localhost:8000/api/search/plant/3");
+      
+      let db = await SetDb();
+      let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
+      let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
+      for(let i = 0; i < this.plants.length; i++){
+        entrepot.add(this.GeneratePlant(this.plants[i]));
+      }
+
+      this.plants = null;
+      this.plants = this.fetchData();
+    },
+    GetAllPlants(url){
+      let that = this;
+      return new Promise(resolve => {
+        $.get(url, function(donnees, status){
+          let json = JSON.parse(donnees);
+          that.plants.push(JSON.parse(donnees));
+          resolve();
+        })
+      })
+    },
+    GeneratePlant(proxyPlant){
+      return {
+          plantType : proxyPlant.plantName,
+          daysConservation : proxyPlant.daysConservation,
+          description : proxyPlant.description,
+          groundType : proxyPlant.groundType,
+          idPlant : proxyPlant.idPlant,
+          imgPlant : proxyPlant.imgPlant,
+          plantName : proxyPlant.plantName,
+          season : proxyPlant.season,
+          tblPlantSowing_idSowing : proxyPlant.tblPlantSowing_idSowing
+      };
+    },
+    fetchData(){
+      return new Promise(resolve => {
+        let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
+        let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");
+        let requete = entrepot.getAll();
+        requete.onsuccess = function(event){
+          resolve(event.target.result);
+        }
+      })
+    },
+    SetDb(){
+      return new Promise(resolve =>{
+      window.requete = indexedDB.open("GreenHouseTech",2);
+
+      window.requete.onupgradeneeded = function(event){
+            db = event.target.result;
+            let options = {
+                keyPath : "primaryKey",
+                autoIncrement : true
+            };
+            let entrepot = db.createObjectStore("GreenHouseTech_Entrepot2",options);
+            entrepot.createIndex("index", "primaryKey");
+            resolve(db);
+        }
+
+        // Gestion des erreurs d'ouverture
+        window.requete.onerror = function(event){
+            console.log(event.target.errorCode);
+            console.log("error");
+            resolve(db);
+        };
+
+        // En cas de succès, "bd" contient la connexion
+        window.requete.onsuccess = function(event){
+            db = event.target.result;
+            resolve(db);
+        }
+      });
     }
-  }
+  }   
 }
 </script>
-
 
 <style>
 #app {
@@ -89,6 +167,20 @@ li a:hover{
 
 .active {
   background-color : cyan;
+}
+
+nav{
+  position : relative;
+}
+
+#btnLogin{
+  position : absolute;
+  top : 0;
+  right : 0;
+}
+
+#btnLogin:hover{
+  cursor: pointer;
 }
 
 </style>
