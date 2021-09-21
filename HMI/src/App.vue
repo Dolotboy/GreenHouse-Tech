@@ -69,7 +69,7 @@ export default {
     },
     GeneratePlant(proxyPlant){
       return {
-          plantType : proxyPlant.plantName,
+          plantType : proxyPlant.plantType,
           daysConservation : proxyPlant.daysConservation,
           description : proxyPlant.description,
           groundType : proxyPlant.groundType,

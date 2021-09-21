@@ -1,9 +1,19 @@
 <template>
-  <h1>Ceci est la page d'acceuil</h1> 
-    <div class="productsGrid">
-      <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in plants' :plant="plant"/>
+  <h1>Ceci est la page d'acceuil</h1>
+  <div class="rdPlantTypeWrapper">
+    <div>
+      <label>Fruit</label>
+      <input type="radio" name="rdPlantType" value="fruit" checked @click="filterData('Fruit')">
     </div>
-    <Details v-if="showDetails" :plant="detailedPlant"/>
+    <div>
+      <label>Légume</label>
+      <input type="radio" name="rdPlantType" value="vegetable" @click="filterData('Vegetable')">
+    </div>
+  </div>
+  <div class="productsGrid">
+    <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in plants' :plant="plant"/>
+  </div>
+  <Details v-if="showDetails" :plant="detailedPlant"/>
 </template>
 
 <script>
@@ -31,6 +41,15 @@ export default {
     toggleDetails(num){
       this.showDetails = !this.showDetails;
       this.detailedPlant = this.plants[num];
+    },
+    async filterData(value){
+      console.log(value);
+      await this.initialisation();
+      let plants = [];
+      for(let i = 0; i < this.plants.length; i++)
+        if(this.plants[i].plantType == value)
+          plants.push(this.plants[i])
+      this.plants = plants;
     },
     async initialisation(){
       let db = await this.setDb();
@@ -90,5 +109,13 @@ export default {
 .plant:hover{
   background: lightgray;
   cursor : pointer;
+}
+
+.rdPlantTypeWrapper{
+  display : flex;
+}
+
+.rdPlantTypeWrapper > div{
+  display : flex;
 }
 </style>
