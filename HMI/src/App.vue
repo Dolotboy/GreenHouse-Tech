@@ -36,7 +36,7 @@ export default {
     async Initialisation(){
       let db = await this.SetDb();
       
-      this.plants = this.fetchData();
+      this.plants = await this.fetchData();
       if(this.plants.length > 0)
         return;
       this.plants = [];
