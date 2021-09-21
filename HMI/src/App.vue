@@ -38,8 +38,8 @@ export default {
       this.showLogin = !this.showLogin;
     },
     async Initialisation(){
-      //await this.GetAllPlants("http://apitestenv.pcst.xyz/api/search/plant/3");
-      await this.GetAllPlants("http://localhost:8000/api/search/plant/3");
+      await this.GetAllPlants("http://apitestenv.pcst.xyz/api/search/plant/3");
+      //await this.GetAllPlants("http://localhost:8000/api/search/plant/3");
       
       let db = await SetDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");

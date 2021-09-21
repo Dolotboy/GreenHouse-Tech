@@ -1,6 +1,16 @@
 <template>
     <div class="details">
         <h1>Details component : {{ plant.plantName }}</h1>
+        <p>Type de plante : {{ plant.plantType }}<br/>
+           Saison : {{plant.season}}<br/>
+           Problème : <br/> 
+           Condition favorable : <br/>
+           Date de semance : <br/>
+           Date de récolte : <br/>
+           Temps de conservation : {{plant.daysConservation}}<br/>
+           Distance de plants : <br/>
+           Fonctionnement : 
+        </p>
     </div>
 </template>
 
