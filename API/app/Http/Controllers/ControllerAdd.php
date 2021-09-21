@@ -24,12 +24,12 @@ class ControllerAdd extends Controller
 
         $plant = new Plant();
 
-        $plant->imgPlant = $request->imgPlant;
-        $plant->plantName = $request->plantName;
-        $plant->season = $request->season;
-        $plant->groundType = $request->groundType;
-        $plant->daysConservation = $request->daysConservation;
-        $plant->description = $request->description;
+        $plant->imgPlant = $request->input("imgPlant");
+        $plant->plantName = $request->input("plantName");
+        $plant->season = $request->input("season");
+        $plant->groundType = $request->input("groundType");
+        $plant->daysConservation = $request->input("daysConservation");
+        $plant->description = $request->input("description");
         $plant->tblPlantSowing_idSowing = $request->tblPlantSowing_idSowing;
         
         $plant->save();

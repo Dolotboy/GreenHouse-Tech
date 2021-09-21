@@ -16,9 +16,9 @@
                             <div class="product-details">
                             <h3>Add your favourite plant below</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h2 class="mb-3"><input type="text" name='favourite' placeholder="Favourite" value=""></h2>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='profile' placeholder="Profile"></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='plant' placeholder="Plant"></h3>                              
+                                    <h3 class="mb-0 text-primary"><input type="text" name='profile' placeholder="Id Profile" value=""></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='plant' placeholder="Id Plant" value=""></h3>    
+                                    <h3 class="mb-0 text-primary"><input type="submit" name='submit' placeholder="Submit"></h3>                           
                                 </div>
                             </div>
                         </div>

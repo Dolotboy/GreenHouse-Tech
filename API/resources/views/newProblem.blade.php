@@ -16,10 +16,10 @@
                             <div class="product-details">
                             <h3>Add a problem</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h2 class="mb-3"><input type="text" name='typeProblem' value="Problem"></h2>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='importanceLvl' value="Importance Level"></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='description' value="Description"></h3>    
-                                    <h3 class="mb-0 text-primary"><input type="submit" name='submit' value="Submit"></h3>                             
+                                    <h2 class="mb-3"><input type="text" name='typeProblem' placeholder="Problem" value=""></h2>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='importanceLvl' placeholder="Importance Level" value=""></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='description' placeholder="Description" value=""></h3>    
+                                    <h3 class="mb-0 text-primary"><input type="submit" name='submit' placeholder="Submit"></h3>                             
                                 </div>
                             </div>
                         </div>
