@@ -10,7 +10,7 @@ class CreateDb extends Migration
      * Run the migrations.
      *
      * @return void
-     */
+     */ 
     public function up()
     {
         Schema::create('tblPlant', function (Blueprint $table) {

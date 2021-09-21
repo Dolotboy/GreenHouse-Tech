@@ -1,9 +1,9 @@
 <template>
   <h1>Ceci est la page d'acceuil</h1> 
     <div class="productsGrid">
-      <Plant class="plant" @click="toggleDetails(2)" v-for='plant in plants' :plant="plant"/>
+      <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in plants' :plant="plant"/>
     </div>
-    <Details v-if="showDetails" :plant="detailedPlant"/>
+    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
 </template>
 
 <script>
