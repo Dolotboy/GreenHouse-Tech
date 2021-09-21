@@ -1,11 +1,10 @@
 @extends('layouts.app')
-@section('title', 'Add Profile')
+@section('title', 'Edit Profile')
 @section('pageContent')
 @parent
 
-<div id='mainContainer'>
-        
-        <form action='{{route('addProfile')}}' method='PUT'>
+    <div id='mainContainer'>
+        <form action='{{route('editSearchProfile')}}' method='POST'>
             @csrf
             @method('PUT')
 
@@ -14,14 +13,14 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                             <div class="product-details">
-                            <h3>Add your information</h3>
+                            <h3>Edit your profile</h3>
                                 <div class="border-bottom pb-3 mb-3">
                                     <h2 class="mb-3"><input type="text" name='email' placeholder="Email"></h2>
                                     <h3 class="mb-0 text-primary"><input type="text" name='password' placeholder="Importance Level"></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='salt' placeholder="Salt"></h3>   
                                     <h3 class="mb-0 text-primary"><input type="text" name='firstName' placeholder="First Name"></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='lastName' placeholder="Last Name"></h3>   
-                                    <h3 class="mb-0 text-primary"><input type="submit" name='submit' placeholder="Submit"></h3>                             
+                                    <h3 class="mb-0 text-primary"><input type="submit" name='submit' placeholder="Submit"></h3>                                         
                                 </div>
                             </div>
                         </div>

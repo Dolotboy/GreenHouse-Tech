@@ -15,7 +15,8 @@
                             <div class="product-details">
                             <h3>Add a plant</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h2 class="mb-3"><input type="text" name='name' placeholder="Nom"></h2>
+                                    <h2 class="mb-3"><input type="text" name='imgPlant' placeholder="imgPlant"></h2>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='name' placeholder="Nom"></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='season' placeholder="Season"></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='type' placeholder="Type"></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='groundType' placeholder="Ground Type"></h3>

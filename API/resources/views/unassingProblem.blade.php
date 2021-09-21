@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Search Plant')
+@section('title', 'Unassign a problem')
 @section('pageContent')
 @parent
 
-<div id='mainContainer'>
+    <div id='mainContainer'>
         
-        <form action='{{route('searchPlant')}}' method='POST'>
+        <form action='{{route('unassignProblem')}}' method='POST'>
             @csrf
             @method('PUT')
 
@@ -14,13 +14,10 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                             <div class="product-details">
-                            <h3>Search for a plant</h3>
+                            <h3>Unassign a problem</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h2 class="mb-3"><input type="text" name='name' placeholder="Nom"></h2>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='season' placeholder="Season"></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='groundType' placeholder="GroundType"></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='daysConservation' placeholder="daysConservation"></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='description' placeholder="Description"></h3>
+                                    <h2 class="mb-3"><input type="text" name='idPlant' placeholder="idPlant"></h2>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='idProblem' placeholder="idProblem"></h3>
                                     <h3 class="mb-0 text-primary"><input type="submit" name='submit' placeholder="Submit"></h3>                                      
                                 </div>
                             </div>

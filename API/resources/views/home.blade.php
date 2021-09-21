@@ -15,7 +15,7 @@
 @parent
         <div id='mainContainer'>
 
-            // ****************** FIRST LINE ********************//
+            <!-- // ****************** FIRST LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            // ****************** SECOND LINE ********************//
+            <!-- // ****************** SECOND LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            // ****************** THIRD LINE ********************//
+            <!-- // ****************** THIRD LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -87,7 +87,7 @@
                 </div>
             </div>
 
-            // ****************** FOURTH LINE ********************//
+            <!-- // ****************** FOURTH LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -115,7 +115,7 @@
                 </div>
             </div>
 
-            // ****************** FIFTH LINE ********************//
+            <!-- // ****************** FIFTH LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -143,7 +143,7 @@
                 </div>
             </div>
 
-            // ****************** SEVENTH LINE ********************//
+           <!-- // ****************** SEVENTH LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -159,7 +159,7 @@
                 </div>
             </div>
 
-            // ****************** EIGHTH LINE ********************//
+            <!-- // ****************** EIGHTH LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -175,35 +175,29 @@
                 </div>
             </div>
 
-            // ****************** NINTH LINE ********************//
+            <!-- // ****************** NINTH LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('getAllPlant')}}">
-                        <h2>Assigner un problème</h2> 
+                    <a href="{{route('detailAllPlant')}}">
+                        <h2>Voir tout les plantes</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('getAllProblem')}}">
-                        <h2>Désassigner un problème</h2> 
+                    <a href="{{route('detailAllProblem')}}">
+                        <h2>Voir tout les problèmes</h2> 
                     </a>
                 </div>
-            </div>
-
-            <div class='midContainer'>
-                <div class='cbtn'>
-                    <a href="{{route('getAllFavorite')}}">
-                        <h2>Assigner un problème</h2> 
-                    </a>
-                </div>
+            
 
                 <div class='cbtn'>
-                    <a href="{{route('getAllProfile')}}">
-                        <h2>Désassigner un problème</h2> 
+                    <a href="{{route('detailAllProfile')}}">
+                        <h2>Voir tous les profils</h2> 
                     </a>
                 </div>
-            </div>
+            
+     
 
         </div>
 @endsection

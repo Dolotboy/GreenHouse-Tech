@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Add Profile')
+@section('title', 'Search Profile')
 @section('pageContent')
 @parent
 
 <div id='mainContainer'>
         
-        <form action='{{route('addProfile')}}' method='PUT'>
+        <form action='{{route('searchProfile')}}' method='PUT'>
             @csrf
             @method('PUT')
 
@@ -17,7 +17,7 @@
                             <h3>Add your information</h3>
                                 <div class="border-bottom pb-3 mb-3">
                                     <h2 class="mb-3"><input type="text" name='email' placeholder="Email"></h2>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='password' placeholder="Importance Level"></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='password' placeholder="Password"></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='salt' placeholder="Salt"></h3>   
                                     <h3 class="mb-0 text-primary"><input type="text" name='firstName' placeholder="First Name"></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='lastName' placeholder="Last Name"></h3>   
