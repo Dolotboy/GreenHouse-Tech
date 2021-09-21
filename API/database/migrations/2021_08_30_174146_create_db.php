@@ -17,6 +17,8 @@ class CreateDb extends Migration
             $table->bigIncrements('idPlant');
             $table->longText('imgPlant');
             $table->string('plantName');
+            $table->string('plantType');
+            $table->string('plantFamily');
             $table->string('season');
             $table->string('groundType');
             $table->integer('daysConservation');
@@ -28,18 +30,6 @@ class CreateDb extends Migration
         Schema::create('tblPlantSowing', function (Blueprint $table) {
             $table->bigIncrements('idSowing');
             $table->date('dateSowing');
-            $table->timestamps();
-        });
-
-        Schema::create('tblFruit', function (Blueprint $table) {
-            $table->unsignedBigInteger('tblPlant_idPlant');
-            $table->foreign('tblPlant_idPlant')->references('idPlant')->on('tblPlant'); // Foreign à tblPlant
-            $table->timestamps();
-        });
-
-        Schema::create('tblVegetable', function (Blueprint $table) {
-            $table->unsignedBigInteger('tblPlant_idPlant');
-            $table->foreign('tblPlant_idPlant')->references('idPlant')->on('tblPlant'); // Foreign à tblPlant
             $table->timestamps();
         });
 
