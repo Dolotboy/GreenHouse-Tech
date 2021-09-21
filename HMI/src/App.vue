@@ -34,10 +34,17 @@ export default {
       this.showLogin = !this.showLogin;
     },
     async Initialisation(){
-      //await this.GetAllPlants("http://apitestenv.pcst.xyz/api/search/plant/3");
-      await this.GetAllPlants("http://localhost:8000/api/search/plant/3");
+      let db = await this.SetDb();
       
-      let db = await SetDb();
+      this.plants = this.fetchData();
+      if(this.plants.length > 0)
+        return;
+      this.plants = [];
+      
+      await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
+      //await this.GetAllPlants("http://localhost:8000/api/searchAll/plant/3");
+      //await this.GetAllPlants("http://apitestenv.pcst.xyz/api/search/plant/3");
+      
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
       for(let i = 0; i < this.plants.length; i++){
@@ -48,11 +55,14 @@ export default {
       this.plants = this.fetchData();
     },
     GetAllPlants(url){
+      console.log("GetAllPlants");
       let that = this;
       return new Promise(resolve => {
         $.get(url, function(donnees, status){
+          let data = donnees.substring(1,donnees.length - 1);
           let json = JSON.parse(donnees);
-          that.plants.push(JSON.parse(donnees));
+          for(let i = 0; i< json.length; i++)
+            that.plants.push(json[i]);
           resolve();
         })
       })
