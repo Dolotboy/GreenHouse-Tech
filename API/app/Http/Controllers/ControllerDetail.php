@@ -181,7 +181,7 @@ class ControllerDetail extends Controller
 
     }
 
-    /*public function searchPackage($type, $searchCondition)
+    public function searchPackage($searchCondition)
     {
         $plant = Plant::find($searchCondition);
 
@@ -198,12 +198,26 @@ class ControllerDetail extends Controller
 
         
         $array = array('idPlant' => $idPlant, 'imgPlant' => $imgPlant, 'plantName' => $plantName, 'season' => $season, 'groundType' => $groundType, 'daysConservation' => $daysConservation, 'description' => $description, 'tblPlantSowing_idSowing' => $tblPlantSowing_idSowing, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
-        $json = json_encode($array);
 
-        $problemAssociation = AssignProblem::where('tblPlant_idPlant', '=', $searchCondition)
-        ->get();
+        /*$problemAssociation = AssignProblem::where('tblPlant_idPlant', '=', $searchCondition)
+        ->get();*/
 
-        $problem = Problem::find($problemAssociation->idProblem);
+        $problems = array($plant->plantProblems);
+
+        //$favCondition = array_merge($plant->plantFavConditionDate, $plant->plantFavConditionNb);
+
+        $favConditionDate = array($plant->plantFavConditionDate);
+
+        $favConditionNb = array($plant->plantFavConditionNb);
+
+        $favConditions = array_merge($favConditionDate, $favConditionNb);
+
+        $package = array_merge($array, $problems, $favConditions);
+
+        $json = json_encode($package);
+
+        return $json;
+        /*$problem = Problem::find($problemAssociation->idProblem);
 
         $idProblem = $problem->idProblem;
         $typeProblem = $problem->typeProblem;
@@ -218,6 +232,6 @@ class ControllerDetail extends Controller
         return ("$json $json2");
 
         // Laravel Doc Model
-        // many to many
-    }*/
+        // many to many*/
+    }
 }
