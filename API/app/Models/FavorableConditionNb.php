@@ -9,4 +9,9 @@ class FavorableConditionNb extends Model
 {
     protected $table = 'tblNbRangeFav';
     protected $primaryKey = 'idRangeNb';
+
+    public function plants()
+    {
+        return $this->belongsToMany(Plant::class, 'tblPlant_tblNbRangeFav', 'tblPlant_idPlant', 'tblNbRangeFav_idRangeNb');
+    }
 }

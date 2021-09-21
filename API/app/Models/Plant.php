@@ -9,4 +9,19 @@ class Plant extends Model
 {
     protected $table = 'tblPlant';
     protected $primaryKey = 'idPlant';
+
+    public function plantProblems()
+    {
+        return $this->belongsToMany(Problem::class, 'tblPlant_tblProblem', 'tblPlant_idPlant', 'tblProblem_idProblem');
+    }
+
+    public function plantFavConditionDate()
+    {
+        return $this->belongsToMany(FavorableConditionDate::class, 'tblPlant_tblDateRangeFav', 'tblPlant_idPlant', 'tblDateRangeFav_idRangeDate');
+    }
+
+    public function plantFavConditionNb()
+    {
+        return $this->belongsToMany(FavorableConditionNb::class, 'tblPlant_tblNbRangeFav', 'tblPlant_idPlant', 'tblNbRangeFav_idRangeNb');
+    }
 }

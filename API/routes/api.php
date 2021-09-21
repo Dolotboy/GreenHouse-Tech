@@ -18,15 +18,15 @@ use App\Http\Controllers\ControllerUnassign;
 Route::get('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('addPlant');
 Route::post('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('addPlant');
 
-Route::put('/edit/plant/editPlant', [ControllerEdit::class, 'editPlant'])->name('editPlant');
+Route::put('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlant');
 
 //Route::middleware(['cors'])->group(function () { Route::get("search/plant/{id}", [ControllerDetail::class, 'searchPlant'],function ($id){})->name('detailPlant'); });
 
-Route::get("search/plant/{id}", [ControllerDetail::class, 'searchPlant'],function ($id){})->name('detailPlant');
+Route::get("search/plant/{idPlant}", [ControllerDetail::class, 'searchPlant'],function ($idPlant){})->name('detailPlant');
 
 Route::get("searchAll/plant", [ControllerDetail::class, 'searchAllPlant'],function (){})->name('detailAllPlant');
 
-Route::delete("/delete/plant/{id}", [ControllerDelete::class, 'deletePlant'],function ($id){})->name('deletePlant');
+Route::delete("/delete/plant/{idPlant}", [ControllerDelete::class, 'deletePlant'],function ($idPlant){})->name('deletePlant');
 
 // ***************** PLANT *******************
 
@@ -34,13 +34,13 @@ Route::delete("/delete/plant/{id}", [ControllerDelete::class, 'deletePlant'],fun
 Route::post('/new/problem/addProblem', [ControllerAdd::class, 'addProblem'])->name('addProblem');
 Route::get('/new/problem/addProblem', [ControllerAdd::class, 'addProblem'])->name('addProblem');
 
-Route::put('/edit/problem/editProblem', [ControllerEdit::class, 'editProblem'])->name('editProblem');
+Route::put('/edit/problem/editProblem/{idProblem}', [ControllerEdit::class, 'editProblem'],function ($idProblem){})->name('editProblem');
 
-Route::get("search/problem/{id}", [ControllerDetail::class, 'searchProblem'],function ($id){})->name('detailProblem');
+Route::get("search/problem/{idProblem}", [ControllerDetail::class, 'searchProblem'],function ($idProblem){})->name('detailProblem');
 
 Route::get("searchAll/problem", [ControllerDetail::class, 'searchAllProblem'],function (){})->name('detailAllProblem');
 
-Route::delete("/delete/problem/{id}", [ControllerDelete::class, 'deleteProblem'],function ($id){})->name('deleteProblem');
+Route::delete("/delete/problem/{idProblem}", [ControllerDelete::class, 'deleteProblem'],function ($idProblem){})->name('deleteProblem');
 
 //Route::post('/assign/problem/{idPlant}/{idProblem}', [ControllerAssign::class, 'assignProblem'],function ($idPlant, $idProblem){})->name('assignProblem');
 Route::get('/assign/problem/{idPlant}/{idProblem}', [ControllerAssign::class, 'assignProblem'],function ($idPlant, $idProblem){})->name('assignProblem');
@@ -62,13 +62,13 @@ Route::delete("/delete/favorite/{idPlant}/{idProfile}", [ControllerDelete::class
 
 Route::post('/new/profile/addProfile', [ControllerAdd::class, 'addProfile'])->name('addProfile');
 
-Route::put('/edit/profile/editVegetable', [ControllerEdit::class, 'editProfile'])->name('editProfile');
+Route::put('/edit/profile/editProfile/{idProfile}', [ControllerEdit::class, 'editProfile'],function ($idProfile){})->name('editProfile');
 
-Route::get("search/profile/{id}", [ControllerDetail::class, 'searchProfile'],function ($id){})->name('detailProfile');
+Route::get("search/profile/{idProfile}", [ControllerDetail::class, 'searchProfile'],function ($idProfile){})->name('detailProfile');
 
 Route::get("searchAll/profile", [ControllerDetail::class, 'searchAllProfile'],function (){})->name('detailAllProfile');
 
-Route::delete("/delete/profile/{id}", [ControllerDelete::class, 'deleteProfile'],function ($id){})->name('deleteProfile');
+Route::delete("/delete/profile/{idProfile}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile');
 
 // ***************** PROFILE *******************
 
@@ -76,7 +76,7 @@ Route::delete("/delete/profile/{id}", [ControllerDelete::class, 'deleteProfile']
 
 Route::post('/new/condition/addFavCondition/{type}', [ControllerAdd::class, 'addFavCondition'],function ($type){})->name('addFavCondition');
 
-Route::put('/edit/condition/editFavCondition', [ControllerEdit::class, 'editFavCondition'])->name('editFavCondition');
+Route::put('/edit/condition/editFavCondition/{type}/{idCondition}', [ControllerEdit::class, 'editFavCondition'],function ($type, $idCondition){})->name('editFavCondition');
 
 Route::get("search/condition/{type}/{idCondition}", [ControllerDetail::class, 'searchFavCondition'],function ($type, $idCondition){})->name('detailFavCondition');
 
@@ -91,3 +91,9 @@ Route::delete('/unassign/condition/{type}/{idPlant}/{idCondition}', [ControllerU
 Route::get('/unassign/condition/{type}/{idPlant}/{idCondition}', [ControllerUnassign::class, 'unassignFavCondition'],function ($type, $idPlant, $idCondition){})->name('unassignFavCondition');
 
 // ***************** FAVORABLE CONDITION *******************
+
+// ***************** PACKAGE *******************
+
+Route::get("search/package/{searchCondition}", [ControllerDetail::class, 'searchPackage'],function ($searchCondition){})->name('searchPackage');
+
+// ***************** PACKAGE *******************
