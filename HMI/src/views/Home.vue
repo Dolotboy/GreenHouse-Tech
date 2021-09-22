@@ -1,5 +1,5 @@
 <template>
-  <h1>Ceci est la page d'acceuil</h1> 
+<img src="GreenHouse-Tech/HMI/Images/Logo.png">
     <div class="productsGrid">
       <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in plants' :plant="plant"/>
     </div>
@@ -83,8 +83,8 @@ export default {
 .productsGrid{
   display : grid;
   grid-template-columns: 50% 50%;
-  width : 50vw;
-  margin-left : 25vw;
+  width : 100%;
+  margin-top: 3%;
 }
 
 .plant:hover{

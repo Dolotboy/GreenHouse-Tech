@@ -1,16 +1,17 @@
 <template>
     <div class="details">
-        <h1>Details component : {{ plant.plantName }}</h1>
-        <p>Type de plante : {{ plant.plantType }}<br/>
-           Saison : {{plant.season}}<br/>
-           Problème : <br/> 
-           Condition favorable : <br/>
-           Date de semance : <br/>
-           Date de récolte : <br/>
-           Temps de conservation : {{plant.daysConservation}}<br/>
-           Distance de plants : <br/>
-           Fonctionnement : 
-        </p>
+        <h1>{{ plant.plantName }}</h1>
+        <div class="detailsPlant">
+            <p>Type de plante : {{ plant.plantType }}</p>
+            <p>Saison : {{plant.season}}</p>
+            <p>Problème : </p>
+            <p>Condition favorable : </p>
+            <p>Date de semance : </p>
+            <p>Date de récolte :</p>
+            <p>Temps de conservation : {{plant.daysConservation}} jour(s)</p>
+            <p>Distance de plants : </p>
+            <p>Fonctionnement : </p>        
+        </div>
         <div class="close-button" @click="$emit('close')" >X</div>        
     </div>
 </template>
@@ -27,9 +28,12 @@ export default {
     top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
-    background: rgb(221, 140, 140);
+    background: rgb(206, 205, 205);
+    border: solid;
+    border-color: black;
     width : 50vw;
-    height: 50vh;
+    height: 75vh;
+    padding-left: 5%;
 }
 .close-button {
     position: absolute;
@@ -42,5 +46,17 @@ export default {
     border:solid;
     border-width: 1px;
     border-color: grey;
+}
+.details h1{
+    font-size: 35px;
+}
+.detailsPlant > p{
+    font-size: 24px;
+    margin-top: 1.5%;
+    text-align: left;
+}
+.detailsPlant{
+    display: flex;
+    flex-direction: column;
 }
 </style>
