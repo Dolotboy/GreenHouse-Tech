@@ -20,6 +20,7 @@
 import Details from '../components/Details.vue'
 import Plant from '../components/Plant.vue'
 import $ from '../../node_modules/jquery/dist/jquery.js'
+import toolbox from '../toolbox.js'
 
 export default {
   name: 'Home',
@@ -43,7 +44,6 @@ export default {
       this.detailedPlant = this.plants[num];
     },
     async filterData(value){
-      console.log(value);
       await this.initialisation();
       let plants = [];
       for(let i = 0; i < this.plants.length; i++)
@@ -52,47 +52,8 @@ export default {
       this.plants = plants;
     },
     async initialisation(){
-      let db = await this.setDb();
-      this.plants = await this.fetchData(db);
-    },
-    fetchData(db){
-      return new Promise(resolve => {
-        let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
-        let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");
-        let requete = entrepot.getAll();
-        requete.onsuccess = function(event){
-          resolve(event.target.result);
-        }
-      })
-    },
-    setDb(){
-      return new Promise(resolve =>{
-      window.requete = indexedDB.open("GreenHouseTech",2);
-
-      window.requete.onupgradeneeded = function(event){
-            db = event.target.result;
-            let options = {
-                keyPath : "primaryKey",
-                autoIncrement : true
-            };
-            let entrepot = db.createObjectStore("GreenHouseTech_Entrepot2",options);
-            entrepot.createIndex("index", "primaryKey");
-            resolve(db);
-        }
-
-        // Gestion des erreurs d'ouverture
-        window.requete.onerror = function(event){
-            console.log(event.target.errorCode);
-            console.log("error");
-            resolve(db);
-        };
-
-        // En cas de succès, "bd" contient la connexion
-        window.requete.onsuccess = function(event){
-            db = event.target.result;
-            resolve(db);
-        }
-      });
+      let db = await toolbox.setDb();
+      this.plants = await toolbox.fetchData(db);
     }
   }
 }
