@@ -7,12 +7,12 @@
           <li><router-link to="/about">À propos</router-link></li>
         </div>
         <div id="Login">
-          <li>Se connecter</li>
+          <li @click="toggleLogin">Se connecter</li>
         </div>
       </ul>
     </nav>
-    <router-view/>
-    <Login v-if="showLogin"/>
+    <router-view/>  
+    <Login v-if="showLogin" @close="toggleLogin"/>
   </div>
 </template>
 
@@ -149,14 +149,25 @@ ul {
   background-color: #4E5754 ;
   display: flex;
   justify-content: center;
-  
 }
 
-#Login {
+#Login :hover{
+  background-color: black;
+  cursor: pointer;
+}
+
+#Login li{
   position: absolute;
   right: 0%;
   top: 0%;
+  list-style-type: none;
+  overflow: hidden;
+  color: white;
+  height: 100%;
+  padding: 10px 15px;
 }
+
+
 
 li {
   float: left;
@@ -184,14 +195,5 @@ nav{
   position : relative;
 }
 
-#btnLogin{
-  position : absolute;
-  top : 0;
-  right : 0;
-}
-
-#btnLogin:hover{
-  cursor: pointer;
-}
 
 </style>

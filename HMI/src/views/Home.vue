@@ -1,5 +1,7 @@
 <template>
-<img src="GreenHouse-Tech/HMI/Images/Logo.png">
+  <div class="logo">
+    <img src="../../Images/LogoV1.png">
+  </div>
     <div class="productsGrid">
       <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in plants' :plant="plant"/>
     </div>
@@ -80,11 +82,19 @@ export default {
 </script>
 
 <style>
+.logo{
+  margin-top: 1%;
+  height: 10vh;
+}
+.logo img{
+  max-height: 100%;
+  max-width: 100%;
+}
 .productsGrid{
   display : grid;
   grid-template-columns: 50% 50%;
   width : 100%;
-  margin-top: 3%;
+  margin-top: 1%;
 }
 
 .plant:hover{
