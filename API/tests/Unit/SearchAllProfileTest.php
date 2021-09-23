@@ -6,15 +6,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Profile;
+use Illuminate\Support\Facades\Http;
 
 class SearchAllProfileTest extends TestCase
 {
     public function test_Profile()
     {
         $data = Profile::All();
-        $donneApi = $this->json('GET', 'api/searchAll/profile');
         $dataEncode = json_encode($data);
-        $this->assertEquals($data,$dataEncode);
-        
+        $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/searchAll/profile');
+        $this->assertEquals($data,$dataEncode);     
     }
 }
