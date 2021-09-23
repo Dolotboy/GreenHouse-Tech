@@ -9,4 +9,9 @@ class FavorableConditionDate extends Model
 {
     protected $table = 'tblDateRangeFav';
     protected $primaryKey = 'idRangeDate';
+
+    public function plants()
+    {
+        return $this->belongsToMany(Plant::class, 'tblPlant_tblDateRangeFav', 'tblPlant_idPlant', 'tblDateRangeFav_idRangeDate');
+    }
 }

@@ -26,6 +26,8 @@ class ControllerAdd extends Controller
 
         $plant->imgPlant = $request->imgPlant;
         $plant->plantName = $request->plantName;
+        $plantType = $request->plantType;
+        $plantFamily = $request->plantFamily;
         $plant->season = $request->season;
         $plant->groundType = $request->groundType;
         $plant->daysConservation = $request->daysConservation;
