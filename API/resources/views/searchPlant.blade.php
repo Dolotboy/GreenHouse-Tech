@@ -5,9 +5,8 @@
 
 <div id='mainContainer'>
         
-        <form action='{{route('searchPlant')}}' method='POST'>
+        <form action='{{route('searchPlant')}}' method='GET'>
             @csrf
-            @method('PUT')
 
             <div class="row">
                 <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -16,12 +15,15 @@
                             <div class="product-details">
                             <h3>Search for a plant</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h2 class="mb-3"><input type="text" name='name' placeholder="Nom"></h2>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='season' placeholder="Season"></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='groundType' placeholder="GroundType"></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='daysConservation' placeholder="daysConservation"></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='description' placeholder="Description"></h3>
-                                    <h3 class="mb-0 text-primary"><input type="submit" name='submit' placeholder="Submit"></h3>                                      
+                                <h2 class="mb-3"><input type="text" name='imgPlant' placeholder="image Plant" value=""></h2>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='plantName' placeholder="Plant Name" value="{{ $plant["plantName"] }}"></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='plantType' placeholder="Plant Type" value="{{ $plant["plantType"] }}"></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='plantFamily' placeholder="Plant Family" value="{{ $plant["plantFamily"] }}"></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='season' placeholder="Season" value="{{ $plant["season"] }}"></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='groundType' placeholder="Ground Type" value="{{ $plant["groundType"] }}"></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='daysConservation' placeholder="Days of conservation" value="{{ $plant["daysConservation"] }}"></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='description' placeholder="Description" value="{{ $plant["description"] }}"></h3>  
+                                    <h3 class="mb-0 text-primary"><input type="text" name='tblPlantSowing_idSowing' placeholder="tblPlantSowing_idSowing" value="{{ $plant["tblPlantSowing_idSowing"] }}"></h3>                                   
                                 </div>
                             </div>
                         </div>

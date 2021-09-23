@@ -5,8 +5,8 @@
 
 <div id='mainContainer'>
         
-        <!--<form id="form" action='{{route('addFavorite')}}' method='PUT'>-->
-        <form id="form" action='/api/new/favorite/1/1' method='POST'>
+        <form id="form" action='{{route('newFavorite')}}' method='POST'>
+        <!--<form id="form" action='/api/new/favorite/1/1' method='POST'>-->
             @csrf
 
             <div class="row">
@@ -18,8 +18,7 @@
                                 <div class="border-bottom pb-3 mb-3">
                                     <h3 class="mb-0 text-primary"><input type="text" name='TblPlant_idPlant' placeholder="Id Plant" value=""></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='TblProfile_idProfile' placeholder="Id Profile" value=""></h3>    
-                                    <h3 class="mb-0 text-primary"><input type="submit" name='submit' onclick="click()" placeholder="Submit"></h3> 
-                                    <!--<button><a href='http://apitestenv.pcst.xyz/api/new/favorite/1/1'>CLIQUE ICI MON AMI</a></button>-->                       
+                                    <h3 class="mb-0 text-primary"><input type="submit" name='submit' onclick="click()" placeholder="Submit"></h3>                 
                                 </div>
                             </div>
                         </div>

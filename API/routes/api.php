@@ -77,6 +77,7 @@ Route::delete("/delete/profile/{idProfile}", [ControllerDelete::class, 'deletePr
 // ***************** FAVORABLE CONDITION *******************
 
 Route::post('/new/condition/addFavCondition/{type}', [ControllerAdd::class, 'addFavCondition'],function ($type){})->name('addFavCondition');
+//Route::get('/new/condition/addFavCondition/{type}', [ControllerAdd::class, 'addFavCondition'],function ($type){})->name('addFavCondition');
 
 Route::put('/edit/condition/editFavCondition/{type}/{idCondition}', [ControllerEdit::class, 'editFavCondition'],function ($type, $idCondition){})->name('editFavCondition');
 

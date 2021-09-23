@@ -22,7 +22,7 @@ class ControllerDetail extends Controller
     public function searchPlant($id)
     {
         $plant = Plant::find($id);
-
+        
         $idPlant = $plant->idPlant;
         $imgPlant = $plant->imgPlant;
         $plantName = $plant->plantName;
@@ -41,6 +41,11 @@ class ControllerDetail extends Controller
         $json = json_encode($array);
     
         return ("$json");
+
+        /*$plant = Plant::find($id);
+
+        return view('searchPlant',["plant" => $plant]);*/
+
     }
 
     public function searchAllPlant()

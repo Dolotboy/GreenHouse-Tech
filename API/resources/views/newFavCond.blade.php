@@ -5,7 +5,7 @@
 
     <div id='mainContainer'>
         
-        <form action='{{route('addFavCondition')}}' method='POST'>
+        <form action='{{route('newFavCondition')}}' method='POST'>
             @csrf
 
             <div class="row">

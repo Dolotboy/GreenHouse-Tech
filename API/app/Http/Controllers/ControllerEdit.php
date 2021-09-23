@@ -15,7 +15,7 @@ class ControllerEdit extends Controller
 {
     public function indexPlant(Request $request)
     {
-        return view('editPlant');
+        return view('editSearchPlant');
         /* value="{{ $produit["namePlant"] }}" */
     }
 
