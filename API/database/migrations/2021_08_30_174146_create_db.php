@@ -33,6 +33,19 @@ class CreateDb extends Migration
             $table->timestamps();
         });
 
+        Schema::create('tblFruit', function (Blueprint $table) {
+            $table->unsignedBigInteger('tblPlant_idPlant');
+            $table->foreign('tblPlant_idPlant')->references('idPlant')->on('tblPlant'); // Foreign à tblPlant
+            $table->timestamps();
+        });
+
+        Schema::create('tblVegetable', function (Blueprint $table) {
+            $table->unsignedBigInteger('tblPlant_idPlant');
+            $table->foreign('tblPlant_idPlant')->references('idPlant')->on('tblPlant'); // Foreign à tblPlant
+            $table->timestamps();
+
+        });
+
         Schema::create('tblProblem', function (Blueprint $table) {
             $table->bigIncrements('idProblem');
             $table->string('typeProblem');
