@@ -13,6 +13,8 @@
     <link href="{{ URL::asset('vendor/fonts/circular-std/style.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('vendor/fonts/fontawesome/css/fontawesome-all.css') }}" rel="stylesheet">
 
+    
+
 </head>
 
 <body>

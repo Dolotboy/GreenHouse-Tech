@@ -4,10 +4,8 @@
 @parent
 
 <div id='mainContainer'>
-        
-        <!--<form id="form" action='{{route('addFavorite')}}' method='PUT'>-->
-        <form id="form" action='/api/new/favorite/1/1' method='POST'>
-            @csrf
+
+        <form id="form" method='POST'>
 
             <div class="row">
                 <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -16,10 +14,9 @@
                             <div class="product-details">
                             <h3>Add your favourite plant below</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h3 class="mb-0 text-primary"><input type="text" name='TblPlant_idPlant' placeholder="Id Plant" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='TblProfile_idProfile' placeholder="Id Profile" value=""></h3>    
-                                    <h3 class="mb-0 text-primary"><input type="submit" name='submit' onclick="click()" placeholder="Submit"></h3> 
-                                    <!--<button><a href='http://apitestenv.pcst.xyz/api/new/favorite/1/1'>CLIQUE ICI MON AMI</a></button>-->                       
+                                    <h3 class="mb-0 text-primary"><input type="text" id='v1' name='TblPlant_idPlant' placeholder="Id Plant" value=""></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" id='v2' name='TblProfile_idProfile' placeholder="Id Profile" value=""></h3>    
+                                    <h3 class="mb-0 text-primary"><button type='submit' onclick="myFunction()">Envoyer</button></h3>              
                                 </div>
                             </div>
                         </div>
@@ -27,11 +24,16 @@
                 </div>
             </div>
         </form>
-    </div>
-    <script>
-        function click(){
-            let form = document.querySelector("#form");
-            form.action = form.action + '/1/1';
-        }
-    </script>
+
+        <script>
+            function myFunction() {
+                let v1 = document.getElementById('v1').value;
+                let v2 = document.getElementById('v2').value;
+                let form = document.getElementById("form").action = '/api/new/favorite/' + v1 + '/' + v2;
+            }
+        </script>
+</div>
+
+
+
 @endsection
