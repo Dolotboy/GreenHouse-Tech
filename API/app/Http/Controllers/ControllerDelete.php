@@ -90,7 +90,6 @@ class ControllerDelete extends Controller
                     ['tblPlant_idPlant', '=', $idPlant],
                     ['tblProfile_idProfile', '=', $idProfile],
                 ])->delete();
-                //AssignProblem::destroy([$idPlant, $idProblem]);
                 return ("Favorite deleted !");
             }
             catch(Exception $e)

@@ -204,12 +204,7 @@ class ControllerDetail extends Controller
         
         $array = array('idPlant' => $idPlant, 'imgPlant' => $imgPlant, 'plantName' => $plantName, 'season' => $season, 'groundType' => $groundType, 'daysConservation' => $daysConservation, 'description' => $description, 'tblPlantSowing_idSowing' => $tblPlantSowing_idSowing, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
 
-        /*$problemAssociation = AssignProblem::where('tblPlant_idPlant', '=', $searchCondition)
-        ->get();*/
-
         $problems = array($plant->plantProblems);
-
-        //$favCondition = array_merge($plant->plantFavConditionDate, $plant->plantFavConditionNb);
 
         $favConditionDate = array($plant->plantFavConditionDate);
 
@@ -222,21 +217,5 @@ class ControllerDetail extends Controller
         $json = json_encode($package);
 
         return $json;
-        /*$problem = Problem::find($problemAssociation->idProblem);
-
-        $idProblem = $problem->idProblem;
-        $typeProblem = $problem->typeProblem;
-        $importanceLvl = $problem->importanceLvl;
-        $description = $problem->description;
-        $createdAt = $problem->created_at;
-        $updatedAt = $problem->updated_at;
-        
-        $array2 = array('idProblem' => $idProblem, 'typeProblem' => $typeProblem, 'importanceLvl' => $importanceLvl, 'description' => $description, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
-        $json2 = json_encode($array2);
-
-        return ("$json $json2");
-
-        // Laravel Doc Model
-        // many to many*/
     }
 }
