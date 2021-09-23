@@ -15,6 +15,7 @@ Route::get('/', function () {
 // ***************** HOME *******************
 
 // ***************** PLANT *******************
+
 Route::post('/new/plant/', [ControllerAdd::class, 'indexPlant'])->name('newPlant');
 Route::get('/new/plant/', [ControllerAdd::class, 'indexPlant'])->name('newPlant');
 
@@ -47,11 +48,12 @@ Route::get('/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('
 
 Route::post('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('deleteUnassignProblem');
 Route::get('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('deleteUnassignProblem');
+
 // ***************** PROBLEM *******************
 
 // ***************** FAVORITE *******************
 
-//Route::post('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
+Route::post('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
 Route::get('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
 
 Route::post('/delete/favorite', [ControllerDelete::class, 'indexProblem'])->name('deleteSearchFavorite');
@@ -60,7 +62,7 @@ Route::post('/delete/favorite', [ControllerDelete::class, 'indexProblem'])->name
 
 // ***************** PROFILE *******************
 
-//Route::post('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile');
+Route::post('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile');
 Route::get('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile');
 
 Route::post('/edit/profile', [ControllerEdit::class, 'indexProfile'])->name('editSearchProfile');
@@ -73,7 +75,7 @@ Route::post('/delete/profile', [ControllerDelete::class, 'indexProfile'])->name(
 
 // ***************** FAVORABLE CONDITION *******************
 
-//Route::post('/new/condition', [ControllerAdd::class, 'indexFavCondition'])->name('newFavCondition');
+Route::post('/new/condition', [ControllerAdd::class, 'indexFavCondition'])->name('newFavCondition');
 Route::get('/new/condition', [ControllerAdd::class, 'indexFavCondition'])->name('newFavCondition');
 
 //Route::post('/edit/condition', [ControllerEdit::class, 'indexFavCondition'])->name('editSearchFavCondition');

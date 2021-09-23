@@ -26,6 +26,8 @@ class ControllerDetail extends Controller
         $idPlant = $plant->idPlant;
         $imgPlant = $plant->imgPlant;
         $plantName = $plant->plantName;
+        $plantType = $plant->plantType;
+        $plantFamily = $plant->plantFamily;
         $season = $plant->season;
         $groundType = $plant->groundType;
         $daysConservation = $plant->daysConservation;
@@ -188,6 +190,8 @@ class ControllerDetail extends Controller
         $idPlant = $plant->idPlant;
         $imgPlant = $plant->imgPlant;
         $plantName = $plant->plantName;
+        $plantType = $plant->plantType;
+        $plantFamily = $plant->plantFamily;
         $season = $plant->season;
         $groundType = $plant->groundType;
         $daysConservation = $plant->daysConservation;

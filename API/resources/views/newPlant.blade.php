@@ -15,13 +15,15 @@
                             <div class="product-details">
                             <h3>Add a plant</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h2 class="mb-3"><input type="text" name='imgPlant' placeholder="imgage Plant" value=""></h2>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='name' placeholder="Nom" value=""></h3>
+                                    <h2 class="mb-3"><input type="text" name='imgPlant' placeholder="image Plant" value=""></h2>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='plantName' placeholder="Plant Name" value=""></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='plantType' placeholder="Plant Type" value=""></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='plantFamily' placeholder="Plant Family" value=""></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='season' placeholder="Season" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='type' placeholder="Type" value=""></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='groundType' placeholder="Ground Type" value=""></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='daysConservation' placeholder="Days of conservation" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='functioning' placeholder="Functioning" value=""></h3>  
+                                    <h3 class="mb-0 text-primary"><input type="text" name='description' placeholder="Description" value=""></h3>  
+                                    <h3 class="mb-0 text-primary"><input type="text" name='tblPlantSowing_idSowing' placeholder="tblPlantSowing_idSowing" value="0"></h3> 
                                     <h3 class="mb-0 text-primary"><input type="submit" name='submit' placeholder="Submit"></h3>                                     
                                 </div>
                             </div>

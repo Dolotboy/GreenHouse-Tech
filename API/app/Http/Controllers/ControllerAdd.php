@@ -26,11 +26,13 @@ class ControllerAdd extends Controller
 
         $plant->imgPlant = $request->input("imgPlant");
         $plant->plantName = $request->input("plantName");
+        $plant->plantType = $request->input("plantType");
+        $plant->plantFamily = $request->input("plantFamily");
         $plant->season = $request->input("season");
         $plant->groundType = $request->input("groundType");
         $plant->daysConservation = $request->input("daysConservation");
         $plant->description = $request->input("description");
-        $plant->tblPlantSowing_idSowing = $request->tblPlantSowing_idSowing;
+        $plant->tblPlantSowing_idSowing = $request->input("tblPlantSowing_idSowing");
         
         $plant->save();
 
@@ -62,23 +64,24 @@ class ControllerAdd extends Controller
         return view('newFavourite');
     }
 
-    public function addFavorite(/*Request $request, */$idPlant, $idProfile)
+    public function addFavorite(/*Request $reques*/ $idPlant, $idProfile)
     {
         //$request =  json_decode(file_get_contents('php://input'));
 
         $favorite = new Favorite();
-
+        
         $favorite->tblPlant_idPlant = $idPlant;
         $favorite->tblProfile_idProfile = $idProfile;
 
-        /*$favorite->tblPlant_idPlant = $request->tblPlant_idPlant;
-        $favorite->tblProfile_idProfile = $request->tblProfile_idProfile;
+        /*$favorite->tblPlant_idPlant = $request->input("tblPlant_idPlant");
+        $favorite->tblProfile_idProfile = $request->input("tblProfile_idProfile");*/
 
+        /*
         {   
             "tblPlant_idPlant": 1,  
             "tblProfile_idProfile": 1 
         }  
-        */
+       */ 
         
         $favorite->save();
 
@@ -96,12 +99,12 @@ class ControllerAdd extends Controller
 
         $profile = new Profile();
 
-        $profile->email = $request->email;
-        $profile->password = $request->password;
+        $profile->email = $request->input("email");
+        $profile->password = $request->input("password");
         $profile->salt = Hash::make($request->password);
-        $profile->username = $request->username;
-        $profile->firstName = $request->firstName;
-        $profile->lastName = $request->lastName;
+        $profile->username = $request->input("username");
+        $profile->firstName = $request->input("firstName");
+        $profile->lastName = $request->input("lastName");
         
         $profile->save();
 
@@ -121,18 +124,18 @@ class ControllerAdd extends Controller
         {
             $favorableCondition = new FavorableConditionDate();
 
-            $favorableCondition->rangeType = $request->rangeType;
-            $favorableCondition->begin = $request->begin;
-            $favorableCondition->end = $request->end;
+            $favorableCondition->rangeType = $request->input("rangeType");
+            $favorableCondition->begin = $request->input("begin");
+            $favorableCondition->end = $request->input("end");
         }
         else if ($type == 2)
         {
             $favorableCondition = new FavorableConditionNb();
 
-            $favorableCondition->rangeType = $request->rangeType;
-            $favorableCondition->min = $request->min;
-            $favorableCondition->max = $request->max;
-            $favorableCondition->unit = $request->unit;
+            $favorableCondition->rangeType = $request->input("rangeType");
+            $favorableCondition->min = $request->input("min");
+            $favorableCondition->max = $request->input("max");
+            $favorableCondition->unit = $request->input("unit");
         }
         
         $favorableCondition->save();

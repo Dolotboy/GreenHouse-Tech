@@ -53,6 +53,7 @@ Route::get('/unassign/problem/{idPlant}/{idProblem}', [ControllerUnassign::class
 // ***************** FAVORITE *******************
 
 Route::post('/new/favorite/{idPlant}/{idProfile}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
+Route::get('/new/favorite/{idPlant}/{idProfile}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
 
 Route::delete("/delete/favorite/{idPlant}/{idProfile}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite');
 
@@ -61,6 +62,7 @@ Route::delete("/delete/favorite/{idPlant}/{idProfile}", [ControllerDelete::class
 // ***************** PROFILE *******************
 
 Route::post('/new/profile/addProfile', [ControllerAdd::class, 'addProfile'])->name('addProfile');
+Route::get('/new/profile/addProfile', [ControllerAdd::class, 'addProfile'])->name('addProfile');
 
 Route::put('/edit/profile/editProfile/{idProfile}', [ControllerEdit::class, 'editProfile'],function ($idProfile){})->name('editProfile');
 

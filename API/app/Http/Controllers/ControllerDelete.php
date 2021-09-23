@@ -13,14 +13,9 @@ use Exception;
 
 class ControllerDelete extends Controller
 {
-<<<<<<< HEAD
-    public function indexPlant(Request $request)
-    {
-        return view('deletePlant');        
-=======
     public function indexPlant()
     {
-        return view('');
+        return view('deletePlant');
     }
 
     public function deletePlant($idPlant)
@@ -47,7 +42,7 @@ class ControllerDelete extends Controller
 
     public function indexProblem()
     {
-        return view('');
+        return view('deleteSearchProblem');
     }
 
     public function deleteProblem($idProblem)
@@ -74,7 +69,7 @@ class ControllerDelete extends Controller
 
     public function indexFavorite()
     {
-        return view('');
+        return view('deleteSearchProblem');
     }
 
     public function deleteFavorite($idPlant, $idProfile)
@@ -107,7 +102,7 @@ class ControllerDelete extends Controller
 
     public function indexProfile()
     {
-        return view('');
+        return view('deleteSearchProfile');
     }
 
     public function deleteProfile($idProfile)
@@ -134,7 +129,7 @@ class ControllerDelete extends Controller
 
     public function indexFavCondition()
     {
-        return view('');
+        return view('deleteSearchFavCondition');
     }
 
     public function deleteFavCondition($type, $idCondition)
@@ -181,6 +176,5 @@ class ControllerDelete extends Controller
                 }
             }
         }
->>>>>>> adc715fea949d1df4a734de66b843c7f179a764f
     }
 } 
