@@ -6,7 +6,6 @@
       <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in plants' :plant="plant"/>
     </div>
     <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
->>>>>>> 3e117e12eb944f1da3d49f3172577023251f02a2
 </template>
 
 <script>

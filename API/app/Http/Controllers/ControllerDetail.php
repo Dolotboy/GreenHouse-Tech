@@ -21,25 +21,8 @@ class ControllerDetail extends Controller
 
     public function searchPlant($id)
     {
-        $plant = Plant::find($id);
-
-        $idPlant = $plant->idPlant;
-        $imgPlant = $plant->imgPlant;
-        $plantName = $plant->plantName;
-        $plantType = $plant->plantType;
-        $plantFamily = $plant->plantFamily;
-        $season = $plant->season;
-        $groundType = $plant->groundType;
-        $daysConservation = $plant->daysConservation;
-        $description = $plant->description;
-        $tblPlantSowing_idSowing = $plant->tblPlantSowing_idSowing;
-        $createdAt = $plant->created_at;
-        $updatedAt = $plant->updated_at;
-
-        
-        $array = array('idPlant' => $idPlant, 'imgPlant' => $imgPlant, 'plantName' => $plantName, 'season' => $season, 'groundType' => $groundType, 'daysConservation' => $daysConservation, 'description' => $description, 'tblPlantSowing_idSowing' => $tblPlantSowing_idSowing, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
-        $json = json_encode($array);
-    
+        $plant = Plant::find($id);    
+        $json = json_encode($plant);
         return ("$json");
     }
 
