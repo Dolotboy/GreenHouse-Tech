@@ -43,21 +43,21 @@ Route::post('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->n
 
 Route::post('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
 
-Route::post('/delete/favorite', [ControllerDelete::class, 'indexProblem'])->name('deleteSearchFavorite');
+Route::post('/delete/favorite', [ControllerDelete::class, 'indexFavorite'])->name('deleteSearchFavorite');
 
 // ***************** FAVORITE *******************
 
-// ***************** PROFIL *******************
+// ***************** PROFILE *******************
 
-Route::post('/new/profil', [ControllerAdd::class, 'indexProfil'])->name('newProfil');
+Route::post('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile');
 
-Route::post('/edit/profil', [ControllerEdit::class, 'indexProfil'])->name('editSearchProfil');
+Route::post('/edit/profile', [ControllerEdit::class, 'indexProfile'])->name('editSearchProfile');
 
-Route::post('/search/profil', [ControllerDetail::class, 'indexProfil'])->name('searchProfil');
+Route::post('/search/profile', [ControllerDetail::class, 'indexProfile'])->name('searchProfile');
 
-Route::post('/delete/profil', [ControllerDelete::class, 'indexProfil'])->name('deleteSearchProfil');
+Route::post('/delete/profile', [ControllerDelete::class, 'indexProfile'])->name('deleteSearchProfile');
 
-// ***************** PROFIL *******************
+// ***************** PROFILE *******************
 
 // ***************** FAVORABLE CONDITION *******************
 
