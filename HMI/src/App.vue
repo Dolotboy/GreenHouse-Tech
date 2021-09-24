@@ -183,8 +183,7 @@ li a {
 
 li a:hover{
   color: black;
-  background-color: #e6a800
-;
+  background-color: #e6a800;
 }
 
 .active {

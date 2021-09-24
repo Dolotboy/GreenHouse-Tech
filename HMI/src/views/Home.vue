@@ -103,6 +103,7 @@ body{
 }
 
 .plant:hover{
+  color: white;
   background-color : #600404;
   cursor : pointer;
 }
