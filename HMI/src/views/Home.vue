@@ -52,6 +52,9 @@ export default {
 </script>
 
 <style>
+body{
+  background-color: #292929;
+}
 .logo{
   margin-top: 1%;
   height: 10vh;
@@ -61,14 +64,16 @@ export default {
   max-width: 100%;
 }
 .productsGrid{
+  color: #D2CCB1;
   display : grid;
   grid-template-columns: 50% 50%;
   width : 100%;
   margin-top: 1%;
+  background-color: #616161;
 }
 
 .plant:hover{
-  background: lightgray;
+  background-color : #600404;
   cursor : pointer;
 }
 

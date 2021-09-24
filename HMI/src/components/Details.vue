@@ -10,7 +10,7 @@
             <p>Date de récolte :</p>
             <p>Temps de conservation : {{plant.daysConservation}} jour(s)</p>
             <p>Distance de plants : </p>
-            <p>Fonctionnement : </p>        
+            <p>Fonctionnement : {{plant.description}}</p>        
         </div>
         <div class="close-button" @click="$emit('close')" >X</div>        
     </div>
@@ -24,7 +24,7 @@ export default {
 
 <style>
 .details{
-    position : absolute;
+    position :absolute;
     top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
@@ -32,7 +32,6 @@ export default {
     border: solid;
     border-color: black;
     width : 50vw;
-    height: 75vh;
     padding-left: 5%;
 }
 .close-button {
@@ -51,9 +50,9 @@ export default {
     font-size: 35px;
 }
 .detailsPlant > p{
-    font-size: 24px;
-    margin-top: 1.5%;
+    font-size: 20px;
     text-align: left;
+    margin:10px 0;
 }
 .detailsPlant{
     display: flex;
