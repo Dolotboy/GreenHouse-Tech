@@ -15,6 +15,6 @@ class SearchAllProfileTest extends TestCase
         $data = Profile::All();
         $dataEncode = json_encode($data);
         $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/searchAll/profile');
-        $this->assertEquals($data,$dataEncode);     
+        $this->assertEquals($dataEncode,$donneApi);     
     }
 }

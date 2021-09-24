@@ -60,18 +60,7 @@ class ControllerDetail extends Controller
     public function searchProblem($id)
     {
         $problem = Problem::find($id);
-
-        $idProblem = $problem->idProblem;
-        $typeProblem = $problem->typeProblem;
-        $importanceLvl = $problem->importanceLvl;
-        $description = $problem->description;
-        $createdAt = $problem->created_at;
-        $updatedAt = $problem->updated_at;
-
-        
-        $array = array('idProblem' => $idProblem, 'typeProblem' => $typeProblem, 'importanceLvl' => $importanceLvl, 'description' => $description, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
-        $json = json_encode($array);
-    
+        $json = json_encode($problem);
         return ("$json");
     }
 
@@ -127,34 +116,13 @@ class ControllerDetail extends Controller
         if ($type == 1)
         {
             $favorableCondition = FavorableConditionDate::find($id);
-
-            $idRangeDate = $favorableCondition->idRangeDate;
-            $rangeType = $favorableCondition->rangeType;
-            $begin = $favorableCondition->begin;
-            $end = $favorableCondition->end;
-            $createdAt = $favorableCondition->created_at;
-            $updatedAt = $favorableCondition->updated_at;
-
-            $array = array('idRangeDate' => $idRangeDate, 'rangeType' => $rangeType, 'begin' => $begin, 'end' => $end, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
-
+            $json = json_encode($favorableCondition);
         }
         else if($type == 2)
         {
             $favorableCondition = FavorableConditionNb::find($id);
-
-            $idRangeNb = $favorableCondition->idRangeNb;
-            $rangeType = $favorableCondition->rangeType;
-            $min = $favorableCondition->min;
-            $max = $favorableCondition->max;
-            $unit = $favorableCondition->unit;
-            $createdAt = $favorableCondition->created_at;
-            $updatedAt = $favorableCondition->updated_at;
-
-            $array = array('idRangeNb' => $idRangeNb, 'rangeType' => $rangeType, 'min' => $min, 'max' => $max, 'unit' => $unit, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+            $json = json_encode($favorableCondition);
         }
-
-        $json = json_encode($array);
-    
         return ("$json");
     }
 

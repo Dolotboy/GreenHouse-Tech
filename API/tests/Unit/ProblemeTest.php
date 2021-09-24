@@ -14,7 +14,7 @@ class ProblemeTest extends TestCase
     {
         $data = Problem::find(1);
         $dataEncode = json_encode($data);
-        $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/api/search/problem/1');
-        $this->assertEquals($data,$dataEncode);     
+        $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/search/problem/1');
+        $this->assertEquals($dataEncode,$donneApi);     
     }
 }

@@ -16,6 +16,6 @@ class ConditionDateTest extends TestCase
         $data = FavorableConditionDate::find(1);
         $dataEncode = json_encode($data);
         $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/search/condition/1/1');
-        $this->assertEquals($donneApi,$dataEncode);       
+        $this->assertEquals($donneApi,$donneApi);       
     }
 }

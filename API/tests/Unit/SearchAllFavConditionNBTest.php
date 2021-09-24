@@ -15,6 +15,6 @@ class SearchAllFavConditionNBTest extends TestCase
         $data = FavorableConditionNB::All();
         $dataEncode = json_encode($data);
         $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/searchAll/condition/2');
-        $this->assertEquals($data,$dataEncode);     
+        $this->assertEquals($dataEncode,$donneApi);     
     }
 }

@@ -14,7 +14,7 @@ class SearchAllProblemeTest extends TestCase
     {
         $data = Problem::All();
         $dataEncode = json_encode($data);
-        $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/searchALL/problem');
-        $this->assertEquals($data,$dataEncode);       
+        $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/searchAll/problem');
+        $this->assertEquals($dataEncode,$donneApi);       
     }
 }
