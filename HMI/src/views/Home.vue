@@ -1,19 +1,12 @@
 <template>
-  <h1>Ceci est la page d'acceuil</h1>
-  <div class="rdPlantTypeWrapper">
-    <div>
-      <label>Fruit</label>
-      <input type="radio" name="rdPlantType" value="fruit" checked @click="filterData('Fruit')">
-    </div>
-    <div>
-      <label>Légume</label>
-      <input type="radio" name="rdPlantType" value="vegetable" @click="filterData('Vegetable')">
-    </div>
+  <div class="logo">
+    <img src="../../Images/LogoV1.png">
   </div>
-  <div class="productsGrid">
-    <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in plants' :plant="plant"/>
-  </div>
-  <Details v-if="showDetails" :plant="detailedPlant"/>
+    <div class="productsGrid">
+      <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in plants' :plant="plant"/>
+    </div>
+    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
+>>>>>>> 3e117e12eb944f1da3d49f3172577023251f02a2
 </template>
 
 <script>
@@ -60,11 +53,19 @@ export default {
 </script>
 
 <style>
+.logo{
+  margin-top: 1%;
+  height: 10vh;
+}
+.logo img{
+  max-height: 100%;
+  max-width: 100%;
+}
 .productsGrid{
   display : grid;
   grid-template-columns: 50% 50%;
-  width : 50vw;
-  margin-left : 25vw;
+  width : 100%;
+  margin-top: 1%;
 }
 
 .plant:hover{

@@ -2,13 +2,17 @@
   <div>
     <nav>
       <ul>
-        <li><router-link to="/">Acceuil</router-link></li> 
-        <li><router-link to="/about">À propos</router-link></li>
-        <li><a id="btnLogin" @click="toggleLogin">Se connecter</a></li>
+        <div id="BasicNav">
+          <li><router-link to="/">Acceuil</router-link></li> 
+          <li><router-link to="/about">À propos</router-link></li>
+        </div>
+        <div id="Login">
+          <li @click="toggleLogin">Se connecter</li>
+        </div>
       </ul>
     </nav>
-    <router-view/>
-    <Login v-if="showLogin"/>
+    <router-view/>  
+    <Login v-if="showLogin" @close="toggleLogin"/>
   </div>
 </template>
 
@@ -79,6 +83,10 @@ export default {
   color: black;
 }
 
+nav > ul{
+  position : relative;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -88,6 +96,24 @@ ul {
   display: flex;
   justify-content: center;
 }
+
+#Login :hover{
+  background-color: black;
+  cursor: pointer;
+}
+
+#Login li{
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  list-style-type: none;
+  overflow: hidden;
+  color: white;
+  height: 100%;
+  padding: 10px 15px;
+}
+
+
 
 li {
   float: left;
@@ -115,14 +141,5 @@ nav{
   position : relative;
 }
 
-#btnLogin{
-  position : absolute;
-  top : 0;
-  right : 0;
-}
-
-#btnLogin:hover{
-  cursor: pointer;
-}
 
 </style>
