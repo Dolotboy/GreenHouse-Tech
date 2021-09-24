@@ -146,13 +146,14 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #4E5754 ;
+  background-color: #616161 ;
   display: flex;
   justify-content: center;
 }
 
 #Login :hover{
-  background-color: black;
+  color: white;
+  background-color: #8d4705;
   cursor: pointer;
 }
 
@@ -166,9 +167,6 @@ ul {
   height: 100%;
   padding: 10px 15px;
 }
-
-
-
 li {
   float: left;
   border-right: 1px solid darkgrey;
@@ -184,11 +182,13 @@ li a {
 }
 
 li a:hover{
-  background-color: black;
+  color: black;
+  background-color: #e6a800
+;
 }
 
 .active {
-  background-color : cyan;
+  background-color : #01B0D3;
 }
 
 nav{

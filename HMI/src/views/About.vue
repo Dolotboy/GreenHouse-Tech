@@ -1,6 +1,5 @@
 <template>
-    <h1>Ceci est la page about </h1>
-    <!--<Login/>-->
+    <h1>Petit test des familles</h1>
 </template>
 
 <script>
