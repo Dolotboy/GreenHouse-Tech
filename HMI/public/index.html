@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="=iosManifest.cfm" lang="">
+<html>
   <head>
     <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
     <!--ios support-->
@@ -16,39 +16,40 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+
   <script src="testIndexedDb.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
     navigator.serviceWorker.register('service-worker.js').then(function(registration) {
     // Registration was successful
-    alert('Registered!');
+    console.log('Registered!');
     }, function(err) {
     // registration failed :(
-    alert('ServiceWorker registration failed: ', err);
+    console.log('ServiceWorker registration failed: ', err);
     }).catch(function(err) {
-    alert(err);
+    console.log(err);
     });
     });
     } else {
-    alert('service worker is not supported');
+    console.log('service worker is not supported');
     }
 
-  navigator.serviceWorker.ready.then(function(registration) {
-  if (!registration.pushManager) {
-    alert('No push notifications support.');
-    return false;
-  }
-  //To subscribe `push notification` from push manager
-  registration.pushManager.subscribe({
-  userVisibleOnly: true //Always show notification when received
-  })
-  .then(function (subscription) {
-  console.log('Subscribed.');
-  })
-  .catch(function (error) {
-  console.log('Subscription error: ', error);
-  });
-})
+//   navigator.serviceWorker.ready.then(function(registration) {
+//   if (!registration.pushManager) {
+//     console.log('No push notifications support.');
+//     return false;
+//   }
+//   //To subscribe `push notification` from push manager
+//   registration.pushManager.subscribe({
+//   userVisibleOnly: true //Always show notification when received
+//   })
+//   .then(function (subscription) {
+//   console.log('Subscribed.');
+//   })
+//   .catch(function (error) {
+//   console.log('Subscription error: ', error);
+//   });
+// })
   </script>
 </html>

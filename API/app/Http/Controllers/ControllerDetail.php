@@ -21,25 +21,8 @@ class ControllerDetail extends Controller
 
     public function searchPlant($id)
     {
-        $plant = Plant::find($id);
-
-        $idPlant = $plant->idPlant;
-        $imgPlant = $plant->imgPlant;
-        $plantName = $plant->plantName;
-        $plantType = $plant->plantType;
-        $plantFamily = $plant->plantFamily;
-        $season = $plant->season;
-        $groundType = $plant->groundType;
-        $daysConservation = $plant->daysConservation;
-        $description = $plant->description;
-        $tblPlantSowing_idSowing = $plant->tblPlantSowing_idSowing;
-        $createdAt = $plant->created_at;
-        $updatedAt = $plant->updated_at;
-
-        
-        $array = array('idPlant' => $idPlant, 'imgPlant' => $imgPlant, 'plantName' => $plantName, 'season' => $season, 'groundType' => $groundType, 'daysConservation' => $daysConservation, 'description' => $description, 'tblPlantSowing_idSowing' => $tblPlantSowing_idSowing, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
-        $json = json_encode($array);
-    
+        $plant = Plant::find($id);    
+        $json = json_encode($plant);
         return ("$json");
     }
 
@@ -60,18 +43,7 @@ class ControllerDetail extends Controller
     public function searchProblem($id)
     {
         $problem = Problem::find($id);
-
-        $idProblem = $problem->idProblem;
-        $typeProblem = $problem->typeProblem;
-        $importanceLvl = $problem->importanceLvl;
-        $description = $problem->description;
-        $createdAt = $problem->created_at;
-        $updatedAt = $problem->updated_at;
-
-        
-        $array = array('idProblem' => $idProblem, 'typeProblem' => $typeProblem, 'importanceLvl' => $importanceLvl, 'description' => $description, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
-        $json = json_encode($array);
-    
+        $json = json_encode($problem);
         return ("$json");
     }
 
@@ -127,34 +99,13 @@ class ControllerDetail extends Controller
         if ($type == 1)
         {
             $favorableCondition = FavorableConditionDate::find($id);
-
-            $idRangeDate = $favorableCondition->idRangeDate;
-            $rangeType = $favorableCondition->rangeType;
-            $begin = $favorableCondition->begin;
-            $end = $favorableCondition->end;
-            $createdAt = $favorableCondition->created_at;
-            $updatedAt = $favorableCondition->updated_at;
-
-            $array = array('idRangeDate' => $idRangeDate, 'rangeType' => $rangeType, 'begin' => $begin, 'end' => $end, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
-
+            $json = json_encode($favorableCondition);
         }
         else if($type == 2)
         {
             $favorableCondition = FavorableConditionNb::find($id);
-
-            $idRangeNb = $favorableCondition->idRangeNb;
-            $rangeType = $favorableCondition->rangeType;
-            $min = $favorableCondition->min;
-            $max = $favorableCondition->max;
-            $unit = $favorableCondition->unit;
-            $createdAt = $favorableCondition->created_at;
-            $updatedAt = $favorableCondition->updated_at;
-
-            $array = array('idRangeNb' => $idRangeNb, 'rangeType' => $rangeType, 'min' => $min, 'max' => $max, 'unit' => $unit, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+            $json = json_encode($favorableCondition);
         }
-
-        $json = json_encode($array);
-    
         return ("$json");
     }
 
@@ -203,12 +154,7 @@ class ControllerDetail extends Controller
         
         $array = array('idPlant' => $idPlant, 'imgPlant' => $imgPlant, 'plantName' => $plantName, 'season' => $season, 'groundType' => $groundType, 'daysConservation' => $daysConservation, 'description' => $description, 'tblPlantSowing_idSowing' => $tblPlantSowing_idSowing, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
 
-        /*$problemAssociation = AssignProblem::where('tblPlant_idPlant', '=', $searchCondition)
-        ->get();*/
-
         $problems = array($plant->plantProblems);
-
-        //$favCondition = array_merge($plant->plantFavConditionDate, $plant->plantFavConditionNb);
 
         $favConditionDate = array($plant->plantFavConditionDate);
 
@@ -221,21 +167,5 @@ class ControllerDetail extends Controller
         $json = json_encode($package);
 
         return $json;
-        /*$problem = Problem::find($problemAssociation->idProblem);
-
-        $idProblem = $problem->idProblem;
-        $typeProblem = $problem->typeProblem;
-        $importanceLvl = $problem->importanceLvl;
-        $description = $problem->description;
-        $createdAt = $problem->created_at;
-        $updatedAt = $problem->updated_at;
-        
-        $array2 = array('idProblem' => $idProblem, 'typeProblem' => $typeProblem, 'importanceLvl' => $importanceLvl, 'description' => $description, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
-        $json2 = json_encode($array2);
-
-        return ("$json $json2");
-
-        // Laravel Doc Model
-        // many to many*/
     }
 }

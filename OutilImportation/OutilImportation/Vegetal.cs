@@ -23,13 +23,51 @@ namespace OutilImportation
         public string LengthBetweenPlantsMax { get; set; }
         public string MaturationDays { get; set; }
         public string GroundType { get; set; }
+        public string PHMin { get; set; }
+        public string PHMax { get; set; }
 
         public override string ToString()
         {
-            return $"INSERT INTO tblVegetal (conservationDays, type,name, comment, tempMin, tempMax, humidityMin, humidityMax, Light, LengthBetweenPlantsMin" +
-                   $"LengthBetweenPlantsMax, MaturationDays, GroundType, eighborhood)n " +
-                   $"VALUES ({ConservationDays},{Type},{Name},{Comment},{TempMin},{TempMax},{HumidityMin},{HumidityMax},{Light}," +
-                   $"{LengthBetweenPlantsMin},{LengthBetweenPlantsMax},{MaturationDays},{GroundType}, {Neighborhood})";
+            string tblPlant = $"INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)" +
+                              $"VALUES ('{Name}','{GroundType}',{ConservationDays},'{Comment}', '{ Type }');";
+            string temp = GetRangeNbQuery("'temperature'", TempMin, TempMax, "'°C'");
+            string hum = GetRangeNbQuery("'humidity'", HumidityMin, HumidityMax, "'%'");
+            string lengthBetweenPlants = GetRangeNbQuery("'plantsSpacing'", LengthBetweenPlantsMin, LengthBetweenPlantsMax, "'cm'");
+            string declareTempId = GetDeclareIdQuery("tempId", "idRangeNb");
+            string declareHumId = GetDeclareIdQuery("humId", "idRangeNb");
+            string declareLengthId = GetDeclareIdQuery("lengthId", "idRangeNb");
+            string declarePlantId = $"SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1);";
+            string insertForeigns = GetForeignQuery("plantId", "tempId") + GetForeignQuery("plantId", "humId") + GetForeignQuery("plantId", "lengthId") + GetForeignQuery("plantId", "plantId");
+            //string insertChildTable = GetChildPlantQuery(Type, "plantId");
+
+            return $"{temp} \n {declareTempId} \n {hum} \n {declareHumId} \n {lengthBetweenPlants} \n {declareLengthId} \n {tblPlant} \n {declarePlantId} \n {insertForeigns} \n";
+        }
+
+        private string GetRangeNbQuery(string type, string min, string max, string unit)
+        {
+            const string tblName = "tblNbRangeFav";
+            return $"INSERT INTO {tblName} (rangeType, min, max, unit) VALUES ({type},{min},{max},{unit});";
+        }
+
+        private string GetDeclareIdQuery(string idName, string id)
+        {
+            const string tblName = "tblNbRangeFav";
+            return $"SET @{idName} = (SELECT {id} FROM {tblName} ORDER BY {id} DESC LIMIT 1);";
+        }
+
+        private string GetForeignQuery(string idPlant, string idRange)
+        {
+            const string tblName = "tblPlant_tblNbRangeFav";
+            return $"INSERT INTO {tblName} (tblPlant_idPlant, tblNbRangeFav_idRangeNb) " +
+                                    $"VALUES (@{idPlant}, @{idRange});";
+        }
+
+        private string GetChildPlantQuery(string plantType, string plantId)
+        {
+            if (plantType == "Fruit")
+                return $"INSERT INTO tblFruit (tblPlant_idPlant) VALUES (@{plantId});";
+            else
+                return $"INSERT INTO tblVegetable (tblPlant_idPlant) VALUES (@{plantId});";
         }
 
         public PropertyInfo[] GetProperties()

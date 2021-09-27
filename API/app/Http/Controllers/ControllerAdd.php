@@ -66,8 +66,6 @@ class ControllerAdd extends Controller
 
     public function addFavorite(/*Request $reques*/ $idPlant, $idProfile)
     {
-        //$request =  json_decode(file_get_contents('php://input'));
-
         $favorite = new Favorite();
         
         $favorite->tblPlant_idPlant = $idPlant;

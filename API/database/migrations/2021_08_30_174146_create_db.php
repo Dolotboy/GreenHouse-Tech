@@ -118,8 +118,6 @@ class CreateDb extends Migration
     {
         Schema::dropIfExists('tblPlant');
         Schema::dropIfExists('tblPlantSowing');
-        Schema::dropIfExists('tblFruit');
-        Schema::dropIfExists('tblVegetable');
         Schema::dropIfExists('tblPlant_tblProblem');
         Schema::dropIfExists('tblProblem');
         Schema::dropIfExists('tblFavorites');

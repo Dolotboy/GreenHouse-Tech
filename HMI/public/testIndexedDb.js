@@ -1,6 +1,6 @@
 let db;
     let data;
-    main();
+    //main();
 
     async function main(){
       data = await getData();
@@ -14,7 +14,6 @@ let db;
       for(let i = 0; i < 30; i++){
         entrepot.add(veggies[i]);
       }
-
       data = await fetchData();
       let jsonString = JSON.stringify(data);
       console.log(jsonString);
@@ -25,7 +24,6 @@ let db;
       console.log(json);
       alert(json["vegetals"].length);
     }
-
     function fetchData(){
       return new Promise(resolve => {
         let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
@@ -36,7 +34,6 @@ let db;
         }
       })
     }
-
     function getData(){
       return new Promise(resolve => {
         fetch("./JsonContent.json")
@@ -45,7 +42,6 @@ let db;
       })
       })
     }
-
     function SetDb(){
       return new Promise(resolve =>{
       window.requete = indexedDB.open("GreenHouseTech",2);
@@ -60,14 +56,12 @@ let db;
             entrepot.createIndex("index", "primaryKey");
             resolve(db);
         }
-
         // Gestion des erreurs d'ouverture
         window.requete.onerror = function(event){
             console.log(event.target.errorCode);
             console.log("error");
             resolve(db);
         };
-
         // En cas de succès, "bd" contient la connexion
         window.requete.onsuccess = function(event){
             db = event.target.result;

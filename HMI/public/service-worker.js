@@ -20,7 +20,20 @@ self.addEventListener('install', function() {
   self.addEventListener("activate", event => {
     console.log('Activate!');
   });
+ 
   self.addEventListener('fetch', function(event) {
-    console.log('Fetch! ', event.request);
+    event.respondWith(async function() {
+      const cache = await caches.open('my-cache');
+      const cachedResponse = await cache.match(event.request);
+      const networkResponsePromise = fetch(event.request);
+  
+      event.waitUntil(async function() {
+        const networkResponse = await networkResponsePromise;
+        await cache.put(event.request, networkResponse.clone());
+      }());
+  
+      // Returned the cached response if we have one, otherwise return the network response.
+      return cachedResponse || networkResponsePromise;
+    }());
+    //console.log('Fetch! ', event.request);
   });
-

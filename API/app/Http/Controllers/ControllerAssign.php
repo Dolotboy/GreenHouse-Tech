@@ -15,9 +15,8 @@ use Illuminate\Http\Request;
 
 class ControllerAssign extends Controller
 {
-    public function assignFavCondition(/*Request $request,*/ $type, $idPlant, $idCondition)
+    public function assignFavCondition($type, $idPlant, $idCondition)
     {
-        //$request =  json_decode(file_get_contents('php://input'));
 
         if ($type == 1)
         {
@@ -25,31 +24,13 @@ class ControllerAssign extends Controller
 
             $assignFavorableCondition->tblPlant_idPlant = $idPlant;
             $assignFavorableCondition->tblDateRangeFav_idRangeDate = $idCondition;
-
-            /*$assignFavorableCondition->tblPlant_idPlant = $request->tblPlant_idPlant;
-            $assignFavorableCondition->tblDateRangeFavorableCondition_idRangeDate = $request->tblDateRangeFavorableCondition_idRangeDate;
-
-            {     
-                "tblPlant_idPlant": 1,    
-                "tblDateRangeFavorableCondition_idRangeDate": 1 
-            }    
-            */
         }
         else if ($type == 2)
         {
             $assignFavorableCondition = new AssignConditionNb();
 
             $assignFavorableCondition->tblPlant_idPlant = $idPlant;
-            $assignFavorableCondition->tblNbRangeFav_idRangeNb = $idCondition;
-
-            /*$assignFavorableCondition->tblPlant_idPlant = $request->tblPlant_idPlant;
-            $assignFavorableCondition->tblRangeFavorableConditionNb_idRangeNb = $request->tblRangeFavorableConditionNb_idRangeNb;
-
-            {     
-                "tblPlant_idPlant": 1,    
-                "tblRangeFavorableConditionNb_idRangeNb": 2 
-            } 
-            */   
+            $assignFavorableCondition->tblNbRangeFav_idRangeNb = $idCondition;  
         }
         
         $assignFavorableCondition->save();
