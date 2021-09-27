@@ -17,8 +17,9 @@
 </template>
 
 <script>
-import $ from '../node_modules/jquery/dist/jquery.js'
+import toolbox from './toolbox.js'
 import Login from './components/Login.vue'
+import $ from '../node_modules/jquery/dist/jquery.js'
 
 export default {
   components :{
@@ -38,92 +39,37 @@ export default {
       this.showLogin = !this.showLogin;
     },
     async Initialisation(){
-
-      let db = await this.SetDb();
+      let db = await toolbox.setDb();
       
-      this.plants = await this.fetchData();
+      this.plants = await toolbox.fetchData(db);
       if(this.plants.length > 0)
         return;
       this.plants = [];
       
-      await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
-      //await this.GetAllPlants("http://localhost:8000/api/searchAll/plant/3");
-      //await this.GetAllPlants("http://apitestenv.pcst.xyz/api/search/plant/3");
+      //this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
+      this.plants = await this.GetAllPlants("http://localhost:8000/api/searchAll/plant");
+      //this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
       
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
       for(let i = 0; i < this.plants.length; i++){
-        entrepot.add(this.GeneratePlant(this.plants[i]));
+        entrepot.add(toolbox.GeneratePlant(this.plants[i]));
       }
 
       this.plants = null;
-      this.plants = this.fetchData();
+      this.plants = await toolbox.fetchData(db);
     },
     GetAllPlants(url){
-      console.log("GetAllPlants");
-      let that = this;
-      return new Promise(resolve => {
-        $.get(url, function(donnees, status){
-          let data = donnees.substring(1,donnees.length - 1);
-          let json = JSON.parse(donnees);
-          for(let i = 0; i< json.length; i++)
-            that.plants.push(json[i]);
-          resolve();
-        })
+    return new Promise(resolve => {
+      $.get(url, function(donnees, status){
+        let json = JSON.parse(donnees);
+        let plants = [];
+        for(let i = 0; i< json.length; i++)
+          plants.push(json[i]);
+        resolve(plants);
       })
-    },
-    GeneratePlant(proxyPlant){
-      return {
-          plantType : proxyPlant.plantType,
-          daysConservation : proxyPlant.daysConservation,
-          description : proxyPlant.description,
-          groundType : proxyPlant.groundType,
-          idPlant : proxyPlant.idPlant,
-          imgPlant : proxyPlant.imgPlant,
-          plantName : proxyPlant.plantName,
-          season : proxyPlant.season,
-          tblPlantSowing_idSowing : proxyPlant.tblPlantSowing_idSowing
-      };
-    },
-    fetchData(){
-      return new Promise(resolve => {
-        let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
-        let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");
-        let requete = entrepot.getAll();
-        requete.onsuccess = function(event){
-          resolve(event.target.result);
-        }
-      })
-    },
-    SetDb(){
-      return new Promise(resolve =>{
-      window.requete = indexedDB.open("GreenHouseTech",2);
-
-      window.requete.onupgradeneeded = function(event){
-            db = event.target.result;
-            let options = {
-                keyPath : "primaryKey",
-                autoIncrement : true
-            };
-            let entrepot = db.createObjectStore("GreenHouseTech_Entrepot2",options);
-            entrepot.createIndex("index", "primaryKey");
-            resolve(db);
-        }
-
-        // Gestion des erreurs d'ouverture
-        window.requete.onerror = function(event){
-            console.log(event.target.errorCode);
-            console.log("error");
-            resolve(db);
-        };
-
-        // En cas de succès, "bd" contient la connexion
-        window.requete.onsuccess = function(event){
-            db = event.target.result;
-            resolve(db);
-        }
-      });
-    }
+    })
+}
   }   
 }
 </script>
@@ -146,13 +92,14 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #4E5754 ;
+  background-color: #616161 ;
   display: flex;
   justify-content: center;
 }
 
 #Login :hover{
-  background-color: black;
+  color: white;
+  background-color: #8d4705;
   cursor: pointer;
 }
 
@@ -166,9 +113,6 @@ ul {
   height: 100%;
   padding: 10px 15px;
 }
-
-
-
 li {
   float: left;
   border-right: 1px solid darkgrey;
@@ -184,11 +128,13 @@ li a {
 }
 
 li a:hover{
-  background-color: black;
+  color: black;
+  background-color: #e6a800
+;
 }
 
 .active {
-  background-color : cyan;
+  background-color : #01B0D3;
 }
 
 nav{

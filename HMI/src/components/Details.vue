@@ -25,7 +25,7 @@ export default {
 
 <style>
 .details{
-    position : absolute;
+    position :absolute;
     top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
@@ -33,7 +33,6 @@ export default {
     border: solid;
     border-color: black;
     width : 50vw;
-    height: 85vh;
     padding-left: 5%;
     padding-right: 5%;
 }
@@ -53,11 +52,10 @@ export default {
     font-size: 35px;
 }
 .detailsPlant > p{
-    font-size: 24px;
-    margin-top: 1.5%;
+    font-size: 20px;
     text-align: left;
-    text-align: justify;
-}
+    margin:10px 0;
+}    
 .detailsPlant{
     display: flex;
     flex-direction: column;

@@ -28,8 +28,8 @@ namespace OutilImportation
 
         public override string ToString()
         {
-            string tblPlant = $"INSERT INTO tblPlant (plantName, groundType, daysConservation, description)" +
-                              $"VALUES ('{Name}','{GroundType}',{ConservationDays},'{Comment}');";
+            string tblPlant = $"INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)" +
+                              $"VALUES ('{Name}','{GroundType}',{ConservationDays},'{Comment}', '{ Type }');";
             string temp = GetRangeNbQuery("'temperature'", TempMin, TempMax, "'°C'");
             string hum = GetRangeNbQuery("'humidity'", HumidityMin, HumidityMax, "'%'");
             string lengthBetweenPlants = GetRangeNbQuery("'plantsSpacing'", LengthBetweenPlantsMin, LengthBetweenPlantsMax, "'cm'");
@@ -38,9 +38,9 @@ namespace OutilImportation
             string declareLengthId = GetDeclareIdQuery("lengthId", "idRangeNb");
             string declarePlantId = $"SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1);";
             string insertForeigns = GetForeignQuery("plantId", "tempId") + GetForeignQuery("plantId", "humId") + GetForeignQuery("plantId", "lengthId") + GetForeignQuery("plantId", "plantId");
-            string insertChildTable = GetChildPlantQuery(Type, "plantId");
+            //string insertChildTable = GetChildPlantQuery(Type, "plantId");
 
-            return $"{temp} \n {declareTempId} \n {hum} \n {declareHumId} \n {lengthBetweenPlants} \n {declareLengthId} \n {tblPlant} \n {declarePlantId} \n {insertForeigns} \n {insertChildTable} \n";
+            return $"{temp} \n {declareTempId} \n {hum} \n {declareHumId} \n {lengthBetweenPlants} \n {declareLengthId} \n {tblPlant} \n {declarePlantId} \n {insertForeigns} \n";
         }
 
         private string GetRangeNbQuery(string type, string min, string max, string unit)

@@ -26,6 +26,8 @@ class ControllerAdd extends Controller
 
         $plant->imgPlant = $request->imgPlant;
         $plant->plantName = $request->plantName;
+        $plantType = $request->plantType;
+        $plantFamily = $request->plantFamily;
         $plant->season = $request->season;
         $plant->groundType = $request->groundType;
         $plant->daysConservation = $request->daysConservation;
@@ -62,24 +64,13 @@ class ControllerAdd extends Controller
         return view('');
     }
 
-    public function addFavorite(/*Request $request, */$idPlant, $idProfile)
+    public function addFavorite($idPlant, $idProfile)
     {
-        //$request =  json_decode(file_get_contents('php://input'));
-
         $favorite = new Favorite();
 
         $favorite->tblPlant_idPlant = $idPlant;
         $favorite->tblProfile_idProfile = $idProfile;
 
-        /*$favorite->tblPlant_idPlant = $request->tblPlant_idPlant;
-        $favorite->tblProfile_idProfile = $request->tblProfile_idProfile;
-
-        {   
-            "tblPlant_idPlant": 1,  
-            "tblProfile_idProfile": 1 
-        }  
-        */
-        
         $favorite->save();
 
         return ("Le favoris a été ajouté");
