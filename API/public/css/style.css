@@ -17,11 +17,39 @@ html
     flex-direction: column;
     height: 100%;
     width: 100%;
+    margin-top: 80px;
+}
+
+.section
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.sectionHeader
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(50,50,50,1);
+    width: 40%;
+    border-radius: 35%;
+}
+
+
+h1
+{
+    color: rgba(255,255,255,1);
 }
 
 .midContainer
 {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     flex-direction: row;
     /*border-style: dotted;*/
