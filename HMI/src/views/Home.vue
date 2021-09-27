@@ -2,6 +2,11 @@
   <div class="logo">
     <img src="../../Images/LogoV1.png">
   </div>
+    <form autocomplete="off" action="/action_page.php">
+      <div class="autocomplete" style="width:300px;">
+        <input id="searchBar" type="text" name="myCountry" placeholder="Country">
+      </div>
+    </form>
     <div class="rdPlantTypeWrapper">
       <div>
         <label>Fruit</label>
@@ -23,6 +28,7 @@ import Details from '../components/Details.vue'
 import Plant from '../components/Plant.vue'
 import $ from '../../node_modules/jquery/dist/jquery.js'
 import toolbox from '../toolbox.js'
+import autoComplete from '../autocomplete.js'
 
 export default {
   name: 'Home',
@@ -56,6 +62,14 @@ export default {
     async initialisation(){
       let db = await toolbox.setDb();
       this.plants = await toolbox.fetchData(db);
+      let strings = await this.getAllStrings();
+      autoComplete.autocomplete(document.getElementById("searchBar"), strings);
+    },
+    getAllStrings(){
+      let strings = [];
+      for(let i = 0; i < this.plants.length; i++)
+        strings.push(this.plants[i].plantName);
+      return strings;
     }
   }
 }
