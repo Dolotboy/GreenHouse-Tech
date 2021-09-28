@@ -2,6 +2,16 @@
   <div class="logo">
     <img src="../../Images/LogoV1.png">
   </div>
+    <div class="rdPlantTypeWrapper">
+      <div>
+        <label>Fruit</label>
+        <input type="radio" name="rdPlantType" value="fruit" checked @click="filterData('Fruit')">
+      </div>
+      <div>
+        <label>Légume</label>
+        <input type="radio" name="rdPlantType" value="vegetable" @click="filterData('Vegetable')">
+      </div>
+  </div>
     <div class="productsGrid">
       <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in plants' :plant="plant"/>
     </div>
