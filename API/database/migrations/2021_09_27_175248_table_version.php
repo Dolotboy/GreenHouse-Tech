@@ -14,7 +14,8 @@ class TableVersion extends Migration
     public function up()
     {
         Schema::create('tblVersions', function (Blueprint $table) {
-            $table->double('idVersion');
+            $table->bigIncrements('idVersion');
+            $table->double('numVersion');
             $table->timestamps();
         });
     }

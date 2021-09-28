@@ -9,6 +9,7 @@ use App\Models\FavorableConditionNb;
 use App\Models\Favorite;
 use App\Models\Profile;
 use App\Models\AssignProblem;
+use App\Models\Version;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -165,6 +166,20 @@ class ControllerDetail extends Controller
         $package = array_merge($array, $problems, $favConditions);
 
         $json = json_encode($package);
+
+        return $json;
+    }
+
+    public function indexVersion()
+    {
+        return view('');
+    }
+
+    public function searchLastVersion()
+    {
+        $version = Version::orderBy('idVersion', 'DESC')->get();
+
+        $json = json_encode($version[0], JSON_NUMERIC_CHECK);
 
         return $json;
     }
