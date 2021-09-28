@@ -35,6 +35,8 @@ class ControllerAssign extends Controller
         
         $assignFavorableCondition->save();
 
+        Controller::incrementVersion();
+
         return ("La condition a été assigné");
     }
 
@@ -48,6 +50,8 @@ class ControllerAssign extends Controller
         $assignProblem->tblProblem_idProblem = $idProblem;
 
         $assignProblem->save();
+
+        Controller::incrementVersion();
 
         return ("Le problème a été assigné");
     }

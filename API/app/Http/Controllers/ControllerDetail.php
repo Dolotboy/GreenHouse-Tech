@@ -174,13 +174,4 @@ class ControllerDetail extends Controller
     {
         return view('');
     }
-
-    public function searchLastVersion()
-    {
-        $version = Version::orderBy('idVersion', 'DESC')->get();
-
-        $json = json_encode($version[0], JSON_NUMERIC_CHECK);
-
-        return $json;
-    }
 }

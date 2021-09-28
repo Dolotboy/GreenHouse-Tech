@@ -64,6 +64,8 @@ class ControllerUnassign extends Controller
                 }
             }
         }
+
+        Controller::incrementVersion();
     }
 
     public function unassignProblem($idPlant, $idProblem)
@@ -91,5 +93,7 @@ class ControllerUnassign extends Controller
                 return('Error while deleting'.$e);
             }
         }
+
+        Controller::incrementVersion();
     }
 }
