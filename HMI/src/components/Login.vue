@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <h1>Se connecter</h1>
-        <div class="detailsPlant">
+        <div class="loginForm">
           <form>
           <label for="uname"><b>Adresse Courriel : </b></label>
             <input type="text" placeholder="Entrez votre email" name="uname" required>
@@ -12,10 +12,10 @@
             <label>
               <input type="checkbox" name="remember"> Se rappeler de moi
             </label>
-          </div>
           <div class="container">
             <span class="psw"><a href="#">Mot de passe oublié?</a></span>
           </div>
+        </div>
         <div class="close-button" @click="$emit('close')" >X</div>        
     </div>
 </template>
@@ -52,11 +52,9 @@ export default {
     border-color: grey;
 }
 .login h1{
-    font-size: 35px;
+    font-size: 50px;
 }
-.login > p{
-    font-size: 24px;
-    margin-top: 1.5%;
-    text-align: left;
+.loginForm{
+  font-size: 32px;
 }
 </style>
