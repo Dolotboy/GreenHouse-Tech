@@ -30,6 +30,7 @@ exports.autocomplete = (inp, arr) => {
                 b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/
                 inp.value = this.getElementsByTagName("input")[0].value;
+                document.dispatchEvent(new CustomEvent("filter", {"detail": inp.value}));
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
                 closeAllLists();
@@ -39,7 +40,7 @@ exports.autocomplete = (inp, arr) => {
         }
     });
     /*execute a function presses a key on the keyboard:*/
-    inp.addEventListener("keydown", function(e) {
+    inp.addEventListener("keydown", async function(e) {
         var x = document.getElementById(this.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
         if (e.keyCode == 40) {
@@ -47,7 +48,7 @@ exports.autocomplete = (inp, arr) => {
           increase the currentFocus variable:*/
           currentFocus++;
           /*and and make the current item more visible:*/
-          addActive(x);
+          await addActive(x);
         } else if (e.keyCode == 38) { //up
           /*If the arrow UP key is pressed,
           decrease the currentFocus variable:*/
@@ -65,6 +66,8 @@ exports.autocomplete = (inp, arr) => {
     });
 
     function addActive (x) {
+      return;
+      let test = 0;
       /*a function to classify an item as "active":*/
       if (!x) return false;
       /*start by removing the "active" class on all items:*/
@@ -75,6 +78,7 @@ exports.autocomplete = (inp, arr) => {
       x[currentFocus].classList.add("autocomplete-active");
     }
     function removeActive (x) {
+      return;
       /*a function to remove the "active" class from all autocomplete items:*/
       for (var i = 0; i < x.length; i++) {
         x[i].classList.remove("autocomplete-active");

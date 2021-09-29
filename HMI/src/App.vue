@@ -46,8 +46,8 @@ export default {
         return;
       this.plants = [];
       
-      //this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
-      this.plants = await this.GetAllPlants("http://localhost:8000/api/searchAll/plant");
+      this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
+      //this.plants = await this.GetAllPlants("http://localhost:8000/api/searchAll/plant");
       //this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
       
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");

@@ -2,23 +2,27 @@
   <div class="logo">
     <img src="../../Images/LogoV1.png">
   </div>
-    <form autocomplete="off" action="/action_page.php">
+    <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
       <div class="autocomplete" style="width:300px;">
-        <input id="searchBar" type="text" name="myCountry" placeholder="Country">
+        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Country">
       </div>
     </form>
     <div class="rdPlantTypeWrapper">
       <div>
         <label>Fruit</label>
-        <input type="radio" name="rdPlantType" value="fruit" checked @click="filterData('Fruit')">
+        <input type="radio" name="rdPlantType" value="fruit" @click="radioValueChanged('Fruit')">
       </div>
       <div>
         <label>Légume</label>
-        <input type="radio" name="rdPlantType" value="vegetable" @click="filterData('Vegetable')">
+        <input type="radio" name="rdPlantType" value="vegetable" @click="radioValueChanged('Vegetable')">
+      </div>
+      <div>
+        <label>All</label>
+        <input type="radio" name="rdPlantType" value="vegetable" checked @click="radioValueChanged('All')">
       </div>
   </div>
     <div class="productsGrid">
-      <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in plants' :plant="plant"/>
+      <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in visiblePlants' :plant="plant"/>
     </div>
     <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
 </template>
@@ -39,8 +43,11 @@ export default {
   data(){
     return {
       plants : [],
+      visiblePlants : [],
       detailedPlant : Object,
-      showDetails : false
+      showDetails : false,
+      radioFilterValue : "All",
+      searchBarValue : ""
     }
   },
   mounted(){
@@ -51,24 +58,36 @@ export default {
       this.showDetails = !this.showDetails;
       this.detailedPlant = this.plants[num];
     },
-    async filterData(value){
+    async filterData(){
       await this.initialisation();
-      let plants = [];
+      this.visiblePlants = [];
       for(let i = 0; i < this.plants.length; i++)
-        if(this.plants[i].plantType == value)
-          plants.push(this.plants[i])
-      this.plants = plants;
+        if(this.plants[i].plantName.toLowerCase().startsWith(this.searchBarValue.toLowerCase())) {
+          if(this.radioFilterValue == "All" || this.plants[i].plantType == this.radioFilterValue){
+            this.visiblePlants.push(this.plants[i]);
+          }
+        }
+    },
+    radioValueChanged(value){
+      this.radioFilterValue = value;
+      this.filterData();
     },
     async initialisation(){
       let db = await toolbox.setDb();
       this.plants = await toolbox.fetchData(db);
-      let strings = await this.getAllStrings();
+      this.visiblePlants = this.plants;
+      let strings = await this.getAllStrings(this.radioFilterValue);
       autoComplete.autocomplete(document.getElementById("searchBar"), strings);
+      document.addEventListener('filter', (event) => {
+        this.searchBarValue = event.detail;
+        this.filterData();
+      });
     },
-    getAllStrings(){
+    getAllStrings(plantType){
       let strings = [];
       for(let i = 0; i < this.plants.length; i++)
-        strings.push(this.plants[i].plantName);
+        if(plantType == "All" || this.plants[i].plantType == plantType)
+          strings.push(this.plants[i].plantName);
       return strings;
     }
   }
@@ -107,5 +126,33 @@ body{
 
 .rdPlantTypeWrapper > div{
   display : flex;
+}
+
+.autoCompleteForm{
+  display : flex;
+  justify-content: center;
+}
+
+.autocomplete{
+  display : flex;
+  position : relative;
+}
+
+.autocomplete-active{
+  background : blue;
+}
+
+.autocomplete > *{
+  width : 100%
+}
+
+#searchBarautocomplete-list{
+  position : absolute;
+  top : 100%;
+  background : white;
+}
+
+#searchBarautocomplete-list:hover{
+  cursor : pointer;
 }
 </style>
