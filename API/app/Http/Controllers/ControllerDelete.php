@@ -31,6 +31,7 @@ class ControllerDelete extends Controller
             try
             {
                 Plant::destroy($idPlant);
+                Controller::incrementVersion();
                 return ("Plant deleted !");
             }
             catch(Exception $e)
@@ -58,6 +59,7 @@ class ControllerDelete extends Controller
             try
             {
                 Problem::destroy($idProblem);
+                Controller::incrementVersion();
                 return ("Problem deleted !");
             }
             catch(Exception $e)
@@ -90,6 +92,7 @@ class ControllerDelete extends Controller
                     ['tblPlant_idPlant', '=', $idPlant],
                     ['tblProfile_idProfile', '=', $idProfile],
                 ])->delete();
+                Controller::incrementVersion();
                 return ("Favorite deleted !");
             }
             catch(Exception $e)
@@ -117,6 +120,7 @@ class ControllerDelete extends Controller
             try
             {
                 Profile::destroy($idProfile);
+                Controller::incrementVersion();
                 return ("Profile deleted !");
             }
             catch(Exception $e)
@@ -146,6 +150,7 @@ class ControllerDelete extends Controller
                 try
                 {
                     FavorableConditionDate::destroy($idCondition);
+                    Controller::incrementVersion();
                     return ("Favorable condition deleted !");
                 }
                 catch(Exception $e)
@@ -167,6 +172,7 @@ class ControllerDelete extends Controller
                 try
                 {
                     FavorableConditionNb::destroy($idCondition);
+                    Controller::incrementVersion();
                     return ("Favorable condition deleted !");
                 }
                 catch(Exception $e)

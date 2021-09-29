@@ -26,8 +26,8 @@ class ControllerAdd extends Controller
 
         $plant->imgPlant = $request->imgPlant;
         $plant->plantName = $request->plantName;
-        $plantType = $request->plantType;
-        $plantFamily = $request->plantFamily;
+        $plant->plantType = $request->plantType;
+        $plant->plantFamily = $request->plantFamily;
         $plant->season = $request->season;
         $plant->groundType = $request->groundType;
         $plant->daysConservation = $request->daysConservation;
@@ -35,6 +35,8 @@ class ControllerAdd extends Controller
         $plant->tblPlantSowing_idSowing = $request->tblPlantSowing_idSowing;
         
         $plant->save();
+
+        Controller::incrementVersion();
 
         return ("La plante#$plant->idPlant a été ajouté");
     }
@@ -56,6 +58,8 @@ class ControllerAdd extends Controller
         
         $problem->save();
 
+        Controller::incrementVersion();
+
         return ("Le problème#$problem->idProblem a été ajouté");
     }
 
@@ -72,6 +76,8 @@ class ControllerAdd extends Controller
         $favorite->tblProfile_idProfile = $idProfile;
 
         $favorite->save();
+
+        Controller::incrementVersion();
 
         return ("Le favoris a été ajouté");
     }
@@ -95,6 +101,8 @@ class ControllerAdd extends Controller
         $profile->lastName = $request->lastName;
         
         $profile->save();
+
+        Controller::incrementVersion();
 
         return ("Le profil a été ajouté");
     }
@@ -127,6 +135,8 @@ class ControllerAdd extends Controller
         }
         
         $favorableCondition->save();
+
+        Controller::incrementVersion();
 
         return ("La condition favorable a été ajouté");
     }

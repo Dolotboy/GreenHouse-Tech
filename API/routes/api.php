@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -94,3 +95,11 @@ Route::delete('/unassign/condition/{type}/{idPlant}/{idCondition}', [ControllerU
 Route::get("search/package/{searchCondition}", [ControllerDetail::class, 'searchPackage'],function ($searchCondition){})->name('searchPackage');
 
 // ***************** PACKAGE *******************
+
+// ******************* VERSION *******************
+
+Route::get("search/last/version", [Controller::class, 'searchLastVersion'])->name('searchLastVersion');
+
+Route::post("increment/last/version", [Controller::class, 'incrementVersion'])->name('incrementVersion');
+
+// ******************* VERSION *******************

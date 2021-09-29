@@ -9,6 +9,7 @@ use App\Models\FavorableConditionNb;
 use App\Models\Favorite;
 use App\Models\Profile;
 use App\Models\AssignProblem;
+use App\Models\Version;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -167,5 +168,10 @@ class ControllerDetail extends Controller
         $json = json_encode($package);
 
         return $json;
+    }
+
+    public function indexVersion()
+    {
+        return view('');
     }
 }
