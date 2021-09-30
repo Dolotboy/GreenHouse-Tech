@@ -31,9 +31,12 @@ export default {
   },
   data(){
       return{
+          env : "http://localhost:8000/",
+          envBack : "https://apitestenv.pcst.xyz/",
           plants : [],
           showLogin : false,
-          showRegister : false
+          showRegister : false,
+          apiVersion : 0.0
       }
   },
 
@@ -49,25 +52,40 @@ export default {
       this.showLogin = !this.showLogin;
     },
     async Initialisation(){
+      let version = localStorage.getItem('apiVersion');
+      let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
+      this.plants = this.GetAllPlants(this.env + "api/searchAll/plant");
+
+      if(version == undefined || version != apiVersion){
+        await this.ClearDb();
+        localStorage.setItem('apiVersion', apiVersion);
+        this.DownloadContent();
+      }
+      
+      this.plants = await toolbox.fetchData(await toolbox.setDb());
+      if(this.plants.length == 0)
+        this.DownloadContent();   
+    },
+    async ClearDb(){
       let db = await toolbox.setDb();
-      
-      this.plants = await toolbox.fetchData(db);
-      if(this.plants.length > 0)
-        return;
-      this.plants = [];
-      
-      this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
-      //this.plants = await this.GetAllPlants("http://localhost:8000/api/searchAll/plant");
-      //this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
-      
+      toolbox.ClearDb(db);
+    },
+    async DownloadContent(){
+      this.plants = await this.GetAllPlants(this.env + "api/searchAll/plant");
+      let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
       for(let i = 0; i < this.plants.length; i++){
         entrepot.add(toolbox.GeneratePlant(this.plants[i]));
       }
-
-      this.plants = null;
-      this.plants = await toolbox.fetchData(db);
+    },
+    GetApiVersion(url){
+      return new Promise(resolve =>{
+        $.get(url, function(data, status){
+          let json = JSON.parse(data);
+          resolve(json.numVersion);
+        })
+      })
     },
     GetAllPlants(url){
     return new Promise(resolve => {

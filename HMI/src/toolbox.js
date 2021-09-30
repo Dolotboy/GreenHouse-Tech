@@ -40,6 +40,15 @@ exports.setDb = () => {
     });
 }
 
+exports.ClearDb = (db) =>{
+    let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
+    let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");
+    let request = entrepot.clear();
+    request.onsuccess = function(event) {
+        console.log("successs");
+    }
+}
+
 exports.GeneratePlant = (proxyPlant) => {
     return {
         plantType : proxyPlant.plantType,
