@@ -4,20 +4,20 @@
   </div>
     <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
       <div class="autocomplete" style="width:300px;">
-        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Country">
+        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
       </div>
     </form>
     <div class="rdPlantTypeWrapper">
       <div>
-        <label>Fruit</label>
+        <label>Fruits</label>
         <input type="radio" name="rdPlantType" value="fruit" @click="radioValueChanged('Fruit')">
       </div>
       <div>
-        <label>Légume</label>
+        <label>Légumes</label>
         <input type="radio" name="rdPlantType" value="vegetable" @click="radioValueChanged('Vegetable')">
       </div>
       <div>
-        <label>All</label>
+        <label>Tous</label>
         <input type="radio" name="rdPlantType" value="vegetable" checked @click="radioValueChanged('All')">
       </div>
   </div>

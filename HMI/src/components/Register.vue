@@ -20,13 +20,15 @@
         <input name="password" v-model="password" placeholder="Mot de passe" type="password" required>
       </div>      
     </form>
-    <input type="submit" value="S'inscrire">
+    <input type="submit" @click="postCreateUser()" value="S'inscrire">
     </div>    
     <div class="close-button" @click="$emit('close')" >X</div> 
   </div>
 </template>
 
 <script>
+import $ from '../../node_modules/jquery/dist/jquery.js'
+
 export default {
     name: "App",
     data() {
@@ -37,6 +39,22 @@ export default {
         password: "",
         };
     },
+    methods : {
+      createUser(){
+        var user = {
+          firstName : this.firstName,
+          lastName : this.lastName,
+          email : this.email,
+          password : this.password
+        }
+        return user;
+      },
+
+      postCreateUser(){
+        let user = this.createUser();
+        $.post("http://localhost:8000/new/profile", JSON.stringify(user), status, "json");
+      }
+    }
 }
 </script>
 
