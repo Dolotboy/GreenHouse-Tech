@@ -135,6 +135,16 @@ class ControllerDetail extends Controller
 
     }
 
+    public function searchAllPackages(){
+        $plants = Plant::All();
+        $jsons = array();
+        for($i = 0; $i < count($plants); $i++){
+            $json = ControllerDetail::searchPackage($plants[$i]->idPlant);
+            array_push($jsons,$json);
+        }
+        return json_encode($jsons);
+    }
+
     public function searchPackage($searchCondition)
     {
         $plant = Plant::find($searchCondition);

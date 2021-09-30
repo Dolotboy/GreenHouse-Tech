@@ -93,6 +93,7 @@ Route::delete('/unassign/condition/{type}/{idPlant}/{idCondition}', [ControllerU
 // ***************** PACKAGE *******************
 
 Route::get("search/package/{searchCondition}", [ControllerDetail::class, 'searchPackage'],function ($searchCondition){})->name('searchPackage');
+Route::get("searchAll/package/", [ControllerDetail::class, 'searchAllPackages'],function (){})->name('searchAllPackage');
 
 // ***************** PACKAGE *******************
 
