@@ -33,6 +33,11 @@ class ControllerAdd extends Controller
         $plant->daysConservation = $request->daysConservation;
         $plant->description = $request->description;
         $plant->tblPlantSowing_idSowing = $request->tblPlantSowing_idSowing;
+        $plant->plantState = $request->plantState;
+        $plant->equipment = $request->equipment;
+        $plant->difficulty = $request->difficulty;
+        $plant->lifeTime = $request->lifeTime;
+        $plant->bestNeighbor = $request->bestNeighbor;
         
         $plant->save();
 
@@ -52,6 +57,7 @@ class ControllerAdd extends Controller
 
         $problem = new Problem();
 
+        $problem->imgProblem = $request->imgProblem;
         $problem->typeProblem = $request->typeProblem;
         $problem->importanceLvl = $request->importanceLvl;
         $problem->description = $request->description;
@@ -96,9 +102,9 @@ class ControllerAdd extends Controller
         $profile->email = $request->email;
         $profile->password = $request->password;
         $profile->salt = Hash::make($request->password);
-        $profile->username = $request->username;
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
+        $profile->access = $request->access;
         
         $profile->save();
 
@@ -123,6 +129,7 @@ class ControllerAdd extends Controller
             $favorableCondition->rangeType = $request->rangeType;
             $favorableCondition->begin = $request->begin;
             $favorableCondition->end = $request->end;
+            $favorableCondition->location = $request->location;
         }
         else if ($type == 2)
         {

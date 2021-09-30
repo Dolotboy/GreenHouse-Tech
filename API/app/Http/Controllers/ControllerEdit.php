@@ -33,6 +33,11 @@ class ControllerEdit extends Controller
         $plant->daysConservation = $request->daysConservation;
         $plant->description = $request->description;
         $plant->tblPlantSowing_idSowing = $request->tblPlantSowing_idSowing;
+        $plant->plantState = $request->plantState;
+        $plant->equipment = $request->equipment;
+        $plant->difficulty = $request->difficulty;
+        $plant->lifeTime = $request->lifeTime;
+        $plant->bestNeighbor = $request->bestNeighbor;
 
         $plant->save();
 
@@ -52,6 +57,7 @@ class ControllerEdit extends Controller
 
         $problem = Problem::find($idProblem);
 
+        $problem->imgProblem = $request->imgProblem;
         $problem->typeProblem = $request->typeProblem;
         $problem->importanceLvl = $request->importanceLvl;
         $problem->description = $request->description;
@@ -75,9 +81,9 @@ class ControllerEdit extends Controller
         $profile = Profile::find($idProfile);
 
         $profile->email = $request->email;
-        $profile->username = $request->username;
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
+        $profile->access = $request->access;
 
         $profile->save();
 
@@ -102,6 +108,7 @@ class ControllerEdit extends Controller
             $favorableCondition->rangeType = $request->rangeType;
             $favorableCondition->begin = $request->begin;
             $favorableCondition->end = $request->end;
+            $favorableCondition->location = $request->location;
         }
         else if ($type == 2)
         {
