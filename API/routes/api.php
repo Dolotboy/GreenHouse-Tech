@@ -18,7 +18,8 @@ use App\Http\Controllers\ControllerUnassign;
 Route::get('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('addPlant');
 Route::post('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('addPlant');
 
-Route::put('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlant');
+Route::post('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlantTest'],function ($idPlant){})->name('editPlantTest');
+Route::get('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlant');
 
 //Route::middleware(['cors'])->group(function () { Route::get("search/plant/{id}", [ControllerDetail::class, 'searchPlant'],function ($id){})->name('detailPlant'); });
 

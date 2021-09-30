@@ -36,23 +36,28 @@ class ControllerEdit extends Controller
 
     public function editPlant(Request $request, $idPlant)
     {
-        $request =  json_decode(file_get_contents('php://input'));
-
         $plant = Plant::find($idPlant);
 
-        $plant->imgPlant = $request->imgPlant;
-        $plant->plantName = $request->plantName;
-        $plantType = $request->plantType;
-        $plantFamily = $request->plantFamily;
-        $plant->season = $request->season;
-        $plant->groundType = $request->groundType;
-        $plant->daysConservation = $request->daysConservation;
-        $plant->description = $request->description;
-        $plant->tblPlantSowing_idSowing = $request->tblPlantSowing_idSowing;
+        return view('editPlant', ["plant" => $plant]);
+    }
+
+    public function editPlantTest(Request $request, $idPlant)
+    {
+        $plant = Plant::find($idPlant);
+
+        $plant->imgPlant = $request->input("imgPlant");
+        $plant->plantName = $request->input("plantName");
+        $plant->plantType = $request->input("plantType");
+        $plant->plantFamily = $request->input("plantFamily");
+        $plant->season = $request->input("season");
+        $plant->groundType = $request->input("groundType");
+        $plant->daysConservation = $request->input("daysConservation");
+        $plant->description = $request->input("description");
+        $plant->tblPlantSowing_idSowing = $request->input("tblPlantSowing_idSowing");   
 
         $plant->save();
-
-        return ("La plante#$plant->id a été modifié");
+        
+        return ("Succesfully modified a plant !");
     }
 
     public function editProblem(Request $request, $idProblem)
