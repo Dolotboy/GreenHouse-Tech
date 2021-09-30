@@ -62,3 +62,20 @@ exports.GeneratePlant = (proxyPlant) => {
         tblPlantSowing_idSowing : proxyPlant.tblPlantSowing_idSowing
     };
 }
+
+exports.GeneratePackage = (proxyPackage) => {
+     return{
+            idPlant : proxyPackage.idPlant,
+            imgPlant : proxyPackage.imgPlant,
+            plantName : proxyPackage.plantName,
+            plantType : proxyPackage.plantType,
+            plantFamily : proxyPackage.plantFamily,
+            season : proxyPackage.season,
+            groundType : proxyPackage.groundType,
+            daysConservation : proxyPackage.daysConservation,
+            description : proxyPackage.description,
+            //favorableConditions : proxyPackage.favorableConditions,
+            //problems : proxyPackage.problems,
+            //dontKnow : proxyPackage.dontKnow
+     };
+}
