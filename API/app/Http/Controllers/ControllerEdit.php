@@ -44,7 +44,7 @@ class ControllerEdit extends Controller
     public function editPlantTest(Request $request, $idPlant)
     {
         $plant = Plant::find($idPlant);
-
+ 
         $plant->imgPlant = $request->input("imgPlant");
         $plant->plantName = $request->input("plantName");
         $plant->plantType = $request->input("plantType");
