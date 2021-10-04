@@ -48,14 +48,8 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', 'platinewtf.com'),
             'port' => env('DB_PORT', '3306'),
-            /*
-            'database' => env('DB_DATABASE', 'u882331052_wiki'),
-            'username' => env('DB_USERNAME', 'u882331052_wiki'),
-            */
-            
             'database' => env('DB_DATABASE', 'u882331052_apitestenv'),
             'username' => env('DB_USERNAME', 'u882331052_apitestenv'),
-            
             'password' => env('DB_PASSWORD', 'Cegep2021'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
