@@ -5,7 +5,7 @@ INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('temperature',20,3
  SET @humId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
  INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('plantsSpacing',120,120,'cm'); 
  SET @lengthId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
- INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Concombre','Riche en compost ou en fumier ',7,'Semez en poquets de 5 graines. Gardez 3 plants par poquet.', 'Légume'); 
+ INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Concombre','Riche en compost ou en fumier ',7,'Semez en poquets de 5 graines. Gardez 3 plants par poquet.', 'Vegetable'); 
  SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
  INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @plantId); 
 
@@ -15,7 +15,7 @@ INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('temperature',25,3
  SET @humId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
  INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('plantsSpacing',80,80,'cm'); 
  SET @lengthId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
- INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Courgette','Matière organique fraîche',10,' les courgettes poussent  sur la plupart des sols.', 'Légume'); 
+ INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Courgette','Matière organique fraîche',10,' les courgettes poussent  sur la plupart des sols.', 'Vegetable'); 
  SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
  INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @plantId); 
 
@@ -45,7 +45,7 @@ INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('temperature',8,29
  SET @humId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
  INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('plantsSpacing',5,45,'cm'); 
  SET @lengthId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
- INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Carotte','meuble, riche, dépourvu de cailloux',90,'Semez aux 15 jours du début mai au 15 juin.', 'Légume'); 
+ INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Carotte','meuble, riche, dépourvu de cailloux',90,'Semez aux 15 jours du début mai au 15 juin.', 'Vegetable'); 
  SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
  INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @plantId); 
 
@@ -55,7 +55,7 @@ INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('temperature',12,2
  SET @humId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
  INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('plantsSpacing',150,200,'cm'); 
  SET @lengthId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
- INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Melon','profond, bien drainé, riche en matières organiques',21,'Semez en poquets de 3 graines. Gardez 3 ou 4 fruits par plant. Le melon n’aime pas les courants d’air.', 'Légume'); 
+ INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Melon','profond, bien drainé, riche en matières organiques',21,'Semez en poquets de 3 graines. Gardez 3 ou 4 fruits par plant. Le melon n’aime pas les courants d’air.', 'Vegetable'); 
  SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
  INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @plantId); 
 
@@ -65,7 +65,7 @@ INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('temperature',25,3
  SET @humId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
  INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('plantsSpacing',25,75,'cm'); 
  SET @lengthId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
- INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Maïs','profond, léger, frais et riche en humus,',90,'Semez sur au moins deux rangs pour favoriser la pollinisation.', 'Légume'); 
+ INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Maïs','profond, léger, frais et riche en humus,',90,'Semez sur au moins deux rangs pour favoriser la pollinisation.', 'Vegetable'); 
  SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
  INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @plantId); 
 
@@ -75,7 +75,7 @@ INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('temperature',7,24
  SET @humId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
  INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('plantsSpacing',10,40,'cm'); 
  SET @lengthId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
- INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Épinard','Meuble, frais et humifère',14,'Semez tôt au printemps ou à la fin de l''été, sinon risque de monter en graines.', 'Légume'); 
+ INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Épinard','Meuble, frais et humifère',14,'Semez tôt au printemps ou à la fin de l''été, sinon risque de monter en graines.', 'Vegetable'); 
  SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
  INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @plantId); 
 
@@ -85,7 +85,7 @@ INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('temperature',21,3
  SET @humId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
  INSERT INTO tblNbRangeFav (rangeType, min, max, unit) VALUES ('plantsSpacing',200,250,'cm'); 
  SET @lengthId = (SELECT idRangeNb FROM tblNbRangeFav ORDER BY idRangeNb DESC LIMIT 1); 
- INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Citrouille','loam sableux,sol bien drainé et les sols argileux',180,'Semez en poquets de 3 graines. Gardez 2 à 4 fruits par plant.', 'Légume'); 
+ INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)VALUES ('Citrouille','loam sableux,sol bien drainé et les sols argileux',180,'Semez en poquets de 3 graines. Gardez 2 à 4 fruits par plant.', 'Vegetable'); 
  SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
  INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblNbRangeFav (tblPlant_idPlant, tblNbRangeFav_idRangeNb) VALUES (@plantId, @plantId); 
 

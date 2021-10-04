@@ -3,61 +3,89 @@
     <nav>
       <ul>
         <div id="BasicNav">
-          <li><router-link to="/">Acceuil</router-link></li> 
+          <li><router-link to="/">Accueil</router-link></li> 
           <li><router-link to="/about">À propos</router-link></li>
         </div>
-        <div id="Login">
-          <li @click="toggleLogin">Se connecter</li>
+        <div id="LoginRegister">
+          <li @click="toggleRegister">S'inscrire</li>
+          <li @click="toggleLogin">Se connecter</li>         
         </div>
       </ul>
     </nav>
     <router-view/>  
     <Login v-if="showLogin" @close="toggleLogin"/>
+    <Register v-if="showRegister" @close="toggleRegister"/>
   </div>
 </template>
 
 <script>
 import toolbox from './toolbox.js'
 import Login from './components/Login.vue'
+import Register from './components/Register.vue'
 import $ from '../node_modules/jquery/dist/jquery.js'
 
 export default {
   components :{
-    Login
+    Login,
+    Register
   },
   data(){
       return{
+          env : "http://localhost:8000/",
+          envBack : "https://apitestenv.pcst.xyz/",
           plants : [],
-          showLogin : false
+          showLogin : false,
+          showRegister : false,
+          apiVersion : 0.0
       }
   },
+
   mounted(){
       this.Initialisation()
   },
+
   methods :{
+    toggleRegister(){
+      this.showRegister = !this.showRegister;
+    },
     toggleLogin(){
       this.showLogin = !this.showLogin;
     },
     async Initialisation(){
+      let version = localStorage.getItem('apiVersion');
+      let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
+      this.plants = this.GetAllPlants(this.env + "api/searchAll/plant");
+
+      if(version == undefined || version != apiVersion){
+        await this.ClearDb();
+        localStorage.setItem('apiVersion', apiVersion);
+        this.DownloadContent();
+      }
+      
+      this.plants = await toolbox.fetchData(await toolbox.setDb());
+      if(this.plants.length == 0)
+        this.DownloadContent();   
+    },
+    async ClearDb(){
       let db = await toolbox.setDb();
-      
-      this.plants = await toolbox.fetchData(db);
-      if(this.plants.length > 0)
-        return;
-      this.plants = [];
-      
-      //this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
-      this.plants = await this.GetAllPlants("http://localhost:8000/api/searchAll/plant");
-      //this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
-      
+      toolbox.ClearDb(db);
+    },
+    async DownloadContent(){
+      this.plants = await this.GetAllPlants(this.env + "api/searchAll/plant");
+      let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
       for(let i = 0; i < this.plants.length; i++){
         entrepot.add(toolbox.GeneratePlant(this.plants[i]));
       }
-
-      this.plants = null;
-      this.plants = await toolbox.fetchData(db);
+    },
+    GetApiVersion(url){
+      return new Promise(resolve =>{
+        $.get(url, function(data, status){
+          let json = JSON.parse(data);
+          resolve(json.numVersion);
+        })
+      })
     },
     GetAllPlants(url){
     return new Promise(resolve => {
@@ -97,22 +125,26 @@ ul {
   justify-content: center;
 }
 
-#Login :hover{
+#LoginRegister :hover{
   color: white;
   background-color: #8d4705;
   cursor: pointer;
 }
 
-#Login li{
+#LoginRegister {
   position: absolute;
   right: 0%;
   top: 0%;
+}
+
+#LoginRegister li{
   list-style-type: none;
   overflow: hidden;
   color: white;
   height: 100%;
   padding: 10px 15px;
 }
+
 li {
   float: left;
   border-right: 1px solid darkgrey;
