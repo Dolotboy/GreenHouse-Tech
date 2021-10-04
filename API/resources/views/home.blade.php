@@ -119,26 +119,54 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newFavCondition')}}">
-                        <h2>Ajouter une condition favorable</h2> 
+                    <a href="{{route('newFavCondDate')}}">
+                        <h2>Ajouter une condition favorable Date</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('editSearchFavCondition')}}">
-                        <h2>Modifier une condition favorable</h2> 
+                    <a href="{{route('editSearchFavCondDate')}}">
+                        <h2>Modifier une condition favorable Date</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('searchFavCondition')}}">
-                        <h2>Chercher une condition favorable</h2>
+                    <a href="{{route('searchFavCondDate')}}">
+                        <h2>Chercher une condition favorable Date</h2>
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteSearchFavCondition')}}">
-                        <h2>Supprimer une condition favorable</h2>
+                    <a href="{{route('deleteSearchFavCondDate')}}">
+                        <h2>Supprimer une condition favorable Date</h2>
+                    </a>
+                </div>
+            </div>
+
+             <!-- // ****************** SIXTH LINE - FAVORITE CONDITION NB ******************** // -->
+
+             <div class='midContainer'>
+                <div class='cbtn'>
+                    <a href="{{route('newFavCondNb')}}">
+                        <h2>Ajouter une condition favorable Nb</h2> 
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('editSearchFavCondNb')}}">
+                        <h2>Modifier une condition favorable Nb</h2> 
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('searchFavCondNb')}}">
+                        <h2>Chercher une condition favorable Nb</h2>
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('deleteSearchFavCondNb')}}">
+                        <h2>Supprimer une condition favorable Nb</h2>
                     </a>
                 </div>
             </div>
@@ -147,19 +175,35 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newAssignFavCondition')}}">
-                        <h2>Assigner une condition favorable</h2> 
+                    <a href="{{route('newAssignFavCondDate')}}">
+                        <h2>Assigner une condition favorable Date</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteUnassignFavCondition')}}">
-                        <h2>Désassigner une condition favorable</h2> 
+                    <a href="{{route('deleteUnassignFavCondDate')}}">
+                        <h2>Désassigner une condition favorable Date</h2> 
                     </a>
                 </div>
             </div>
 
             <!-- // ****************** EIGHTH LINE ******************** // -->
+
+            <div class='midContainer'>
+                <div class='cbtn'>
+                    <a href="{{route('newAssignFavCondNb')}}">
+                        <h2>Assigner une condition favorable Nb</h2> 
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('deleteUnassignFavCondNb')}}">
+                        <h2>Désassigner une condition favorable Nb</h2> 
+                    </a>
+                </div>
+            </div>
+
+            <!-- // ****************** NINTH LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -175,7 +219,7 @@
                 </div>
             </div>
 
-            <!-- // ****************** NINTH LINE ******************** // -->
+            <!-- // ****************** TENTH LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -196,8 +240,6 @@
                         <h2>Voir tous les profils</h2> 
                     </a>
                 </div>
-            
-     
 
         </div>
 @endsection

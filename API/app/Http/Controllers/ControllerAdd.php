@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 
 class ControllerAdd extends Controller
 {
+
+    /* ------------------- PLANT ------------------- */
+
     public function indexPlant(Request $request)
     {
         return view('newPlant');        
@@ -39,6 +42,8 @@ class ControllerAdd extends Controller
         return ("La plante#$plant->idPlant a été ajouté");
     }
 
+    /* ------------------- PROBLEM ------------------- */
+
     public function indexProblem(Request $request)
     {
         return view('newProblem');
@@ -59,34 +64,26 @@ class ControllerAdd extends Controller
         return ("Le problème#$problem->idProblem a été ajouté");
     }
 
+/* ------------------- FAVORITE ------------------- */
+
     public function indexFavorite(Request $request)
     {
         return view('newFavourite');
     }
 
-    public function addFavorite(/*Request $reques*/ $idPlant, $idProfile)
+    public function addFavorite($idPlant, $idProfile)
     {
-        //$request =  json_decode(file_get_contents('php://input'));
-
         $favorite = new Favorite();
         
         $favorite->tblPlant_idPlant = $idPlant;
         $favorite->tblProfile_idProfile = $idProfile;
-
-        /*$favorite->tblPlant_idPlant = $request->input("tblPlant_idPlant");
-        $favorite->tblProfile_idProfile = $request->input("tblProfile_idProfile");*/
-
-        /*
-        {   
-            "tblPlant_idPlant": 1,  
-            "tblProfile_idProfile": 1 
-        }  
-       */ 
         
         $favorite->save();
 
         return ("Le favoris a été ajouté");
     }
+
+/* ------------------- PROFILE ------------------- */
 
     public function indexProfile(Request $request)
     {
@@ -95,51 +92,59 @@ class ControllerAdd extends Controller
 
     public function addProfile(Request $request)
     {
-        //$request =  json_decode(file_get_contents('php://input'));
 
         $profile = new Profile();
 
         $profile->email = $request->input("email");
         $profile->password = $request->input("password");
-        $profile->salt = Hash::make($request->password);
+        $profile->salt = Hash::make($request->input("password"));
         $profile->username = $request->input("username");
         $profile->firstName = $request->input("firstName");
         $profile->lastName = $request->input("lastName");
         
         $profile->save();
 
-        return ("Le profil a été ajouté");
+        return ("Le profil a été ajouté"); 
     }
 
-    public function indexFavCondition(Request $request)
+/* ------------------- FAVORITE CONDITION DATE ------------------- */
+
+    public function indexFavCondDate(Request $request)
     {
-        return view('newFavCond');
+        return view('newFavCondDate');
     }
 
-    public function addFavCondition(Request $request, $type)
+    public function addFavConditionDate(Request $request)
     {
-        //$request =  json_decode(file_get_contents('php://input'));
+        $favorableConditionDate = new FavorableConditionDate();
 
-        if ($type == 1)
-        {
-            $favorableCondition = new FavorableConditionDate();
+        $favorableConditionDate->rangeType = $request->input("rangeType");
+        $favorableConditionDate->begin = $request->input("begin");
+        $favorableConditionDate->end = $request->input("end");
 
-            $favorableCondition->rangeType = $request->input("rangeType");
-            $favorableCondition->begin = $request->input("begin");
-            $favorableCondition->end = $request->input("end");
-        }
-        else if ($type == 2)
-        {
-            $favorableCondition = new FavorableConditionNb();
+        $favorableConditionDate->save();
 
-            $favorableCondition->rangeType = $request->input("rangeType");
-            $favorableCondition->min = $request->input("min");
-            $favorableCondition->max = $request->input("max");
-            $favorableCondition->unit = $request->input("unit");
-        }
-        
-        $favorableCondition->save();
+        return ("La condition favorable Date a été ajouté");
+    }
 
-        return ("La condition favorable a été ajouté");
+/* ------------------- FAVORITE CONDITION NB ------------------- */
+
+    public function indexFavCondNb(Request $request)
+    {
+        return view('newFavCondNb');
+    }
+
+    public function addFavConditionNb(Request $request)
+    {
+        $favorableConditionNb = new FavorableConditionNb();
+
+        $favorableConditionNb->rangeType = $request->input("rangeType");
+        $favorableConditionNb->min = $request->input("min");
+        $favorableConditionNb->max = $request->input("max");
+        $favorableConditionNb->unit = $request->input("unit");
+
+        $favorableConditionNb->save();
+
+        return ("La condition favorable Nb a été ajouté");
     }
 }

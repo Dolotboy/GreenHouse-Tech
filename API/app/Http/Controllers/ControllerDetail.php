@@ -124,7 +124,7 @@ class ControllerDetail extends Controller
 
     public function indexFavCondition(Request $request)
     {
-        return view('');
+        return view('searchFavCondition');
     }
 
     public function searchFavCondition($type, $id)
@@ -158,7 +158,7 @@ class ControllerDetail extends Controller
             $array = array('idRangeNb' => $idRangeNb, 'rangeType' => $rangeType, 'min' => $min, 'max' => $max, 'unit' => $unit, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
         }
 
-        $json = json_encode($array);
+        //$json = json_encode($array);
     
         return ("$json");
     }

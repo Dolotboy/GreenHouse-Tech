@@ -5,7 +5,8 @@ use App\Http\Controllers\ControllerAdd;
 use App\Http\Controllers\ControllerEdit;
 use App\Http\Controllers\ControllerDetail;
 use App\Http\Controllers\ControllerDelete;
-
+use App\Http\Controllers\ControllerAssign;
+use App\Http\Controllers\ControllerUnassign;
 
 // ***************** HOME *******************
 
@@ -35,7 +36,6 @@ Route::get('/delete/plant/', [ControllerDelete::class, 'indexPlant'])->name('del
 Route::post('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem');
 Route::get('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem');
 
-//Route::post('/edit/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem');
 Route::get('/edit/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem');
 
 
@@ -65,7 +65,7 @@ Route::post('/delete/favorite', [ControllerDelete::class, 'indexProblem'])->name
 Route::post('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile');
 Route::get('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile');
 
-Route::post('/edit/profile', [ControllerEdit::class, 'indexProfile'])->name('editSearchProfile');
+Route::get('/edit/profile', [ControllerEdit::class, 'indexProfile'])->name('editSearchProfile');
 
 Route::post('/search/profile', [ControllerDetail::class, 'indexProfile'])->name('searchProfile');
 
@@ -73,23 +73,41 @@ Route::post('/delete/profile', [ControllerDelete::class, 'indexProfile'])->name(
 
 // ***************** PROFILE *******************
 
+// ***************** FAVORABLE CONDITION DATE *******************
+
+Route::post('/new/conditionDate', [ControllerAdd::class, 'indexFavCondDate'])->name('newFavCondDate');
+Route::get('/new/conditionDate', [ControllerAdd::class, 'indexFavCondDate'])->name('newFavCondDate');
+
+Route::get('/edit/conditionDate', [ControllerEdit::class, 'indexFavCondDate'])->name('editSearchFavCondDate');
+
+Route::get('/search/conditionDate', [ControllerDetail::class, 'indexFavCondDate'])->name('searchFavCondDate');
+
+Route::post('/delete/conditionDate', [ControllerDelete::class, 'indexFavCondDate'])->name('deleteSearchFavCondDate');
+
+Route::post('/assign/conditionDate', [ControllerAssign::class, 'indexFavCondDate'])->name('newAssignFavCondDate');
+Route::get('/assign/conditionDate', [ControllerAssign::class, 'indexFavCondDate'])->name('newAssignFavCondDate');
+
+Route::post('/unassign/conditionDate', [ControllerUnassign::class, 'indexFavCondDate'])->name('deleteUnassignFavCondDate');
+Route::get('/unassign/conditionDate', [ControllerUnassign::class, 'indexFavCondDate'])->name('deleteUnassignFavCondDate');
+
 // ***************** FAVORABLE CONDITION *******************
 
-Route::post('/new/condition', [ControllerAdd::class, 'indexFavCondition'])->name('newFavCondition');
-Route::get('/new/condition', [ControllerAdd::class, 'indexFavCondition'])->name('newFavCondition');
+// ***************** FAVORABLE CONDITION NB *******************
 
-//Route::post('/edit/condition', [ControllerEdit::class, 'indexFavCondition'])->name('editSearchFavCondition');
-Route::get('/edit/condition', [ControllerEdit::class, 'indexFavCondition'])->name('editSearchFavCondition');
+Route::post('/new/conditionNb', [ControllerAdd::class, 'indexFavCondNb'])->name('newFavCondNb');
+Route::get('/new/conditionNb', [ControllerAdd::class, 'indexFavCondNb'])->name('newFavCondNb');
 
-Route::post('/search/condition', [ControllerDetail::class, 'indexFavCondition'])->name('searchFavCondition');
+Route::get('/edit/conditionNb', [ControllerEdit::class, 'indexFavCondNb'])->name('editSearchFavCondNb');
 
-Route::post('/delete/condition', [ControllerDelete::class, 'indexFavCondition'])->name('deleteSearchFavCondition');
+Route::get('/search/conditionNb', [ControllerDetail::class, 'indexFavCondNb'])->name('searchFavCondNb');
 
-Route::post('/assign/condition', [ControllerAssign::class, 'indexFavCondition'])->name('newAssignFavCondition');
-Route::get('/assign/condition', [ControllerAssign::class, 'indexFavCondition'])->name('newAssignFavCondition');
+Route::post('/delete/conditionNb', [ControllerDelete::class, 'indexFavCondNb'])->name('deleteSearchFavCondNb');
 
-Route::post('/unassign/condition', [ControllerUnassign::class, 'indexFavCondition'])->name('deleteUnassignFavCondition');
-Route::get('/unassign/condition', [ControllerUnassign::class, 'indexFavCondition'])->name('deleteUnassignFavCondition');
+Route::post('/assign/conditionNb', [ControllerAssign::class, 'indexFavCondNb'])->name('newAssignFavCondNb');
+Route::get('/assign/conditionNb', [ControllerAssign::class, 'indexFavCondNb'])->name('newAssignFavCondNb');
+
+Route::post('/unassign/conditionNb', [ControllerUnassign::class, 'indexFavCondNb'])->name('deleteUnassignFavCondNb');
+Route::get('/unassign/conditionNb', [ControllerUnassign::class, 'indexFavCondNb'])->name('deleteUnassignFavCondNb');
 
 // ***************** FAVORABLE CONDITION *******************
 

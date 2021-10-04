@@ -15,52 +15,43 @@ use Illuminate\Http\Request;
 
 class ControllerAssign extends Controller
 {
-    public function assignFavCondition(/*Request $request,*/ $type, $idPlant, $idCondition)
+
+    public function indexFavCondDate()
     {
-        //$request =  json_decode(file_get_contents('php://input'));
+        return view("assignFavCondDate");
+    }
 
-        if ($type == 1)
-        {
-            $assignFavorableCondition = new AssignConditionDate();
+    public function assignFavConditionDate($idPlant,$idCondition)
+    {
+        $assignFavorableConditionDate = new AssignConditionDate();
 
-            $assignFavorableCondition->tblPlant_idPlant = $idPlant;
-            $assignFavorableCondition->tblDateRangeFav_idRangeDate = $idCondition;
+        $assignFavorableConditionDate->tblPlant_idPlant = $idPlant;
+        $assignFavorableConditionDate->tblDateRangeFav_idRangeDate = $idCondition;
 
-            /*$assignFavorableCondition->tblPlant_idPlant = $request->tblPlant_idPlant;
-            $assignFavorableCondition->tblDateRangeFavorableCondition_idRangeDate = $request->tblDateRangeFavorableCondition_idRangeDate;
+        $assignFavorableConditionDate->save();
 
-            {     
-                "tblPlant_idPlant": 1,    
-                "tblDateRangeFavorableCondition_idRangeDate": 1 
-            }    
-            */
-        }
-        else if ($type == 2)
-        {
-            $assignFavorableCondition = new AssignConditionNb();
+        return("La condition favorable date a ete ajoute");
+    }
+    
+    public function indexFavCondNb()
+    {
+        return view("assignFavCondNb");
+    }
 
-            $assignFavorableCondition->tblPlant_idPlant = $idPlant;
-            $assignFavorableCondition->tblNbRangeFav_idRangeNb = $idCondition;
+    public function assignFavConditionNb($idPlant, $idCondition)
+    {
+        $assignFavorableConditionNb = new AssignConditionNb();  
 
-            /*$assignFavorableCondition->tblPlant_idPlant = $request->tblPlant_idPlant;
-            $assignFavorableCondition->tblRangeFavorableConditionNb_idRangeNb = $request->tblRangeFavorableConditionNb_idRangeNb;
+        $assignFavorableConditionNb->tblPlant_idPlant = $idPlant;
+        $assignFavorableConditionNb->tblNbRangeFav_idRangeNb = $idCondition;
 
-            {     
-                "tblPlant_idPlant": 1,    
-                "tblRangeFavorableConditionNb_idRangeNb": 2 
-            } 
-            */   
-        }
-        
-        $assignFavorableCondition->save();
+        $assignFavorableConditionNb->save();
 
-        return ("La condition a été assigné");
+        return("La condition favorable nb a ete ajoute");
     }
 
     public function assignProblem(Request $request, $idPlant, $idProblem)
     {
-        $request =  json_decode(file_get_contents('php://input'));
-
         $assignProblem = new AssignProblem();
 
         $assignProblem->tblPlant_idPlant = $idPlant;
