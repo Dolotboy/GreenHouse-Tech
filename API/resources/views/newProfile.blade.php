@@ -21,6 +21,7 @@
                                     <h3 class="mb-0 text-primary"><input type="text" name='username' placeholder="Username" value=""></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='firstName' placeholder="First Name" value=""></h3>
                                     <h3 class="mb-0 text-primary"><input type="text" name='lastName' placeholder="Last Name" value=""></h3>   
+                                    <h3 class="mb-0 text-primary"><input type="text" name='access' placeholder="Access" value=""></h3>  
                                     <h3 class="mb-0 text-primary"><input type="submit" name='submit' placeholder="Submit"></h3>                             
                                 </div>
                             </div>

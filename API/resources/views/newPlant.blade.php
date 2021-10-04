@@ -16,15 +16,18 @@
                             <h3>Add a plant</h3>
                                 <div class="border-bottom pb-3 mb-3">
                                     <h2 class="mb-3"><input type="text" name='imgPlant' placeholder="image Plant" value=""></h2>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='plantName' placeholder="Plant Name" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='plantType' placeholder="Plant Type" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='plantFamily' placeholder="Plant Family" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='season' placeholder="Season" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='groundType' placeholder="Ground Type" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='daysConservation' placeholder="Days of conservation" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='description' placeholder="Description" value=""></h3>  
-                                    <h3 class="mb-0 text-primary"><input type="text" name='tblPlantSowing_idSowing' placeholder="tblPlantSowing_idSowing" value="0"></h3> 
-                                    <h3 class="mb-0 text-primary"><input type="submit" name='submit' placeholder="Submit"></h3>                                     
+                                    <h3 class="mb-3"><input type="text" name='plantName' placeholder="Plant Name" value=""></h3>
+                                    <h3 class="mb-3"><input type="text" name='plantType' placeholder="Plant Type" value=""></h3>
+                                    <h3 class="mb-3"><input type="text" name='plantFamily' placeholder="Plant Family" value=""></h3>
+                                    <h3 class="mb-3"><input type="text" name='plantSeason' placeholder="Plant Season" value=""></h3>
+                                    <h3 class="mb-3"><input type="text" name='plantGroundType' placeholder="Plant Ground Type" value=""></h3>
+                                    <h3 class="mb-3"><input type="text" name='plantdaysConservation' placeholder="Days of conservation" value=""></h3>
+                                    <h3 class="mb-3"><input type="text" name='plantDescription' placeholder="Plant Description" value=""></h3>  
+                                    <h3 class="mb-3"><input type="text" name='plantState' placeholder="Plant State" value=""></h3>
+                                    <h3 class="mb-3"><input type="text" name='plantDifficulty' placeholder="Plant Difficulty" value=""></h3>
+                                    <h3 class="mb-3"><input type="text" name='lifeTime' placeholder="Life Time" value=""></h3>
+                                    <h3 class="mb-3"><input type="text" name='plantBestNeighbor' placeholder="Plant Best Neighbor" value=""></h3>  
+                                    <h3 class="mb-3"><input type="submit" name='submit' placeholder="Submit"></h3>                                     
                                 </div>
                             </div>
                         </div>

@@ -113,7 +113,7 @@ class ControllerEdit extends Controller
     {
         $favorableCondition = FavorableConditionDate::find($idCondition);
 
-        return view('editFavCondDate', ["favorableCondition" => $idCondition]);
+        return view('editFavCondDate', ["favorableCondition" => $favorableCondition]);
     }
 
     public function editFavCondDateSent(Request $request, $idCondition)
