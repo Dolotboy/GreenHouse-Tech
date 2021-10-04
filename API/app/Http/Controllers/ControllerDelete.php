@@ -14,7 +14,7 @@ use Exception;
 class ControllerDelete extends Controller
 {
     public function indexPlant()
-    {
+    { 
         return view('deletePlant');
     }
 

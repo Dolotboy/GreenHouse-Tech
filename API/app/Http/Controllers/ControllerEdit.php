@@ -29,9 +29,14 @@ class ControllerEdit extends Controller
         return view('editSearchProfile');
     }
 
-    public function indexFavCondition(Request $request)
+    public function indexFavCondDate(Request $request)
     {
-        return view('editSearchFavCondition');
+        return view('editSearchFavCondDate');
+    }
+
+    public function indexFavCondNb(Request $request)
+    {
+        return view('editSearchFavCondNb');
     }
 
     public function editPlant(Request $request, $idPlant)
@@ -62,59 +67,79 @@ class ControllerEdit extends Controller
 
     public function editProblem(Request $request, $idProblem)
     {
-        $request =  json_decode(file_get_contents('php://input'));
-
         $problem = Problem::find($idProblem);
 
-        $problem->typeProblem = $request->typeProblem;
-        $problem->importanceLvl = $request->importanceLvl;
-        $problem->description = $request->description;
+        return view('editProblem', ["problem" => $problem]);
+    }
+
+    public function editProblemTest(Request $request, $idProblem)
+    {
+        $problem = Problem::find($idProblem);
+
+        $problem->typeProblem = $request->input("typeProblem");
+        $problem->importanceLvl = $request->input("importanceLvl");
+        $problem->description = $request->input("description");
 
         $problem->save();
 
-        return ("Le problème#$problem->id a été modifié");
+        return("Problem has been successfully modified");
+        //return ("Le problème #$problem->id a été modifié");
     }
 
     public function editProfile(Request $request, $idProfile)
     {
-        $request =  json_decode(file_get_contents('php://input'));
-
         $profile = Profile::find($idProfile);
 
-        $profile->email = $request->email;
-        $profile->username = $request->username;
-        $profile->firstName = $request->firstName;
-        $profile->lastName = $request->lastName;
+        return view('editProfile', ["profile" => $profile]);
+    }
+
+    public function editProfileTest(Request $request, $idProfile)
+    {
+        $profile = Profile::find($idProfile);
+
+        $profile->email = $request->input("email");
+        $profile->username = $request->input("password");
+        $profile->username = $request->input("username");
+        $profile->firstName = $request->input("firstName");
+        $profile->lastName = $request->input("lastName");
 
         $profile->save();
 
-        return ("Le profile#$profile->id a été modifié");
+        return("Profile has been successfully modified");
+        //return ("Le profile #$profile->id a été modifié");
     }
 
-    public function editFavCondition($type, $idCondition)
+    public function editFavCondDate(Request $request, $idCondition)
     {
-        $request =  json_decode(file_get_contents('php://input'));
+        $favorableCondition = FavorableConditionDate::find($idCondition);
 
-        if ($type == 1)
-        {
-            $favorableCondition = FavorableConditionDate::find($idCondition);
+        return view('editFavCondDate', ["favorableCondition" => $idCondition]);
+    }
 
-            $favorableCondition->rangeType = $request->rangeType;
-            $favorableCondition->begin = $request->begin;
-            $favorableCondition->end = $request->end;
-        }
-        else if ($type == 2)
-        {
-            $favorableCondition = FavorableConditionNb::find($idCondition);
+    public function editFavCondDateSent(Request $request, $idCondition)
+    {
+        $favorableCondition = FavorableConditionDate::find($idCondition);
 
-            $favorableCondition->rangeType = $request->rangeType;
-            $favorableCondition->min = $request->min;
-            $favorableCondition->max = $request->max;
-            $favorableCondition->unit = $request->unit;
-        }
-        
+        $favorableCondition->rangeType = $request->input("rangeType");
+        $favorableCondition->begin = $request->input("begin");
+        $favorableCondition->end = $request->input("end");
+
         $favorableCondition->save();
 
-        return ("La condition favorable a été sauvegardé");
+        return("Fav Cond Date have been modified");
+    }
+
+    public function editFavCondNb(Request $request,$idCondition)
+    {
+        $favorableCondition = FavorableConditionNb::find($idCondition);
+
+        $favorableCondition->rangeType = $request->input("rangeType");
+        $favorableCondition->min = $request->input("min");
+        $favorableCondition->max = $request->input("max");
+        $favorableCondition->unit = $request->input("unit");
+
+        $favorableCondition->save();
+
+        return("Fav Cond Nb have been modified");
     }
 }
