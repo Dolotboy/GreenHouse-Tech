@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class FavorableConditionNb extends Model
 {
-    protected $table = 'tblNbRangeFav';
+    protected $table = 'tblRangeNb';
     protected $primaryKey = 'idRangeNb';
 
     public function plants()
     {
-        return $this->belongsToMany(Plant::class, 'tblPlant_tblNbRangeFav', 'tblPlant_idPlant', 'tblNbRangeFav_idRangeNb');
+        return $this->belongsToMany(Plant::class, 'tblPlant_tblRangeNb', 'tblPlant_idPlant', 'tblRangeNb_idRangeNb');
     }
 }

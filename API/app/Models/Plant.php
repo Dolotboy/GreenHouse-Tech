@@ -17,11 +17,11 @@ class Plant extends Model
 
     public function plantFavConditionDate()
     {
-        return $this->belongsToMany(FavorableConditionDate::class, 'tblPlant_tblDateRangeFav', 'tblPlant_idPlant', 'tblDateRangeFav_idRangeDate');
+        return $this->belongsToMany(FavorableConditionDate::class, 'tblPlant_tblRangeDate', 'tblPlant_idPlant', 'tblRangeDate_idRangeDate');
     }
 
     public function plantFavConditionNb()
     {
-        return $this->belongsToMany(FavorableConditionNb::class, 'tblPlant_tblNbRangeFav', 'tblPlant_idPlant', 'tblNbRangeFav_idRangeNb');
+        return $this->belongsToMany(FavorableConditionNb::class, 'tblPlant_tblRangeNb', 'tblPlant_idPlant', 'tblRangeNb_idRangeNb');
     }
 }

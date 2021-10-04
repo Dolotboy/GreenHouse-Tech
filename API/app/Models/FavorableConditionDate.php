@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class FavorableConditionDate extends Model
 {
-    protected $table = 'tblDateRangeFav';
+    protected $table = 'tblRangeDate';
     protected $primaryKey = 'idRangeDate';
 
     public function plants()
     {
-        return $this->belongsToMany(Plant::class, 'tblPlant_tblDateRangeFav', 'tblPlant_idPlant', 'tblDateRangeFav_idRangeDate');
+        return $this->belongsToMany(Plant::class, 'tblPlant_tblRangeDate', 'tblPlant_idPlant', 'tblRangeDate_idRangeDate');
     }
 }

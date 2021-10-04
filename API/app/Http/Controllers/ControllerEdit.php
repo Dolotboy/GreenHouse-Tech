@@ -28,11 +28,14 @@ class ControllerEdit extends Controller
         $plant->plantName = $request->plantName;
         $plant->plantType = $request->plantType;
         $plant->plantFamily = $request->plantFamily;
-        $plant->season = $request->season;
-        $plant->groundType = $request->groundType;
-        $plant->daysConservation = $request->daysConservation;
-        $plant->description = $request->description;
-        $plant->tblPlantSowing_idSowing = $request->tblPlantSowing_idSowing;
+        $plant->plantSeason = $request->plantSeason;
+        $plant->plantGroundType = $request->plantGroundType;
+        $plant->plantDaysConservation = $request->plantDaysConservation;
+        $plant->plantDescription = $request->plantDescription;
+        $plant->plantState = $request->plantState;
+        $plant->plantDifficulty = $request->plantDifficulty;
+        $plant->plantLifeTime = $request->plantLifeTime;
+        $plant->plantBestNeighbor = $request->plantBestNeighbor;
 
         $plant->save();
 
@@ -52,9 +55,9 @@ class ControllerEdit extends Controller
 
         $problem = Problem::find($idProblem);
 
-        $problem->typeProblem = $request->typeProblem;
+        $problem->problemType = $request->problemType;
         $problem->importanceLvl = $request->importanceLvl;
-        $problem->description = $request->description;
+        $problem->problemSolution = $request->problemSolution;
 
         $problem->save();
 
@@ -75,9 +78,9 @@ class ControllerEdit extends Controller
         $profile = Profile::find($idProfile);
 
         $profile->email = $request->email;
-        $profile->username = $request->username;
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
+        $profile->access = $request->access;
 
         $profile->save();
 
@@ -99,15 +102,16 @@ class ControllerEdit extends Controller
         {
             $favorableCondition = FavorableConditionDate::find($idCondition);
 
-            $favorableCondition->rangeType = $request->rangeType;
-            $favorableCondition->begin = $request->begin;
+            $favorableCondition->type = $request->type;
+            $favorableCondition->start = $request->start;
             $favorableCondition->end = $request->end;
+            $favorableCondition->location = $request->location;
         }
         else if ($type == 2)
         {
             $favorableCondition = FavorableConditionNb::find($idCondition);
 
-            $favorableCondition->rangeType = $request->rangeType;
+            $favorableCondition->type = $request->type;
             $favorableCondition->min = $request->min;
             $favorableCondition->max = $request->max;
             $favorableCondition->unit = $request->unit;
