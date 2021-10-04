@@ -13,17 +13,7 @@ class BdV2 extends Migration
      */
     public function up()
     {
-        Schema::create('tblPlant', function (Blueprint $table) {
-            $table->bigIncrements('idPlant');
-            $table->longText('imgPlant');
-            $table->string('plantName');
-            $table->string('plantType');
-            $table->string('plantFamily');
-            $table->string('season');
-            $table->string('groundType');
-            $table->integer('daysConservation');
-            $table->longText('description');
-            $table->integer('tblPlantSowing_idSowing'); // Foreign à tblPlantSowing
+        Schema::table('tblPlant', function (Blueprint $table) {
             $table->string('plantState');
             $table->string('equipment');
             $table->integer('difficulty');
@@ -32,33 +22,17 @@ class BdV2 extends Migration
             $table->timestamps();
         });
 
-        Schema::create('tblProblem', function (Blueprint $table) {
-            $table->bigIncrements('idProblem');
+        Schema::table('tblProblem', function (Blueprint $table) {
             $table->string('imgProblem');
-            $table->string('typeProblem');
-            $table->integer('importanceLvl');
-            $table->string('description');
-            $table->timestamps();
         });
 
-        Schema::create('tblProfile', function (Blueprint $table) {
-            $table->bigIncrements('idProfile');
-            $table->string('email');
-            $table->binary('password');
-            $table->string('salt');
-            $table->string('firstName');
-            $table->string('lastName');
+        Schema::table('tblProfile', function (Blueprint $table) {
+            $table->dropColumn('username');
             $table->string('access');
-            $table->timestamps();
         });
 
-        Schema::create('tblDateRangeFav', function (Blueprint $table) {
-            $table->bigIncrements('idRangeDate');
-            $table->string('rangeType');
-            $table->date('begin');
-            $table->date('end'); 
+        Schema::table('tblDateRangeFav', function (Blueprint $table) {
             $table->string('location');
-            $table->timestamps();
         });
     }
 

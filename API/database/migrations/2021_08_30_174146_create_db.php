@@ -24,7 +24,6 @@ class CreateDb extends Migration
             $table->integer('daysConservation');
             $table->longText('description');
             $table->integer('tblPlantSowing_idSowing'); // Foreign à tblPlantSowing
-            $table->timestamps();
         });
 
         Schema::create('tblPlantSowing', function (Blueprint $table) {
@@ -65,7 +64,7 @@ class CreateDb extends Migration
         Schema::create('tblProfile', function (Blueprint $table) {
             $table->bigIncrements('idProfile');
             $table->string('email');
-            $table->binary('password');
+            $table->string('password');
             $table->string('salt');
             $table->string('username');
             $table->string('firstName');

@@ -10,6 +10,8 @@ use App\Models\Favorite;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class ControllerAdd extends Controller
 {
@@ -20,8 +22,6 @@ class ControllerAdd extends Controller
 
     public function addPlant(Request $request)
     {
-        $request =  json_decode(file_get_contents('php://input'));
-
         $plant = new Plant();
 
         $plant->imgPlant = $request->imgPlant;
@@ -53,8 +53,6 @@ class ControllerAdd extends Controller
 
     public function addProblem(Request $request)
     {
-        $request =  json_decode(file_get_contents('php://input'));
-
         $problem = new Problem();
 
         $problem->imgProblem = $request->imgProblem;
@@ -95,13 +93,17 @@ class ControllerAdd extends Controller
 
     public function addProfile(Request $request)
     {
-        $request =  json_decode(file_get_contents('php://input'));
-
         $profile = new Profile();
+        $salt = Str::random(40);
 
         $profile->email = $request->email;
-        $profile->password = $request->password;
-        $profile->salt = Hash::make($request->password);
+        $hashedPassword = $request->password . $salt;
+
+        $profile->password = Hash::make($hashedPassword);
+        //$profile->password = $request->password;
+        //$profile->password = Hash::make($request->password);
+        $profile->salt = $salt;
+
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
         $profile->access = $request->access;
