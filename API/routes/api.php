@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ControllerAdd;
 use App\Http\Controllers\ControllerEdit;
 use App\Http\Controllers\ControllerDetail;
@@ -21,13 +21,15 @@ Route::post('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('ad
 Route::post('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlantTest'],function ($idPlant){})->name('editPlantTest');
 Route::get('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlant');
 
-//Route::middleware(['cors'])->group(function () { Route::get("search/plant/{id}", [ControllerDetail::class, 'searchPlant'],function ($id){})->name('detailPlant'); });
-
 Route::get("search/plant/{idPlant}", [ControllerDetail::class, 'searchPlant'],function ($idPlant){})->name('detailPlant');
 
 Route::get("searchAll/plant", [ControllerDetail::class, 'searchAllPlant'],function (){})->name('detailAllPlant');
 
 Route::delete("/delete/plant/{idPlant}", [ControllerDelete::class, 'deletePlant'],function ($idPlant){})->name('deletePlant');
+
+Route::get("searchAll/plant/families", [ControllerDetail::class, 'searchAllFamilies'],function (){})->name('searchAllFamilies');
+
+Route::get("searchAll/plant/difficulties", [ControllerDetail::class, 'searchAllDifficulties'],function (){})->name('searchAllDifficulties');
 
 // ***************** PLANT *******************
 
@@ -106,7 +108,8 @@ Route::get('/new/condition/addFavCondNb', [ControllerAdd::class, 'addFavConditio
 
 Route::put('/edit/condition/editFavCondNb/{idCondition}', [ControllerEdit::class, 'editFavConditionNb'],function ($type, $idCondition){})->name('editFavConditionNb');
 
-Route::get("search/condition/{type}/{idCondition}", [ControllerDetail::class, 'searchFavConditionNb'],function ($type, $idCondition){})->name('searchFavConditionNb');
+//Route::get("search/condition/{type}/{idCondition}", [ControllerDetail::class, 'searchFavConditionNb'],function ($type, $idCondition){})->name('searchFavConditionNb');
+Route::get("search/condition/{type}/{idCondition}", [ControllerDetail::class, 'searchFavCondition'],function ($type, $idCondition){})->name('detailFavCondition');
 
 //Route::get("searchAll/condition/{type}", [ControllerDetail::class, 'searchAllFavCondition'],function ($type){})->name('detailAllFavCondition');
 
@@ -122,5 +125,14 @@ Route::get('/unassign/condition/nb/{idPlant}/{idCondition}', [ControllerUnassign
 // ***************** PACKAGE *******************
 
 Route::get("search/package/{searchCondition}", [ControllerDetail::class, 'searchPackage'],function ($searchCondition){})->name('searchPackage');
+Route::get("searchAll/package/", [ControllerDetail::class, 'searchAllPackages'],function (){})->name('searchAllPackage');
 
 // ***************** PACKAGE *******************
+
+// ******************* VERSION *******************
+
+Route::get("search/last/version", [Controller::class, 'searchLastVersion'])->name('searchLastVersion');
+
+Route::post("increment/last/version", [Controller::class, 'incrementVersion'])->name('incrementVersion');
+
+// ******************* VERSION *******************

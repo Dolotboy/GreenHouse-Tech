@@ -15,9 +15,13 @@ namespace OutilImportation
 
         static void Main(string[] args)
         {
+            string bd = "u882331052_apitestenv";
+            if (args.Length > 0)
+                bd = "u882331052_wiki";
+
             List<Vegetal> veggies = new List<Vegetal>();
             LoadVeggies(veggies);
-            SaveFiles(veggies);
+            SaveFiles(veggies, bd);
             string jsonTest = CreateTestJson(veggies);
             SaveTestJson(jsonTest);
         }
@@ -29,8 +33,11 @@ namespace OutilImportation
             Excel.Worksheet ws = (Excel.Worksheet)wb.Sheets[1];
             Excel.Range range = ws.UsedRange;
 
-            for (int i = 2; i < 6; i++)
+            for (int i = 2; i < 1000; i++)
             {
+                if (ConvertCellToString(range.Cells[i, 1]) == "")
+                    break;
+
                 Vegetal veg = new Vegetal()
                 {
                     Name = ConvertCellToString(range.Cells[i, 1]),
@@ -46,7 +53,9 @@ namespace OutilImportation
                     Comment = ConvertCellToString(range.Cells[i, 11]),
                     GroundType = ConvertCellToString(range.Cells[i, 12]),
                     ConservationDays = ConvertCellToString(range.Cells[i, 13]),
-                    Type = ConvertCellToString(range.Cells[i, 14])
+                    Type = ConvertCellToString(range.Cells[i, 14]),
+                    PHMin = ConvertCellToString(range.Cells[i,15]),
+                    PHMax = ConvertCellToString(range.Cells[i,16])
                 };
                 veggies.Add(veg);
                 if (i % 5 == 0)
@@ -60,12 +69,14 @@ namespace OutilImportation
         {
             if (cell.Value == null)
                 return "";
-            return cell.Value.ToString();
+            return cell.Value.ToString().Replace("\'", "\'\'");
         }
 
-        static void SaveFiles(List<Vegetal> veggies)
+        static void SaveFiles(List<Vegetal> veggies, string bd)
         {
+
             StreamWriter writer = new StreamWriter(baseDir + "statements.txt");
+            writer.WriteLine($"USE {bd};");
             foreach (Vegetal veg in veggies)
                 writer.WriteLine(veg.ToString());
             writer.Close();

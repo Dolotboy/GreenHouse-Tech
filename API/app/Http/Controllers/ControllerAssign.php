@@ -59,6 +59,8 @@ class ControllerAssign extends Controller
 
         $assignProblem->save();
 
+        Controller::incrementVersion();
+
         return ("Le problème a été assigné");
     }
 }

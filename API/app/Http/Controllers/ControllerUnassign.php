@@ -30,7 +30,6 @@ class ControllerUnassign extends Controller
                         ['tblPlant_idPlant', '=', $idPlant],
                         ['tblDateRangeFav_idRangeDate', '=', $idCondition],
                     ])->delete();
-                    //AssignProblem::destroy([$idPlant, $idProblem]);
                     return ("Assignation deleted !");
                 }
                 catch(Exception $e)
@@ -57,7 +56,6 @@ class ControllerUnassign extends Controller
                         ['tblPlant_idPlant', '=', $idPlant],
                         ['tblNbRangeFav_idRangeNb', '=', $idCondition],
                     ])->delete();
-                    //AssignProblem::destroy([$idPlant, $idProblem]);
                     return ("Assignation deleted !");
                 }
                 catch(Exception $e)
@@ -66,6 +64,8 @@ class ControllerUnassign extends Controller
                 }
             }
         }
+
+        Controller::incrementVersion();
     }
 
     public function unassignProblem($idPlant, $idProblem)
@@ -86,7 +86,6 @@ class ControllerUnassign extends Controller
                     ['tblPlant_idPlant', '=', $idPlant],
                     ['tblProblem_idProblem', '=', $idProblem],
                 ])->delete();
-                //AssignProblem::destroy([$idPlant, $idProblem]);
                 return ("Assignation deleted !");
             }
             catch(Exception $e)
@@ -94,5 +93,7 @@ class ControllerUnassign extends Controller
                 return('Error while deleting'.$e);
             }
         }
+
+        Controller::incrementVersion();
     }
 }
