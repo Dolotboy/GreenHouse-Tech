@@ -174,7 +174,7 @@ class ControllerDetail extends Controller
         return view('');
     }
 
-    public function searchAllFamilies()
+    public function searchAllPlantFamilies()
     {
         $families = Plant::select('plantFamily')->groupBy('plantFamily')->get();
 
@@ -183,11 +183,20 @@ class ControllerDetail extends Controller
         return $json;
     }
 
-    public function searchAllDifficulties()
+    public function searchAllPlantDifficulties()
     {
         $difficulties = Plant::select('plantDifficulty')->groupBy('plantDifficulty')->get();
 
         $json = json_encode($difficulties);
+
+        return $json;
+    }
+
+    public function searchAllPlantTypes()
+    {
+        $types = Plant::select('plantType')->groupBy('plantType')->get();
+
+        $json = json_encode($types);
 
         return $json;
     }

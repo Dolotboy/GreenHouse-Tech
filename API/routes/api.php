@@ -27,9 +27,11 @@ Route::get("searchAll/plant", [ControllerDetail::class, 'searchAllPlant'],functi
 
 Route::delete("/delete/plant/{idPlant}", [ControllerDelete::class, 'deletePlant'],function ($idPlant){})->name('deletePlant');
 
-Route::get("searchAll/plant/families", [ControllerDetail::class, 'searchAllFamilies'],function (){})->name('searchAllFamilies');
+Route::get("searchAll/plant/families", [ControllerDetail::class, 'searchAllPlantFamilies'],function (){})->name('searchAllPlantFamilies');
 
-Route::get("searchAll/plant/difficulties", [ControllerDetail::class, 'searchAllDifficulties'],function (){})->name('searchAllDifficulties');
+Route::get("searchAll/plant/difficulties", [ControllerDetail::class, 'searchAllPlantDifficulties'],function (){})->name('searchAllPlantDifficulties');
+
+Route::get("searchAll/plant/types", [ControllerDetail::class, 'searchAllPlantTypes'],function (){})->name('searchAllPlantTypes');
 
 // ***************** PLANT *******************
 
