@@ -82,7 +82,6 @@ export default {
         this.searchBarValue = event.detail;
         this.filterData();
       });
-      console.log(this.plants);
     },
     getAllStrings(plantType){
       let strings = [];

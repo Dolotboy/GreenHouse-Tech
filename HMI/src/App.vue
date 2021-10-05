@@ -31,8 +31,8 @@ export default {
   },
   data(){
       return{
-          envBack : "http://localhost:8000/",
-          env : "https://apitestenv.pcst.xyz/",
+          env : "http://localhost:8000/",
+          envBack : "https://apitestenv.pcst.xyz/",
           plants : [],
           showLogin : false,
           showRegister : false,
@@ -76,7 +76,7 @@ export default {
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
       for(let i = 0; i < this.plants.length; i++){
-        entrepot.add(toolbox.GeneratePackage(this.plants[i]));
+        entrepot.add(toolbox.GenerateObject(this.plants[i]));
       }
     },
     GetApiVersion(url){

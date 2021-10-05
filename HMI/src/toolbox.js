@@ -49,59 +49,6 @@ exports.ClearDb = (db) =>{
     }
 }
 
-exports.GeneratePlant = (proxyPlant) => {
-    return {
-        plantType : proxyPlant.plantType,
-        daysConservation : proxyPlant.daysConservation,
-        description : proxyPlant.description,
-        groundType : proxyPlant.groundType,
-        idPlant : proxyPlant.idPlant,
-        imgPlant : proxyPlant.imgPlant,
-        plantName : proxyPlant.plantName,
-        season : proxyPlant.season,
-        tblPlantSowing_idSowing : proxyPlant.tblPlantSowing_idSowing
-    };
-}
-
-exports.GeneratePackage = (proxyPackage) => {
-    console.log("Package : " + JSON.stringify(proxyPackage));
-    console.log("Problems :" + proxyPackage.favorableConditions);
-     return{
-            idPlant : proxyPackage.idPlant,
-            imgPlant : proxyPackage.imgPlant,
-            plantName : proxyPackage.plantName,
-            plantType : proxyPackage.plantType,
-            plantFamily : proxyPackage.plantFamily,
-            season : proxyPackage.season,
-            groundType : proxyPackage.groundType,
-            daysConservation : proxyPackage.daysConservation,
-            description : proxyPackage.description,
-            favorableConditions : this.favorableConditions(proxyPackage.favorableConditions),
-            //problems : proxyPackage.problems,
-            favorableConditionDate : this.favorableConditionsDate(proxyPackage.favorableConditionDate)
-     };
-}
-
-exports.favorableConditionsDate = (proxyProblems) => {
-    let dateRanges = [];
-    for(let i = 0; i < proxyProblems.length; i++){
-        let dateRange = Object;
-        dateRange.idRangeDate = proxyProblems[i];
-        dateRange.rangeType = proxyProblems[i];
-        dateRanges.push(dateRange);
-    }
-    return dateRanges;
-}
-
-exports.favorableConditions = (proxyFavorableConditions) => {
-    let favorableConditions = [];
-    for(let i = 0; i < proxyFavorableConditions.length; i++){
-        let favorableCondition = Object;
-        favorableCondition.type = proxyFavorableConditions[i].type,
-        favorableCondition.min = proxyFavorableConditions[i].min,
-        favorableCondition.max = proxyFavorableConditions[i].max,
-        favorableCondition.unit = proxyFavorableConditions[i].unit
-        favorableConditions.push(favorableCondition);
-    }
-    return favorableConditions;
+exports.GenerateObject = (proxy) => {
+    return JSON.parse(JSON.stringify(proxy));
 }
