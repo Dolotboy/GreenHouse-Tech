@@ -29,6 +29,8 @@ Route::delete("/delete/plant/{idPlant}", [ControllerDelete::class, 'deletePlant'
 
 Route::get("searchAll/plant/families", [ControllerDetail::class, 'searchAllFamilies'],function (){})->name('searchAllFamilies');
 
+Route::get("searchAll/plant/difficulties", [ControllerDetail::class, 'searchAllDifficulties'],function (){})->name('searchAllDifficulties');
+
 // ***************** PLANT *******************
 
 // ***************** PROBLEM *******************

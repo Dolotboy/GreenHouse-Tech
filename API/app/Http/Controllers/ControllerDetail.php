@@ -182,4 +182,13 @@ class ControllerDetail extends Controller
 
         return $json;
     }
+
+    public function searchAllDifficulties()
+    {
+        $difficulties = Plant::select('plantDifficulty')->groupBy('plantDifficulty')->get();
+
+        $json = json_encode($difficulties);
+
+        return $json;
+    }
 }
