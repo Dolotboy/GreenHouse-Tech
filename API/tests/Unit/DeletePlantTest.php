@@ -6,18 +6,19 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class UserTest extends TestCase
+class DeletePlantTest extends TestCase
 {
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    /*
     public function test_example()
     {
-        $response = $this->get('/');
+        $data = Plant::find(1);
+        $dataEncode = json_encode($data);
+        $donneApi = Http::acceptJson()->get('/delete/plant/1');
 
-        $response->assertStatus(200);
-    }*/
+        $this->assertEquals($dataEncode,$donneApi);
+    }
 }

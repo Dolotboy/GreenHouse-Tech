@@ -20,19 +20,19 @@ class ControllerAdd extends Controller
 
     public function addPlant(Request $request)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         $plant = new Plant();
 
-        $plant->imgPlant = $request->imgPlant;
+        $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
-        $plantType = $request->plantType;
-        $plantFamily = $request->plantFamily;
-        $plant->season = $request->season;
-        $plant->groundType = $request->groundType;
-        $plant->daysConservation = $request->daysConservation;
-        $plant->description = $request->description;
-        $plant->tblPlantSowing_idSowing = $request->tblPlantSowing_idSowing;
+        $plant->plantType = $request->plantType;
+        $plant->plantFamily = $request->plantFamily;
+        $plant->plantSeason = $request->plantSeason;
+        $plant->plantGroundType = $request->plantGroundType;
+        $plant->plantDaysConservation = $request->plantDaysConservation;
+        $plant->plantDescription = $request->plantDescription;
+        $plant->plantDifficulty = $request->plantDifficulty;
+        $plant->plantBestNeighbor = $request->plantBestNeighbor;
         
         $plant->save();
 
@@ -46,13 +46,12 @@ class ControllerAdd extends Controller
 
     public function addProblem(Request $request)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         $problem = new Problem();
 
-        $problem->typeProblem = $request->typeProblem;
-        $problem->importanceLvl = $request->importanceLvl;
-        $problem->description = $request->description;
+        $problem->problemName = $request->problemName;
+        $problem->problemType = $request->problemType;
+        $problem->problemSolution = $request->problemSolution;
         
         $problem->save();
 
@@ -83,14 +82,12 @@ class ControllerAdd extends Controller
 
     public function addProfile(Request $request)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         $profile = new Profile();
 
         $profile->email = $request->email;
         $profile->password = $request->password;
         $profile->salt = Hash::make($request->password);
-        $profile->username = $request->username;
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
         
@@ -106,21 +103,21 @@ class ControllerAdd extends Controller
 
     public function addFavCondition(Request $request, $type)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         if ($type == 1)
         {
             $favorableCondition = new FavorableConditionDate();
 
-            $favorableCondition->rangeType = $request->rangeType;
-            $favorableCondition->begin = $request->begin;
+            $favorableCondition->type = $request->type;
+            $favorableCondition->start = $request->start;
             $favorableCondition->end = $request->end;
+            $favorableCondition->location = $request->location;
         }
         else if ($type == 2)
         {
             $favorableCondition = new FavorableConditionNb();
 
-            $favorableCondition->rangeType = $request->rangeType;
+            $favorableCondition->type = $request->type;
             $favorableCondition->min = $request->min;
             $favorableCondition->max = $request->max;
             $favorableCondition->unit = $request->unit;
