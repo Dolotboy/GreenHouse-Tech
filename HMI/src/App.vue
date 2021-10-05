@@ -54,7 +54,7 @@ export default {
     async Initialisation(){
       let version = localStorage.getItem('apiVersion');
       let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
-      this.plants = this.GetAllPlants(this.env + "api/searchAll/plant");
+      this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
 
       if(version == undefined || version != apiVersion){
         await this.ClearDb();
@@ -71,12 +71,12 @@ export default {
       toolbox.ClearDb(db);
     },
     async DownloadContent(){
-      this.plants = await this.GetAllPlants(this.env + "api/searchAll/plant");
+      this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
       let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
       for(let i = 0; i < this.plants.length; i++){
-        entrepot.add(toolbox.GeneratePlant(this.plants[i]));
+        entrepot.add(toolbox.GenerateObject(this.plants[i]));
       }
     },
     GetApiVersion(url){
@@ -92,8 +92,9 @@ export default {
       $.get(url, function(donnees, status){
         let json = JSON.parse(donnees);
         let plants = [];
-        for(let i = 0; i< json.length; i++)
+        for(let i = 0; i< json.length; i++){
           plants.push(json[i]);
+        }
         resolve(plants);
       })
     })

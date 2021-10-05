@@ -49,16 +49,6 @@ exports.ClearDb = (db) =>{
     }
 }
 
-exports.GeneratePlant = (proxyPlant) => {
-    return {
-        plantType : proxyPlant.plantType,
-        daysConservation : proxyPlant.daysConservation,
-        description : proxyPlant.description,
-        groundType : proxyPlant.groundType,
-        idPlant : proxyPlant.idPlant,
-        imgPlant : proxyPlant.imgPlant,
-        plantName : proxyPlant.plantName,
-        season : proxyPlant.season,
-        tblPlantSowing_idSowing : proxyPlant.tblPlantSowing_idSowing
-    };
+exports.GenerateObject = (proxy) => {
+    return JSON.parse(JSON.stringify(proxy));
 }
