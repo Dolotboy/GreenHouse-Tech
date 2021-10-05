@@ -64,6 +64,8 @@ exports.GeneratePlant = (proxyPlant) => {
 }
 
 exports.GeneratePackage = (proxyPackage) => {
+    console.log("Package : " + JSON.stringify(proxyPackage));
+    console.log("Problems :" + proxyPackage.favorableConditions);
      return{
             idPlant : proxyPackage.idPlant,
             imgPlant : proxyPackage.imgPlant,
@@ -74,8 +76,32 @@ exports.GeneratePackage = (proxyPackage) => {
             groundType : proxyPackage.groundType,
             daysConservation : proxyPackage.daysConservation,
             description : proxyPackage.description,
-            //favorableConditions : proxyPackage.favorableConditions,
+            favorableConditions : this.favorableConditions(proxyPackage.favorableConditions),
             //problems : proxyPackage.problems,
-            //dontKnow : proxyPackage.dontKnow
+            favorableConditionDate : this.favorableConditionsDate(proxyPackage.favorableConditionDate)
      };
+}
+
+exports.favorableConditionsDate = (proxyProblems) => {
+    let dateRanges = [];
+    for(let i = 0; i < proxyProblems.length; i++){
+        let dateRange = Object;
+        dateRange.idRangeDate = proxyProblems[i];
+        dateRange.rangeType = proxyProblems[i];
+        dateRanges.push(dateRange);
+    }
+    return dateRanges;
+}
+
+exports.favorableConditions = (proxyFavorableConditions) => {
+    let favorableConditions = [];
+    for(let i = 0; i < proxyFavorableConditions.length; i++){
+        let favorableCondition = Object;
+        favorableCondition.type = proxyFavorableConditions[i].type,
+        favorableCondition.min = proxyFavorableConditions[i].min,
+        favorableCondition.max = proxyFavorableConditions[i].max,
+        favorableCondition.unit = proxyFavorableConditions[i].unit
+        favorableConditions.push(favorableCondition);
+    }
+    return favorableConditions;
 }

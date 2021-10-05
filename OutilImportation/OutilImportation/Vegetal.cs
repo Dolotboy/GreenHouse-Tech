@@ -28,7 +28,7 @@ namespace OutilImportation
 
         public override string ToString()
         {
-            string tblPlant = $"INSERT INTO tblPlant (plantName, groundType, daysConservation, description, plantType)" +
+            string tblPlant = $"INSERT INTO tblPlant (plantName, plantGroundType, plantDaysConservation, plantDescription, plantType)" +
                               $"VALUES ('{Name}','{GroundType}',{ConservationDays},'{Comment}', '{ Type }');";
             string temp = GetRangeNbQuery("'temperature'", TempMin, TempMax, "'°C'");
             string hum = GetRangeNbQuery("'humidity'", HumidityMin, HumidityMax, "'%'");
@@ -45,20 +45,20 @@ namespace OutilImportation
 
         private string GetRangeNbQuery(string type, string min, string max, string unit)
         {
-            const string tblName = "tblNbRangeFav";
-            return $"INSERT INTO {tblName} (rangeType, min, max, unit) VALUES ({type},{min},{max},{unit});";
+            const string tblName = "tblRangeNb";
+            return $"INSERT INTO {tblName} (type, min, max, unit) VALUES ({type},{min},{max},{unit});";
         }
 
         private string GetDeclareIdQuery(string idName, string id)
         {
-            const string tblName = "tblNbRangeFav";
+            const string tblName = "tblRangeNb";
             return $"SET @{idName} = (SELECT {id} FROM {tblName} ORDER BY {id} DESC LIMIT 1);";
         }
 
         private string GetForeignQuery(string idPlant, string idRange)
         {
-            const string tblName = "tblPlant_tblNbRangeFav";
-            return $"INSERT INTO {tblName} (tblPlant_idPlant, tblNbRangeFav_idRangeNb) " +
+            const string tblName = "tblPlant_tblRangeNb";
+            return $"INSERT INTO {tblName} (tblPlant_idPlant, tblRangeNb_idRangeNb) " +
                                     $"VALUES (@{idPlant}, @{idRange});";
         }
 

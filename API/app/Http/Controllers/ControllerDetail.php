@@ -140,7 +140,7 @@ class ControllerDetail extends Controller
         $jsons = array();
         for($i = 0; $i < count($plants); $i++){
             $json = ControllerDetail::searchPackage($plants[$i]->idPlant);
-            array_push($jsons,$json);
+            array_push($jsons,json_decode($json));
         }
         return json_encode($jsons);
     }
@@ -162,10 +162,10 @@ class ControllerDetail extends Controller
         $package = array_merge($array, $problems, $favConditions);
 
         $json = json_encode($package);
-
         $json = str_replace("\"0\":[", "\"problems\":[", $json);
-        $json = str_replace("\"1\":[", "\"dontKnow\":[", $json);
+        $json = str_replace("\"1\":[", "\"favorableConditionDate\":[", $json);
         $json = str_replace("\"2\":[", "\"favorableConditions\":[", $json);
+
         return $json;
     }
 

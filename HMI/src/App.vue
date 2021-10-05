@@ -31,8 +31,8 @@ export default {
   },
   data(){
       return{
-          env : "http://localhost:8000/",
-          envBack : "https://apitestenv.pcst.xyz/",
+          envBack : "http://localhost:8000/",
+          env : "https://apitestenv.pcst.xyz/",
           plants : [],
           showLogin : false,
           showRegister : false,
@@ -54,7 +54,7 @@ export default {
     async Initialisation(){
       let version = localStorage.getItem('apiVersion');
       let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
-      this.plants = this.GetAllPlants(this.env + "api/searchAll/package");
+      this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
 
       if(version == undefined || version != apiVersion){
         await this.ClearDb();
@@ -76,8 +76,6 @@ export default {
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
       for(let i = 0; i < this.plants.length; i++){
-        console.log(this.plants[i].plantName);
-        console.log("Download:" + toolbox.GeneratePackage(this.plants[i]));
         entrepot.add(toolbox.GeneratePackage(this.plants[i]));
       }
     },
@@ -94,9 +92,9 @@ export default {
       $.get(url, function(donnees, status){
         let json = JSON.parse(donnees);
         let plants = [];
-        for(let i = 0; i< json.length; i++)
+        for(let i = 0; i< json.length; i++){
           plants.push(json[i]);
-        console.log(plants);
+        }
         resolve(plants);
       })
     })
