@@ -24,7 +24,7 @@ class ControllerEdit extends Controller
 
         $plant = Plant::find($idPlant);
 
-        $plant->imgPlant = $request->imgPlant;
+        $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
         $plant->plantType = $request->plantType;
         $plant->plantFamily = $request->plantFamily;
@@ -32,9 +32,7 @@ class ControllerEdit extends Controller
         $plant->plantGroundType = $request->plantGroundType;
         $plant->plantDaysConservation = $request->plantDaysConservation;
         $plant->plantDescription = $request->plantDescription;
-        $plant->plantState = $request->plantState;
         $plant->plantDifficulty = $request->plantDifficulty;
-        $plant->plantLifeTime = $request->plantLifeTime;
         $plant->plantBestNeighbor = $request->plantBestNeighbor;
 
         $plant->save();
@@ -55,8 +53,8 @@ class ControllerEdit extends Controller
 
         $problem = Problem::find($idProblem);
 
+        $problem->problemName = $request->problemName;
         $problem->problemType = $request->problemType;
-        $problem->importanceLvl = $request->importanceLvl;
         $problem->problemSolution = $request->problemSolution;
 
         $problem->save();
