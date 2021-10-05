@@ -103,7 +103,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -112,66 +112,58 @@ export default {
   color: black;
 }
 
-nav > ul{
+nav{
   position : relative;
-}
+  & > ul{
+    position : relative;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #616161 ;
+    display: flex;
+    justify-content: center;
+  }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #616161 ;
-  display: flex;
-  justify-content: center;
-}
+  #LoginRegister {
+    position: absolute;
+    right: 0%;
+    top: 0%;
 
-#LoginRegister :hover{
-  color: white;
-  background-color: #8d4705;
-  cursor: pointer;
-}
+    &:hover{
+      color: white;
+      background-color: #8d4705;
+      cursor: pointer;
+    }
 
-#LoginRegister {
-  position: absolute;
-  right: 0%;
-  top: 0%;
-}
+    li{
+      list-style-type: none;
+      overflow: hidden;
+      color: white;
+      height: 100%;
+      padding: 10px 15px;
+      float: left;
+      border-right: 1px solid darkgrey;
+      border-left: 1px solid darkgrey;
 
-#LoginRegister li{
-  list-style-type: none;
-  overflow: hidden;
-  color: white;
-  height: 100%;
-  padding: 10px 15px;
-}
+      a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        padding: 10px 15px;
 
-li {
-  float: left;
-  border-right: 1px solid darkgrey;
-  border-left: 1px solid darkgrey; 
-}
-
-li a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  padding: 10px 15px;
-}
-
-li a:hover{
-  color: black;
-  background-color: #e6a800
-;
+        &:hover{
+          color: black;
+          background-color: #e6a800;
+        }
+      }
+    }
+  }
 }
 
 .active {
   background-color : #01B0D3;
-}
-
-nav{
-  position : relative;
 }
 
 

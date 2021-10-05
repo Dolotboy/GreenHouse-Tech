@@ -94,17 +94,18 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 body{
   background-color: #292929;
 }
 .logo{
   margin-top: 1%;
   height: 10vh;
-}
-.logo img{
-  max-height: 100%;
-  max-width: 100%;
+
+  img{
+    max-height: 100%;
+    max-width: 100%;
+  }
 }
 .productsGrid{
   color: #D2CCB1;
@@ -114,45 +115,41 @@ body{
   margin-top: 1%;
   background-color: #616161;
 }
-
 .plant:hover{
   background-color : #600404;
   cursor : pointer;
 }
-
 .rdPlantTypeWrapper{
   display : flex;
+  & > div{
+    display : flex;
+  }
 }
-
-.rdPlantTypeWrapper > div{
-  display : flex;
-}
-
 .autoCompleteForm{
   display : flex;
   justify-content: center;
-}
 
-.autocomplete{
-  display : flex;
-  position : relative;
-}
+  .autocomplete{
+    display : flex;
+    position : relative;
+  }
 
-.autocomplete-active{
-  background : blue;
-}
+  .autocomplete-active{
+    background : blue;
+  }
 
-.autocomplete > *{
-  width : 100%
-}
+  .autocomplete > *{
+    width : 100%
+  }
 
-#searchBarautocomplete-list{
-  position : absolute;
-  top : 100%;
-  background : white;
-}
+  #searchBarautocomplete-list{
+    position : absolute;
+    top : 100%;
+    background : white;
+  }
 
-#searchBarautocomplete-list:hover{
-  cursor : pointer;
+  #searchBarautocomplete-list:hover{
+    cursor : pointer;
+  }
 }
 </style>
