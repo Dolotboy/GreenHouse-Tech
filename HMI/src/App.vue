@@ -112,10 +112,18 @@ export default {
   color: black;
 }
 
+body{
+  font-size : 10pt;
+}
+
 nav{
   position : relative;
-  & > ul{
+
+  &> ul{
     position : relative;
+  }
+
+  ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -123,28 +131,11 @@ nav{
     background-color: #616161 ;
     display: flex;
     justify-content: center;
-  }
 
-  #LoginRegister {
-    position: absolute;
-    right: 0%;
-    top: 0%;
-
-    &:hover{
-      color: white;
-      background-color: #8d4705;
-      cursor: pointer;
-    }
-
-    li{
-      list-style-type: none;
-      overflow: hidden;
-      color: white;
-      height: 100%;
-      padding: 10px 15px;
+    li {
       float: left;
       border-right: 1px solid darkgrey;
-      border-left: 1px solid darkgrey;
+      border-left: 1px solid darkgrey; 
 
       a {
         display: block;
@@ -162,9 +153,33 @@ nav{
   }
 }
 
+#LoginRegister :hover{
+  color: white;
+  background-color: #8d4705;
+  cursor: pointer;
+}
+
+#LoginRegister {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+}
+
+#LoginRegister li{
+  list-style-type: none;
+  overflow: hidden;
+  color: white;
+  height: 100%;
+  padding: 10px 15px;
+}
+
 .active {
   background-color : #01B0D3;
 }
 
-
+@media screen and (max-width : 480px) {
+  body{
+    font-size : 6pt;
+  }
+}
 </style>

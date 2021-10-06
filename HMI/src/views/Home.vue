@@ -110,21 +110,30 @@ body{
 .productsGrid{
   color: #D2CCB1;
   display : grid;
-  grid-template-columns: 50% 50%;
-  width : 100%;
-  margin-top: 1%;
+  grid-template-columns : repeat(auto-fit, minmax(250px, 1fr));
+  width : 80%;
+  margin : 2vh 0 0 10%;
+}
+
+.plant{
   background-color: #616161;
+
+  &:hover{
+    background-color : #600404;
+    cursor : pointer;
+  }
 }
-.plant:hover{
-  background-color : #600404;
-  cursor : pointer;
-}
+
 .rdPlantTypeWrapper{
   display : flex;
+  justify-content : center;
+  margin : 2vh 0;
+
   & > div{
     display : flex;
   }
 }
+
 .autoCompleteForm{
   display : flex;
   justify-content: center;
@@ -151,5 +160,9 @@ body{
   #searchBarautocomplete-list:hover{
     cursor : pointer;
   }
+}
+
+@media screen and (max-width : 600px){
+  
 }
 </style>
