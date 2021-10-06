@@ -37,6 +37,7 @@ export default {
         lastName: "",
         email: "",
         password: "",
+        access: "user"
         };
     },
     methods : {
@@ -45,14 +46,26 @@ export default {
           firstName : this.firstName,
           lastName : this.lastName,
           email : this.email,
-          password : this.password
+          password : this.password,
+          access : this.access
         }
         return user;
       },
-
       postCreateUser(){
         let user = this.createUser();
-        $.post("http://localhost:8000/new/profile", JSON.stringify(user), status, "json");
+        console.log(JSON.stringify(user));
+        //$.post("https://apitestenv.pcst.xyz/api/new/profile/addProfile", JSON.stringify(user));
+        $.ajax({
+          url : 'http://apitestenv.pcst.xyz/api/new/profile/addProfile',
+          datatype: 'json',
+          contentType : 'application/json',
+          type: 'post',
+          data: JSON.stringify(user),
+          success: function()
+          {
+            alert("Inscription effectuée!"); 
+          }
+        });
       }
     }
 }

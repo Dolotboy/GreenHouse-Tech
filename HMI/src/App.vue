@@ -98,7 +98,7 @@ export default {
         resolve(plants);
       })
     })
-}
+    }
   }   
 }
 </script>
@@ -127,7 +127,7 @@ ul {
 }
 
 #LoginRegister :hover{
-  color: white;
+  color: #D2CCB1;
   background-color: #8d4705;
   cursor: pointer;
 }
@@ -141,7 +141,7 @@ ul {
 #LoginRegister li{
   list-style-type: none;
   overflow: hidden;
-  color: white;
+  color: #d8d5ca;
   height: 100%;
   padding: 10px 15px;
 }
@@ -154,7 +154,7 @@ li {
 
 li a {
   display: block;
-  color: white;
+  color: #d8d5ca;
   text-decoration: none;
   text-align: center;
   padding: 10px 15px;
