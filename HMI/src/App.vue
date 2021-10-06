@@ -56,8 +56,8 @@ export default {
         return;
       this.plants = [];
       
-      this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
-      //this.plants = await this.GetAllPlants("http://localhost:8000/api/searchAll/plant");
+      //this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
+      this.plants = await this.GetAllPlants("http://10.10.81.171:8000/api/searchAll/plant");
       //this.plants = await this.GetAllPlants("http://apitestenv.pcst.xyz/api/searchAll/plant");
       
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
@@ -79,7 +79,7 @@ export default {
         resolve(plants);
       })
     })
-}
+    }
   }   
 }
 </script>
@@ -108,7 +108,7 @@ ul {
 }
 
 #LoginRegister :hover{
-  color: white;
+  color: #D2CCB1;
   background-color: #8d4705;
   cursor: pointer;
 }
@@ -122,7 +122,7 @@ ul {
 #LoginRegister li{
   list-style-type: none;
   overflow: hidden;
-  color: white;
+  color: #d8d5ca;
   height: 100%;
   padding: 10px 15px;
 }
@@ -135,7 +135,7 @@ li {
 
 li a {
   display: block;
-  color: white;
+  color: #d8d5ca;
   text-decoration: none;
   text-align: center;
   padding: 10px 15px;
