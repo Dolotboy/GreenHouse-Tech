@@ -20,11 +20,11 @@
         <label>Tous</label>
         <input type="radio" name="rdPlantType" value="vegetable" checked @click="radioValueChanged('All')">
       </div>
-  </div>
-    <div class="productsGrid">
-      <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in visiblePlants' :plant="plant"/>
     </div>
-    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
+    <div class="productsGrid">
+      <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in visiblePlants' :plant="plant"/>    
+    </div>
+    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
 </template>
 
 <script>
@@ -123,11 +123,15 @@ body{
     cursor : pointer;
   }
 }
-
 .rdPlantTypeWrapper{
-  display : flex;
-  justify-content : center;
+  display : inline-flex;
+  width: auto;
+  background: #616161;
+  color: #D2CCB1;
+  justify-content: center;
   margin : 2vh 0;
+  border: 1px solid;
+  border-radius: 5px;
 
   & > div{
     display : flex;

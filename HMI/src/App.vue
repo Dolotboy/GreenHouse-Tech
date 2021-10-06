@@ -98,7 +98,7 @@ export default {
         resolve(plants);
       })
     })
-}
+    }
   }   
 }
 </script>
@@ -154,7 +154,7 @@ nav{
 }
 
 #LoginRegister :hover{
-  color: white;
+  color: #D2CCB1;
   background-color: #8d4705;
   cursor: pointer;
 }
@@ -168,9 +168,28 @@ nav{
 #LoginRegister li{
   list-style-type: none;
   overflow: hidden;
-  color: white;
+  color: #d8d5ca;
   height: 100%;
   padding: 10px 15px;
+}
+
+li {
+  float: left;
+  border-right: 1px solid darkgrey;
+  border-left: 1px solid darkgrey; 
+}
+
+li a {
+  display: block;
+  color: #d8d5ca;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 15px;
+}
+
+li a:hover{
+  color: black;
+  background-color: #e6a800;
 }
 
 .active {
