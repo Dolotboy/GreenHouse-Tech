@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .details{
     position :absolute;
     top : 50%;
@@ -35,29 +35,33 @@ export default {
     width : 50vw;
     padding-left: 5%;
     padding-right: 5%;
-}
-.close-button {
-    position: absolute;
-    top: 1%;
-    right: 1%;
-    font-size: 30pt;
-}
-.close-button:hover{
-    cursor: pointer;
-    border:solid;
-    border-width: 1px;
-    border-color: grey;
-}
-.details h1{
-    font-size: 35px;
-}
-.detailsPlant > p{
-    font-size: 20px;
-    text-align: left;
-    margin:10px 0;
-}    
-.detailsPlant{
-    display: flex;
-    flex-direction: column;
+
+    h1{
+        font-size: 35px;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 1%;
+        right: 1%;
+        font-size: 30pt;
+
+        &:hover{
+            cursor: pointer;
+            border:solid;
+            border-width: 1px;
+            border-color: grey;
+        }
+    }
+    .detailsPlant{
+        display: flex;
+        flex-direction: column;
+
+        & > p{
+            font-size: 20px;
+            text-align: left;
+            margin:10px 0;
+        }    
+    }
 }
 </style>

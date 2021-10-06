@@ -25,7 +25,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .login{
     position : absolute;
     top : 50%;
@@ -38,23 +38,26 @@ export default {
     height: 75vh;
     padding-left: 5%;
     padding-right: 5%;
-}
-.close-button {
-    position: absolute;
-    top: 1%;
-    right: 1%;
-    font-size: 30pt;
-}
-.close-button:hover{
-    cursor: pointer;
-    border:solid;
-    border-width: 1px;
-    border-color: grey;
-}
-.login h1{
-    font-size: 50px;
-}
-.loginForm{
-  font-size: 32px;
+
+    h1{
+      font-size: 50px;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 1%;
+      right: 1%;
+      font-size: 30pt;
+
+      &:hover{
+        cursor: pointer;
+        border:solid;
+        border-width: 1px;
+        border-color: grey;
+      } 
+    }
+    .loginForm{
+      font-size: 32px;
+    }
 }
 </style>
