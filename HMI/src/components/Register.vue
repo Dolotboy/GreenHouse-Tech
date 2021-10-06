@@ -89,7 +89,7 @@ export default {
     position: absolute;
     top: 1%;
     right: 1%;
-    font-size: 30pt;
+    font-size: 3rem;
 }
 .close-button:hover{
     cursor: pointer;
@@ -98,10 +98,10 @@ export default {
     border-color: grey;
 }
 .register h1{
-    font-size: 50px;
+    font-size: 5rem;
 }
 .form{
-    font-size: 32px;
+    font-size: 2rem;
     margin: 10% 0;
 }
 .form > form > div{

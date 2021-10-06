@@ -112,8 +112,25 @@ export default {
   color: black;
 }
 
-body{
+*{
+  box-sizing: border-box;
+}
+
+html{
   font-size : 10pt;
+}
+
+button{
+  background-color: black;
+  color : white;
+  border : none;
+  padding : 10px;
+  font-size : 1.2rem;
+
+  &:hover{
+    opacity : .8;
+    cursor : pointer;
+  }
 }
 
 nav{
@@ -196,9 +213,15 @@ li a:hover{
   background-color : #01B0D3;
 }
 
-@media screen and (max-width : 480px) {
-  body{
-    font-size : 6pt;
+@media screen and (max-width : 1200px) {
+  html{
+    font-size : 7.5pt;
+  }
+}
+
+@media screen and (max-width : 600px) {
+  html{
+    font-size : 5pt;
   }
 }
 </style>
