@@ -3,12 +3,12 @@
         <h1>Se connecter</h1>
         <div class="loginForm">
           <form>
-            <div>
-              <label for="uname"><b>Adresse Courriel :</b></label>
+            <div class="lblInp-div">
+              <label for="uname"><b>Adresse Courriel</b></label>
               <input type="text" placeholder="Entrez votre email" name="uname" required>
             </div>
-            <div>
-              <label for="psw"><b>Mot de passe :</b></label>
+            <div class="lblInp-div">
+              <label for="psw"><b>Mot de passe</b></label>
               <input type="password" placeholder="Entrez le mot de passe" name="psw" required>
             </div>
             <button type="submit">Se connecter</button>
@@ -42,27 +42,11 @@ export default {
     border-color: black;
     width : 50vw;
     max-width : 50vw;
-    height: 75vh;
-    padding : 0 7.5%;
-
-    form{
-      *{
-        margin : 5px 0;
-      }
-
-      & > div{
-        display: flex;
-        justify-content: end;
-
-        input{
-          width : 50%;
-          margin-left : 1vw;
-        }
-      }
-    }
+    padding : 7.5%;
 
     h1{
-      font-size: 5rem;
+      font-size: 4rem;
+      margin-top : 0;
     }
 
     .close-button {
@@ -83,17 +67,9 @@ export default {
     }
 }
 
-@media screen and (max-width : 600px) {
+@media screen and (max-width : 1000px) {
   body{
     font-size : 6pt;
-  }
-
-  .login{
-    form{
-      & > div{
-        flex-direction: columns;
-      }
-    }
   }
 }
 </style>

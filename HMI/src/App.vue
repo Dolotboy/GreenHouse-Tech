@@ -213,9 +213,41 @@ li a:hover{
   background-color : #01B0D3;
 }
 
+.lblInp-div{
+  display : flex;
+  justify-content : end;
+  height : 2rem;
+  margin : 20px 0;
+
+  label{
+    font-size : 2rem;
+
+    &:after{
+      content : " :";
+    }
+  }
+
+  input{
+    width : 50%;
+    height : 100%;
+    margin-left : 1vw;
+  }
+}
+
 @media screen and (max-width : 1200px) {
   html{
     font-size : 7.5pt;
+  }
+  
+  .lblInp-div{
+    flex-direction: column;
+    align-items: start;
+    height : 5rem;
+
+    input{
+      width : 100% !important;
+      margin : 0 !important;
+    }
   }
 }
 
