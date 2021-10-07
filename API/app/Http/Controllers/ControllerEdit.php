@@ -34,6 +34,7 @@ class ControllerEdit extends Controller
         return view('editSearchFavCondDate');
     }
 
+
     public function indexFavCondNb(Request $request)
     {
         return view('editSearchFavCondNb');
@@ -49,19 +50,23 @@ class ControllerEdit extends Controller
     public function editPlantTest(Request $request, $idPlant)
     {
         $plant = Plant::find($idPlant);
-
-        $plant->imgPlant = $request->input("imgPlant");
-        $plant->plantName = $request->input("plantName");
-        $plant->plantType = $request->input("plantType");
-        $plant->plantFamily = $request->input("plantFamily");
-        $plant->season = $request->input("season");
-        $plant->groundType = $request->input("groundType");
-        $plant->daysConservation = $request->input("daysConservation");
-        $plant->description = $request->input("description");
-        $plant->tblPlantSowing_idSowing = $request->input("tblPlantSowing_idSowing");   
+ 
+        $plant->plantImg = $request->plantImg;
+        $plant->plantName = $request->plantName;
+        $plant->plantType = $request->plantType;
+        $plant->plantFamily = $request->plantFamily;
+        $plant->plantSeason = $request->plantSeason;
+        $plant->plantGroundType = $request->plantGroundType;
+        $plant->plantDaysConservation = $request->plantDaysConservation;
+        $plant->plantDescription = $request->plantDescription;
+        $plant->plantDifficulty = $request->plantDifficulty;
+        $plant->plantBestNeighbor = $request->plantBestNeighbor; 
 
         $plant->save();
+
+        Controller::incrementVersion();
         
+        //return ("La plante#$plant->idPlant a été modifié");
         return ("Succesfully modified a plant !");
     }
 
@@ -76,14 +81,15 @@ class ControllerEdit extends Controller
     {
         $problem = Problem::find($idProblem);
 
-        $problem->typeProblem = $request->input("typeProblem");
-        $problem->importanceLvl = $request->input("importanceLvl");
-        $problem->description = $request->input("description");
+        $problem->problemName = $request->problemName;
+        $problem->problemType = $request->problemType;
+        $problem->problemSolution = $request->problemSolution;
 
         $problem->save();
 
-        return("Problem has been successfully modified");
-        //return ("Le problème #$problem->id a été modifié");
+        Controller::incrementVersion();
+
+        return ("Le problème#$problem->idProblem a été modifié");
     }
 
     public function editProfile(Request $request, $idProfile)
@@ -97,16 +103,16 @@ class ControllerEdit extends Controller
     {
         $profile = Profile::find($idProfile);
 
-        $profile->email = $request->input("email");
-        $profile->username = $request->input("password");
-        $profile->username = $request->input("username");
-        $profile->firstName = $request->input("firstName");
-        $profile->lastName = $request->input("lastName");
+        $profile->email = $request->email;
+        $profile->firstName = $request->firstName;
+        $profile->lastName = $request->lastName;
+        $profile->access = $request->access;
 
         $profile->save();
 
-        return("Profile has been successfully modified");
-        //return ("Le profile #$profile->id a été modifié");
+        Controller::incrementVersion();
+
+        return ("Le profile#$profile->idProfile a été modifié");
     }
 
     public function editFavCondDate(Request $request, $idCondition)
@@ -120,8 +126,8 @@ class ControllerEdit extends Controller
     {
         $favorableCondition = FavorableConditionDate::find($idCondition);
 
-        $favorableCondition->rangeType = $request->input("rangeType");
-        $favorableCondition->begin = $request->input("begin");
+        $favorableCondition->type = $request->input("type");
+        $favorableCondition->start = $request->input("start");
         $favorableCondition->end = $request->input("end");
 
         $favorableCondition->save();
@@ -129,11 +135,18 @@ class ControllerEdit extends Controller
         return("Fav Cond Date have been modified");
     }
 
-    public function editFavCondNb(Request $request,$idCondition)
+    public function editFavCondNb(Request $request, $idCondition)
     {
         $favorableCondition = FavorableConditionNb::find($idCondition);
 
-        $favorableCondition->rangeType = $request->input("rangeType");
+        return view('editFavCondNb', ["favorableCondition" => $favorableCondition]);
+    }
+
+    public function editFavCondNbSent(Request $request,$idCondition)
+    {
+        $favorableCondition = FavorableConditionNb::find($idCondition);
+
+        $favorableCondition->type = $request->input("type");
         $favorableCondition->min = $request->input("min");
         $favorableCondition->max = $request->input("max");
         $favorableCondition->unit = $request->input("unit");
@@ -141,5 +154,6 @@ class ControllerEdit extends Controller
         $favorableCondition->save();
 
         return("Fav Cond Nb have been modified");
+
     }
 }

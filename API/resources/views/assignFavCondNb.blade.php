@@ -14,9 +14,9 @@
                         <div class="product-details">
                         <h3>Assign a favorite condition nb to a plant</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"><input type="text" id="v1" name='TblPlant_idPlant' placeholder="idPlant" value=""></h2>
-                                <h3 class="mb-3"><input type="text" id="v2" name='tblNbRangeFav_idRangeNb' placeholder="idRangeDate" value=""></h3>
-                                <h3 class="mb-0 text-primary"><button type="submit" name='submit' onclick="myFunction()" placeholder="Submit" value="Submit"></button></h3>                                      
+                                <h2 class="mb-3"> <input type="text" id="v1" name='tblPlant_idPlant' placeholder="idPlant" value=""></h2>
+                                <h3 class="mb-3"> <input type="text" id="v2" name='tblNbRangeFav_idRangeNb' placeholder="idRangeDate" value=""></h3>
+                                <h3 class="mb-3"> <button type="submit" name='submit' onclick="myFunction()" placeholder="Submit" value="Submit"></button></h3>                                      
                             </div>
                         </div>
                     </div>

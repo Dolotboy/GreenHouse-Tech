@@ -26,7 +26,7 @@ Route::get('/edit/plant/', [ControllerEdit::class, 'indexPlant'])->name('editSea
 //Route::put('/search/plant/', [ControllerDetail::class, 'indexPlant'])->name('searchPlant');
 Route::get('/search/plant/', [ControllerDetail::class, 'indexPlant'])->name('searchPlant');
 
-//Route::post('/delete/plant/', [ControllerDelete::class, 'indexPlant'])->name('deleteSearchPlant');
+Route::delete('/delete/plant/', [ControllerDelete::class, 'deletePlant'])->name('deletePlant');
 Route::get('/delete/plant/', [ControllerDelete::class, 'indexPlant'])->name('deleteSearchPlant');
 
 // ***************** PLANT *******************
@@ -37,7 +37,6 @@ Route::post('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newPr
 Route::get('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem');
 
 Route::get('/edit/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem');
-
 
 Route::post('/search/problem', [ControllerDetail::class, 'indexProblem'])->name('searchProblem');
 

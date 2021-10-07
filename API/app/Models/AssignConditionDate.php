@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AssignConditionDate extends Model
 {
-    protected $table = 'tblPlant_tblDateRangeFav';
-    protected $primaryKey = ['tblPlant_idPlant', 'tblDateRangeFav_idRangeDate'];
+    protected $table = 'tblPlant_tblRangeDate';
+    protected $primaryKey = ['tblPlant_idPlant', 'tblRangeDate_idRangeDate'];
     public $incrementing = false;
 }

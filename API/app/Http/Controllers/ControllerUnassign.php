@@ -10,60 +10,78 @@ use Exception;
 
 class ControllerUnassign extends Controller
 {
-    public function unassignFavCondition($type, $idPlant, $idCondition)
+    /* ------------------------- INDEX ---------------------------- */
+    
+    public function indexFavCondDate()
     {
-        if ($type == 1)
+        return view('searchFavCondDate');
+    }
+
+    public function indexFavCondNb()
+    {
+        return view('searchFavCondNb');
+    }
+
+    public function indexProblem()
+    {
+        return view('searchProblem');
+    }
+
+
+/* ------------------------- ASSIGN ---------------------------- */
+
+    public function assignFavCondDate()
+    {
+        $unassignFavCondition = AssignConditionDate::where('tblPlant_idPlant', '=', $idPlant)
+        ->where('tblDateRangeFav_idRangeDate', '=', $idCondition)
+        ->get();
+
+        if (is_null($unassignFavCondition))
         {
-            $unassignFavCondition = AssignConditionDate::where('tblPlant_idPlant', '=', $idPlant)
-            ->where('tblDateRangeFav_idRangeDate', '=', $idCondition)
-            ->get();
-    
-            if (is_null($unassignFavCondition))
-            {
-                return('Error, assignation not found');
-            }
-            else
-            {
-                try
-                {
-                    AssignConditionDate::where([
-                        ['tblPlant_idPlant', '=', $idPlant],
-                        ['tblDateRangeFav_idRangeDate', '=', $idCondition],
-                    ])->delete();
-                    //AssignProblem::destroy([$idPlant, $idProblem]);
-                    return ("Assignation deleted !");
-                }
-                catch(Exception $e)
-                {
-                    return('Error while deleting'.$e);
-                }
-            }
+            return('Error, assignation not found');
         }
-        else if ($type == 2)
+        else
         {
-            $unassignFavCondition = AssignConditionNb::where('tblPlant_idPlant', '=', $idPlant)
-            ->where('tblNbRangeFav_idRangeNb', '=', $idCondition)
-            ->get();
-    
-            if (is_null($unassignFavCondition))
+            try
             {
-                return('Error, assignation not found');
+                AssignConditionDate::where([
+                    ['tblPlant_idPlant', '=', $idPlant],
+                    ['tblDateRangeFav_idRangeDate', '=', $idCondition],
+                ])->delete();
+                return ("Assignation deleted !");
             }
-            else
+            catch(Exception $e)
             {
-                try
-                {
-                    AssignConditionNb::where([
-                        ['tblPlant_idPlant', '=', $idPlant],
-                        ['tblNbRangeFav_idRangeNb', '=', $idCondition],
-                    ])->delete();
-                    //AssignProblem::destroy([$idPlant, $idProblem]);
-                    return ("Assignation deleted !");
-                }
-                catch(Exception $e)
-                {
-                    return('Error while deleting'.$e);
-                }
+                return('Error while deleting'.$e);
+            }
+
+            Controller::incrementVersion();
+        }
+    }
+
+    public function assignFavCondNb()
+    {
+        $unassignFavCondition = AssignConditionNb::where('tblPlant_idPlant', '=', $idPlant)
+        ->where('tblNbRangeFav_idRangeNb', '=', $idCondition)
+        ->get();
+
+        if (is_null($unassignFavCondition))
+        {
+            return('Error, assignation not found');
+        }
+        else
+        {
+            try
+            {
+                AssignConditionNb::where([
+                    ['tblPlant_idPlant', '=', $idPlant],
+                    ['tblNbRangeFav_idRangeNb', '=', $idCondition],
+                ])->delete();
+                return ("Assignation deleted !");
+            }
+            catch(Exception $e)
+            {
+                return('Error while deleting'.$e);
             }
         }
     }
@@ -86,7 +104,6 @@ class ControllerUnassign extends Controller
                     ['tblPlant_idPlant', '=', $idPlant],
                     ['tblProblem_idProblem', '=', $idProblem],
                 ])->delete();
-                //AssignProblem::destroy([$idPlant, $idProblem]);
                 return ("Assignation deleted !");
             }
             catch(Exception $e)
@@ -94,5 +111,7 @@ class ControllerUnassign extends Controller
                 return('Error while deleting'.$e);
             }
         }
+
+        Controller::incrementVersion();
     }
 }

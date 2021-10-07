@@ -26,9 +26,11 @@ class ControllerAssign extends Controller
         $assignFavorableConditionDate = new AssignConditionDate();
 
         $assignFavorableConditionDate->tblPlant_idPlant = $idPlant;
-        $assignFavorableConditionDate->tblDateRangeFav_idRangeDate = $idCondition;
+        $assignFavorableConditionDate->tblRangeDate_idRangeDate = $idCondition;
 
         $assignFavorableConditionDate->save();
+
+        Controller::incrementVersion();
 
         return("La condition favorable date a ete ajoute");
     }
@@ -43,14 +45,21 @@ class ControllerAssign extends Controller
         $assignFavorableConditionNb = new AssignConditionNb();  
 
         $assignFavorableConditionNb->tblPlant_idPlant = $idPlant;
-        $assignFavorableConditionNb->tblNbRangeFav_idRangeNb = $idCondition;
+        $assignFavorableConditionNb->tblRangeNb_idRangeNb = $idCondition;
 
         $assignFavorableConditionNb->save();
 
+        Controller::incrementVersion();
+
         return("La condition favorable nb a ete ajoute");
     }
+       
+    public function indexProblem()
+    {
+        return view("assignProblem");
+    }
 
-    public function assignProblem(Request $request, $idPlant, $idProblem)
+    public function assignProblem($idPlant, $idProblem)
     {
         $assignProblem = new AssignProblem();
 
@@ -58,6 +67,8 @@ class ControllerAssign extends Controller
         $assignProblem->tblProblem_idProblem = $idProblem;
 
         $assignProblem->save();
+
+        Controller::incrementVersion();
 
         return ("Le problème a été assigné");
     }

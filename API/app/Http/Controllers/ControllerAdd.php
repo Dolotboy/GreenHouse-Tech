@@ -10,6 +10,8 @@ use App\Models\Favorite;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class ControllerAdd extends Controller
 {
@@ -23,21 +25,22 @@ class ControllerAdd extends Controller
 
     public function addPlant(Request $request)
     {
-        //$request =  json_decode(file_get_contents('php://input'));
-
         $plant = new Plant();
 
-        $plant->imgPlant = $request->input("imgPlant");
-        $plant->plantName = $request->input("plantName");
-        $plant->plantType = $request->input("plantType");
-        $plant->plantFamily = $request->input("plantFamily");
-        $plant->season = $request->input("season");
-        $plant->groundType = $request->input("groundType");
-        $plant->daysConservation = $request->input("daysConservation");
-        $plant->description = $request->input("description");
-        $plant->tblPlantSowing_idSowing = $request->input("tblPlantSowing_idSowing");
+        $plant->plantImg = $request->plantImg;
+        $plant->plantName = $request->plantName;
+        $plant->plantType = $request->plantType;
+        $plant->plantFamily = $request->plantFamily;
+        $plant->plantSeason = $request->plantSeason;
+        $plant->plantGroundType = $request->plantGroundType;
+        $plant->plantDaysConservation = $request->plantDaysConservation;
+        $plant->plantDescription = $request->plantDescription;
+        $plant->plantDifficulty = $request->plantDifficulty;
+        $plant->plantBestNeighbor = $request->plantBestNeighbor;
         
         $plant->save();
+
+        Controller::incrementVersion();
 
         return ("La plante#$plant->idPlant a été ajouté");
     }
@@ -51,15 +54,15 @@ class ControllerAdd extends Controller
 
     public function addProblem(Request $request)
     {
-        //$request =  json_decode(file_get_contents('php://input'));
-
         $problem = new Problem();
 
-        $problem->typeProblem = $request->input("typeProblem");
-        $problem->importanceLvl = $request->input("importanceLvl");
-        $problem->description = $request->input("description");
+        $problem->problemName = $request->problemName;
+        $problem->problemType = $request->problemType;
+        $problem->problemSolution = $request->problemSolution;
         
         $problem->save();
+
+        Controller::incrementVersion();
 
         return ("Le problème#$problem->idProblem a été ajouté");
     }
@@ -77,8 +80,9 @@ class ControllerAdd extends Controller
         
         $favorite->tblPlant_idPlant = $idPlant;
         $favorite->tblProfile_idProfile = $idProfile;
-        
         $favorite->save();
+
+        Controller::incrementVersion();
 
         return ("Le favoris a été ajouté");
     }
@@ -92,19 +96,26 @@ class ControllerAdd extends Controller
 
     public function addProfile(Request $request)
     {
-
         $profile = new Profile();
+        $salt = Str::random(40);
 
-        $profile->email = $request->input("email");
-        $profile->password = $request->input("password");
-        $profile->salt = Hash::make($request->input("password"));
-        $profile->username = $request->input("username");
-        $profile->firstName = $request->input("firstName");
-        $profile->lastName = $request->input("lastName");
+        $profile->email = $request->email;
+        $hashedPassword = $request->password . $salt;
+
+        $profile->password = Hash::make($hashedPassword);
+        //$profile->password = $request->password;
+        //$profile->password = Hash::make($request->password);
+        $profile->salt = $salt;
+
+        $profile->firstName = $request->firstName;
+        $profile->lastName = $request->lastName;
+        $profile->access = $request->access;
         
         $profile->save();
 
-        return ("Le profil a été ajouté"); 
+        Controller::incrementVersion();
+
+        return ("Le profil a été ajouté");
     }
 
 /* ------------------- FAVORITE CONDITION DATE ------------------- */
@@ -116,19 +127,20 @@ class ControllerAdd extends Controller
 
     public function addFavConditionDate(Request $request)
     {
-        $favorableConditionDate = new FavorableConditionDate();
+        $favorableCondition = new FavorableConditionDate();
 
-        $favorableConditionDate->rangeType = $request->input("rangeType");
-        $favorableConditionDate->begin = $request->input("begin");
-        $favorableConditionDate->end = $request->input("end");
+        $favorableCondition->type = $request->type;
+        $favorableCondition->start = $request->start;
+        $favorableCondition->end = $request->end;
+        $favorableCondition->location = $request->location;
 
-        $favorableConditionDate->save();
+        $favorableCondition->save();
 
-        return ("La condition favorable Date a été ajouté");
+        Controller::incrementVersion();
+
+        return ("La condition favorable DATE a été ajouté");
     }
-
-/* ------------------- FAVORITE CONDITION NB ------------------- */
-
+    
     public function indexFavCondNb(Request $request)
     {
         return view('newFavCondNb');
@@ -136,15 +148,18 @@ class ControllerAdd extends Controller
 
     public function addFavConditionNb(Request $request)
     {
-        $favorableConditionNb = new FavorableConditionNb();
+        $favorableCondition = new FavorableConditionNb();
 
-        $favorableConditionNb->rangeType = $request->input("rangeType");
-        $favorableConditionNb->min = $request->input("min");
-        $favorableConditionNb->max = $request->input("max");
-        $favorableConditionNb->unit = $request->input("unit");
+        $favorableCondition->type = $request->type;
+        $favorableCondition->min = $request->min;
+        $favorableCondition->max = $request->max;
+        $favorableCondition->unit = $request->unit;
 
-        $favorableConditionNb->save();
+        $favorableCondition->save();
 
-        return ("La condition favorable Nb a été ajouté");
+        Controller::incrementVersion();
+
+        return ("La condition favorable NB a été ajouté");
     }
+
 }

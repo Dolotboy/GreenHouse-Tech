@@ -1,4 +1,101 @@
-INSERT INTO tblVegetal (conservationDays, type,name, comment, tempMin, tempMax, humidityMin, humidityMax, Light, LengthBetweenPlantsMinLengthBetweenPlantsMax, MaturationDays, GroundType, eighborhood)n VALUES (7,Légume,Concombre,Semez en poquets* de 5 graines. Gardez 3 plants par poquet*.,20,30,60,70,tout,120,120,60,Riche en compost ou en fumier , Céleri, chou-rave, chou, haricot, laitue, maïs, oignon, pois, radis et tomate)
-INSERT INTO tblVegetal (conservationDays, type,name, comment, tempMin, tempMax, humidityMin, humidityMax, Light, LengthBetweenPlantsMinLengthBetweenPlantsMax, MaturationDays, GroundType, eighborhood)n VALUES (10,Légume,Courgette,,25,30,65,80,tout,80,80,60,Matière organique fraîche, Ciboulette, échalote, oignon, ail, petit pois, haricot,la menthe, le basilic, le thym,  les soucis et œillets d’Inde)
-INSERT INTO tblVegetal (conservationDays, type,name, comment, tempMin, tempMax, humidityMin, humidityMax, Light, LengthBetweenPlantsMinLengthBetweenPlantsMax, MaturationDays, GroundType, eighborhood)n VALUES (7,Fruit,Fraise, Il faut au moins 10 jours d’exposition à la lumière pour l’initiation florale avec au minimum 6 heures de soleil par jour,18,22,70,80,très élevé,40,50,40,Loam sableux et riches en humus, Les haricots,la mâche, le poireau, la ciboulette, l'oignon jaune, le souci, l’ail,l'épinard et la laitue.)
-INSERT INTO tblVegetal (conservationDays, type,name, comment, tempMin, tempMax, humidityMin, humidityMax, Light, LengthBetweenPlantsMinLengthBetweenPlantsMax, MaturationDays, GroundType, eighborhood)n VALUES (5,Fruit,Tomate,Plantez de sorte que les premières feuilles soient près du sol. Enlevez les gourmands à l'aisselle des feuilles des cultivars de type indéterminé.,18,22,75,75,élevé,45,90,70,Riche en humus, léger et bien drainé, Ail, carotte, céleri, concombre, haricot, oignon, piment et radis)
+USE u882331052_apitestenv;
+INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('temperature',20,30,'°C'); 
+ SET @tempId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('humidity',60,70,'%'); 
+ SET @humId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('plantsSpacing',120,120,'cm'); 
+ SET @lengthId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblPlant (plantName, plantGroundType, plantDaysConservation, plantDescription, plantType)VALUES ('Concombre','Riche en compost ou en fumier ',7,'Semez en poquets de 5 graines. Gardez 3 plants par poquet.', 'Vegetable'); 
+ SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
+ INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @plantId); 
+
+INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('temperature',25,30,'°C'); 
+ SET @tempId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('humidity',65,80,'%'); 
+ SET @humId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('plantsSpacing',80,80,'cm'); 
+ SET @lengthId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblPlant (plantName, plantGroundType, plantDaysConservation, plantDescription, plantType)VALUES ('Courgette','Matière organique fraîche',10,' les courgettes poussent  sur la plupart des sols.', 'Vegetable'); 
+ SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
+ INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @plantId); 
+
+INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('temperature',18,22,'°C'); 
+ SET @tempId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('humidity',70,80,'%'); 
+ SET @humId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('plantsSpacing',40,50,'cm'); 
+ SET @lengthId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblPlant (plantName, plantGroundType, plantDaysConservation, plantDescription, plantType)VALUES ('Fraise','Loam sableux et riches en humus',7,' Il faut au moins 10 jours d’exposition à la lumière pour l’initiation florale avec au minimum 6 heures de soleil par jour', 'Fruit'); 
+ SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
+ INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @plantId); 
+
+INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('temperature',18,22,'°C'); 
+ SET @tempId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('humidity',75,75,'%'); 
+ SET @humId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('plantsSpacing',45,90,'cm'); 
+ SET @lengthId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblPlant (plantName, plantGroundType, plantDaysConservation, plantDescription, plantType)VALUES ('Tomate','Riche en humus, léger et bien drainé',5,'Plantez de sorte que les premières feuilles soient près du sol. Enlevez les gourmands à l''aisselle des feuilles des cultivars de type indéterminé.', 'Fruit'); 
+ SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
+ INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @plantId); 
+
+INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('temperature',8,29,'°C'); 
+ SET @tempId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('humidity',70,75,'%'); 
+ SET @humId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('plantsSpacing',5,45,'cm'); 
+ SET @lengthId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblPlant (plantName, plantGroundType, plantDaysConservation, plantDescription, plantType)VALUES ('Carotte','meuble, riche, dépourvu de cailloux',90,'Semez aux 15 jours du début mai au 15 juin.', 'Vegetable'); 
+ SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
+ INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @plantId); 
+
+INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('temperature',12,20,'°C'); 
+ SET @tempId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('humidity',85,90,'%'); 
+ SET @humId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('plantsSpacing',150,200,'cm'); 
+ SET @lengthId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblPlant (plantName, plantGroundType, plantDaysConservation, plantDescription, plantType)VALUES ('Melon','profond, bien drainé, riche en matières organiques',21,'Semez en poquets de 3 graines. Gardez 3 ou 4 fruits par plant. Le melon n’aime pas les courants d’air.', 'Vegetable'); 
+ SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
+ INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @plantId); 
+
+INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('temperature',25,33,'°C'); 
+ SET @tempId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('humidity',70,80,'%'); 
+ SET @humId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('plantsSpacing',25,75,'cm'); 
+ SET @lengthId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblPlant (plantName, plantGroundType, plantDaysConservation, plantDescription, plantType)VALUES ('Maïs','profond, léger, frais et riche en humus,',90,'Semez sur au moins deux rangs pour favoriser la pollinisation.', 'Vegetable'); 
+ SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
+ INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @plantId); 
+
+INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('temperature',7,24,'°C'); 
+ SET @tempId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('humidity',70,80,'%'); 
+ SET @humId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('plantsSpacing',10,40,'cm'); 
+ SET @lengthId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblPlant (plantName, plantGroundType, plantDaysConservation, plantDescription, plantType)VALUES ('Épinard','Meuble, frais et humifère',14,'Semez tôt au printemps ou à la fin de l''été, sinon risque de monter en graines.', 'Vegetable'); 
+ SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
+ INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @plantId); 
+
+INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('temperature',21,32,'°C'); 
+ SET @tempId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('humidity',50,70,'%'); 
+ SET @humId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('plantsSpacing',200,250,'cm'); 
+ SET @lengthId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblPlant (plantName, plantGroundType, plantDaysConservation, plantDescription, plantType)VALUES ('Citrouille','loam sableux,sol bien drainé et les sols argileux',180,'Semez en poquets de 3 graines. Gardez 2 à 4 fruits par plant.', 'Vegetable'); 
+ SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
+ INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @plantId); 
+
+INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('temperature',20,30,'°C'); 
+ SET @tempId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('humidity',70,80,'%'); 
+ SET @humId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblRangeNb (type, min, max, unit) VALUES ('plantsSpacing',45,120,'cm'); 
+ SET @lengthId = (SELECT idRangeNb FROM tblRangeNb ORDER BY idRangeNb DESC LIMIT 1); 
+ INSERT INTO tblPlant (plantName, plantGroundType, plantDaysConservation, plantDescription, plantType)VALUES ('Framboise','humide, meuble, bien drainé, légèrement acide et fertile',2,'Les framboisiers s''accommodent de la mi-ombre, mais ils produisent des fruits plus sucrés et en plus grand nombre s''ils sont plantés au soleil.', 'Fruit'); 
+ SET @plantId = (SELECT idPlant FROM tblPlant ORDER BY idPlant DESC LIMIT 1); 
+ INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @tempId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @humId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @lengthId);INSERT INTO tblPlant_tblRangeNb (tblPlant_idPlant, tblRangeNb_idRangeNb) VALUES (@plantId, @plantId); 
+
