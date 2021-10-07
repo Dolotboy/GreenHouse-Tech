@@ -22,14 +22,39 @@ class ControllerDetail extends Controller
 
     public function searchPlant($id)
     {
-        $plant = Plant::find($id);    
+        try
+        {
+            $plant = Plant::find($id);    
+        }
+        catch (Exception)
+        {
+            return "The plant doesn't exsit or there is not connection with the database";
+        }
+
+        if (is_null($plant))
+        {
+            return "The plant doesn't exist";
+        }
+
         $json = json_encode($plant);
         return ("$json");
     }
 
     public function searchAllPlant()
     {
-        $plant = Plant::All();
+        try
+        {
+            $plant = Plant::All();
+        }
+        catch (Exception)
+        {
+            return "There is no plant in the database or there is not connection with the database";
+        }
+
+        if (is_null($plant))
+        {
+            return "There is not plant in the database";
+        }
 
         $json = json_encode($plant);
 
@@ -43,14 +68,39 @@ class ControllerDetail extends Controller
 
     public function searchProblem($id)
     {
+        try
+        {
         $problem = Problem::find($id);
+        }
+        catch (Exception)
+        {
+            return "The problem doesn't exsit or there is not connection with the database";
+        
+        }
+
+        if (is_null($problem))
+        {
+            return "The problem doesn't exist";
+        }
+
         $json = json_encode($problem);
         return ("$json");
     }
 
     public function searchAllProblem()
     {
+        try
+        {
         $problem = Problem::All();
+        }
+        catch (Exception)
+        {
+            return "There is no problem in the database or there is not connection with the database";
+        }
+        if (is_null($problem))
+        {
+            return "There is no problem in the database";
+        }
 
         $json = json_encode($problem);
 
@@ -64,7 +114,19 @@ class ControllerDetail extends Controller
 
     public function searchProfile($id)
     {
-        $profile = Profile::find($id);
+        try
+        {
+            $profile = Profile::find($id);
+        }
+        catch (Exception)
+        {
+            return "The profile doesn't exsit or there is not connection with the database";
+        }
+
+        if (is_null($profile))
+        {
+            return "The profile doesn't exist";
+        }
 
         $idProfile = $profile->idProfile;
         $email = $profile->email;
@@ -83,7 +145,19 @@ class ControllerDetail extends Controller
 
     public function searchAllProfile()
     {
-        $profile = Profile::All();
+        try
+        {
+            $profile = Profile::All();
+        }
+        catch (Exception)
+        {
+            return "There is not profile in the database or there is not connection with the database";
+        }
+        
+        if (is_null($profile))
+        {
+            return "There is no profile in the database";
+        }
 
         $json = json_encode($profile);
 
@@ -97,6 +171,8 @@ class ControllerDetail extends Controller
 
     public function searchFavCondition($type, $id)
     {
+        try
+        {
         if ($type == 1)
         {
             $favorableCondition = FavorableConditionDate::find($id);
@@ -107,36 +183,67 @@ class ControllerDetail extends Controller
             $favorableCondition = FavorableConditionNb::find($id);
             $json = json_encode($favorableCondition);
         }
-        return ("$json");
+        }
+        catch (Exception)
+        {
+            $json = "The condition doesn't exsit or there is not connection with the database";
+        }
+        if (is_null($favorableCondition))
+        {
+            return "The condition doesn't exist";
+        }
+
+        return $json;
     }
 
     public function searchAllFavCondition($type)
     {
+        try
+        {
         if ($type == 1)
         {
             $favCondition = FavorableConditionDate::All();
 
             $json = json_encode($favCondition);
-    
-            return ("$json");
         }
         else if ($type ==2)
         {
             $favCondition = FavorableConditionNb::All();
 
             $json = json_encode($favCondition);
-    
-            return ("$json");
         }
+        }
+        catch (Exception)
+        {
+            $json = "The condition doesn't exsit or there is not connection with the database";
+        }
+        if (is_null($favCondition))
+        {
+            return "There is no condition in the database";
+        }
+
+        return ("$json");
     }
 
     public function indexPackage()
     {
-
+        return view('');
     }
 
     public function searchAllPackages(){
-        $plants = Plant::All();
+        try
+        {
+            $plants = Plant::All();
+        }
+        catch (Exception)
+        {
+            return "There is no plant and his data in the database or there is not connection with the database";
+        }
+        if (is_null($plants))
+        {
+            return "There is no plant in the database";
+        }
+        
         $jsons = array();
         for($i = 0; $i < count($plants); $i++){
             $json = ControllerDetail::searchPackage($plants[$i]->idPlant);
@@ -147,10 +254,24 @@ class ControllerDetail extends Controller
 
     public function searchPackage($searchCondition)
     {
+        try
+        {
         $plant = Plant::find($searchCondition);
+        }
+        catch (Exception)
+        {
+            return "The plant doesn't exsit or there is not connection with the database";
+        }
+        if (is_null($plant))
+        {
+            return "The plant doesn't exist";
+        }
+
         $json = json_encode($plant);
         $array = json_decode($json,true);
 
+        try
+        {
         $problems = array($plant->plantProblems);
 
         $favConditionDate = array($plant->plantFavConditionDate);
@@ -160,6 +281,11 @@ class ControllerDetail extends Controller
         $favConditions = array_merge($favConditionDate, $favConditionNb);
 
         $package = array_merge($array, $problems, $favConditions);
+        }
+        catch (Exception)
+        {
+            return "Error while retrieving data in relation with the plant#$searchCondition";
+        }
 
         $json = json_encode($package);
         $json = str_replace("\"0\":[", "\"problems\":[", $json);
@@ -176,7 +302,18 @@ class ControllerDetail extends Controller
 
     public function searchAllPlantFamilies()
     {
+        try
+        {
         $families = Plant::select('plantFamily')->groupBy('plantFamily')->get();
+        }
+        catch (Exception)
+        {
+            return "Error while retrieving families or there is no plant in the database";
+        }
+        if (is_null($families))
+        {
+            return "There is not plant in the database";
+        }
 
         $json = json_encode($families);
 
@@ -185,7 +322,18 @@ class ControllerDetail extends Controller
 
     public function searchAllPlantDifficulties()
     {
+        try
+        {
         $difficulties = Plant::select('plantDifficulty')->groupBy('plantDifficulty')->get();
+        }
+        catch (Exception)
+        {
+            return "Error while retrieving difficulties or there is no plant in the database";
+        }
+        if (is_null($difficulties))
+        {
+            return "There is not plant in the database";
+        }
 
         $json = json_encode($difficulties);
 
@@ -194,7 +342,18 @@ class ControllerDetail extends Controller
 
     public function searchAllPlantTypes()
     {
+        try
+        {
         $types = Plant::select('plantType')->groupBy('plantType')->get();
+        }
+        catch (Exception)
+        {
+            return "Error while retrieving types or there is no plant in the database";
+        }
+        if (is_null($types))
+        {
+            return "There is not plant in the database";
+        }
 
         $json = json_encode($types);
 
