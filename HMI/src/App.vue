@@ -31,8 +31,8 @@ export default {
   },
   data(){
       return{
-          env : "http://localhost:8000/",
-          envBack : "https://apitestenv.pcst.xyz/",
+          envBack : "http://localhost:8000/",
+          env : "https://apitestenv.pcst.xyz/",
           plants : [],
           showLogin : false,
           showRegister : false,
@@ -59,12 +59,12 @@ export default {
       if(version == undefined || version != apiVersion){
         await this.ClearDb();
         localStorage.setItem('apiVersion', apiVersion);
-        this.DownloadContent();
+        await this.DownloadContent();
       }
       
       this.plants = await toolbox.fetchData(await toolbox.setDb());
       if(this.plants.length == 0)
-        this.DownloadContent();   
+        await this.DownloadContent();   
     },
     async ClearDb(){
       let db = await toolbox.setDb();
@@ -242,7 +242,7 @@ li a:hover{
   .lblInp-div{
     flex-direction: column;
     align-items: start;
-    height : 5rem;
+    height : 7rem;
 
     input{
       width : 100% !important;

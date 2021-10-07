@@ -135,6 +135,16 @@ body{
 
   & > div{
     display : flex;
+
+    label{
+      font-size : 2rem;
+    }
+
+    input[type=radio]{
+      height: 1.5rem;
+      width : 1.5rem;
+      margin : auto 1rem;
+    }
   }
 }
 
@@ -155,6 +165,10 @@ body{
     width : 100%
   }
 
+  #searchBar{
+    height : 3rem;
+  }
+
   #searchBarautocomplete-list{
     position : absolute;
     top : 100%;
@@ -167,6 +181,9 @@ body{
 }
 
 @media screen and (max-width : 600px){
-  
+  input[type=radio]{
+    height : 2.5rem;
+    width : 2.5rem;
+  }
 }
 </style>
