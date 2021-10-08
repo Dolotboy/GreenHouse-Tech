@@ -3,15 +3,19 @@
         <h1>Se connecter</h1>
         <div class="loginForm">
           <form>
-          <label for="uname"><b>Adresse Courriel : </b></label>
-            <input type="text" placeholder="Entrez votre email" name="uname" required>
-            <label for="psw"><b>Mot de passe : </b></label>
-            <input type="password" placeholder="Entrez le mot de passe" name="psw" required>
-          </form>
+            <div class="lblInp-div">
+              <label for="uname"><b>Adresse Courriel</b></label>
+              <input type="text" placeholder="Entrez votre email" name="uname" required>
+            </div>
+            <div class="lblInp-div">
+              <label for="psw"><b>Mot de passe</b></label>
+              <input type="password" placeholder="Entrez le mot de passe" name="psw" required>
+            </div>
             <button type="submit">Se connecter</button>
-            <label>
+          </form>
+            <!--<label>
               <input type="checkbox" name="remember"> Se rappeler de moi
-            </label>
+            </label>-->
           <div class="container">
             <span class="psw"><a href="#">Mot de passe oublié?</a></span>
           </div>
@@ -25,9 +29,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .login{
     position : absolute;
+    display : flex;
+    flex-direction : column;
     top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
@@ -35,26 +41,35 @@ export default {
     border: solid;
     border-color: black;
     width : 50vw;
-    height: 75vh;
-    padding-left: 5%;
-    padding-right: 5%;
+    max-width : 50vw;
+    padding : 7.5%;
+
+    h1{
+      font-size: 4rem;
+      margin-top : 0;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 1%;
+      right: 1%;
+      font-size: 3rem;
+
+      &:hover{
+        cursor: pointer;
+        border:solid;
+        border-width: 1px;
+        border-color: grey;
+      } 
+    }
+    .loginForm{
+      font-size: 1.6rem;
+    }
 }
-.close-button {
-    position: absolute;
-    top: 1%;
-    right: 1%;
-    font-size: 30pt;
-}
-.close-button:hover{
-    cursor: pointer;
-    border:solid;
-    border-width: 1px;
-    border-color: grey;
-}
-.login h1{
-    font-size: 50px;
-}
-.loginForm{
-  font-size: 32px;
+
+@media screen and (max-width : 1000px) {
+  body{
+    font-size : 6pt;
+  }
 }
 </style>

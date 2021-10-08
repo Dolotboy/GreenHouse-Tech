@@ -173,4 +173,26 @@ class ControllerDetail extends Controller
     {
         return view('');
     }
+
+    public function searchAllFamilies()
+    {
+        $families = Plant::select('plantFamily')->groupBy('plantFamily')->get();
+
+        $json = json_encode($families);
+
+        return $json;
+    }
+
+    public function searchAllDifficulties()
+    {
+        $difficulties = Plant::select('plantDifficulty')->groupBy('plantDifficulty')->get();
+
+        $json = json_encode($difficulties);
+
+        return $json;
+    }
+
+    public function searchAllFavorites($idProfile){
+        return json_encode(Favorite::where('tblProfile_idProfile', $idProfile)->get());
+    }
 }

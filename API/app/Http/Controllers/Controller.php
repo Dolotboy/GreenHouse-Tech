@@ -32,4 +32,14 @@ class Controller extends BaseController
 
         return $json;
     }
+
+    public function hashPassword($password){
+        return password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    public function comparePassword($password, $hash){
+        if(password_verify($password, $hash))
+            return 1;
+        return 0;
+    }
 }

@@ -31,8 +31,8 @@ export default {
   },
   data(){
       return{
-          env : "http://localhost:8000/",
-          envBack : "https://apitestenv.pcst.xyz/",
+          envBack : "http://localhost:8000/",
+          env : "https://apitestenv.pcst.xyz/",
           plants : [],
           showLogin : false,
           showRegister : false,
@@ -54,29 +54,29 @@ export default {
     async Initialisation(){
       let version = localStorage.getItem('apiVersion');
       let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
-      this.plants = this.GetAllPlants(this.env + "api/searchAll/plant");
+      this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
 
       if(version == undefined || version != apiVersion){
         await this.ClearDb();
         localStorage.setItem('apiVersion', apiVersion);
-        this.DownloadContent();
+        await this.DownloadContent();
       }
       
       this.plants = await toolbox.fetchData(await toolbox.setDb());
       if(this.plants.length == 0)
-        this.DownloadContent();   
+        await this.DownloadContent();   
     },
     async ClearDb(){
       let db = await toolbox.setDb();
       toolbox.ClearDb(db);
     },
     async DownloadContent(){
-      this.plants = await this.GetAllPlants(this.env + "api/searchAll/plant");
+      this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
       let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
       for(let i = 0; i < this.plants.length; i++){
-        entrepot.add(toolbox.GeneratePlant(this.plants[i]));
+        entrepot.add(toolbox.GenerateObject(this.plants[i]));
       }
     },
     GetApiVersion(url){
@@ -92,17 +92,18 @@ export default {
       $.get(url, function(donnees, status){
         let json = JSON.parse(donnees);
         let plants = [];
-        for(let i = 0; i< json.length; i++)
+        for(let i = 0; i< json.length; i++){
           plants.push(json[i]);
+        }
         resolve(plants);
       })
     })
-}
+    }
   }   
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -111,22 +112,66 @@ export default {
   color: black;
 }
 
-nav > ul{
-  position : relative;
+*{
+  box-sizing: border-box;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #616161 ;
-  display: flex;
-  justify-content: center;
+html{
+  font-size : 10pt;
+}
+
+button{
+  background-color: black;
+  color : white;
+  border : none;
+  padding : 10px;
+  font-size : 1.2rem;
+
+  &:hover{
+    opacity : .8;
+    cursor : pointer;
+  }
+}
+
+nav{
+  position : relative;
+
+  &> ul{
+    position : relative;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #616161 ;
+    display: flex;
+    justify-content: center;
+
+    li {
+      float: left;
+      border-right: 1px solid darkgrey;
+      border-left: 1px solid darkgrey; 
+
+      a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        padding: 10px 15px;
+
+        &:hover{
+          color: black;
+          background-color: #e6a800;
+        }
+      }
+    }
+  }
 }
 
 #LoginRegister :hover{
-  color: white;
+  color: #D2CCB1;
   background-color: #8d4705;
   cursor: pointer;
 }
@@ -140,7 +185,7 @@ ul {
 #LoginRegister li{
   list-style-type: none;
   overflow: hidden;
-  color: white;
+  color: #d8d5ca;
   height: 100%;
   padding: 10px 15px;
 }
@@ -153,7 +198,7 @@ li {
 
 li a {
   display: block;
-  color: white;
+  color: #d8d5ca;
   text-decoration: none;
   text-align: center;
   padding: 10px 15px;
@@ -161,17 +206,54 @@ li a {
 
 li a:hover{
   color: black;
-  background-color: #e6a800
-;
+  background-color: #e6a800;
 }
 
 .active {
   background-color : #01B0D3;
 }
 
-nav{
-  position : relative;
+.lblInp-div{
+  display : flex;
+  justify-content : end;
+  height : 2rem;
+  margin : 20px 0;
+
+  label{
+    font-size : 2rem;
+
+    &:after{
+      content : " :";
+    }
+  }
+
+  input{
+    width : 50%;
+    height : 100%;
+    margin-left : 1vw;
+  }
 }
 
+@media screen and (max-width : 1200px) {
+  html{
+    font-size : 7.5pt;
+  }
+  
+  .lblInp-div{
+    flex-direction: column;
+    align-items: start;
+    height : 7rem;
 
+    input{
+      width : 100% !important;
+      margin : 0 !important;
+    }
+  }
+}
+
+@media screen and (max-width : 600px) {
+  html{
+    font-size : 5pt;
+  }
+}
 </style>
