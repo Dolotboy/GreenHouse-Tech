@@ -14,17 +14,12 @@ namespace OutilImportation
         public string Type { get; set; }
         public string Name { get; set; }
         public string Comment { get; set; }
-        public string TempMin { get; set; }
-        public string TempMax { get; set; }
-        public string HumidityMin { get; set; }
-        public string HumidityMax { get; set; }
         public string Light { get; set; }
         public string LengthBetweenPlantsMin { get; set; }
         public string LengthBetweenPlantsMax { get; set; }
-        public string MaturationDays { get; set; }
-        public string GroundType { get; set; }
-        public string PHMin { get; set; }
-        public string PHMax { get; set; }
+        public string plantDaysConservation { get; set; }
+        public string plantGroundType { get; set; }
+        public List<ConditionNb> conditionsNbs { get; set; }
 
         public override string ToString()
         {

@@ -38,13 +38,20 @@ namespace OutilImportation
                 if (ConvertCellToString(range.Cells[i, 1]) == "")
                     break;
 
+                DateTime now = DateTime.Now;
+                List<ConditionNb> conds = new List<ConditionNb>()
+                {
+                    new ConditionNb(){type = "temperature", min = ConvertCellToString(range.Cells[i, 2]), max = ConvertCellToString(range.Cells[i, 3]), unit = "°C", create_at = now, updated_at = now},
+                    new ConditionNb(){type = "humidity", min = ConvertCellToString(range.Cells[i, 4]), max = ConvertCellToString(range.Cells[i, 5]), unit = "%", create_at = now, updated_at = now},
+                    new ConditionNb(){type = "ph", min = ConvertCellToString(range.Cells[i, 15]), max = ConvertCellToString(range.Cells[i, 16]), unit = "", create_at = now, updated_at = now},
+                };
                 Vegetal veg = new Vegetal()
                 {
                     Name = ConvertCellToString(range.Cells[i, 1]),
-                    TempMin = ConvertCellToString(range.Cells[i, 2]),
-                    TempMax = ConvertCellToString(range.Cells[i, 3]),
-                    HumidityMin = ConvertCellToString(range.Cells[i, 4]),
-                    HumidityMax = ConvertCellToString(range.Cells[i, 5]),
+                    //TempMin = ConvertCellToString(range.Cells[i, 2]),
+                    //TempMax = ConvertCellToString(range.Cells[i, 3]),
+                    //HumidityMin = ConvertCellToString(range.Cells[i, 4]),
+                    //HumidityMax = ConvertCellToString(range.Cells[i, 5]),
                     Light = ConvertCellToString(range.Cells[i, 6]),
                     LengthBetweenPlantsMin = ConvertCellToString(range.Cells[i, 7]),
                     LengthBetweenPlantsMax = ConvertCellToString(range.Cells[i, 8]),
@@ -54,8 +61,8 @@ namespace OutilImportation
                     GroundType = ConvertCellToString(range.Cells[i, 12]),
                     ConservationDays = ConvertCellToString(range.Cells[i, 13]),
                     Type = ConvertCellToString(range.Cells[i, 14]),
-                    PHMin = ConvertCellToString(range.Cells[i,15]),
-                    PHMax = ConvertCellToString(range.Cells[i,16])
+                    //PHMin = ConvertCellToString(range.Cells[i,15]),
+                    //PHMax = ConvertCellToString(range.Cells[i,16])
                 };
                 veggies.Add(veg);
                 if (i % 5 == 0)
