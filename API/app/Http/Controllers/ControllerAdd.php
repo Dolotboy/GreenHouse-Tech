@@ -92,11 +92,9 @@ class ControllerAdd extends Controller
         $salt = Str::random(40);
 
         $profile->email = $request->email;
-        $hashedPassword = $request->password . $salt;
+        $saltedPassword = $request->password . $salt;
 
-        $profile->password = Hash::make($hashedPassword);
-        //$profile->password = $request->password;
-        //$profile->password = Hash::make($request->password);
+        $profile->password = Controller::hashPassword($saltedPassword);
         $profile->salt = $salt;
 
         $profile->firstName = $request->firstName;
@@ -107,7 +105,7 @@ class ControllerAdd extends Controller
 
         Controller::incrementVersion();
 
-        return ("Le profil a été ajouté");
+        return ("  Le profil a été ajouté");
     }
 
     public function indexFavCondition(Request $request)
