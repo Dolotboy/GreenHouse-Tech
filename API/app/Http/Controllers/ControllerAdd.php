@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Str;
+use Illuminate\Http\Response;
 
 
 class ControllerAdd extends Controller
@@ -36,7 +37,7 @@ class ControllerAdd extends Controller
             is_null($request->plantDifficulty) || 
             is_null($request->plantBestNeighbor))
         {
-            return "One of the field is empty, you must fill them all or the field's name aren't right";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         $plant->plantImg = $request->plantImg;
@@ -77,7 +78,7 @@ class ControllerAdd extends Controller
             is_null($request->problemType) || 
             is_null($request->problemSolution))
         {
-            return "One of the field is empty, you must fill them all";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         $problem->problemName = $request->problemName;
@@ -110,7 +111,7 @@ class ControllerAdd extends Controller
         if (is_null($idPlant) || 
             is_null($idProfile))
         {
-            return "One of the field is empty, you must fill them all";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         $favorite->tblPlant_idPlant = $idPlant;
@@ -146,7 +147,7 @@ class ControllerAdd extends Controller
             is_null($request->lastname) || 
             is_null($request->access))
         {
-            return "One of the field is empty, you must fill them all";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
         else if (is_null($salt))
         {
@@ -195,7 +196,7 @@ class ControllerAdd extends Controller
             is_null($request->max) || 
             is_null($request->unit))
         {
-            return "One of the field is empty, you must fill them all";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         if ($type == 1)

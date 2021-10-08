@@ -12,6 +12,7 @@ use App\Models\AssignProblem;
 use App\Models\Version;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Response;
 
 class ControllerDetail extends Controller
 {
@@ -28,12 +29,13 @@ class ControllerDetail extends Controller
         }
         catch (Exception)
         {
-            return "The plant doesn't exsit or there is not connection with the database";
+            return "The plant doesn't exist or there is not connection with the database";
         }
 
-        if (is_null($plant))
+        if (is_null($plant)) // Mostly when it doesn't exist
         {
-            return "The plant doesn't exist";
+            return new Response("The plant doesn't exist", 404);
+            //return new Response(['message' => 'test'], 422);
         }
 
         $json = json_encode($plant);
@@ -53,7 +55,7 @@ class ControllerDetail extends Controller
 
         if (is_null($plant))
         {
-            return "There is not plant in the database";
+            return new Response("There is no plant in the database", 404);
         }
 
         $json = json_encode($plant);
@@ -74,13 +76,13 @@ class ControllerDetail extends Controller
         }
         catch (Exception)
         {
-            return "The problem doesn't exsit or there is not connection with the database";
+            return "The problem doesn't exist or there is not connection with the database";
         
         }
 
         if (is_null($problem))
         {
-            return "The problem doesn't exist";
+            return new Response("The problem doesn't exist", 404);
         }
 
         $json = json_encode($problem);
@@ -99,7 +101,7 @@ class ControllerDetail extends Controller
         }
         if (is_null($problem))
         {
-            return "There is no problem in the database";
+            return new Response("There is no problem in the database", 404);
         }
 
         $json = json_encode($problem);
@@ -120,12 +122,12 @@ class ControllerDetail extends Controller
         }
         catch (Exception)
         {
-            return "The profile doesn't exsit or there is not connection with the database";
+            return "The profile doesn't exist or there is not connection with the database";
         }
 
         if (is_null($profile))
         {
-            return "The profile doesn't exist";
+            return new Response("The profile doesn't exist", 404);
         }
 
         $idProfile = $profile->idProfile;
@@ -156,7 +158,7 @@ class ControllerDetail extends Controller
         
         if (is_null($profile))
         {
-            return "There is no profile in the database";
+            return new Response("There is no profile in the database", 404);
         }
 
         $json = json_encode($profile);
@@ -186,11 +188,12 @@ class ControllerDetail extends Controller
         }
         catch (Exception)
         {
-            $json = "The condition doesn't exsit or there is not connection with the database";
+            $json = "The condition doesn't exist or there is not connection with the database";
         }
+
         if (is_null($favorableCondition))
         {
-            return "The condition doesn't exist";
+            return new Response("The condition doesn't exist", 404);
         }
 
         return $json;
@@ -215,11 +218,11 @@ class ControllerDetail extends Controller
         }
         catch (Exception)
         {
-            $json = "The condition doesn't exsit or there is not connection with the database";
+            $json = "The condition doesn't exist or there is not connection with the database";
         }
         if (is_null($favCondition))
         {
-            return "There is no condition in the database";
+            return new Response("There is no condition in the database", 404);
         }
 
         return ("$json");
@@ -241,7 +244,7 @@ class ControllerDetail extends Controller
         }
         if (is_null($plants))
         {
-            return "There is no plant in the database";
+            return new Response("There is no plant in the database", 404);
         }
         
         $jsons = array();
@@ -260,11 +263,11 @@ class ControllerDetail extends Controller
         }
         catch (Exception)
         {
-            return "The plant doesn't exsit or there is not connection with the database";
+            return "The plant doesn't exist or there is not connection with the database";
         }
         if (is_null($plant))
         {
-            return "The plant doesn't exist";
+            return new Response("The plant doesn't exist", 404);
         }
 
         $json = json_encode($plant);
@@ -312,7 +315,7 @@ class ControllerDetail extends Controller
         }
         if (is_null($families))
         {
-            return "There is not plant in the database";
+            return new Response("There is no plant in the database", 404);
         }
 
         $json = json_encode($families);
@@ -332,7 +335,7 @@ class ControllerDetail extends Controller
         }
         if (is_null($difficulties))
         {
-            return "There is not plant in the database";
+            return new Response("There is no plant in the database", 404);
         }
 
         $json = json_encode($difficulties);
@@ -352,7 +355,7 @@ class ControllerDetail extends Controller
         }
         if (is_null($types))
         {
-            return "There is not plant in the database";
+            return new Response("There is no plant in the database", 404);
         }
 
         $json = json_encode($types);

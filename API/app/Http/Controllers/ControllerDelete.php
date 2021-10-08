@@ -10,6 +10,7 @@ use App\Models\Favorite;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Response;
 
 class ControllerDelete extends Controller
 {
@@ -22,7 +23,7 @@ class ControllerDelete extends Controller
     {
         if (is_null($idPlant))
         {
-            return "One of the field is empty, you must fill them all or the field's name aren't right";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         try
@@ -62,7 +63,7 @@ class ControllerDelete extends Controller
     {
         if (is_null($idProblem))
         {
-            return "One of the field is empty, you must fill them all or the field's name aren't right";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         try
@@ -103,7 +104,7 @@ class ControllerDelete extends Controller
         if (is_null($idPlant) ||
             is_null($idProfile))
         {
-            return "One of the field is empty, you must fill them all or the field's name aren't right";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         try
@@ -148,7 +149,7 @@ class ControllerDelete extends Controller
     {
         if (is_null($idProfile))
         {
-            return "One of the field is empty, you must fill them all or the field's name aren't right";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         try
@@ -189,7 +190,7 @@ class ControllerDelete extends Controller
         if (is_null($type) ||
             is_null($idCondition))
         {
-            return "One of the field is empty, you must fill them all or the field's name aren't right";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         if ($type == 1)

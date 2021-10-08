@@ -11,6 +11,7 @@ use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Response;
 
 class ControllerEdit extends Controller
 {
@@ -35,7 +36,7 @@ class ControllerEdit extends Controller
             is_null($request->plantBestNeighbor) ||
             is_null($idPlant))
         {
-            return "One of the field is empty, you must fill them all or the field's name aren't right";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         try
@@ -44,7 +45,13 @@ class ControllerEdit extends Controller
         }
         catch (Exception)
         {
-            return "The plant doesn't exsit or there is not connection with the database";
+            return "The plant doesn't exist or there is not connection with the database";
+        }
+        
+        if (is_null($plant)) // Mostly when it doesn't exist
+        {
+            return new Response("The plant doesn't exist", 404);
+            //return new Response(['message' => 'test'], 422);
         }
 
         $plant->plantImg = $request->plantImg;
@@ -86,7 +93,7 @@ class ControllerEdit extends Controller
             is_null($request->problemSolution) ||
             is_null($idProblem))
         {
-            return "One of the field is empty, you must fill them all";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         try
@@ -95,8 +102,13 @@ class ControllerEdit extends Controller
         }
         catch (Exception)
         {
-            return "The problem doesn't exsit or there is not connection with the database";
+            return "The problem doesn't exist or there is not connection with the database";
         
+        }
+        
+        if (is_null($problem))
+        {
+            return new Response("The problem doesn't exist", 404);
         }
 
         $problem->problemName = $request->problemName;
@@ -131,7 +143,7 @@ class ControllerEdit extends Controller
             is_null($request->lastName) ||
             is_null($request->access))
         {
-            return "One of the field is empty, you must fill them all";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         try
@@ -140,7 +152,12 @@ class ControllerEdit extends Controller
         }
         catch (Exception)
         {
-            return "The profile doesn't exsit or there is not connection with the database";
+            return "The profile doesn't exist or there is not connection with the database";
+        }
+
+        if (is_null($profile))
+        {
+            return new Response("The profile doesn't exist", 404);
         }
 
         $profile->email = $request->email;
@@ -179,18 +196,23 @@ class ControllerEdit extends Controller
             is_null($request->max) || 
             is_null($request->unit))
         {
-            return "One of the field is empty, you must fill them all";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         if ($type == 1)
         {
             try
             {
-            $favorableCondition = FavorableConditionDate::find($idCondition);
+                $favorableCondition = FavorableConditionDate::find($idCondition);
             }
             catch (Exception)
             {
-                $json = "The condition doesn't exsit or there is not connection with the database";
+                $json = "The condition doesn't exist or there is not connection with the database";
+            }
+
+            if (is_null($favorableCondition))
+            {
+                return new Response("The condition doesn't exist", 404);
             }
 
             $favorableCondition->type = $request->type;
@@ -202,11 +224,16 @@ class ControllerEdit extends Controller
         {
             try
             {
-            $favorableCondition = FavorableConditionNb::find($idCondition);
+                $favorableCondition = FavorableConditionNb::find($idCondition);
             }
             catch (Exception)
             {
-                $json = "The condition doesn't exsit or there is not connection with the database";
+                $json = "The condition doesn't exist or there is not connection with the database";
+            }
+
+            if (is_null($favorableCondition))
+            {
+                return new Response("The condition doesn't exist", 404);
             }
 
             $favorableCondition->type = $request->type;

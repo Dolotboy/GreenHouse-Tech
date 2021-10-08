@@ -13,6 +13,7 @@ use App\Models\AssignConditionDate;
 use App\Models\AssignProblem;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Response;
 
 class ControllerAssign extends Controller
 {
@@ -22,7 +23,7 @@ class ControllerAssign extends Controller
             is_null($idPlant) ||
             is_null($idCondition))
         {
-             return "One of the field is empty, you must fill them all";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         if ($type == 1)
@@ -59,7 +60,7 @@ class ControllerAssign extends Controller
         if (is_null($idPlant) ||
             is_null($idProblem))
         {
-         return "One of the field is empty, you must fill them all";
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
         }
 
         $assignProblem = new AssignProblem();
