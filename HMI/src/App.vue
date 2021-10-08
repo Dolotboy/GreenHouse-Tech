@@ -22,16 +22,19 @@
 import toolbox from './toolbox.js'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
+import Problem from './components/Problem.vue'
 import $ from '../node_modules/jquery/dist/jquery.js'
 
 export default {
   components :{
     Login,
-    Register
+    Register,
+    Problem
   },
   data(){
       return{
           envBack : "http://localhost:8000/",
+
           env : "https://apitestenv.pcst.xyz/",
           plants : [],
           showLogin : false,
@@ -55,13 +58,11 @@ export default {
       let version = localStorage.getItem('apiVersion');
       let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
       this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
-
       if(version == undefined || version != apiVersion){
         await this.ClearDb();
         localStorage.setItem('apiVersion', apiVersion);
         await this.DownloadContent();
-      }
-      
+      }     
       this.plants = await toolbox.fetchData(await toolbox.setDb());
       if(this.plants.length == 0)
         await this.DownloadContent();   
@@ -111,7 +112,6 @@ export default {
   text-align: center;
   color: black;
 }
-
 *{
   box-sizing: border-box;
 }
@@ -169,19 +169,16 @@ nav{
     }
   }
 }
-
 #LoginRegister :hover{
   color: #D2CCB1;
   background-color: #8d4705;
   cursor: pointer;
 }
-
 #LoginRegister {
   position: absolute;
   right: 0%;
   top: 0%;
 }
-
 #LoginRegister li{
   list-style-type: none;
   overflow: hidden;
@@ -189,13 +186,11 @@ nav{
   height: 100%;
   padding: 10px 15px;
 }
-
 li {
   float: left;
   border-right: 1px solid darkgrey;
   border-left: 1px solid darkgrey; 
 }
-
 li a {
   display: block;
   color: #d8d5ca;
@@ -203,16 +198,13 @@ li a {
   text-align: center;
   padding: 10px 15px;
 }
-
 li a:hover{
   color: black;
   background-color: #e6a800;
 }
-
 .active {
   background-color : #01B0D3;
 }
-
 .lblInp-div{
   display : flex;
   justify-content : end;

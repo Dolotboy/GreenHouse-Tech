@@ -1,10 +1,10 @@
 <template>
     <div class="details">
+        <p @click="toggleProblem">Problèmes</p>
         <h1>{{ plant.plantName }}</h1>
         <div class="detailsPlant">
             <p>Type de plante : {{ plant.plantType }}</p>
-            <p>Saison : {{plant.season}}</p>
-            <p>Problème : </p>
+            <p>Saison : {{plant.season}}</p>            
             <p>Condition favorable : </p>
             <p>Date de semance : </p>
             <p>Date de récolte :</p>
@@ -13,13 +13,32 @@
             <p>Type de sol : {{plant.groundType}}</p>
             <p>Fonctionnement : {{plant.description}}</p>              
         </div>
-        <div class="close-button" @click="$emit('close')" >X</div>        
+        <div class="close-button" @click="$emit('close')" >X</div>   
+        <Problem v-if="showProblem" @close="toggleProblem"/>     
     </div>
 </template>
 
+
+
 <script>
+import Problem from './Problem.vue'
+
 export default {
-    props : ['plant']
+    components :{
+        Problem
+     },
+    data(){
+      return{
+        showProblem : false
+      }
+  },
+    props : ['plant'],
+
+    methods: {
+        toggleProblem(){
+            this.showProblem = !this.showProblem;
+    }
+    } 
 }
 </script>
 
@@ -63,5 +82,9 @@ export default {
             margin:10px 0;
         }    
     }
+}
+.details p:hover{
+    color: red;
+    cursor: pointer;
 }
 </style>

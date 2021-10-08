@@ -2,7 +2,7 @@
 <div class="wrapper">
   <h1>{{ plant.plantName }}</h1>
   <p>{{ plant.idPlant }}</p>
-  <input class="star" type="checkbox" title="favorite"> 
+  <input class="star" type="checkbox" title="Favoris"> 
 </div>
 </template>
 
