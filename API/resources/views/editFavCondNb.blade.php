@@ -14,10 +14,10 @@
                         <div class="product-details">
                             <h3>Edit a favorable condition number</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"> <input type="text" name='type' value="{{ $favorableCondition["type"] }}"></h2>
-                                <h2 class="mb-3"> <input type="text" name='min' value=" {{ $favorableCondition["min"] }}"></h2>
-                                <h2 class="mb-3"> <input type="text" name='max' value="{{ $favorableCondition["max"] }}"></h2>  
-                                <h2 class="mb-3"> <input type="text" name='unit' value="{{ $favorableCondition["unit"] }}"></h2>  
+                                <h3 class="mb-3"> <input type="text" name='type' value="{{ $favorableCondition["type"] }}" required></h3>
+                                <h3 class="mb-3"> <input type="text" name='min' value=" {{ $favorableCondition["min"] }}" required></h3>
+                                <h3 class="mb-3"> <input type="text" name='max' value="{{ $favorableCondition["max"] }}" required></h3>  
+                                <h3 class="mb-3"> <input type="text" name='unit' value="{{ $favorableCondition["unit"] }}" required></h3>  
                                 <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Submit"></h3>                                      
                             </div>
                         </div>

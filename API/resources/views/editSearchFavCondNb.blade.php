@@ -13,7 +13,7 @@
                         <div class="product-details">
                         <h3>Edit your favorite condition number</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"><input type="text" id="v1" name='idRangeNb' placeholder="id Range Number" value=""></h2>                              
+                                <h2 class="mb-3"><input type="text" id="v1" name='idRangeNb' placeholder="id Range Number" value="" required></h2>                              
                                 <h3 class="mb-3"><input type="submit" name='submit' onclick="myFunction()" placeholder="Submit" value="Submit"></h3>                                         
                             </div>
                         </div>

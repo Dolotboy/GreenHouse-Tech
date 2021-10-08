@@ -13,7 +13,7 @@
                         <div class="product-details">
                             <h3>Edit a plant</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"><input type="text" id="v1" name='IdPlant' placeholder="Plant ID" value=""></h2>    
+                                <h2 class="mb-3"><input type="text" id="v1" name='IdPlant' placeholder="Plant ID" value="" required></h2>    
                                 <h3 class="mb-3"><input type="submit" onclick="myFunction()" name='submit' placeholder="Submit"></h3>                                       
                             </div>
                         </div>

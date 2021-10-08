@@ -16,12 +16,12 @@
                             <div class="product-details">
                             <h3>Add your information</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h2 class="mb-3"><input type="text" name='email' placeholder="Email" value=""></h2>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='password' placeholder="Password" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='username' placeholder="Username" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='firstName' placeholder="First Name" value=""></h3>
-                                    <h3 class="mb-0 text-primary"><input type="text" name='lastName' placeholder="Last Name" value=""></h3>   
-                                    <h3 class="mb-0 text-primary"><input type="text" name='access' placeholder="Access" value=""></h3>  
+                                    <h2 class="mb-3"><input type="text" name='email' placeholder="Email" value="" required></h2>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='password' placeholder="Password" value="" required></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='username' placeholder="Username" value="" required></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='firstName' placeholder="First Name" value="" required></h3>
+                                    <h3 class="mb-0 text-primary"><input type="text" name='lastName' placeholder="Last Name" value="" required></h3>   
+                                    <h3 class="mb-0 text-primary"><input type="text" name='access' placeholder="Access" value="" required></h3>  
                                     <h3 class="mb-0 text-primary"><input type="submit" name='submit' placeholder="Submit"></h3>                             
                                 </div>
                             </div>

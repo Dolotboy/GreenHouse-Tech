@@ -14,10 +14,10 @@
                         <div class="product-details">
                         <h3>Add a favorite condition Nb</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"><input type="text" name='type' placeholder="Range Type" value=""></h2>
-                                <h3 class="mb-3"><input type="text" name='min' placeholder="Min" value=""></h3>
-                                <h3 class="mb-3"><input type="text" name='max' placeholder="Max" value=""></h3>        
-                                <h3 class="mb-3"><input type="text" name='unit' placeholder="Unit" value=""></h3>                             
+                                <h2 class="mb-3"><input type="text" name='type' placeholder="Range Type" value="" required></h2>
+                                <h3 class="mb-3"><input type="text" name='min' placeholder="Min" value="" required></h3>
+                                <h3 class="mb-3"><input type="text" name='max' placeholder="Max" value="" required></h3>        
+                                <h3 class="mb-3"><input type="text" name='unit' placeholder="Unit" value="" required></h3>                             
                                 <h3 class="mb-3"><input type="submit" name='submit' value="Submit"></h3>                              
                             </div>
                         </div>

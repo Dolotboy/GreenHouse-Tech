@@ -12,7 +12,7 @@
                         <div class="product-details">
                         <h3>Edit your profile</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"><input type="text" id="v1" name='idProfile' placeholder="idProfile" value=""></h2>   
+                                <h2 class="mb-3"><input type="text" id="v1" name='idProfile' placeholder="idProfile" value="" required></h2>   
                                 <h3 class="mb-3"><input type="submit" onclick="myFunction()" name='submit' placeholder="Submit"></h3>                                       
                             </div>
                         </div>

@@ -14,8 +14,8 @@
                         <div class="product-details">
                         <h3>Assign a favorite condition date to a plant</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"> <input type="text" id="v1" name='tblPlant_idPlant' placeholder="idPlant" value=""></h2>
-                                <h3 class="mb-3"> <input type="text" id="v2" name='tblRangeDate_idRangeDate' placeholder="idRangeDate" value=""></h3>
+                                <h3 class="mb-3"> <input type="text" id="v1" name='tblPlant_idPlant' placeholder="idPlant" value="" required></h3>
+                                <h3 class="mb-3"> <input type="text" id="v2" name='tblRangeDate_idRangeDate' placeholder="idRangeDate" value="" required></h3>
                                 <h3 class="mb-3"> <button type="submit" name='submit' onclick="myFunction()" value="Submit"></button></h3>                                      
                             </div>
                         </div>

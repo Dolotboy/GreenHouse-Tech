@@ -12,10 +12,10 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                         <div class="product-details">
-                        <h3>Assign a problem</h3>
+                        <h3>Assign a problem</h3> 
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"> <input type="text" id="v1" name='tblPlant_idPlant' placeholder="idPlant" value=""></h2>
-                                <h3 class="mb-3"> <input type="text" id="v2" name='tblProblem_idProblem' placeholder="idProblem" value=""></h3>
+                                <h2 class="mb-3"> <input type="text" id="v1" name='tblPlant_idPlant' placeholder="idPlant" value="" required></h2>
+                                <h3 class="mb-3"> <input type="text" id="v2" name='tblProblem_idProblem' placeholder="idProblem" value="" required></h3>
                                 <h3 class="mb-3"> <button type="submit" name='submit' onclick="myFunction()" value="Submit"></button></h3>                                      
                             </div>
                         </div>

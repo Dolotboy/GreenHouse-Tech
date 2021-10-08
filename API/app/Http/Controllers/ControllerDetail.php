@@ -17,7 +17,10 @@ class ControllerDetail extends Controller
 {
     public function indexPlant(Request $request)
     {
-        return view('searchPlant');
+        $data = Plant::all();
+        
+        //return view('searchPlantTest',["plant" =­­­> $data]);
+        return view('searchPlantTest',["plant" => $data]);
     }
 
     public function searchPlant($id)

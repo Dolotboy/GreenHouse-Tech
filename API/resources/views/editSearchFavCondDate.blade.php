@@ -13,7 +13,7 @@
                         <div class="product-details">
                         <h3>Edit your favorite condition date</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"><input type="text" id="v1" name='idRangeDate' placeholder="id Range Date" value=""></h2>                              
+                                <h2 class="mb-3"><input type="text" id="v1" name='idRangeDate' placeholder="id Range Date" value="" required></h2>                              
                                 <h3 class="mb-3"><input type="submit" name='submit' onclick="myFunction()" placeholder="Submit" value="Submit"></h3>                                         
                             </div>
                         </div>
