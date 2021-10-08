@@ -20,11 +20,20 @@ class UpdaterProblemTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $data = Problem::find(5);
-        $dataEncode = json_encode($data);     
+        $data = Problem::find(15);     
 
-        $response = $this->json('PUT','/api/edit/problem/editProblem/5', [
-            $dataEncode->problemName => 'problemNameEdit'
+        $response = $this->json('PUT','/api/edit/problem/editProblem/15', [
+            $data->problemName => 'problemNameEdit',
+            'problemType' => 'problemType',
+            'problemSolution' => 'problemSolution'
+        ]);
+
+        $response->assertStatus(200);
+
+        $response = $this->json('PUT','/api/edit/problem/editProblem/15', [
+            $data->problemName => 'problemName',
+            'problemType' => 'problemType',
+            'problemSolution' => 'problemSolution'
         ]);
 
         $response->assertStatus(200);

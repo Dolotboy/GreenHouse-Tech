@@ -25,16 +25,18 @@ class ControllerEdit extends Controller
 
         $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
-        $plantType = $request->plantType;
-        $plantFamily = $request->plantFamily;
+        $plant->plantType = $request->plantType;
+        $plant->plantFamily = $request->plantFamily;
         $plant->plantSeason = $request->plantSeason;
         $plant->plantGroundType = $request->plantGroundType;
         $plant->plantDaysConservation = $request->plantDaysConservation;
         $plant->plantDescription = $request->plantDescription;
         $plant->plantDifficulty = $request->plantDifficulty;
         $plant->plantBestNeighbor = $request->plantBestNeighbor;
-
+        
         $plant->save();
+
+        Controller::incrementVersion();
 
         return ("La plante#$plant->idPlant a été modifié");
     }
@@ -55,6 +57,8 @@ class ControllerEdit extends Controller
 
         $problem->save();
 
+        Controller::incrementVersion();
+
         return ("Le problème#$problem->idProblem a été modifié");
     }
 
@@ -69,11 +73,13 @@ class ControllerEdit extends Controller
         $profile = Profile::find($idProfile);
 
         $profile->email = $request->email;
-        $profile->password = $request->password;
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
+        $profile->access = $request->access;
 
         $profile->save();
+
+        Controller::incrementVersion();
 
         return ("Le profile#$profile->idProfile a été modifié");
     }
@@ -106,6 +112,8 @@ class ControllerEdit extends Controller
         }
         
         $favorableCondition->save();
+
+        Controller::incrementVersion();
 
         return ("La condition favorable a été sauvegardé");
     }

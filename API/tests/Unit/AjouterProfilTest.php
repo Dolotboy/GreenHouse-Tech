@@ -24,7 +24,8 @@ class AjouterProfilTest extends TestCase
             'email' => 'email',
             'password' => 'password',
             'firstName' => 'firstName',
-            'lastName' => 'lastName'
+            'lastName' => 'lastName',
+            'access' => 'access'
         ]);
 
 

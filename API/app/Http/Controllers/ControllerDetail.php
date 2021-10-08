@@ -9,6 +9,7 @@ use App\Models\FavorableConditionNb;
 use App\Models\Favorite;
 use App\Models\Profile;
 use App\Models\AssignProblem;
+use App\Models\Version;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -134,25 +135,21 @@ class ControllerDetail extends Controller
 
     }
 
+    public function searchAllPackages(){
+        $plants = Plant::All();
+        $jsons = array();
+        for($i = 0; $i < count($plants); $i++){
+            $json = ControllerDetail::searchPackage($plants[$i]->idPlant);
+            array_push($jsons,json_decode($json));
+        }
+        return json_encode($jsons);
+    }
+
     public function searchPackage($searchCondition)
     {
         $plant = Plant::find($searchCondition);
-
-        $idPlant = $plant->idPlant;
-        $imgPlant = $plant->imgPlant;
-        $plantName = $plant->plantName;
-        $plantType = $plant->plantType;
-        $plantFamily = $plant->plantFamily;
-        $season = $plant->season;
-        $groundType = $plant->groundType;
-        $daysConservation = $plant->daysConservation;
-        $description = $plant->description;
-        $tblPlantSowing_idSowing = $plant->tblPlantSowing_idSowing;
-        $createdAt = $plant->created_at;
-        $updatedAt = $plant->updated_at;
-
-        
-        $array = array('idPlant' => $idPlant, 'imgPlant' => $imgPlant, 'plantName' => $plantName, 'season' => $season, 'groundType' => $groundType, 'daysConservation' => $daysConservation, 'description' => $description, 'tblPlantSowing_idSowing' => $tblPlantSowing_idSowing, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        $json = json_encode($plant);
+        $array = json_decode($json,true);
 
         $problems = array($plant->plantProblems);
 
@@ -165,7 +162,15 @@ class ControllerDetail extends Controller
         $package = array_merge($array, $problems, $favConditions);
 
         $json = json_encode($package);
+        $json = str_replace("\"0\":[", "\"problems\":[", $json);
+        $json = str_replace("\"1\":[", "\"favorableConditionDate\":[", $json);
+        $json = str_replace("\"2\":[", "\"favorableConditions\":[", $json);
 
         return $json;
+    }
+
+    public function indexVersion()
+    {
+        return view('');
     }
 }

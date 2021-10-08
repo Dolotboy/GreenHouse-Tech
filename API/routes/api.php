@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +20,6 @@ use App\Http\Controllers\ControllerUnassign;
 Route::post('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('addPlant');
 
 Route::put('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlant');
-
-Route::middleware(['cors'])->group(function () { Route::get("search/plant/{id}", [ControllerDetail::class, 'searchPlant'],function ($id){})->name('detailPlant'); });
 
 Route::get("search/plant/{idPlant}", [ControllerDetail::class, 'searchPlant'],function ($idPlant){})->name('detailPlant');
 
@@ -92,5 +91,14 @@ Route::delete('/unassign/condition/{type}/{idPlant}/{idCondition}', [ControllerU
 // ***************** PACKAGE *******************
 
 Route::get("search/package/{searchCondition}", [ControllerDetail::class, 'searchPackage'],function ($searchCondition){})->name('searchPackage');
+Route::get("searchAll/package/", [ControllerDetail::class, 'searchAllPackages'],function (){})->name('searchAllPackage');
 
 // ***************** PACKAGE *******************
+
+// ******************* VERSION *******************
+
+Route::get("search/last/version", [Controller::class, 'searchLastVersion'])->name('searchLastVersion');
+
+Route::post("increment/last/version", [Controller::class, 'incrementVersion'])->name('incrementVersion');
+
+// ******************* VERSION *******************

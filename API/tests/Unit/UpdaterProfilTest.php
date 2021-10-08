@@ -21,11 +21,24 @@ class UpdaterProfilTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $data = Profil::find(5);
-        $dataEncode = json_encode($data);     
+        $data = Profile::find(25);     
 
-        $response = $this->json('PUT','/api/edit/profile/editProfile/5', [
-            $dataEncode->email => 'emailEdit'
+        $response = $this->json('PUT','/api/edit/profile/editProfile/25', [
+            $data->email => 'emailEdit',
+            'password' => 'password',
+            'firstName' => 'firstName',
+            'lastName' => 'lastName',
+            'access' => 'access'
+        ]);
+
+        $response->assertStatus(200);
+
+        $response = $this->json('PUT','/api/edit/profile/editProfile/25', [
+            $data->email => 'email',
+            'password' => 'password',
+            'firstName' => 'firstName',
+            'lastName' => 'lastName',
+            'access' => 'access'
         ]);
 
         $response->assertStatus(200);

@@ -10,6 +10,8 @@ use App\Models\Favorite;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class ControllerAdd extends Controller
 {
@@ -20,9 +22,8 @@ class ControllerAdd extends Controller
 
     public function addPlant(Request $request)
     {
-
         $plant = new Plant();
-
+        
         $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
         $plant->plantType = $request->plantType;
@@ -36,6 +37,8 @@ class ControllerAdd extends Controller
         
         $plant->save();
 
+        Controller::incrementVersion();
+
         return ("La plante#$plant->idPlant a été ajouté");
     }
 
@@ -46,7 +49,6 @@ class ControllerAdd extends Controller
 
     public function addProblem(Request $request)
     {
-
         $problem = new Problem();
 
         $problem->problemName = $request->problemName;
@@ -54,6 +56,8 @@ class ControllerAdd extends Controller
         $problem->problemSolution = $request->problemSolution;
         
         $problem->save();
+
+        Controller::incrementVersion();
 
         return ("Le problème#$problem->idProblem a été ajouté");
     }
@@ -72,6 +76,8 @@ class ControllerAdd extends Controller
 
         $favorite->save();
 
+        Controller::incrementVersion();
+
         return ("Le favoris a été ajouté");
     }
 
@@ -82,16 +88,24 @@ class ControllerAdd extends Controller
 
     public function addProfile(Request $request)
     {
-
         $profile = new Profile();
+        $salt = Str::random(40);
 
         $profile->email = $request->email;
-        $profile->password = $request->password;
-        $profile->salt = Hash::make($request->password);
+        $hashedPassword = $request->password . $salt;
+
+        $profile->password = Hash::make($hashedPassword);
+        //$profile->password = $request->password;
+        //$profile->password = Hash::make($request->password);
+        $profile->salt = $salt;
+
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
+        $profile->access = $request->access;
         
         $profile->save();
+
+        Controller::incrementVersion();
 
         return ("Le profil a été ajouté");
     }
@@ -124,6 +138,8 @@ class ControllerAdd extends Controller
         }
         
         $favorableCondition->save();
+
+        Controller::incrementVersion();
 
         return ("La condition favorable a été ajouté");
     }
