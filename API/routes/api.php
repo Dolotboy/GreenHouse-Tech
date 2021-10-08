@@ -72,7 +72,7 @@ Route::get("searchAll/profile", [ControllerDetail::class, 'searchAllProfile'],fu
 
 Route::delete("/delete/profile/{idProfile}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile');
 
-Route::get("searchAll/favorites/{idProfile}", [ControllerDetails::class, 'getFavorites'],function ($idProfile){})->name('getFavorites'));
+Route::get("searchAll/favorite/{idProfile}", [ControllerDetail::class, 'searchAllFavorites'],function ($idProfile){})->name('searchAllFavorites');
 
 // ***************** PROFILE *******************
 

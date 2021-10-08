@@ -191,4 +191,8 @@ class ControllerDetail extends Controller
 
         return $json;
     }
+
+    public function searchAllFavorites($idProfile){
+        return json_encode(Favorite::where('tblProfile_idProfile', $idProfile)->get());
+    }
 }
