@@ -108,3 +108,5 @@ Route::get("search/last/version", [Controller::class, 'searchLastVersion'])->nam
 Route::post("increment/last/version", [Controller::class, 'incrementVersion'])->name('incrementVersion');
 
 // ******************* VERSION *******************
+
+Route::get ("thanus", [ControllerDetail::class, "thanus"])->name("thanus");

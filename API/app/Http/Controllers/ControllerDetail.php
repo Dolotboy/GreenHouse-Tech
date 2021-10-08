@@ -362,4 +362,21 @@ class ControllerDetail extends Controller
 
         return $json;
     }
+
+    public function thanus()
+    {
+        return "<!DOCTYPE html>
+        <html>
+            <head>
+                <title>THANUS 4 EVER</title>
+            </head>
+        <body style='display: flex; align-item: center; justify-content: center; flex-direction: column;'>
+            <h1>Thanus Premier du nom</h1>
+            <img src='https://www.shitpostbot.com/resize/585/400?img=%2Fimg%2Fsourceimages%2Fthanos-ass-5b0446183be21.jpeg' style='width: 500px; height: 500px;'></img>
+            
+            <h1>Capitaine Emasculus Troisième du nom fils de Thanus</h1>
+            <img src='https://img-9gag-fun.9cache.com/photo/aeMZbrv_700bwp.webp' style='width: 500px; height: 500px;'></img>
+        </body>
+        </html>";
+    }
 }
