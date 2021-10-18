@@ -22,7 +22,7 @@ class ControllerUnassign extends Controller
         if ($type == 1)
         {
             $unassignFavCondition = AssignConditionDate::where('tblPlant_idPlant', '=', $idPlant)
-            ->where('tblDateRangeFav_idRangeDate', '=', $idCondition)
+            ->where('tblRangeDate_idRangeDate', '=', $idCondition)
             ->get();
     
             if (is_null($unassignFavCondition))
@@ -35,7 +35,7 @@ class ControllerUnassign extends Controller
                 {
                     AssignConditionDate::where([
                         ['tblPlant_idPlant', '=', $idPlant],
-                        ['tblDateRangeFav_idRangeDate', '=', $idCondition],
+                        ['tblRangeDate_idRangeDate', '=', $idCondition],
                     ])->delete();
                     return ("Assignation deleted !");
                 }
@@ -48,7 +48,7 @@ class ControllerUnassign extends Controller
         else if ($type == 2)
         {
             $unassignFavCondition = AssignConditionNb::where('tblPlant_idPlant', '=', $idPlant)
-            ->where('tblNbRangeFav_idRangeNb', '=', $idCondition)
+            ->where('tblRangeNb_idRangeNb', '=', $idCondition)
             ->get();
     
             if (is_null($unassignFavCondition))
@@ -61,7 +61,7 @@ class ControllerUnassign extends Controller
                 {
                     AssignConditionNb::where([
                         ['tblPlant_idPlant', '=', $idPlant],
-                        ['tblNbRangeFav_idRangeNb', '=', $idCondition],
+                        ['tblRangeNb_idRangeNb', '=', $idCondition],
                     ])->delete();
                     return ("Assignation deleted !");
                 }
