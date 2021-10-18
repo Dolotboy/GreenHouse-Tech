@@ -23,8 +23,6 @@ class ControllerAdd extends Controller
     public function addPlant(Request $request)
     {
         $plant = new Plant();
-        $request = json_decode(file_get_contents('php://input'));
-
         $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
         $plant->plantType = $request->plantType;

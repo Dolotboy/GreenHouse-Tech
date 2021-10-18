@@ -20,7 +20,6 @@ class ControllerEdit extends Controller
 
     public function editPlant(Request $request, $idPlant)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         $plant = Plant::find($idPlant);
 
@@ -34,7 +33,7 @@ class ControllerEdit extends Controller
         $plant->plantDescription = $request->plantDescription;
         $plant->plantDifficulty = $request->plantDifficulty;
         $plant->plantBestNeighbor = $request->plantBestNeighbor;
-
+        
         $plant->save();
 
         Controller::incrementVersion();
@@ -49,7 +48,6 @@ class ControllerEdit extends Controller
 
     public function editProblem(Request $request, $idProblem)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         $problem = Problem::find($idProblem);
 
@@ -71,7 +69,6 @@ class ControllerEdit extends Controller
 
     public function editProfile(Request $request, $idProfile)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         $profile = Profile::find($idProfile);
 
@@ -94,7 +91,6 @@ class ControllerEdit extends Controller
 
     public function editFavCondition($type, $idCondition)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         if ($type == 1)
         {
