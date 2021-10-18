@@ -22,7 +22,6 @@ class ControllerEdit extends Controller
 
     public function editPlant(Request $request, $idPlant)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         if (is_null($request->plantImg) || 
             is_null($request->plantName) || 
@@ -86,7 +85,6 @@ class ControllerEdit extends Controller
 
     public function editProblem(Request $request, $idProblem)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         if (is_null($request->problemName) || 
             is_null($request->problemType) || 
@@ -136,7 +134,6 @@ class ControllerEdit extends Controller
 
     public function editProfile(Request $request, $idProfile)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         if (is_null($request->email) || 
             is_null($request->firstName) || 
@@ -186,7 +183,6 @@ class ControllerEdit extends Controller
 
     public function editFavCondition(Request $request, $type, $idCondition)
     {
-        $request =  json_decode(file_get_contents('php://input'));
 
         if (is_null($request->type) || 
             is_null($request->start) || 

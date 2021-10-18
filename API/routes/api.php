@@ -10,6 +10,7 @@ use App\Http\Controllers\ControllerDetail;
 use App\Http\Controllers\ControllerDelete;
 use App\Http\Controllers\ControllerAssign;
 use App\Http\Controllers\ControllerUnassign;
+use App\Http\Controllers\ControllerLogin;
 
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -73,6 +74,8 @@ Route::get("searchAll/profile", [ControllerDetail::class, 'searchAllProfile'],fu
 
 Route::delete("/delete/profile/{idProfile}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile');
 
+Route::get("searchAll/favorite/{idProfile}", [ControllerDetail::class, 'searchAllFavorites'],function ($idProfile){})->name('searchAllFavorites');
+
 // ***************** PROFILE *******************
 
 // ***************** FAVORABLE CONDITION *******************
@@ -91,7 +94,6 @@ Route::delete("/delete/condition/{type}/{idCondition}", [ControllerDelete::class
 Route::post('/assign/condition/{type}/{idPlant}/{idCondition}', [ControllerAssign::class, 'assignFavCondition'],function ($type, $idPlant, $idCondition){})->name('assignFavCondition');
 
 Route::delete('/unassign/condition/{type}/{idPlant}/{idCondition}', [ControllerUnassign::class, 'unassignFavCondition'],function ($type, $idPlant, $idCondition){})->name('unassignFavCondition');
-
 // ***************** FAVORABLE CONDITION *******************
 
 // ***************** PACKAGE *******************
@@ -109,4 +111,8 @@ Route::post("increment/last/version", [Controller::class, 'incrementVersion'])->
 
 // ******************* VERSION *******************
 
+<<<<<<< HEAD
 Route::get ("thanus", [ControllerDetail::class, "thanus"])->name("thanus");
+=======
+Route::post("login/checkLogin", [ControllerLogin::class, 'checkLogin'])->name('checkLogin');
+>>>>>>> ba82ef660ed7d8ce68136117d608a237c9648717

@@ -20,11 +20,11 @@
         <label>Tous</label>
         <input type="radio" name="rdPlantType" value="vegetable" checked @click="radioValueChanged('All')">
       </div>
-  </div>
-    <div class="productsGrid">
-      <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in visiblePlants' :plant="plant"/>
     </div>
-    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
+    <div class="productsGrid">
+      <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in visiblePlants' :plant="plant"/>    
+    </div>
+    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
 </template>
 
 <script>
@@ -94,65 +94,96 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 body{
   background-color: #292929;
 }
 .logo{
   margin-top: 1%;
   height: 10vh;
-}
-.logo img{
-  max-height: 100%;
-  max-width: 100%;
+
+  img{
+    max-height: 100%;
+    max-width: 100%;
+  }
 }
 .productsGrid{
   color: #D2CCB1;
   display : grid;
-  grid-template-columns: 50% 50%;
-  width : 100%;
-  margin-top: 1%;
+  grid-template-columns : repeat(auto-fit, minmax(250px, 1fr));
+  width : 80%;
+  margin : 2vh 0 0 10%;
+}
+
+.plant{
   background-color: #616161;
-}
 
-.plant:hover{
-  background-color : #600404;
-  cursor : pointer;
+  &:hover{
+    background-color : #600404;
+    cursor : pointer;
+  }
 }
-
 .rdPlantTypeWrapper{
-  display : flex;
-}
+  display : inline-flex;
+  width: auto;
+  background: #616161;
+  color: #D2CCB1;
+  justify-content: center;
+  margin : 2vh 0;
+  border: 1px solid;
+  border-radius: 5px;
 
-.rdPlantTypeWrapper > div{
-  display : flex;
+  & > div{
+    display : flex;
+
+    label{
+      font-size : 2rem;
+    }
+
+    input[type=radio]{
+      height: 1.5rem;
+      width : 1.5rem;
+      margin : auto 1rem;
+    }
+  }
 }
 
 .autoCompleteForm{
   display : flex;
   justify-content: center;
+
+  .autocomplete{
+    display : flex;
+    position : relative;
+  }
+
+  .autocomplete-active{
+    background : blue;
+  }
+
+  .autocomplete > *{
+    width : 100%
+  }
+
+  #searchBar{
+    height : 3rem;
+  }
+
+  #searchBarautocomplete-list{
+    position : absolute;
+    top : 100%;
+    background : white;
+  }
+
+  #searchBarautocomplete-list:hover{
+    cursor : pointer;
+  }
 }
 
-.autocomplete{
-  display : flex;
-  position : relative;
-}
-
-.autocomplete-active{
-  background : blue;
-}
-
-.autocomplete > *{
-  width : 100%
-}
-
-#searchBarautocomplete-list{
-  position : absolute;
-  top : 100%;
-  background : white;
-}
-
-#searchBarautocomplete-list:hover{
-  cursor : pointer;
+@media screen and (max-width : 600px){
+  input[type=radio]{
+    height : 2.5rem;
+    width : 2.5rem;
+  }
 }
 </style>
