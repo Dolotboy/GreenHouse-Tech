@@ -17,20 +17,19 @@ class ControllerAssign extends Controller
 {
     public function assignFavCondition($type, $idPlant, $idCondition)
     {
-
         if ($type == 1)
         {
             $assignFavorableCondition = new AssignConditionDate();
 
             $assignFavorableCondition->tblPlant_idPlant = $idPlant;
-            $assignFavorableCondition->tblDateRangeFav_idRangeDate = $idCondition;
+            $assignFavorableCondition->tblRangeDate_idRangeDate = $idCondition;
         }
         else if ($type == 2)
         {
             $assignFavorableCondition = new AssignConditionNb();
 
             $assignFavorableCondition->tblPlant_idPlant = $idPlant;
-            $assignFavorableCondition->tblNbRangeFav_idRangeNb = $idCondition;  
+            $assignFavorableCondition->tblRangeNb_idRangeNb = $idCondition;  
         }
         
         $assignFavorableCondition->save();

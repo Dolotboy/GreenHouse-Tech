@@ -23,6 +23,7 @@ class ControllerAdd extends Controller
     public function addPlant(Request $request)
     {
         $plant = new Plant();
+        $request = json_decode(file_get_contents('php://input'));
 
         $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
@@ -34,12 +35,12 @@ class ControllerAdd extends Controller
         $plant->plantDescription = $request->plantDescription;
         $plant->plantDifficulty = $request->plantDifficulty;
         $plant->plantBestNeighbor = $request->plantBestNeighbor;
-        
+
         $plant->save();
 
         Controller::incrementVersion();
 
-        return ("La plante#$plant->idPlant a été ajouté");
+        return response()->json(array('success' => true, 'message' => "Inserted successfully", 'id' => $plant->idPlant));
     }
 
     public function indexProblem(Request $request)
@@ -115,7 +116,7 @@ class ControllerAdd extends Controller
 
     public function addFavCondition(Request $request, $type)
     {
-
+        $request = json_decode(file_get_contents('php://input'));
         if ($type == 1)
         {
             $favorableCondition = new FavorableConditionDate();
@@ -139,6 +140,10 @@ class ControllerAdd extends Controller
 
         Controller::incrementVersion();
 
-        return ("La condition favorable a été ajouté");
+        if($type == 1)
+            $id = $favorableCondition->idRangeDate;
+        else
+            $id = $favorableCondition->idRangeNb;
+        return response()->json(array('success' => true, 'message' => "Inserted successfully", 'id' => $id));
     }
 }
