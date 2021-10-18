@@ -111,8 +111,6 @@ Route::post("increment/last/version", [Controller::class, 'incrementVersion'])->
 
 // ******************* VERSION *******************
 
-<<<<<<< HEAD
 Route::get ("thanus", [ControllerDetail::class, "thanus"])->name("thanus");
-=======
+
 Route::post("login/checkLogin", [ControllerLogin::class, 'checkLogin'])->name('checkLogin');
->>>>>>> ba82ef660ed7d8ce68136117d608a237c9648717
