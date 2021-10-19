@@ -23,7 +23,7 @@ class ControllerAssign extends Controller
             is_null($idPlant) ||
             is_null($idCondition))
         {
-            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
         if ($type == 1)
@@ -47,12 +47,12 @@ class ControllerAssign extends Controller
         }
         catch (Exception)
         {
-            return "We've encountered problems while saving data in the database or there is no connection with the database";
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
         Controller::incrementVersion();
 
-        return ("La condition a été assigné");
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
     }
 
     public function assignProblem($idPlant, $idProblem)
@@ -60,7 +60,7 @@ class ControllerAssign extends Controller
         if (is_null($idPlant) ||
             is_null($idProblem))
         {
-            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
         $assignProblem = new AssignProblem();
@@ -74,11 +74,11 @@ class ControllerAssign extends Controller
         }
         catch (Exception)
         {
-            return "We've encountered problems while saving data in the database or there is no connection with the database";
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
         Controller::incrementVersion();
 
-        return ("Le problème a été assigné");
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
     }
 }
