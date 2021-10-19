@@ -159,7 +159,21 @@ class DeleteTest extends TestCase
         
         $favorite->save();
 
-        $this->delete("/api/delete/favorite/".$idPlant."/".$idProfile)->assertStatus(200);
+        $FavoritesBefore = Favorite::where("tblPlant_idPlant",$idPlant)
+        ->where("tblProfile_idProfile",$idProfile)
+        ->get();
+        $this->assertEquals(count($FavoritesBefore),1);
+
+        $this->delete("/api/delete/favorite/".$idPlant."/".$idProfile);
+        
+        $FavoritesAfter = Favorite::where("tblPlant_idPlant",$idPlant)
+               ->where("tblProfile_idProfile",$idProfile)
+               ->get();
+
+        $this->assertEquals(count($FavoritesAfter),0);
+
+        $this->delete("/api/delete/profile/".$idProfile);
+        $this->delete("/api/delete/plant/".$idPlant);
 
     }
     public function test_deleteProfile()
@@ -181,7 +195,7 @@ class DeleteTest extends TestCase
         $id=$profile->idProfile;
         
 
-        $this->delete("/api/delete/profile/".$id)->assertStatus(200);
+        $this->delete("/api/delete/profile/".$id);
 
         $this->get('/api/search/profile/'.$id)->assertStatus(404);
 
