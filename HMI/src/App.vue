@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav>
+    <nav id="navDesktop">
       <ul>
         <div id="BasicNav">
           <li><router-link to="/">Accueil</router-link></li> 
@@ -10,6 +10,19 @@
           <li @click="toggleRegister">S'inscrire</li>
           <li @click="toggleLogin">Se connecter</li>         
         </div>
+      </ul>
+    </nav>
+    <nav id="navMobile">
+      <div class="hamburger-wrapper">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="links">
+          <li><router-link to="/">Accueil</router-link></li> 
+          <li><router-link to="/about">À propos</router-link></li>
+          <li @click="toggleRegister">S'inscrire</li>
+          <li @click="toggleLogin">Se connecter</li> 
       </ul>
     </nav>
     <router-view/>  
@@ -133,7 +146,7 @@ button{
   }
 }
 
-nav{
+#navDesktop{
   position : relative;
 
   &> ul{
@@ -226,6 +239,66 @@ li a:hover{
   }
 }
 
+#navMobile{
+  display : none;
+  position : relative;
+  top : 0;
+  left : 0;
+  background: black;
+  color : white;
+  width : 75vw;
+  height : 75vh;
+
+  .hamburger-wrapper{
+      position : absolute;
+      top : 0;
+      left : 0;
+      display : flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      width : 10vw;
+      height : 10vw;
+
+      div{
+        width : 80%;
+        height : 15%;
+        background: white;
+      }
+  }
+
+  .links{
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height : 75%;
+    position : absolute;
+    bottom : 0;
+    left: 0;
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+
+    li{
+      font-size: 3rem;
+      text-decoration: none;
+      border : none;
+      padding: 10px 15px;
+      color : white;
+
+      &:hover{
+        background-color: #e6a800;
+        cursor : pointer;
+      }
+
+      a{
+        color : white;
+      }
+    }
+  }
+}
+
 @media screen and (max-width : 1200px) {
   html{
     font-size : 7.5pt;
@@ -240,6 +313,14 @@ li a:hover{
       width : 100% !important;
       margin : 0 !important;
     }
+  }
+
+  #navDesktop{
+    display : none;
+  }
+
+  #navMobile{
+    display : block;
   }
 }
 
