@@ -76,7 +76,7 @@ class ControllerDetail extends Controller
     {
         if (is_null($idProblem))
         {
-            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         }
 
         try
@@ -126,7 +126,7 @@ class ControllerDetail extends Controller
     {
         if (is_null($idProfile))
         {
-            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
 
         try
@@ -189,7 +189,7 @@ class ControllerDetail extends Controller
         if (is_null($type) ||
             is_null($idCondition))
         {
-            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
         }
 
         try
@@ -222,7 +222,7 @@ class ControllerDetail extends Controller
     {
         if (is_null($type))
         {
-            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
         try
@@ -283,7 +283,7 @@ class ControllerDetail extends Controller
     {
         if (is_null($searchCondition))
         {
-            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $searchCondition], 400);
         }
 
         try
