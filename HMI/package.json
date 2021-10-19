@@ -9,7 +9,8 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "jquery": "^3.6.0",
-    "sass-loader": "^12.1.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "10.1.1",
     "vue": "^3.2.19",
     "vue-cli": "^2.9.6",
     "vue-router": "^4.0.0-0"
@@ -18,7 +19,8 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0"
+    "@vue/compiler-sfc": "^3.0.0",
+    "sa": "^0.2.50"
   },
   "browserslist": [
     "> 1%",

@@ -10,7 +10,9 @@ use App\Models\Favorite;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Support\Str;
+use Illuminate\Http\Response;
 
 
 class ControllerAdd extends Controller
@@ -24,6 +26,20 @@ class ControllerAdd extends Controller
     {
         $plant = new Plant();
 
+        if (is_null($request->plantImg) || 
+            is_null($request->plantName) || 
+            is_null($request->plantType) || 
+            is_null($request->plantFamily) || 
+            is_null($request->plantSeason) || 
+            is_null($request->plantGroundType) || 
+            is_null($request->plantDaysConservation) || 
+            is_null($request->plantDescription) || 
+            is_null($request->plantDifficulty) || 
+            is_null($request->plantBestNeighbor))
+        {
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+        }
+
         $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
         $plant->plantType = $request->plantType;
@@ -35,11 +51,18 @@ class ControllerAdd extends Controller
         $plant->plantDifficulty = $request->plantDifficulty;
         $plant->plantBestNeighbor = $request->plantBestNeighbor;
         
-        $plant->save();
+        try
+        {
+            $plant->save();
+        }
+        catch (Exception)
+        {
+            return "We've encountered problems while saving data in the database or there is no connection with the database";
+        }
 
         Controller::incrementVersion();
 
-        return ("La plante#$plant->idPlant a été ajouté");
+        return response()->json(array('success' => true, 'message' => "Inserted successfully", 'id' => $plant->idPlant));
     }
 
     public function indexProblem(Request $request)
@@ -51,11 +74,25 @@ class ControllerAdd extends Controller
     {
         $problem = new Problem();
 
+        if (is_null($request->problemName) || 
+            is_null($request->problemType) || 
+            is_null($request->problemSolution))
+        {
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+        }
+
         $problem->problemName = $request->problemName;
         $problem->problemType = $request->problemType;
         $problem->problemSolution = $request->problemSolution;
         
-        $problem->save();
+        try
+        {
+            $problem->save();
+        }
+        catch (Exception)
+        {
+            return "We've encountered problems while saving data in the database or there is no connection with the database";
+        }
 
         Controller::incrementVersion();
 
@@ -71,10 +108,23 @@ class ControllerAdd extends Controller
     {
         $favorite = new Favorite();
 
+        if (is_null($idPlant) || 
+            is_null($idProfile))
+        {
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+        }
+
         $favorite->tblPlant_idPlant = $idPlant;
         $favorite->tblProfile_idProfile = $idProfile;
 
-        $favorite->save();
+        try
+        {
+            $favorite->save();
+        }
+        catch (Exception)
+        {
+            return "We've encountered problems while saving data in the database or there is no connection with the database";
+        }
 
         Controller::incrementVersion();
 
@@ -91,23 +141,41 @@ class ControllerAdd extends Controller
         $profile = new Profile();
         $salt = Str::random(40);
 
-        $profile->email = $request->email;
-        $hashedPassword = $request->password . $salt;
+        if (is_null($request->email) || 
+            is_null($request->password) || 
+            is_null($request->firstname) || 
+            is_null($request->lastname) || 
+            is_null($request->access))
+        {
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+        }
+        else if (is_null($salt))
+        {
+            return "A problem has been encountered while creating a salt";
+        }
 
-        $profile->password = Hash::make($hashedPassword);
-        //$profile->password = $request->password;
-        //$profile->password = Hash::make($request->password);
+        $profile->email = $request->email;
+        $saltedPassword = $request->password . $salt;
+
+        $profile->password = Controller::hashPassword($saltedPassword);
         $profile->salt = $salt;
 
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
         $profile->access = $request->access;
-        
-        $profile->save();
+
+        try
+        {
+            $profile->save();
+        }
+        catch (Exception)
+        {
+            return "We've encountered problems while saving data in the database or there is no connection with the database";
+        }
 
         Controller::incrementVersion();
 
-        return ("Le profil a été ajouté");
+        return ("  Le profil a été ajouté");
     }
 
     public function indexFavCondition(Request $request)
@@ -117,6 +185,16 @@ class ControllerAdd extends Controller
 
     public function addFavCondition(Request $request, $type)
     {
+        if (is_null($request->type) || 
+            is_null($request->start) || 
+            is_null($request->end) || 
+            is_null($request->location) || 
+            is_null($request->min) || 
+            is_null($request->max) || 
+            is_null($request->unit))
+        {
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+        }
 
         if ($type == 1)
         {
@@ -136,11 +214,22 @@ class ControllerAdd extends Controller
             $favorableCondition->max = $request->max;
             $favorableCondition->unit = $request->unit;
         }
-        
-        $favorableCondition->save();
 
+        try
+        {
+            $favorableCondition->save();
+        }
+        catch (Exception)
+        {
+            return "We've encountered problems while saving data in the database or there is no connection with the database";
+        }
+        
         Controller::incrementVersion();
 
-        return ("La condition favorable a été ajouté");
+        if($type == 1)
+            $id = $favorableCondition->idRangeDate;
+        else
+            $id = $favorableCondition->idRangeNb;
+        return response()->json(array('success' => true, 'message' => "Inserted successfully", 'id' => $id));
     }
 }

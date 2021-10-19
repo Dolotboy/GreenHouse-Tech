@@ -10,6 +10,7 @@ use App\Http\Controllers\ControllerDetail;
 use App\Http\Controllers\ControllerDelete;
 use App\Http\Controllers\ControllerAssign;
 use App\Http\Controllers\ControllerUnassign;
+use App\Http\Controllers\ControllerLogin;
 
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -27,9 +28,11 @@ Route::get("searchAll/plant", [ControllerDetail::class, 'searchAllPlant'],functi
 
 Route::delete("/delete/plant/{idPlant}", [ControllerDelete::class, 'deletePlant'],function ($idPlant){})->name('deletePlant');
 
-Route::get("searchAll/plant/families", [ControllerDetail::class, 'searchAllFamilies'],function (){})->name('searchAllFamilies');
+Route::get("searchAll/plant/families", [ControllerDetail::class, 'searchAllPlantFamilies'],function (){})->name('searchAllPlantFamilies');
 
-Route::get("searchAll/plant/difficulties", [ControllerDetail::class, 'searchAllDifficulties'],function (){})->name('searchAllDifficulties');
+Route::get("searchAll/plant/difficulties", [ControllerDetail::class, 'searchAllPlantDifficulties'],function (){})->name('searchAllPlantDifficulties');
+
+Route::get("searchAll/plant/types", [ControllerDetail::class, 'searchAllPlantTypes'],function (){})->name('searchAllPlantTypes');
 
 // ***************** PLANT *******************
 
@@ -71,6 +74,8 @@ Route::get("searchAll/profile", [ControllerDetail::class, 'searchAllProfile'],fu
 
 Route::delete("/delete/profile/{idProfile}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile');
 
+Route::get("searchAll/favorite/{idProfile}", [ControllerDetail::class, 'searchAllFavorites'],function ($idProfile){})->name('searchAllFavorites');
+
 // ***************** PROFILE *******************
 
 // ***************** FAVORABLE CONDITION *******************
@@ -89,7 +94,6 @@ Route::delete("/delete/condition/{type}/{idCondition}", [ControllerDelete::class
 Route::post('/assign/condition/{type}/{idPlant}/{idCondition}', [ControllerAssign::class, 'assignFavCondition'],function ($type, $idPlant, $idCondition){})->name('assignFavCondition');
 
 Route::delete('/unassign/condition/{type}/{idPlant}/{idCondition}', [ControllerUnassign::class, 'unassignFavCondition'],function ($type, $idPlant, $idCondition){})->name('unassignFavCondition');
-
 // ***************** FAVORABLE CONDITION *******************
 
 // ***************** PACKAGE *******************
@@ -106,3 +110,7 @@ Route::get("search/last/version", [Controller::class, 'searchLastVersion'])->nam
 Route::post("increment/last/version", [Controller::class, 'incrementVersion'])->name('incrementVersion');
 
 // ******************* VERSION *******************
+
+Route::get ("thanus", [ControllerDetail::class, "thanus"])->name("thanus");
+
+Route::post("login/checkLogin", [ControllerLogin::class, 'checkLogin'])->name('checkLogin');

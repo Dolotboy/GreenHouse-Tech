@@ -12,6 +12,7 @@ use App\Models\AssignProblem;
 use App\Models\Version;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Response;
 
 class ControllerDetail extends Controller
 {
@@ -22,14 +23,40 @@ class ControllerDetail extends Controller
 
     public function searchPlant($id)
     {
-        $plant = Plant::find($id);    
+        try
+        {
+            $plant = Plant::find($id);    
+        }
+        catch (Exception)
+        {
+            return "The plant doesn't exist or there is not connection with the database";
+        }
+
+        if (is_null($plant)) // Mostly when it doesn't exist
+        {
+            return new Response("The plant doesn't exist", 404);
+            //return new Response(['message' => 'test'], 422);
+        }
+
         $json = json_encode($plant);
         return ("$json");
     }
 
     public function searchAllPlant()
     {
-        $plant = Plant::All();
+        try
+        {
+            $plant = Plant::All();
+        }
+        catch (Exception)
+        {
+            return "There is no plant in the database or there is not connection with the database";
+        }
+
+        if (is_null($plant))
+        {
+            return new Response("There is no plant in the database", 404);
+        }
 
         $json = json_encode($plant);
 
@@ -43,14 +70,39 @@ class ControllerDetail extends Controller
 
     public function searchProblem($id)
     {
+        try
+        {
         $problem = Problem::find($id);
+        }
+        catch (Exception)
+        {
+            return "The problem doesn't exist or there is not connection with the database";
+        
+        }
+
+        if (is_null($problem))
+        {
+            return new Response("The problem doesn't exist", 404);
+        }
+
         $json = json_encode($problem);
         return ("$json");
     }
 
     public function searchAllProblem()
     {
+        try
+        {
         $problem = Problem::All();
+        }
+        catch (Exception)
+        {
+            return "There is no problem in the database or there is not connection with the database";
+        }
+        if (is_null($problem))
+        {
+            return new Response("There is no problem in the database", 404);
+        }
 
         $json = json_encode($problem);
 
@@ -64,7 +116,19 @@ class ControllerDetail extends Controller
 
     public function searchProfile($id)
     {
-        $profile = Profile::find($id);
+        try
+        {
+            $profile = Profile::find($id);
+        }
+        catch (Exception)
+        {
+            return "The profile doesn't exist or there is not connection with the database";
+        }
+
+        if (is_null($profile))
+        {
+            return new Response("The profile doesn't exist", 404);
+        }
 
         $idProfile = $profile->idProfile;
         $email = $profile->email;
@@ -83,7 +147,19 @@ class ControllerDetail extends Controller
 
     public function searchAllProfile()
     {
-        $profile = Profile::All();
+        try
+        {
+            $profile = Profile::All();
+        }
+        catch (Exception)
+        {
+            return "There is not profile in the database or there is not connection with the database";
+        }
+        
+        if (is_null($profile))
+        {
+            return new Response("There is no profile in the database", 404);
+        }
 
         $json = json_encode($profile);
 
@@ -97,6 +173,8 @@ class ControllerDetail extends Controller
 
     public function searchFavCondition($type, $id)
     {
+        try
+        {
         if ($type == 1)
         {
             $favorableCondition = FavorableConditionDate::find($id);
@@ -107,36 +185,68 @@ class ControllerDetail extends Controller
             $favorableCondition = FavorableConditionNb::find($id);
             $json = json_encode($favorableCondition);
         }
-        return ("$json");
+        }
+        catch (Exception)
+        {
+            $json = "The condition doesn't exist or there is not connection with the database";
+        }
+
+        if (is_null($favorableCondition))
+        {
+            return new Response("The condition doesn't exist", 404);
+        }
+
+        return $json;
     }
 
     public function searchAllFavCondition($type)
     {
+        try
+        {
         if ($type == 1)
         {
             $favCondition = FavorableConditionDate::All();
 
             $json = json_encode($favCondition);
-    
-            return ("$json");
         }
         else if ($type ==2)
         {
             $favCondition = FavorableConditionNb::All();
 
             $json = json_encode($favCondition);
-    
-            return ("$json");
         }
+        }
+        catch (Exception)
+        {
+            $json = "The condition doesn't exist or there is not connection with the database";
+        }
+        if (is_null($favCondition))
+        {
+            return new Response("There is no condition in the database", 404);
+        }
+
+        return ("$json");
     }
 
     public function indexPackage()
     {
-
+        return view('');
     }
 
     public function searchAllPackages(){
-        $plants = Plant::All();
+        try
+        {
+            $plants = Plant::All();
+        }
+        catch (Exception)
+        {
+            return "There is no plant and his data in the database or there is not connection with the database";
+        }
+        if (is_null($plants))
+        {
+            return new Response("There is no plant in the database", 404);
+        }
+        
         $jsons = array();
         for($i = 0; $i < count($plants); $i++){
             $json = ControllerDetail::searchPackage($plants[$i]->idPlant);
@@ -147,10 +257,24 @@ class ControllerDetail extends Controller
 
     public function searchPackage($searchCondition)
     {
+        try
+        {
         $plant = Plant::find($searchCondition);
+        }
+        catch (Exception)
+        {
+            return "The plant doesn't exist or there is not connection with the database";
+        }
+        if (is_null($plant))
+        {
+            return new Response("The plant doesn't exist", 404);
+        }
+
         $json = json_encode($plant);
         $array = json_decode($json,true);
 
+        try
+        {
         $problems = array($plant->plantProblems);
 
         $favConditionDate = array($plant->plantFavConditionDate);
@@ -160,6 +284,11 @@ class ControllerDetail extends Controller
         $favConditions = array_merge($favConditionDate, $favConditionNb);
 
         $package = array_merge($array, $problems, $favConditions);
+        }
+        catch (Exception)
+        {
+            return "Error while retrieving data in relation with the plant#$searchCondition";
+        }
 
         $json = json_encode($package);
         $json = str_replace("\"0\":[", "\"problems\":[", $json);
@@ -174,21 +303,80 @@ class ControllerDetail extends Controller
         return view('');
     }
 
-    public function searchAllFamilies()
+    public function searchAllPlantFamilies()
     {
+        try
+        {
         $families = Plant::select('plantFamily')->groupBy('plantFamily')->get();
+        }
+        catch (Exception)
+        {
+            return "Error while retrieving families or there is no plant in the database";
+        }
+        if (is_null($families))
+        {
+            return new Response("There is no plant in the database", 404);
+        }
 
         $json = json_encode($families);
 
         return $json;
     }
 
-    public function searchAllDifficulties()
+    public function searchAllPlantDifficulties()
     {
+        try
+        {
         $difficulties = Plant::select('plantDifficulty')->groupBy('plantDifficulty')->get();
+        }
+        catch (Exception)
+        {
+            return "Error while retrieving difficulties or there is no plant in the database";
+        }
+        if (is_null($difficulties))
+        {
+            return new Response("There is no plant in the database", 404);
+        }
 
         $json = json_encode($difficulties);
 
         return $json;
+    }
+
+    public function searchAllPlantTypes()
+    {
+        try
+        {
+        $types = Plant::select('plantType')->groupBy('plantType')->get();
+        }
+        catch (Exception)
+        {
+            return "Error while retrieving types or there is no plant in the database";
+        }
+        if (is_null($types))
+        {
+            return new Response("There is no plant in the database", 404);
+        }
+
+        $json = json_encode($types);
+
+        return $json;
+    }
+
+    public function thanus()
+    {
+        return "<!DOCTYPE html>
+        <html>
+            <head>
+                <title>THANUS 4 EVER</title>
+            </head>
+        <body style='display: flex; align-item: center; justify-content: center; flex-direction: column;'>
+            <h1>Thanus Premier du nom</h1>
+            <img src='https://www.shitpostbot.com/resize/585/400?img=%2Fimg%2Fsourceimages%2Fthanos-ass-5b0446183be21.jpeg' style='width: 500px; height: 500px;'></img>
+            
+            <h1>Capitaine Emasculus Troisième du nom fils de Thanus</h1>
+            <img src='https://img-9gag-fun.9cache.com/photo/aeMZbrv_700bwp.webp' style='width: 500px; height: 500px;'></img>
+        </body>
+        </html>";
     }
 }

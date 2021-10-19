@@ -10,6 +10,7 @@ use App\Models\Favorite;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Response;
 
 class ControllerDelete extends Controller
 {
@@ -20,11 +21,23 @@ class ControllerDelete extends Controller
 
     public function deletePlant($idPlant)
     {
-        $plant = Plant::Find($idPlant);
+        if (is_null($idPlant))
+        {
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+        }
+
+        try
+        {
+            $plant = Plant::Find($idPlant);
+        }
+        catch (Exception)
+        {
+            return "The plant doesn't exist or there is no connection with the database";
+        }
 
         if (is_null($plant))
         {
-            return('Error, assignation not found');
+            return('Error, plant not found');
         }
         else
         {
@@ -36,7 +49,7 @@ class ControllerDelete extends Controller
             }
             catch(Exception $e)
             {
-                return('Error while deleting'.$e);
+                return('Error while deleting or there is no connection with the database'.$e);
             }
         }
     }
@@ -48,7 +61,19 @@ class ControllerDelete extends Controller
 
     public function deleteProblem($idProblem)
     {
-        $problem = Problem::Find($idProblem);
+        if (is_null($idProblem))
+        {
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+        }
+
+        try
+        {
+            $problem = Problem::Find($idProblem);
+        }
+        catch (Exception)
+        {
+            return "The problem doesn't exist or there is no connection with the database";
+        }
 
         if (is_null($problem))
         {
@@ -64,7 +89,7 @@ class ControllerDelete extends Controller
             }
             catch(Exception $e)
             {
-                return('Error while deleting'.$e);
+                return('Error while deleting or there is no connection with the database'.$e);
             }
         }
     }
@@ -76,9 +101,22 @@ class ControllerDelete extends Controller
 
     public function deleteFavorite($idPlant, $idProfile)
     {
-        $favorite = Favorite::where('tblPlant_idPlant', '=', $idPlant)
-        ->where('tblProfile_idProfile', '=', $idProfile)
-        ->get();
+        if (is_null($idPlant) ||
+            is_null($idProfile))
+        {
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+        }
+
+        try
+        {
+            $favorite = Favorite::where('tblPlant_idPlant', '=', $idPlant)
+            ->where('tblProfile_idProfile', '=', $idProfile)
+            ->get();
+        }
+        catch (Exception)
+        {
+            return "The favorite doesn't exist or there is no connection with the database";
+        }
 
         if (is_null($favorite))
         {
@@ -97,7 +135,7 @@ class ControllerDelete extends Controller
             }
             catch(Exception $e)
             {
-                return('Error while deleting'.$e);
+                return('Error while deleting or there is no connection with the database'.$e);
             }
         }
     }
@@ -109,7 +147,19 @@ class ControllerDelete extends Controller
 
     public function deleteProfile($idProfile)
     {
-        $profile = Problem::Find($idProfile);
+        if (is_null($idProfile))
+        {
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+        }
+
+        try
+        {
+            $profile = Problem::Find($idProfile);
+        }
+        catch (Exception)
+        {
+            return "The profile doesn't exist or there is no connection with the database";
+        }
 
         if (is_null($profile))
         {
@@ -125,7 +175,7 @@ class ControllerDelete extends Controller
             }
             catch(Exception $e)
             {
-                return('Error while deleting'.$e);
+                return('Error while deleting or there is no connection with the database'.$e);
             }
         }
     }
@@ -137,9 +187,22 @@ class ControllerDelete extends Controller
 
     public function deleteFavCondition($type, $idCondition)
     {
+        if (is_null($type) ||
+            is_null($idCondition))
+        {
+            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+        }
+
         if ($type == 1)
         {
-            $favorableCondition = FavorableConditionDate::Find($idCondition);
+            try
+            {
+                $favorableCondition = FavorableConditionDate::Find($idCondition);
+            }
+            catch (Exception)
+            {
+                return "The condition doesn't exist or there is no connection with the database";
+            }
 
             if (is_null($idCondition))
             {
@@ -155,13 +218,20 @@ class ControllerDelete extends Controller
                 }
                 catch(Exception $e)
                 {
-                    return('Error while deleting'.$e);
+                    return('Error while deleting or there is no connection with the database'.$e);
                 }
             }
         }
         else if ($type == 2)
         {
-            $favorableCondition = FavorableConditionNb::Find($idCondition);
+            try
+            {
+                $favorableCondition = FavorableConditionNb::Find($idCondition);
+            }
+            catch (Exception)
+            {
+                return "The condition doesn't exist or there is no connection with the database";
+            }
 
             if (is_null($idCondition))
             {
@@ -177,7 +247,7 @@ class ControllerDelete extends Controller
                 }
                 catch(Exception $e)
                 {
-                    return('Error while deleting'.$e);
+                    return('Error while deleting or there is no connection with the database'.$e);
                 }
             }
         }
