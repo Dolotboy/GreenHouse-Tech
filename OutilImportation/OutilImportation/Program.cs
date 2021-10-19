@@ -28,11 +28,11 @@ namespace OutilImportation
         static void LoadVeggies(List<Plant> veggies)
         {
             Excel.Application app = new Excel.Application();
-            Excel.Workbook wb = app.Workbooks.Open(baseDir + "infoleg.xlsx");
+            Excel.Workbook wb = app.Workbooks.Open(baseDir + "veggies.xlsx");
             Excel.Worksheet ws = (Excel.Worksheet)wb.Sheets[1];
             Excel.Range range = ws.UsedRange;
 
-            for (int i = 2; i < 1000; i++)
+            for (int i = 2; i < 10; i++)
             {
                 if (ConvertCellToString(range.Cells[i, 1]) == "")
                     break;
@@ -47,11 +47,11 @@ namespace OutilImportation
                 };
                 Plant veg = new Plant()
                 {
-                    plantImg = "",
+                    plantImg = "empty",
                     plantName = ConvertCellToString(range.Cells[i, 1]),
                     plantType = ConvertCellToString(range.Cells[i, 14]),
-                    plantFamily = "",
-                    plantSeason = "",
+                    plantFamily = "empty",
+                    plantSeason = "empty",
                     plantGroundType = ConvertCellToString(range.Cells[i, 12]),
                     plantDaysConservation = ConvertCellToString(range.Cells[i, 13], true),
                     plantDescription = ConvertCellToString(range.Cells[i, 11]),
@@ -105,7 +105,7 @@ namespace OutilImportation
         static string ConvertCellToString(Excel.Range cell, bool shouldRemoveCommas = false)
         {
             if (cell.Value == null)
-                return "";
+                return "empty";
             if (shouldRemoveCommas)
                 return RemoveComas(cell.Value.ToString().Replace("\'", "\'\'"));
             return cell.Value.ToString().Replace("\'", "\'\'");
