@@ -4,6 +4,7 @@ using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace OutilImportation
 {
@@ -20,7 +21,7 @@ namespace OutilImportation
             List<Plant> veggies = new List<Plant>();
             LoadVeggies(veggies);
             //PushData($"https://{env}.pcst.xyz/api/new/plant/addPlant", veggies);
-            PushData($"http://localhost:8000/api/new/plant/addPlant", veggies);
+            PushData($"http://localhost:8000/api/", veggies);
 
             Interface.ReadKey();
         }
@@ -67,38 +68,60 @@ namespace OutilImportation
             app.Quit();
         }
 
-        static async void PushData(string url, List<Plant> veggies)
+        static async void PushData(string baseUrl, List<Plant> veggies)
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
                     foreach (Plant veg in veggies)
-                    {
-                        StringContent content = new StringContent(veg.ToString());
-                        Interface.WriteLine(veg.ToString());
-                        HttpResponseMessage response = await client.PostAsync(url, content);
-                        string responseString = await response.Content.ReadAsStringAsync();
-                        Response plantResponse = JsonConvert.DeserializeObject<Response>(responseString);
-                        Interface.WriteLine(plantResponse.id);
-                        if(plantResponse.success)
-                            foreach(ConditionNb cond in veg.conditionsNbs)
-                            {
-                                StringContent content2 = new StringContent(cond.ToString());
-                                HttpResponseMessage response2 = await client.PostAsync("http://localhost:8000/api/new/condition/addFavCondition/2", content2);
-                                string responseString2 = await response2.Content.ReadAsStringAsync();
-                                Response condResponse = JsonConvert.DeserializeObject<Response>(responseString2);
-                                response = await client.PostAsync($"http://localhost:8000/api/assign/condition/2/{plantResponse.id}/{condResponse.id}", new StringContent(""));
-                                Interface.WriteLine(condResponse.id);
-                            }
-                        Interface.WriteLine(responseString);
-                    }
+                       await PushPlant(baseUrl, veg, client);
                 }
                 Interface.WriteLine("Everything was pushed.");
             }
             catch(Exception e)
             {
                 Interface.WriteLine(e.Message);
+            }
+        }
+
+        static async Task PushPlant(string baseUrl, Plant plant, HttpClient client)
+        {
+            Response plantResponse = await PostContent($"{baseUrl}new/plant/addPlant", new StringContent(plant.ToString()), client);
+            if (plantResponse.success)
+            {
+                Interface.WriteLine($"\nPlant #{plantResponse.id} added successfully");
+                foreach (ConditionNb cond in plant.conditionsNbs)
+                {
+                    Response condResponse = await PostContent($"{baseUrl}new/condition/addFavCondition/2", new StringContent(cond.ToString()), client);
+                    if (condResponse.success)
+                    {
+                        Interface.WriteLine($"Range #{condResponse.id} added successfully");
+                        Response assignResponse = await PostContent($"{baseUrl}assign/condition/2/{plantResponse.id}/{condResponse.id}", new StringContent(""), client);
+                        if (assignResponse.success)
+                            Interface.WriteLine($"Range #{condResponse.id} assigned successfully to plant #{plantResponse.id}");
+                        else
+                            Interface.WriteLine(assignResponse.ToString());
+                    }
+                    else
+                        Interface.WriteLine(condResponse.ToString());
+                }
+            }
+            else
+                Interface.WriteLine("\n" + plantResponse.ToString());
+        }
+
+        static async Task<Response> PostContent(string url, StringContent content, HttpClient client)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string responseString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Response>(responseString);
+            }
+            catch(Exception e)
+            {
+                return new Response() { id = "-1", message = $"{e.Message}\n{e.InnerException}", success = false };
             }
         }
 
