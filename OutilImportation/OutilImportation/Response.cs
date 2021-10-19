@@ -11,5 +11,10 @@ namespace OutilImportation
         public bool success { get; set; }
         public string message { get; set; }
         public string id { get; set; }
+
+        public override string ToString()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
     }
 }

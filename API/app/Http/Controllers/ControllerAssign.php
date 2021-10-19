@@ -52,7 +52,7 @@ class ControllerAssign extends Controller
 
         Controller::incrementVersion();
 
-        return ("La condition a été assigné");
+        return response()->json(array('success' => true, 'message' => "Condition assigned successfully", 'id' => -1));
     }
 
     public function assignProblem($idPlant, $idProblem)
