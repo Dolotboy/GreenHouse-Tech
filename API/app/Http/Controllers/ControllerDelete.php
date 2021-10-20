@@ -11,6 +11,7 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class ControllerDelete extends Controller
 {
@@ -43,13 +44,24 @@ class ControllerDelete extends Controller
         {
             try
             {
+                DB::table('tblPlant_tblProblem')->where('tblPlant_idPlant', $idPlant)->delete();
+                DB::table('tblPlant_tblRangeDate')->where('tblPlant_idPlant', $idPlant)->delete();
+                DB::table('tblPlant_tblRangeNb')->where('tblPlant_idPlant', $idPlant)->delete();
+            }
+            catch (Exception)
+            {
+                return response()->json(['message'=> "Error while deleting data in relation with the plant#$idPlant", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+            }
+
+            try
+            {
                 Plant::destroy($idPlant);
                 Controller::incrementVersion();
                 return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idPlant], 200);
             }
             catch(Exception $e)
             {
-                return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+                return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
             }
         }
     }
