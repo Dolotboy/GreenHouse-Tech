@@ -47,6 +47,7 @@ class ControllerDelete extends Controller
                 DB::table('tblPlant_tblProblem')->where('tblPlant_idPlant', $idPlant)->delete();
                 DB::table('tblPlant_tblRangeDate')->where('tblPlant_idPlant', $idPlant)->delete();
                 DB::table('tblPlant_tblRangeNb')->where('tblPlant_idPlant', $idPlant)->delete();
+                DB::table('tblFavorites')->where('tblPlant_idPlant', $idPlant)->delete();
             }
             catch (Exception)
             {
@@ -93,6 +94,15 @@ class ControllerDelete extends Controller
         }
         else
         {
+            try
+            {
+                DB::table('tblPlant_tblProblem')->where('tblProblem_idProblem', $idProblem)->delete();
+            }
+            catch (Exception)
+            {
+                return response()->json(['message'=> "Error while deleting data in relation with the problem#$idProblem", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
+            }
+
             try
             {
                 Problem::destroy($idProblem);
@@ -181,6 +191,15 @@ class ControllerDelete extends Controller
         {
             try
             {
+                DB::table('tblFavorites')->where('tblProfile_idProfile', $idProfile)->delete();
+            }
+            catch (Exception)
+            {
+                return response()->json(['message'=> "Error while deleting data in relation with the profile#$idProfile", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+            }
+
+            try
+            {
                 Profile::destroy($idProfile);
                 Controller::incrementVersion();
                 return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
@@ -224,6 +243,15 @@ class ControllerDelete extends Controller
             {
                 try
                 {
+                    DB::table('tblPlant_tblRangeDate')->where('tblRangeDate_idRangeDate', $idCondition)->delete();
+                }
+                catch (Exception)
+                {
+                    return response()->json(['message'=> "Error while deleting data in relation with the condition#$idCondition", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+                }
+
+                try
+                {
                     FavorableConditionDate::destroy($idCondition);
                     Controller::incrementVersion();
                     return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
@@ -251,6 +279,15 @@ class ControllerDelete extends Controller
             }
             else
             {
+                try
+                {
+                    DB::table('tblPlant_tblRangeNb')->where('tblRangeNb_idRangeNb', $idCondition)->delete();
+                }
+                catch (Exception)
+                {
+                    return response()->json(['message'=> "Error while deleting data in relation with the condition#$idCondition", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+                }
+
                 try
                 {
                     FavorableConditionNb::destroy($idCondition);
