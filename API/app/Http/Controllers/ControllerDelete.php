@@ -31,7 +31,7 @@ class ControllerDelete extends Controller
         {
             $plant = Plant::Find($idPlant);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
@@ -49,7 +49,7 @@ class ControllerDelete extends Controller
                 DB::table('tblPlant_tblRangeNb')->where('tblPlant_idPlant', $idPlant)->delete();
                 DB::table('tblFavorites')->where('tblPlant_idPlant', $idPlant)->delete();
             }
-            catch (Exception)
+            catch (Exception $e)
             {
                 return response()->json(['message'=> "Error while deleting data in relation with the plant#$idPlant", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
             }
@@ -83,7 +83,7 @@ class ControllerDelete extends Controller
         {
             $problem = Problem::Find($idProblem);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "The problem doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         }
@@ -98,7 +98,7 @@ class ControllerDelete extends Controller
             {
                 DB::table('tblPlant_tblProblem')->where('tblProblem_idProblem', $idProblem)->delete();
             }
-            catch (Exception)
+            catch (Exception $e)
             {
                 return response()->json(['message'=> "Error while deleting data in relation with the problem#$idProblem", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
             }
@@ -135,7 +135,7 @@ class ControllerDelete extends Controller
             ->where('tblProfile_idProfile', '=', $idProfile)
             ->get();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "The favorite doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
         }
@@ -178,7 +178,7 @@ class ControllerDelete extends Controller
         {
             $profile = Problem::Find($idProfile);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
@@ -193,7 +193,7 @@ class ControllerDelete extends Controller
             {
                 DB::table('tblFavorites')->where('tblProfile_idProfile', $idProfile)->delete();
             }
-            catch (Exception)
+            catch (Exception $e)
             {
                 return response()->json(['message'=> "Error while deleting data in relation with the profile#$idProfile", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
             }
@@ -230,7 +230,7 @@ class ControllerDelete extends Controller
             {
                 $favorableCondition = FavorableConditionDate::Find($idCondition);
             }
-            catch (Exception)
+            catch (Exception $e)
             {
                 return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
             }
@@ -245,7 +245,7 @@ class ControllerDelete extends Controller
                 {
                     DB::table('tblPlant_tblRangeDate')->where('tblRangeDate_idRangeDate', $idCondition)->delete();
                 }
-                catch (Exception)
+                catch (Exception $e)
                 {
                     return response()->json(['message'=> "Error while deleting data in relation with the condition#$idCondition", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
                 }
@@ -268,7 +268,7 @@ class ControllerDelete extends Controller
             {
                 $favorableCondition = FavorableConditionNb::Find($idCondition);
             }
-            catch (Exception)
+            catch (Exception $e)
             {
                 return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
             }
@@ -283,7 +283,7 @@ class ControllerDelete extends Controller
                 {
                     DB::table('tblPlant_tblRangeNb')->where('tblRangeNb_idRangeNb', $idCondition)->delete();
                 }
-                catch (Exception)
+                catch (Exception $e)
                 {
                     return response()->json(['message'=> "Error while deleting data in relation with the condition#$idCondition", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
                 }

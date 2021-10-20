@@ -32,7 +32,7 @@ class ControllerDetail extends Controller
         {
             $plant = Plant::find($idPlant);    
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
@@ -52,7 +52,7 @@ class ControllerDetail extends Controller
         {
             $plant = Plant::All();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "There is no plant or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
@@ -83,7 +83,7 @@ class ControllerDetail extends Controller
         {
         $problem = Problem::find($idProblem);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "The problem doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         }
@@ -103,7 +103,7 @@ class ControllerDetail extends Controller
         {
         $problem = Problem::All();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "There is no problem or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
@@ -133,7 +133,7 @@ class ControllerDetail extends Controller
         {
             $profile = Profile::find($idProfile);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
@@ -164,7 +164,7 @@ class ControllerDetail extends Controller
         {
             $profile = Profile::All();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "There is no profile or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
@@ -205,7 +205,7 @@ class ControllerDetail extends Controller
             $json = json_encode($favorableCondition);
         }
         }
-        catch (Exception)
+        catch (Exception $e)
         { 
             return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
         }
@@ -240,7 +240,7 @@ class ControllerDetail extends Controller
             $json = json_encode($favCondition);
         }
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "There is no condition or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
@@ -262,7 +262,7 @@ class ControllerDetail extends Controller
         {
             $plants = Plant::All();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "There is no plants or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
@@ -290,7 +290,7 @@ class ControllerDetail extends Controller
         {
         $plant = Plant::find($searchCondition);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
@@ -314,7 +314,7 @@ class ControllerDetail extends Controller
 
         $package = array_merge($array, $problems, $favConditions);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "Error while retrieving data in relation with the plant#$searchCondition", 'success' => false, 'status' => "Request Failed", 'id' => $searchCondition], 404);
         }
@@ -338,7 +338,7 @@ class ControllerDetail extends Controller
         {
         $families = Plant::select('plantFamily')->groupBy('plantFamily')->get();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "Error while retrieving families or there is no plant in the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
@@ -358,7 +358,7 @@ class ControllerDetail extends Controller
         {
         $difficulties = Plant::select('plantDifficulty')->groupBy('plantDifficulty')->get();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "Error while retrieving difficulties or there is no plant in the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
@@ -378,7 +378,7 @@ class ControllerDetail extends Controller
         {
         $types = Plant::select('plantType')->groupBy('plantType')->get();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "Error while retrieving types or there is no plant in the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }

@@ -45,7 +45,7 @@ class ControllerAssign extends Controller
         {
             $assignFavorableCondition->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
@@ -72,7 +72,7 @@ class ControllerAssign extends Controller
         {
             $assignProblem->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }

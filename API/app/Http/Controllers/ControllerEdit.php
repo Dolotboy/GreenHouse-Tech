@@ -42,7 +42,7 @@ class ControllerEdit extends Controller
         {
             $plant = Plant::find($idPlant);    
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
@@ -68,7 +68,7 @@ class ControllerEdit extends Controller
         {
             $plant->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
@@ -98,7 +98,7 @@ class ControllerEdit extends Controller
         {
             $problem = Problem::find($idProblem);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "The problem doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         
@@ -117,7 +117,7 @@ class ControllerEdit extends Controller
         {
             $problem->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         }
@@ -147,7 +147,7 @@ class ControllerEdit extends Controller
         {
             $profile = Profile::find($idProfile);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
@@ -166,7 +166,7 @@ class ControllerEdit extends Controller
         {
             $profile->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
@@ -201,7 +201,7 @@ class ControllerEdit extends Controller
             {
                 $favorableCondition = FavorableConditionDate::find($idCondition);
             }
-            catch (Exception)
+            catch (Exception $e)
             {
                 return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
             }
@@ -220,7 +220,7 @@ class ControllerEdit extends Controller
             {
                 $favorableCondition->save();
             }
-            catch (Exception)
+            catch (Exception $e)
             {
                 return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
             }
@@ -231,7 +231,7 @@ class ControllerEdit extends Controller
             {
                 $favorableCondition = FavorableConditionNb::find($idCondition);
             }
-            catch (Exception)
+            catch (Exception $e)
             {
                 return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
             }
@@ -250,7 +250,7 @@ class ControllerEdit extends Controller
             {
                 $favorableCondition->save();
             }
-            catch (Exception)
+            catch (Exception $e)
             {
                 return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
             }

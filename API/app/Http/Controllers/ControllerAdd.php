@@ -55,7 +55,7 @@ class ControllerAdd extends Controller
         {
             $plant->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
@@ -89,7 +89,7 @@ class ControllerAdd extends Controller
         {
             $problem->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
@@ -121,7 +121,7 @@ class ControllerAdd extends Controller
         {
             $favorite->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
@@ -168,7 +168,7 @@ class ControllerAdd extends Controller
         {
             $profile->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
@@ -219,7 +219,7 @@ class ControllerAdd extends Controller
         {
             $favorableCondition->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
