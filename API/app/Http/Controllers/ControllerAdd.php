@@ -185,7 +185,6 @@ class ControllerAdd extends Controller
 
     public function addFavCondition(Request $request, $type)
     {
-
         if (is_null($request->type) || 
             is_null($request->start) || 
             is_null($request->end) || 

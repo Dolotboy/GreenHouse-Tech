@@ -25,7 +25,7 @@ class ControllerAssign extends Controller
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
-
+        
         if ($type == 1)
         {
             $assignFavorableCondition = new AssignConditionDate();

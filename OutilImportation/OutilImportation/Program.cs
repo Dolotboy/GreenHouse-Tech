@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
-using System.Reflection;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace OutilImportation
 {
@@ -15,99 +14,129 @@ namespace OutilImportation
 
         static void Main(string[] args)
         {
-            string bd = "u882331052_apitestenv";
+            string env = "apitestenv";
             if (args.Length > 0)
-                bd = "u882331052_wiki";
+                env = "api";
 
-            List<Vegetal> veggies = new List<Vegetal>();
+            List<Plant> veggies = new List<Plant>();
             LoadVeggies(veggies);
-            SaveFiles(veggies, bd);
-            string jsonTest = CreateTestJson(veggies);
-            SaveTestJson(jsonTest);
+            //PushData($"https://{env}.pcst.xyz/api/new/plant/addPlant", veggies);
+            PushData($"http://localhost:8000/api/", veggies);
+
+            Interface.ReadKey();
         }
 
-        static void LoadVeggies(List<Vegetal> veggies)
+        static void LoadVeggies(List<Plant> veggies)
         {
             Excel.Application app = new Excel.Application();
-            Excel.Workbook wb = app.Workbooks.Open(baseDir + "infoleg.xlsx");
+            Excel.Workbook wb = app.Workbooks.Open(baseDir + "veggies.xlsx");
             Excel.Worksheet ws = (Excel.Worksheet)wb.Sheets[1];
             Excel.Range range = ws.UsedRange;
 
-            for (int i = 2; i < 1000; i++)
+            for (int i = 2; i < 10; i++)
             {
                 if (ConvertCellToString(range.Cells[i, 1]) == "")
                     break;
 
-                Vegetal veg = new Vegetal()
+                string now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                List<ConditionNb> conds = new List<ConditionNb>()
                 {
-                    Name = ConvertCellToString(range.Cells[i, 1]),
-                    TempMin = ConvertCellToString(range.Cells[i, 2]),
-                    TempMax = ConvertCellToString(range.Cells[i, 3]),
-                    HumidityMin = ConvertCellToString(range.Cells[i, 4]),
-                    HumidityMax = ConvertCellToString(range.Cells[i, 5]),
-                    Light = ConvertCellToString(range.Cells[i, 6]),
-                    LengthBetweenPlantsMin = ConvertCellToString(range.Cells[i, 7]),
-                    LengthBetweenPlantsMax = ConvertCellToString(range.Cells[i, 8]),
-                    MaturationDays = ConvertCellToString(range.Cells[i, 9]),
-                    Neighborhood = ConvertCellToString(range.Cells[i, 10]),
-                    Comment = ConvertCellToString(range.Cells[i, 11]),
-                    GroundType = ConvertCellToString(range.Cells[i, 12]),
-                    ConservationDays = ConvertCellToString(range.Cells[i, 13]),
-                    Type = ConvertCellToString(range.Cells[i, 14]),
-                    PHMin = ConvertCellToString(range.Cells[i,15]),
-                    PHMax = ConvertCellToString(range.Cells[i,16])
+                    new ConditionNb(){type = "temperature", min = ConvertCellToString(range.Cells[i, 2], true), max = ConvertCellToString(range.Cells[i, 3], true), unit = "°C", create_at = now, updated_at = now},
+                    new ConditionNb(){type = "humidity", min = ConvertCellToString(range.Cells[i, 4], true), max = ConvertCellToString(range.Cells[i, 5], true), unit = "%", create_at = now, updated_at = now},
+                    new ConditionNb(){type = "ph", min = ConvertCellToString(range.Cells[i, 15], true), max = ConvertCellToString(range.Cells[i, 16], true), unit = "", create_at = now, updated_at = now},
+                    new ConditionNb(){type = "plantSpacing", min = ConvertCellToString(range.Cells[i, 7], true), max = ConvertCellToString(range.Cells[i, 8], true), unit = "cm", create_at = now, updated_at = now},
+                };
+                Plant veg = new Plant()
+                {
+                    plantImg = "empty",
+                    plantName = ConvertCellToString(range.Cells[i, 1]),
+                    plantType = ConvertCellToString(range.Cells[i, 14]),
+                    plantFamily = "empty",
+                    plantSeason = "empty",
+                    plantGroundType = ConvertCellToString(range.Cells[i, 12]),
+                    plantDaysConservation = ConvertCellToString(range.Cells[i, 13], true),
+                    plantDescription = ConvertCellToString(range.Cells[i, 11]),
+                    plantDifficulty = "1",
+                    plantBestNeighbor = ConvertCellToString(range.Cells[i, 10]),
+                    conditionsNbs = conds
                 };
                 veggies.Add(veg);
                 if (i % 5 == 0)
-                    Console.WriteLine($"Loaded {i} vegetals");
+                    Interface.WriteLine($"Loaded {i} vegetals");
             }
             wb.Close();
             app.Quit();
         }
 
-        static string ConvertCellToString(Excel.Range cell)
+        static async void PushData(string baseUrl, List<Plant> veggies)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    foreach (Plant veg in veggies)
+                       await PushPlant(baseUrl, veg, client);
+                }
+                Interface.WriteLine("Everything was pushed.");
+            }
+            catch(Exception e)
+            {
+                Interface.WriteLine(e.Message);
+            }
+        }
+
+        static async Task PushPlant(string baseUrl, Plant plant, HttpClient client)
+        {
+            Response plantResponse = await PostContent($"{baseUrl}new/plant/addPlant", new StringContent(plant.ToString()), client);
+            if (plantResponse.success)
+            {
+                Interface.WriteLine($"\nPlant #{plantResponse.id} added successfully");
+                foreach (ConditionNb cond in plant.conditionsNbs)
+                {
+                    Response condResponse = await PostContent($"{baseUrl}new/condition/addFavCondition/2", new StringContent(cond.ToString()), client);
+                    if (condResponse.success)
+                    {
+                        Interface.WriteLine($"Range #{condResponse.id} added successfully");
+                        Response assignResponse = await PostContent($"{baseUrl}assign/condition/2/{plantResponse.id}/{condResponse.id}", new StringContent(""), client);
+                        if (assignResponse.success)
+                            Interface.WriteLine($"Range #{condResponse.id} assigned successfully to plant #{plantResponse.id}");
+                        else
+                            Interface.WriteLine(assignResponse.ToString());
+                    }
+                    else
+                        Interface.WriteLine(condResponse.ToString());
+                }
+            }
+            else
+                Interface.WriteLine("\n" + plantResponse.ToString());
+        }
+
+        static async Task<Response> PostContent(string url, StringContent content, HttpClient client)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                string responseString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Response>(responseString);
+            }
+            catch(Exception e)
+            {
+                return new Response() { id = "-1", message = $"{e.Message}\n{e.InnerException}", success = false };
+            }
+        }
+
+        static string ConvertCellToString(Excel.Range cell, bool shouldRemoveCommas = false)
         {
             if (cell.Value == null)
-                return "";
+                return "empty";
+            if (shouldRemoveCommas)
+                return RemoveComas(cell.Value.ToString().Replace("\'", "\'\'"));
             return cell.Value.ToString().Replace("\'", "\'\'");
         }
 
-        static void SaveFiles(List<Vegetal> veggies, string bd)
+        static string RemoveComas(string str)
         {
-
-            StreamWriter writer = new StreamWriter(baseDir + "statements.txt");
-            writer.WriteLine($"USE {bd};");
-            foreach (Vegetal veg in veggies)
-                writer.WriteLine(veg.ToString());
-            writer.Close();
-        }
-
-        static string CreateTestJson(List<Vegetal> veggies)
-        {
-            string jsonContent = "{ \n\"vegetals\":[";
-            foreach (Vegetal veg in veggies)
-            {
-                PropertyInfo[] props = veg.GetProperties();
-                for (int i = 0; i < 50; i++)
-                {
-                    jsonContent += "\n\n{";
-                    for(int j = 0; j < props.Length; j++)
-                    {
-                        jsonContent += "\n\t\"" + props[j].ToString().Split(' ')[1] + "\" : \"" + props[j].GetValue(veg) + "\"";
-                        if (j != props.Length - 1)
-                            jsonContent += ",";
-                    }
-                    jsonContent += "\n},";
-                }
-            }
-            return jsonContent += "\n]\n}";
-        }
-
-        static void SaveTestJson(string jsonContent)
-        {
-            StreamWriter writer = new StreamWriter(baseDir + "JsonContent.json");
-            writer.WriteLine(jsonContent);
-            writer.Close();
+            return str.Replace(",", ".");
         }
     }
 }
