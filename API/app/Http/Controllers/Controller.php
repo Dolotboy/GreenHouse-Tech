@@ -57,4 +57,4 @@ class Controller extends BaseController
             return 1;
         return 0;
     }
-}
+} 

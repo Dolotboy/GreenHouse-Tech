@@ -108,5 +108,5 @@ class ControllerUnassign extends Controller
         }
 
         Controller::incrementVersion();
-    }
+    } 
 }

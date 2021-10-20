@@ -156,7 +156,7 @@ class ControllerDetail extends Controller
         $json = json_encode($array);
     
         return ("$json");
-    }
+    } 
 
     public function searchAllProfile()
     {

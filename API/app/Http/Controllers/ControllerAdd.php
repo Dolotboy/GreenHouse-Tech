@@ -228,5 +228,5 @@ class ControllerAdd extends Controller
         Controller::incrementVersion();
 
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
-    }
+    } 
 }
