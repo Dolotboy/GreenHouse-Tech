@@ -88,15 +88,14 @@ class ControllerAdd extends Controller
         try
         {
             $problem->save();
+            Controller::incrementVersion();
+
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $problem->idProblem], 200);
         }
         catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
-
-        Controller::incrementVersion();
-
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $problem->idProblem], 200);
     }
 
     public function indexFavorite(Request $request)
@@ -226,14 +225,17 @@ class ControllerAdd extends Controller
         try
         {
             $favorableCondition->save();
+            if($type == 1)
+                $id = $favorableCondition->idRangeDate;
+            else
+            $id = $favorableCondition->idRangeNb;
+            
+            Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $id], 200);
         }
         catch (Exception $e)
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
-        
-        Controller::incrementVersion();
-
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
     } 
 }
