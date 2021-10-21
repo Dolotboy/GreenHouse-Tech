@@ -143,8 +143,8 @@ class ControllerAdd extends Controller
 
         if (is_null($request->email) || 
             is_null($request->password) || 
-            is_null($request->firstname) || 
-            is_null($request->lastname) || 
+            is_null($request->firstName) || 
+            is_null($request->lastName) || 
             is_null($request->access))
         { 
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
