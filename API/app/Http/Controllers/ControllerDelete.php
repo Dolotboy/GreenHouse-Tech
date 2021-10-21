@@ -11,6 +11,7 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class ControllerDelete extends Controller
 {
@@ -23,33 +24,45 @@ class ControllerDelete extends Controller
     {
         if (is_null($idPlant))
         {
-            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
 
         try
         {
             $plant = Plant::Find($idPlant);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "The plant doesn't exist or there is no connection with the database";
+            return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
 
         if (is_null($plant))
         {
-            return('Error, plant not found');
+            return response()->json(['message'=> "Error, plant not found", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
         }
         else
         {
             try
             {
+                DB::table('tblPlant_tblProblem')->where('tblPlant_idPlant', $idPlant)->delete();
+                DB::table('tblPlant_tblRangeDate')->where('tblPlant_idPlant', $idPlant)->delete();
+                DB::table('tblPlant_tblRangeNb')->where('tblPlant_idPlant', $idPlant)->delete();
+                DB::table('tblFavorites')->where('tblPlant_idPlant', $idPlant)->delete();
+            }
+            catch (Exception $e)
+            {
+                return response()->json(['message'=> "Error while deleting data in relation with the plant#$idPlant", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+            }
+
+            try
+            {
                 Plant::destroy($idPlant);
                 Controller::incrementVersion();
-                return ("Plant deleted !");
+                return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idPlant], 200);
             }
             catch(Exception $e)
             {
-                return('Error while deleting or there is no connection with the database'.$e);
+                return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
             }
         }
     }
@@ -63,33 +76,42 @@ class ControllerDelete extends Controller
     {
         if (is_null($idProblem))
         {
-            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         }
 
         try
         {
             $problem = Problem::Find($idProblem);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "The problem doesn't exist or there is no connection with the database";
+            return response()->json(['message'=> "The problem doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         }
 
         if (is_null($problem))
         {
-            return('Error, problem not found');
+            return response()->json(['message'=> "Error, problem not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 404);
         }
         else
         {
             try
             {
+                DB::table('tblPlant_tblProblem')->where('tblProblem_idProblem', $idProblem)->delete();
+            }
+            catch (Exception $e)
+            {
+                return response()->json(['message'=> "Error while deleting data in relation with the problem#$idProblem", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
+            }
+
+            try
+            {
                 Problem::destroy($idProblem);
                 Controller::incrementVersion();
-                return ("Problem deleted !");
+                return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
             }
             catch(Exception $e)
             {
-                return('Error while deleting or there is no connection with the database'.$e);
+                return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
             }
         }
     }
@@ -104,7 +126,7 @@ class ControllerDelete extends Controller
         if (is_null($idPlant) ||
             is_null($idProfile))
         {
-            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
         }
 
         try
@@ -113,14 +135,14 @@ class ControllerDelete extends Controller
             ->where('tblProfile_idProfile', '=', $idProfile)
             ->get();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "The favorite doesn't exist or there is no connection with the database";
+            return response()->json(['message'=> "The favorite doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
         }
 
         if (is_null($favorite))
         {
-            return('Error, favorite not found');
+            return response()->json(['message'=> "Error, favorite not found", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 404);
         }
         else
         {
@@ -131,11 +153,11 @@ class ControllerDelete extends Controller
                     ['tblProfile_idProfile', '=', $idProfile],
                 ])->delete();
                 Controller::incrementVersion();
-                return ("Favorite deleted !");
+                return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
             }
             catch(Exception $e)
             {
-                return('Error while deleting or there is no connection with the database'.$e);
+                return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
             }
         }
     }
@@ -149,33 +171,42 @@ class ControllerDelete extends Controller
     {
         if (is_null($idProfile))
         {
-            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
 
         try
         {
             $profile = Problem::Find($idProfile);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "The profile doesn't exist or there is no connection with the database";
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
 
         if (is_null($profile))
         {
-            return('Error, profile not found');
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
         }
         else
         {
             try
             {
+                DB::table('tblFavorites')->where('tblProfile_idProfile', $idProfile)->delete();
+            }
+            catch (Exception $e)
+            {
+                return response()->json(['message'=> "Error while deleting data in relation with the profile#$idProfile", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+            }
+
+            try
+            {
                 Profile::destroy($idProfile);
                 Controller::incrementVersion();
-                return ("Profile deleted !");
+                return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
             }
             catch(Exception $e)
             {
-                return('Error while deleting or there is no connection with the database'.$e);
+                return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
             }
         }
     }
@@ -190,7 +221,7 @@ class ControllerDelete extends Controller
         if (is_null($type) ||
             is_null($idCondition))
         {
-            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
         }
 
         if ($type == 1)
@@ -199,26 +230,35 @@ class ControllerDelete extends Controller
             {
                 $favorableCondition = FavorableConditionDate::Find($idCondition);
             }
-            catch (Exception)
+            catch (Exception $e)
             {
-                return "The condition doesn't exist or there is no connection with the database";
+                return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
             }
 
             if (is_null($idCondition))
             {
-                return('Error, favorable condition not found');
+                return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
             }
             else
             {
                 try
                 {
+                    DB::table('tblPlant_tblRangeDate')->where('tblRangeDate_idRangeDate', $idCondition)->delete();
+                }
+                catch (Exception $e)
+                {
+                    return response()->json(['message'=> "Error while deleting data in relation with the condition#$idCondition", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+                }
+
+                try
+                {
                     FavorableConditionDate::destroy($idCondition);
                     Controller::incrementVersion();
-                    return ("Favorable condition deleted !");
+                    return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
                 }
                 catch(Exception $e)
                 {
-                    return('Error while deleting or there is no connection with the database'.$e);
+                    return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
                 }
             }
         }
@@ -228,28 +268,37 @@ class ControllerDelete extends Controller
             {
                 $favorableCondition = FavorableConditionNb::Find($idCondition);
             }
-            catch (Exception)
+            catch (Exception $e)
             {
-                return "The condition doesn't exist or there is no connection with the database";
+                return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
             }
 
             if (is_null($idCondition))
             {
-                return('Error, favorable condition not found');
+                return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
             }
             else
             {
                 try
                 {
+                    DB::table('tblPlant_tblRangeNb')->where('tblRangeNb_idRangeNb', $idCondition)->delete();
+                }
+                catch (Exception $e)
+                {
+                    return response()->json(['message'=> "Error while deleting data in relation with the condition#$idCondition", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+                }
+
+                try
+                {
                     FavorableConditionNb::destroy($idCondition);
                     Controller::incrementVersion();
-                    return ("Favorable condition deleted !");
+                    return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
                 }
                 catch(Exception $e)
                 {
-                    return('Error while deleting or there is no connection with the database'.$e);
+                    return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
                 }
             }
         }
     }
-} 
+}

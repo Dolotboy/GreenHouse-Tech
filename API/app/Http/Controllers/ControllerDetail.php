@@ -21,21 +21,25 @@ class ControllerDetail extends Controller
         return view('newPlant');
     }
 
-    public function searchPlant($id)
+    public function searchPlant($idPlant)
     {
+        if (is_null($idPlant))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+        }
+
         try
         {
-            $plant = Plant::find($id);    
+            $plant = Plant::find($idPlant);    
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "The plant doesn't exist or there is not connection with the database";
+            return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
 
         if (is_null($plant)) // Mostly when it doesn't exist
         {
-            return new Response("The plant doesn't exist", 404);
-            //return new Response(['message' => 'test'], 422);
+            return response()->json(['message'=> "Error, plant not found", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
         }
 
         $json = json_encode($plant);
@@ -48,14 +52,14 @@ class ControllerDetail extends Controller
         {
             $plant = Plant::All();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "There is no plant in the database or there is not connection with the database";
+            return response()->json(['message'=> "There is no plant or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
         if (is_null($plant))
         {
-            return new Response("There is no plant in the database", 404);
+            return response()->json(['message'=> "Error, plants not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
 
         $json = json_encode($plant);
@@ -68,21 +72,25 @@ class ControllerDetail extends Controller
         return view('');
     }
 
-    public function searchProblem($id)
+    public function searchProblem($idProblem)
     {
+        if (is_null($idProblem))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
+        }
+
         try
         {
-        $problem = Problem::find($id);
+        $problem = Problem::find($idProblem);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "The problem doesn't exist or there is not connection with the database";
-        
+            return response()->json(['message'=> "The problem doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         }
 
         if (is_null($problem))
         {
-            return new Response("The problem doesn't exist", 404);
+            return response()->json(['message'=> "Error, problem not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 404);
         }
 
         $json = json_encode($problem);
@@ -95,13 +103,13 @@ class ControllerDetail extends Controller
         {
         $problem = Problem::All();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "There is no problem in the database or there is not connection with the database";
+            return response()->json(['message'=> "There is no problem or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
         if (is_null($problem))
         {
-            return new Response("There is no problem in the database", 404);
+            return response()->json(['message'=> "Error, problems not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
 
         $json = json_encode($problem);
@@ -114,20 +122,25 @@ class ControllerDetail extends Controller
         return view('');
     }
 
-    public function searchProfile($id)
+    public function searchProfile($idProfile)
     {
+        if (is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
         try
         {
-            $profile = Profile::find($id);
+            $profile = Profile::find($idProfile);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "The profile doesn't exist or there is not connection with the database";
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
 
         if (is_null($profile))
         {
-            return new Response("The profile doesn't exist", 404);
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
         }
 
         $idProfile = $profile->idProfile;
@@ -143,7 +156,7 @@ class ControllerDetail extends Controller
         $json = json_encode($array);
     
         return ("$json");
-    }
+    } 
 
     public function searchAllProfile()
     {
@@ -151,14 +164,14 @@ class ControllerDetail extends Controller
         {
             $profile = Profile::All();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "There is not profile in the database or there is not connection with the database";
+            return response()->json(['message'=> "There is no profile or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
         
         if (is_null($profile))
-        {
-            return new Response("There is no profile in the database", 404);
+        {    
+            return response()->json(['message'=> "Error, profiles not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
 
         $json = json_encode($profile);
@@ -171,29 +184,35 @@ class ControllerDetail extends Controller
         return view('');
     }
 
-    public function searchFavCondition($type, $id)
+    public function searchFavCondition($type, $idCondition)
     {
+        if (is_null($type) ||
+            is_null($idCondition))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+        }
+
         try
         {
         if ($type == 1)
         {
-            $favorableCondition = FavorableConditionDate::find($id);
+            $favorableCondition = FavorableConditionDate::find($idCondition);
             $json = json_encode($favorableCondition);
         }
         else if($type == 2)
         {
-            $favorableCondition = FavorableConditionNb::find($id);
+            $favorableCondition = FavorableConditionNb::find($idCondition);
             $json = json_encode($favorableCondition);
         }
         }
-        catch (Exception)
-        {
-            $json = "The condition doesn't exist or there is not connection with the database";
+        catch (Exception $e)
+        { 
+            return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
         }
 
         if (is_null($favorableCondition))
         {
-            return new Response("The condition doesn't exist", 404);
+            return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
         }
 
         return $json;
@@ -201,6 +220,11 @@ class ControllerDetail extends Controller
 
     public function searchAllFavCondition($type)
     {
+        if (is_null($type))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
         try
         {
         if ($type == 1)
@@ -216,13 +240,13 @@ class ControllerDetail extends Controller
             $json = json_encode($favCondition);
         }
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            $json = "The condition doesn't exist or there is not connection with the database";
+            return response()->json(['message'=> "There is no condition or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
         if (is_null($favCondition))
         {
-            return new Response("There is no condition in the database", 404);
+            return response()->json(['message'=> "Error, conditions not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
 
         return ("$json");
@@ -238,13 +262,13 @@ class ControllerDetail extends Controller
         {
             $plants = Plant::All();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "There is no plant and his data in the database or there is not connection with the database";
+            return response()->json(['message'=> "There is no plants or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
         if (is_null($plants))
         {
-            return new Response("There is no plant in the database", 404);
+            return response()->json(['message'=> "Error, plants not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
         
         $jsons = array();
@@ -257,17 +281,22 @@ class ControllerDetail extends Controller
 
     public function searchPackage($searchCondition)
     {
+        if (is_null($searchCondition))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $searchCondition], 400);
+        }
+
         try
         {
         $plant = Plant::find($searchCondition);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "The plant doesn't exist or there is not connection with the database";
+            return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
         if (is_null($plant))
         {
-            return new Response("The plant doesn't exist", 404);
+            return response()->json(['message'=> "Error, plant not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
 
         $json = json_encode($plant);
@@ -285,9 +314,9 @@ class ControllerDetail extends Controller
 
         $package = array_merge($array, $problems, $favConditions);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "Error while retrieving data in relation with the plant#$searchCondition";
+            return response()->json(['message'=> "Error while retrieving data in relation with the plant#$searchCondition", 'success' => false, 'status' => "Request Failed", 'id' => $searchCondition], 404);
         }
 
         $json = json_encode($package);
@@ -309,13 +338,13 @@ class ControllerDetail extends Controller
         {
         $families = Plant::select('plantFamily')->groupBy('plantFamily')->get();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "Error while retrieving families or there is no plant in the database";
+            return response()->json(['message'=> "Error while retrieving families or there is no plant in the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
         if (is_null($families))
         {
-            return new Response("There is no plant in the database", 404);
+            return response()->json(['message'=> "Error, plants not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
 
         $json = json_encode($families);
@@ -329,13 +358,13 @@ class ControllerDetail extends Controller
         {
         $difficulties = Plant::select('plantDifficulty')->groupBy('plantDifficulty')->get();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "Error while retrieving difficulties or there is no plant in the database";
+            return response()->json(['message'=> "Error while retrieving difficulties or there is no plant in the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
         if (is_null($difficulties))
         {
-            return new Response("There is no plant in the database", 404);
+            return response()->json(['message'=> "Error, plants not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
 
         $json = json_encode($difficulties);
@@ -349,13 +378,13 @@ class ControllerDetail extends Controller
         {
         $types = Plant::select('plantType')->groupBy('plantType')->get();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "Error while retrieving types or there is no plant in the database";
+            return response()->json(['message'=> "Error while retrieving types or there is no plant in the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
         if (is_null($types))
         {
-            return new Response("There is no plant in the database", 404);
+            return response()->json(['message'=> "Error, plants not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
 
         $json = json_encode($types);

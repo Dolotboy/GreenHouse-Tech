@@ -24,7 +24,7 @@ class Controller extends BaseController
         {
             $newVersion->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return "We've encountered problems while adding a version in the database or there is no connection with the database";
         }
@@ -38,7 +38,7 @@ class Controller extends BaseController
         {
             $version = Version::orderBy('idVersion', 'DESC')->get();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
             return "There is no version in the database or there is no connection with the database";
         }
@@ -57,4 +57,4 @@ class Controller extends BaseController
             return 1;
         return 0;
     }
-}
+} 

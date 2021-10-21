@@ -35,21 +35,21 @@ class ControllerEdit extends Controller
             is_null($request->plantBestNeighbor) ||
             is_null($idPlant))
         {
-            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
 
         try
         {
             $plant = Plant::find($idPlant);    
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "The plant doesn't exist or there is not connection with the database";
+            return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
         
         if (is_null($plant)) // Mostly when it doesn't exist
         {
-            return new Response("The plant doesn't exist", 404);
+            return response()->json(['message'=> "Error, plant not found", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
             //return new Response(['message' => 'test'], 422);
         }
 
@@ -68,14 +68,14 @@ class ControllerEdit extends Controller
         {
             $plant->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "We've encountered problems while saving data in the database or there is no connection with the database";
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
 
         Controller::incrementVersion();
 
-        return ("La plante#$plant->idPlant a été modifié");
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idPlant], 200);
     }
 
     public function indexProblem()
@@ -91,22 +91,22 @@ class ControllerEdit extends Controller
             is_null($request->problemSolution) ||
             is_null($idProblem))
         {
-            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         }
 
         try
         {
             $problem = Problem::find($idProblem);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "The problem doesn't exist or there is not connection with the database";
+            return response()->json(['message'=> "The problem doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         
         }
         
         if (is_null($problem))
         {
-            return new Response("The problem doesn't exist", 404);
+            return response()->json(['message'=> "Error, problem not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 404);
         }
 
         $problem->problemName = $request->problemName;
@@ -117,14 +117,14 @@ class ControllerEdit extends Controller
         {
             $problem->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "We've encountered problems while saving data in the database or there is no connection with the database";
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         }
 
         Controller::incrementVersion();
 
-        return ("Le problème#$problem->idProblem a été modifié");
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProblem], 200);
     }
 
     public function indexProfile()
@@ -140,21 +140,21 @@ class ControllerEdit extends Controller
             is_null($request->lastName) ||
             is_null($request->access))
         {
-            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
 
         try
         {
             $profile = Profile::find($idProfile);
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "The profile doesn't exist or there is not connection with the database";
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
 
         if (is_null($profile))
         {
-            return new Response("The profile doesn't exist", 404);
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
         }
 
         $profile->email = $request->email;
@@ -166,14 +166,14 @@ class ControllerEdit extends Controller
         {
             $profile->save();
         }
-        catch (Exception)
+        catch (Exception $e)
         {
-            return "We've encountered problems while saving data in the database or there is no connection with the database";
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
 
         Controller::incrementVersion();
 
-        return ("Le profile#$profile->idProfile a été modifié");
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
     }
 
     public function indexFavCondition()
@@ -192,7 +192,7 @@ class ControllerEdit extends Controller
             is_null($request->max) || 
             is_null($request->unit))
         {
-            return new Response("One of the field is empty, you must fill them all or the field's name aren't right", 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
         }
 
         if ($type == 1)
@@ -201,20 +201,29 @@ class ControllerEdit extends Controller
             {
                 $favorableCondition = FavorableConditionDate::find($idCondition);
             }
-            catch (Exception)
+            catch (Exception $e)
             {
-                $json = "The condition doesn't exist or there is not connection with the database";
+                return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
             }
 
             if (is_null($favorableCondition))
             {
-                return new Response("The condition doesn't exist", 404);
+                return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
             }
 
             $favorableCondition->type = $request->type;
             $favorableCondition->start = $request->start;
             $favorableCondition->end = $request->end;
-            $favorableCondition->location = $request->location;
+            $favorableCondition->location = $request->location;  
+
+            try
+            {
+                $favorableCondition->save();
+            }
+            catch (Exception $e)
+            {
+                return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+            }
         }
         else if ($type == 2)
         {
@@ -222,33 +231,33 @@ class ControllerEdit extends Controller
             {
                 $favorableCondition = FavorableConditionNb::find($idCondition);
             }
-            catch (Exception)
+            catch (Exception $e)
             {
-                $json = "The condition doesn't exist or there is not connection with the database";
+                return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
             }
 
             if (is_null($favorableCondition))
             {
-                return new Response("The condition doesn't exist", 404);
+                return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
             }
 
             $favorableCondition->type = $request->type;
             $favorableCondition->min = $request->min;
             $favorableCondition->max = $request->max;
-            $favorableCondition->unit = $request->unit;
-        }
-        
-        try
-        {
-            $favorableCondition->save();
-        }
-        catch (Exception)
-        {
-            return "We've encountered problems while saving data in the database or there is no connection with the database";
+            $favorableCondition->unit = $request->unit;  
+
+            try
+            {
+                $favorableCondition->save();
+            }
+            catch (Exception $e)
+            {
+                return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+            }
         }
 
         Controller::incrementVersion();
 
-        return ("La condition favorable a été sauvegardé");
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idCondition], 200);
     }
-}
+} 
