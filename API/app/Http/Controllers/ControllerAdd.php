@@ -185,19 +185,20 @@ class ControllerAdd extends Controller
 
     public function addFavCondition(Request $request, $type)
     {
-        if (is_null($request->type) || 
-            is_null($request->start) || 
-            is_null($request->end) || 
-            is_null($request->location) || 
-            is_null($request->min) || 
-            is_null($request->max) || 
-            is_null($request->unit))
+        if (is_null($type))
         {
-            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            return response()->json(['message'=> "The field type is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
         if ($type == 1)
         {
+            if (is_null($request->start) || 
+                is_null($request->end) || 
+                is_null($request->location))
+            {
+                return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            }
+
             $favorableCondition = new FavorableConditionDate();
 
             $favorableCondition->type = $request->type;
@@ -207,6 +208,13 @@ class ControllerAdd extends Controller
         }
         else if ($type == 2)
         {
+            if (is_null($request->min) || 
+                is_null($request->max) || 
+                is_null($request->unit))
+            {
+                return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            }
+
             $favorableCondition = new FavorableConditionNb();
 
             $favorableCondition->type = $request->type;
