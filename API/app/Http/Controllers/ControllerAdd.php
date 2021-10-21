@@ -25,6 +25,7 @@ class ControllerAdd extends Controller
     public function addPlant(Request $request)
     {
         $plant = new Plant();
+        //$request = json_decode(file_get_contents("php://input"));
 
         if (is_null($request->plantImg) || 
             is_null($request->plantName) || 
@@ -37,9 +38,10 @@ class ControllerAdd extends Controller
             is_null($request->plantDifficulty) || 
             is_null($request->plantBestNeighbor))
         {
+            return $request;
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
-        return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
-
+        
         $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
         $plant->plantType = $request->plantType;
