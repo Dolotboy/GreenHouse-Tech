@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav>
+    <nav id="navDesktop">
       <ul>
         <div id="BasicNav">
           <li><router-link to="/">Accueil</router-link></li> 
@@ -10,6 +10,21 @@
           <li @click="toggleRegister">S'inscrire</li>
           <li @click="toggleLogin">Se connecter</li>         
         </div>
+      </ul>
+    </nav>
+    <nav id="navMobile">
+      <div class="top-wrapper">
+        <div @click="toggleNavMobile" class="hamburger-wrapper">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <ul class="links">
+          <li><router-link to="/">Accueil</router-link></li> 
+          <li><router-link to="/about">À propos</router-link></li>
+          <li @click="toggleRegister">S'inscrire</li>
+          <li @click="toggleLogin">Se connecter</li> 
       </ul>
     </nav>
     <router-view/>  
@@ -34,12 +49,12 @@ export default {
   data(){
       return{
           envBack : "http://localhost:8000/",
-
-          env : "https://apitestenv.pcst.xyz/",
+          env : "https://testenv.apipcst.xyz/",
           plants : [],
           showLogin : false,
           showRegister : false,
-          apiVersion : 0.0
+          apiVersion : 0.0,
+          mobileNavIsOpened : false
       }
   },
 
@@ -53,6 +68,27 @@ export default {
     },
     toggleLogin(){
       this.showLogin = !this.showLogin;
+    },
+    toggleNavMobile(){
+      console.log("clicked");
+      let links = document.querySelector(".links");
+      let navMobile = document.querySelector("#navMobile");
+      let hamburger = document.querySelector(".hamburger-wrapper");
+      console.log(this.mobileNavIsOpened);
+      if(!this.mobileNavIsOpened){
+        links.style.display = "flex";
+        navMobile.style.height = "75vh";
+      }
+      else{
+        console.log("else");
+        links.style.display = "none";
+        navMobile.style.height = "7.5vh";
+        // hamburger.style.top = posY + "px";
+        // hamburger.style.left = posX + "px";
+      }
+      
+      this.mobileNavIsOpened = !this.mobileNavIsOpened;
+      console.log(this.mobileNavIsOpened);
     },
     async Initialisation(){
       let version = localStorage.getItem('apiVersion');
@@ -116,8 +152,10 @@ export default {
   box-sizing: border-box;
 }
 
-html{
+html, body{
   font-size : 10pt;
+  margin : 0;
+  padding : 0;
 }
 
 button{
@@ -133,7 +171,7 @@ button{
   }
 }
 
-nav{
+#navDesktop{
   position : relative;
 
   &> ul{
@@ -226,6 +264,80 @@ li a:hover{
   }
 }
 
+#navMobile{
+  display : none;
+  position : relative;
+  top : 0;
+  left : 0;
+  background: black;
+  color : white;
+  width : 100vw;
+  height : 7.5vh;
+
+  .top-wrapper{
+    position : relative;
+    top : 0;
+    left : 0;
+    height : 7.5vh;
+  }
+
+  .hamburger-wrapper{
+      position : absolute;
+      top : 50%;
+      left : 0;
+      display : flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      width : 10vw;
+      height : 10vw;
+      transform : translate(0,-50%);
+
+      &:hover{
+        cursor : pointer;
+        opacity : 0.8;
+      }
+
+      div{
+        width : 80%;
+        height : 15%;
+        background: white;
+      }
+  }
+
+  .links{
+    display : none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height : 75%;
+    position : absolute;
+    bottom : 0;
+    left: 0;
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    pointer-events: none;
+
+    li{
+      font-size: 3rem;
+      text-decoration: none;
+      border : none;
+      padding: 10px 15px;
+      color : white;
+
+      &:hover{
+        background-color: #e6a800;
+        cursor : pointer;
+      }
+
+      a{
+        color : white;
+      }
+    }
+  }
+}
+
 @media screen and (max-width : 1200px) {
   html{
     font-size : 7.5pt;
@@ -246,6 +358,14 @@ li a:hover{
 @media screen and (max-width : 600px) {
   html{
     font-size : 5pt;
+  }
+    
+  #navDesktop{
+    display : none;
+  }
+
+  #navMobile{
+    display : block;
   }
 }
 </style>
