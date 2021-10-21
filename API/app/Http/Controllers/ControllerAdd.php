@@ -62,7 +62,7 @@ class ControllerAdd extends Controller
 
         Controller::incrementVersion();
 
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $plant->idPlant], 200);
     }
 
     public function indexProblem(Request $request)
@@ -96,7 +96,7 @@ class ControllerAdd extends Controller
 
         Controller::incrementVersion();
 
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $problem->idProblem], 200);
     }
 
     public function indexFavorite(Request $request)
@@ -175,7 +175,7 @@ class ControllerAdd extends Controller
 
         Controller::incrementVersion();
 
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $profile->idProfile], 200);
     }
 
     public function indexFavCondition(Request $request)
