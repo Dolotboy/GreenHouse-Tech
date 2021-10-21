@@ -38,10 +38,8 @@ class ControllerAdd extends Controller
             is_null($request->plantDifficulty) || 
             is_null($request->plantBestNeighbor))
         {
-            return $request;
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
-        
         $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
         $plant->plantType = $request->plantType;
@@ -64,7 +62,7 @@ class ControllerAdd extends Controller
 
         Controller::incrementVersion();
 
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $plant->idPlant], 200);
     }
 
     public function indexProblem(Request $request)
@@ -98,7 +96,7 @@ class ControllerAdd extends Controller
 
         Controller::incrementVersion();
 
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $problem->idProblem], 200);
     }
 
     public function indexFavorite(Request $request)
@@ -145,8 +143,8 @@ class ControllerAdd extends Controller
 
         if (is_null($request->email) || 
             is_null($request->password) || 
-            is_null($request->firstname) || 
-            is_null($request->lastname) || 
+            is_null($request->firstName) || 
+            is_null($request->lastName) || 
             is_null($request->access))
         { 
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
@@ -177,7 +175,7 @@ class ControllerAdd extends Controller
 
         Controller::incrementVersion();
 
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $profile->idProfile], 200);
     }
 
     public function indexFavCondition(Request $request)
@@ -187,19 +185,20 @@ class ControllerAdd extends Controller
 
     public function addFavCondition(Request $request, $type)
     {
-        if (is_null($request->type) || 
-            is_null($request->start) || 
-            is_null($request->end) || 
-            is_null($request->location) || 
-            is_null($request->min) || 
-            is_null($request->max) || 
-            is_null($request->unit))
+        if (is_null($type))
         {
-            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            return response()->json(['message'=> "The field type is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
         if ($type == 1)
         {
+            if (is_null($request->start) || 
+                is_null($request->end) || 
+                is_null($request->location))
+            {
+                return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            }
+
             $favorableCondition = new FavorableConditionDate();
 
             $favorableCondition->type = $request->type;
@@ -209,6 +208,13 @@ class ControllerAdd extends Controller
         }
         else if ($type == 2)
         {
+            if (is_null($request->min) || 
+                is_null($request->max) || 
+                is_null($request->unit))
+            {
+                return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            }
+
             $favorableCondition = new FavorableConditionNb();
 
             $favorableCondition->type = $request->type;
