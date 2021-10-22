@@ -40,6 +40,7 @@ class ControllerAdd extends Controller
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
+        
         $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
         $plant->plantType = $request->plantType;
@@ -139,6 +140,8 @@ class ControllerAdd extends Controller
     {
         $profile = new Profile();
         $salt = Str::random(40);
+
+        
 
         if (is_null($request->email) || 
             is_null($request->password) || 

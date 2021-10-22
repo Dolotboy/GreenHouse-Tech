@@ -18,7 +18,6 @@ class AjouterProfilTest extends TestCase
      */
     public function test_AjouterProfil()
     {
-        $this->withoutExceptionHandling();
 
         $response = $this->json('POST','/api/new/profile/addProfile', [
             'email' => 'email',
@@ -27,7 +26,6 @@ class AjouterProfilTest extends TestCase
             'lastName' => 'lastName',
             'access' => 'access'
         ]);
-
 
         $response->assertStatus(200);
     }
