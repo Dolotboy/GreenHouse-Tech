@@ -57,11 +57,9 @@ export default {
           mobileNavIsOpened : false
       }
   },
-
   mounted(){
       this.Initialisation()
   },
-
   methods :{
     toggleRegister(){
       this.showRegister = !this.showRegister;
@@ -112,7 +110,9 @@ export default {
       let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
+      console.log(this.plants);
       for(let i = 0; i < this.plants.length; i++){
+        
         entrepot.add(toolbox.GenerateObject(this.plants[i]));
       }
     },
