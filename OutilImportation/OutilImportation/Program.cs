@@ -16,14 +16,13 @@ namespace OutilImportation
 
         static void Main(string[] args)
         {
-            string env = "apitestenv";
+            string env = "http://testenv.apipcst.xyz/api/";
             if (args.Length > 0)
-                env = "api";
+                env = args[0];
 
             List<Plant> veggies = new List<Plant>();
             LoadVeggies(veggies);
-            //PushData($"https://{env}.pcst.xyz/api/new/plant/addPlant", veggies);
-            PushData($"http://apipcst.xyz/api/", veggies);
+            PushData(env, veggies);
 
             Interface.ReadKey();
         }
