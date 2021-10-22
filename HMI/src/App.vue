@@ -34,19 +34,16 @@ export default {
   data(){
       return{
           envBack : "http://localhost:8000/",
-
-          env : "https://apitestenv.pcst.xyz/",
+          env : "http://apipcst.xyz/",
           plants : [],
           showLogin : false,
           showRegister : false,
           apiVersion : 0.0
       }
   },
-
   mounted(){
       this.Initialisation()
   },
-
   methods :{
     toggleRegister(){
       this.showRegister = !this.showRegister;
@@ -76,7 +73,9 @@ export default {
       let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
+      console.log(this.plants);
       for(let i = 0; i < this.plants.length; i++){
+        
         entrepot.add(toolbox.GenerateObject(this.plants[i]));
       }
     },
