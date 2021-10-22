@@ -20,9 +20,9 @@ class UpdaterProblemTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $data = Problem::find(15);     
+        $data = Problem::find(1);     
 
-        $response = $this->json('PUT','/api/edit/problem/editProblem/15', [
+        $response = $this->json('PUT','/api/edit/problem/editProblem/1', [
             $data->problemName => 'problemNameEdit',
             'problemType' => 'problemType',
             'problemSolution' => 'problemSolution'
@@ -30,7 +30,7 @@ class UpdaterProblemTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response = $this->json('PUT','/api/edit/problem/editProblem/15', [
+        $response = $this->json('PUT','/api/edit/problem/editProblem/1', [
             $data->problemName => 'problemName',
             'problemType' => 'problemType',
             'problemSolution' => 'problemSolution'

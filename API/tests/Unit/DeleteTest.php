@@ -12,7 +12,7 @@ use App\Models\FavorableConditionDate;
 use App\Models\FavorableConditionNb;
 use App\Models\Favorite;
 use App\Models\Profile;
-
+/*
 class DeleteTest extends TestCase
 {
     public function test_example()
@@ -202,3 +202,4 @@ class DeleteTest extends TestCase
     }
 
 }
+*/
