@@ -4,9 +4,8 @@
 @parent
     <div id='mainContainer'>
         
-        <form action='{{route('addPlant')}}' method='PUT'>
+        <form action='{{route('addPlant')}}' method='Post'>
             @csrf
-            @method('PUT')
 
             <div class="row">
                 <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">

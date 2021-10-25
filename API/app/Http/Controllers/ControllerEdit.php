@@ -33,7 +33,6 @@ class ControllerEdit extends Controller
         return view('editSearchFavCondDate');
     }
 
-
     public function indexFavCondNb(Request $request)
     {
         return view('editSearchFavCondNb');

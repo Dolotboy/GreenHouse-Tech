@@ -26,7 +26,7 @@
 
                 <div class='cbtn'>
                     <a href="{{route('editSearchPlant')}}">
-                        <h2>Modifier une plante</h2> 
+                        <h2>Modifier/Supprimer une plante</h2> 
                     </a>
                 </div>
 
@@ -178,7 +178,7 @@
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteUnassignProblem')}}">
+                    <a href="{{route('searchUnassignProblem')}}">
                         <h2>Désassigner un problème</h2> 
                     </a>
                 </div>
