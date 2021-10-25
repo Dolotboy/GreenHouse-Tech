@@ -2,13 +2,28 @@
 <div class="wrapper">
   <h1>{{ plant.plantName }}</h1>
   <p>{{ plant.idPlant }}</p>
-  <input class="star" type="checkbox" title="Favoris"> 
+  <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
 </div>
 </template>
 
 <script>
 export default {
-    props : ['plant']
+    props : ['plant', 'idProfile'],
+    methods : {
+      postAddFavourite(){
+        $.ajax({
+          url : 'http://apitestenv.pcst.xyz/api/new/favorite/ '+ this.plant.idPlant + '/ '+ this.idProfile +'',
+          datatype: 'json',
+          contentType : 'application/json',
+          type: 'post',
+          data: JSON.stringify(favourite),
+          success: function(status)
+          {
+            alert(status); 
+          }
+        });
+      }
+    }
 }
 </script>
 
