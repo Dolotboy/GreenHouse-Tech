@@ -22,7 +22,7 @@ class ControllerLogin extends Controller
         }
 
         if(Controller::comparePassword($saltedPassword, $profile->password) == 1)
-            return $profile->idProfile;
-        return -1;
+            return response()->json(['message'=> "Profile found", 'success' => true, 'status' => "Login succeeded", 'id' => $profile->idProfile], 200);
+        return response()->json(['message'=> "Incorrect password", 'success' => false, 'status' => "login Failed", 'id' => null], 404);
     }
 }
