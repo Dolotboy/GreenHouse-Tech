@@ -45,8 +45,8 @@ Route::post('/delete/problem', [ControllerDelete::class, 'indexProblem'])->name(
 Route::post('/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('newAssignProblem');
 Route::get('/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('newAssignProblem');
 
-Route::post('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('deleteUnassignProblem');
-Route::get('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('deleteUnassignProblem');
+Route::post('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('deleteUnassignProblem'); // A enlever
+Route::get('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('searchUnassignProblem');
 
 // ***************** PROBLEM *******************
 
@@ -55,7 +55,8 @@ Route::get('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->na
 Route::post('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
 Route::get('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
 
-Route::post('/delete/favorite', [ControllerDelete::class, 'indexProblem'])->name('deleteSearchFavorite');
+Route::delete('/delete/favorite', [ControllerDelete::class, 'indexFavorite'])->name('deleteSearchFavorite');
+Route::get('/delete/favorite', [ControllerDelete::class, 'indexFavorite'])->name('deleteSearchFavorite');
 
 // ***************** FAVORITE *******************
 

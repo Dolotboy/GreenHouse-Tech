@@ -16,7 +16,6 @@ class ControllerEdit extends Controller
     public function indexPlant(Request $request)
     {
         return view('editSearchPlant');
-        /* value="{{ $produit["namePlant"] }}" */
     }
 
     public function indexProblem(Request $request)
@@ -47,7 +46,7 @@ class ControllerEdit extends Controller
         return view('editPlant', ["plant" => $plant]);
     }
 
-    public function editPlantTest(Request $request, $idPlant)
+    public function editPlantSent(Request $request, $idPlant)
     {
         $plant = Plant::find($idPlant);
  
@@ -77,7 +76,7 @@ class ControllerEdit extends Controller
         return view('editProblem', ["problem" => $problem]);
     }
 
-    public function editProblemTest(Request $request, $idProblem)
+    public function editProblemSent(Request $request, $idProblem)
     {
         $problem = Problem::find($idProblem);
 
@@ -99,7 +98,7 @@ class ControllerEdit extends Controller
         return view('editProfile', ["profile" => $profile]);
     }
 
-    public function editProfileTest(Request $request, $idProfile)
+    public function editProfileSent(Request $request, $idProfile)
     {
         $profile = Profile::find($idProfile);
 

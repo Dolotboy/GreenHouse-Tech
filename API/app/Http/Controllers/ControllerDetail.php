@@ -93,9 +93,9 @@ class ControllerDetail extends Controller
         return ("$json");
     }
 
-    public function indexFavCondition(Request $request)
+    public function indexFavCondDate(Request $request)
     {
-        return view('searchFavCondition');
+        return view('searchFavCondDate');
     }
 
     public function searchFavCondition($type, $id)

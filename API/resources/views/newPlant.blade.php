@@ -23,9 +23,7 @@
                                     <h3 class="mb-3"><input type="text" name='plantGroundType' placeholder="Plant Ground Type" value="" required></h3>
                                     <h3 class="mb-3"><input type="text" name='plantDaysConservation' placeholder="Days of conservation" value="" required></h3>
                                     <h3 class="mb-3"><input type="text" name='plantDescription' placeholder="Plant Description" value="" required></h3>  
-                                    <h3 class="mb-3"><input type="text" name='plantState' placeholder="Plant State" value="" required></h3>
                                     <h3 class="mb-3"><input type="text" name='plantDifficulty' placeholder="Plant Difficulty" value="" required></h3>
-                                    <h3 class="mb-3"><input type="text" name='lifeTime' placeholder="Life Time" value="" required></h3>
                                     <h3 class="mb-3"><input type="text" name='plantBestNeighbor' placeholder="Plant Best Neighbor" value="" required></h3>  
                                     <h3 class="mb-3"><input type="submit" name='submit' placeholder="Submit"></h3>                                     
                                 </div>

@@ -10,30 +10,29 @@ use Exception;
 
 class ControllerUnassign extends Controller
 {
-    /* ------------------------- INDEX ---------------------------- */
+    /* ------------------------- INDEX PAGE ---------------------------- */
     
     public function indexFavCondDate()
     {
-        return view('searchFavCondDate');
+        return view('unassignFavCondDate');
     }
 
     public function indexFavCondNb()
     {
-        return view('searchFavCondNb');
+        return view('unassignFavCondNb');
     }
 
     public function indexProblem()
     {
-        return view('searchProblem');
+        return view('unassingProblem');
     }
 
+/* ------------------------- UNASSIGN DATE ---------------------------- */
 
-/* ------------------------- ASSIGN ---------------------------- */
-
-    public function assignFavCondDate()
+    public function unassignFavCondDate($idPlant, $idCondition)
     {
         $unassignFavCondition = AssignConditionDate::where('tblPlant_idPlant', '=', $idPlant)
-        ->where('tblDateRangeFav_idRangeDate', '=', $idCondition)
+        ->where('tblRangeDate_idRangeDate', '=', $idCondition)
         ->get();
 
         if (is_null($unassignFavCondition))
@@ -46,7 +45,7 @@ class ControllerUnassign extends Controller
             {
                 AssignConditionDate::where([
                     ['tblPlant_idPlant', '=', $idPlant],
-                    ['tblDateRangeFav_idRangeDate', '=', $idCondition],
+                    ['tblRangeDate_idRangeDate', '=', $idCondition],
                 ])->delete();
                 return ("Assignation deleted !");
             }
@@ -59,10 +58,12 @@ class ControllerUnassign extends Controller
         }
     }
 
-    public function assignFavCondNb()
+/* ------------------------- UNASSIGN NUMBER ---------------------------- */
+
+    public function unassignFavCondNb($idPlant, $idCondition)
     {
         $unassignFavCondition = AssignConditionNb::where('tblPlant_idPlant', '=', $idPlant)
-        ->where('tblNbRangeFav_idRangeNb', '=', $idCondition)
+        ->where('tblRangeNb_idRangeNb', '=', $idCondition)
         ->get();
 
         if (is_null($unassignFavCondition))
@@ -75,7 +76,7 @@ class ControllerUnassign extends Controller
             {
                 AssignConditionNb::where([
                     ['tblPlant_idPlant', '=', $idPlant],
-                    ['tblNbRangeFav_idRangeNb', '=', $idCondition],
+                    ['tblRangeNb_idRangeNb', '=', $idCondition],
                 ])->delete();
                 return ("Assignation deleted !");
             }
@@ -85,6 +86,8 @@ class ControllerUnassign extends Controller
             }
         }
     }
+
+/* ------------------------- UNASSIGN PROBLEM ---------------------------- */
 
     public function unassignProblem($idPlant, $idProblem)
     {

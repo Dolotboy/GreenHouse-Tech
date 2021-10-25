@@ -15,7 +15,7 @@ class ControllerDelete extends Controller
 {
     public function indexPlant()
     { 
-        return view('deletePlant');
+        return view('deleteSearchPlant');
     }
 
     public function deletePlant($idPlant)
@@ -71,7 +71,7 @@ class ControllerDelete extends Controller
 
     public function indexFavorite()
     {
-        return view('deleteSearchProblem');
+        return view('deleteSearchFavorite');
     }
 
     public function deleteFavorite($idPlant, $idProfile)
@@ -109,7 +109,7 @@ class ControllerDelete extends Controller
 
     public function deleteProfile($idProfile)
     {
-        $profile = Problem::Find($idProfile);
+        $profile = Profile::Find($idProfile);
 
         if (is_null($profile))
         {
@@ -135,51 +135,49 @@ class ControllerDelete extends Controller
         return view('deleteSearchFavCondition');
     }
 
-    public function deleteFavCondition($type, $idCondition)
+    public function deleteFavConditionDate($idCondition)
     {
-        if ($type == 1)
-        {
-            $favorableCondition = FavorableConditionDate::Find($idCondition);
+        $favorableCondition = FavorableConditionDate::Find($idCondition);
 
-            if (is_null($idCondition))
+        if (is_null($idCondition))
+        {
+            return('Error, favorable condition not found');
+        }
+        else
+        {
+            try
             {
-                return('Error, favorable condition not found');
+                FavorableConditionDate::destroy($idCondition);
+                Controller::incrementVersion();
+                return ("Favorable condition deleted !");
             }
-            else
+            catch(Exception $e)
             {
-                try
-                {
-                    FavorableConditionDate::destroy($idCondition);
-                    Controller::incrementVersion();
-                    return ("Favorable condition deleted !");
-                }
-                catch(Exception $e)
-                {
-                    return('Error while deleting'.$e);
-                }
+                return('Error while deleting'.$e);
             }
         }
-        else if ($type == 2)
-        {
-            $favorableCondition = FavorableConditionNb::Find($idCondition);
+    }
 
-            if (is_null($idCondition))
-            {
-                return('Error, favorable condition not found');
-            }
-            else
-            {
-                try
-                {
-                    FavorableConditionNb::destroy($idCondition);
-                    Controller::incrementVersion();
-                    return ("Favorable condition deleted !");
-                }
-                catch(Exception $e)
-                {
-                    return('Error while deleting'.$e);
-                }
-            }
+    public function deleteFavConditionNb($idCondition)
+    {
+        $favorableCondition = FavorableConditionNb::Find($idCondition);
+
+        if (is_null($idCondition))
+        {
+            return('Error, favorable condition not found');
         }
+        else
+        {
+            try
+            {
+                FavorableConditionNb::destroy($idCondition);
+                Controller::incrementVersion();
+                return ("Favorable condition deleted !");
+            }
+            catch(Exception $e)
+            {
+                return('Error while deleting'.$e);
+            }
+        }   
     }
 } 

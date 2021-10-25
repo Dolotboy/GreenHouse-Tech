@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title', 'Search Plant')
+@section('title', 'Delete Search Plant')
 @section('pageContent')
 @parent
 
 <div id='mainContainer'>
-    <form action='' method='GET'>
+    <form id="form">
         @csrf
 
         <div class="row">
@@ -12,10 +12,10 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                         <div class="product-details">
-                        <h3>Search for a plant</h3>
+                        <h3>Delete a plant</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h3 class="mb-3"><input type="text" name='plantImg' placeholder="image Plant" value="" required></h3>
-                                <h3 class="mb-3"><input type="submit" name='submit' placeholder="Submit"></h3>                            
+                                <h2 class="mb-3"><input type="text" name='idPlant' id="v1" placeholder="idPlant" value=""></h2>
+                                <h3 class="mb-3"><input type="submit" onclick="myFunction()" name='submit' placeholder="Submit"></input></h3>                                  
                             </div>
                         </div>
                     </div>
@@ -23,6 +23,14 @@
             </div>
         </div>
     </form>
-    
 </div>
+
+<script>
+    function myFunction() {
+        let v1 = document.getElementById('v1').value;
+        let form = document.getElementById("form").action = '../api/delete/plant/' + v1;
+    }
+    </script>
 @endsection
+        
+        
