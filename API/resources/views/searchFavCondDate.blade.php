@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edit Fav Cond Nb')
+@section('title', 'Search Fav Cond Date')
 @section('pageContent')
 @parent
 
@@ -11,10 +11,10 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                         <div class="product-details">
-                        <h3>Edit your favorite condition number</h3>
+                        <h3>Search your favorite condition date</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"><input type="text" id="v1" name='idRangeNb' placeholder="id Range Number" value="" required></h2>                              
-                                <h3 class="mb-3"><input type="submit" name='submit' onclick="myFunction()" placeholder="Submit" value="Submit"></h3>                                         
+                                <h2 class="mb-3"> <input type="text" id="v1" name='idRangeDate' placeholder="id Range Date" value="" required></h2>                              
+                                <h3 class="mb-3"> <input type="submit" name='submit' onclick="myFunction()" value="Submit"></h3>                                         
                             </div>
                         </div>
                     </div>
@@ -24,10 +24,10 @@
     </form>
 </div>
 
-    <script>
+<script>
         function myFunction() {
             let v1 = document.getElementById('v1').value;
-            let form = document.getElementById("form").action = '../api/edit/condition/editFavCondNb/' + v1;
+            let form = document.getElementById("form").action = '../api/edit/condition/editFavCondDate/' + v1;
         }
     </script>
 @endsection

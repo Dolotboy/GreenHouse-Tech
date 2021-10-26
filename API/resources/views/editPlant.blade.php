@@ -6,7 +6,7 @@
 <div id='mainContainer'>
 
     <div id="formContainer">
-        <form id="form" method="POST">
+        <form id="edit" method="POST">
             @csrf
 
             <div class="row">
@@ -26,7 +26,7 @@
                                     <h3 class="mb-3"> <input type="text" name='plantDescription' value="{{ $plant["plantDescription"] }}" required></h3>  
                                     <h3 class="mb-3"> <input type="text" name='plantDifficulty' placeholder="Plant Difficulty" value="{{ $plant["plantDifficulty"] }}" required></h3>
                                     <h3 class="mb-3"> <input type="text" name='plantBestNeighbor' placeholder="Plant Best Neighbor" value="{{ $plant["plantBestNeighbor"] }}" required></h3>     
-                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Submit"></h3>                                
+                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" onclick="Edit()" value="Submit"></h3>                                
                                 </div>
                             </div>
                         </div>
@@ -65,8 +65,14 @@
         </form>
     </div>    
 
-
  </div>
+
+ <script>
+    function Edit(){
+        var plant = value="{{ $plant["idPlant"] }}";
+        let form = document.getElementById("edit").action = '../../../../api/edit/plant/editPlant/' + plant;
+    }
+</script>
 
  <script>
     function Delete(){

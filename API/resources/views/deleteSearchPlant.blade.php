@@ -14,8 +14,8 @@
                         <div class="product-details">
                         <h3>Delete a plant</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"><input type="text" name='idPlant' id="v1" placeholder="idPlant" value=""></h2>
-                                <h3 class="mb-3"><input type="submit" onclick="myFunction()" name='submit' placeholder="Submit"></input></h3>                                  
+                                <h2 class="mb-3"> <input type="text" name='idPlant' id="v1" placeholder="idPlant" value=""></h2>
+                                <h3 class="mb-3"> <input type="submit" onclick="myFunction()" name='submit' placeholder="Submit"></input></h3>                                  
                             </div>
                         </div>
                     </div>

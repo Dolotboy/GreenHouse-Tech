@@ -21,7 +21,9 @@ Route::get('/new/plant/', [ControllerAdd::class, 'indexPlant'])->name('newPlant'
 
 Route::get('/search/plant/', [ControllerEdit::class, 'indexPlant'])->name('editSearchPlant');      // Va chercher la plante
 
-Route::get('/delete/plant/', [ControllerDelete::class, 'indexPlant'])->name('deleteSearchPlant');  // Supprime une plante
+Route::get('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlantSent');
+
+//Route::get('/delete/plant/', [ControllerDelete::class, 'indexPlant'])->name('deleteSearchPlant');  // Supprime une plante et n'est plus utilisé car DELETE passe par la route EDIT
 
 // ***************** PLANT *******************
 
@@ -29,11 +31,9 @@ Route::get('/delete/plant/', [ControllerDelete::class, 'indexPlant'])->name('del
 
 Route::get('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem');
 
-Route::get('/edit/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem');
+Route::get('/search/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem');
 
-Route::get('/search/problem', [ControllerDetail::class, 'indexProblem'])->name('searchProblem');
-
-Route::get('/delete/problem', [ControllerDelete::class, 'indexProblem'])->name('deleteSearchProblem');
+//Route::get('/delete/problem', [ControllerDelete::class, 'indexProblem'])->name('deleteSearchProblem');
 
 Route::get('/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('newAssignProblem');
 
@@ -53,9 +53,7 @@ Route::get('/delete/favorite', [ControllerDelete::class, 'indexFavorite'])->name
 
 Route::get('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile');
 
-Route::get('/edit/profile', [ControllerEdit::class, 'indexProfile'])->name('editSearchProfile');
-
-Route::get('/search/profile', [ControllerDetail::class, 'indexProfile'])->name('searchProfile');
+Route::get('/search/profile', [ControllerEdit::class, 'indexProfile'])->name('editSearchProfile');
 
 Route::get('/delete/profile', [ControllerDelete::class, 'indexProfile'])->name('deleteSearchProfile');
 
@@ -65,9 +63,7 @@ Route::get('/delete/profile', [ControllerDelete::class, 'indexProfile'])->name('
 
 Route::get('/new/conditionDate', [ControllerAdd::class, 'indexFavCondDate'])->name('newFavCondDate');
 
-Route::get('/edit/conditionDate', [ControllerEdit::class, 'indexFavCondDate'])->name('editSearchFavCondDate');
-
-Route::get('/search/conditionDate', [ControllerDetail::class, 'indexFavCondDate'])->name('searchFavCondDate');
+Route::get('/search/conditionDate', [ControllerEdit::class, 'indexFavCondDate'])->name('editSearchFavCondDate');
 
 Route::get('/delete/conditionDate', [ControllerDelete::class, 'indexFavCondDate'])->name('deleteSearchFavCondDate');
 
@@ -81,9 +77,7 @@ Route::get('/unassign/conditionDate', [ControllerUnassign::class, 'indexFavCondD
 
 Route::get('/new/conditionNb', [ControllerAdd::class, 'indexFavCondNb'])->name('newFavCondNb');
 
-Route::get('/edit/conditionNb', [ControllerEdit::class, 'indexFavCondNb'])->name('editSearchFavCondNb');
-
-Route::get('/search/conditionNb', [ControllerDetail::class, 'indexFavCondNb'])->name('searchFavCondNb');
+Route::get('/search/conditionNb', [ControllerEdit::class, 'indexFavCondNb'])->name('editSearchFavCondNb');
 
 Route::get('/delete/conditionNb', [ControllerDelete::class, 'indexFavCondNb'])->name('deleteSearchFavCondNb');
 

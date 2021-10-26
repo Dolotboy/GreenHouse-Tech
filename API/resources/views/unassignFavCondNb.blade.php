@@ -16,7 +16,7 @@
                             <div class="border-bottom pb-3 mb-3">
                                 <h3 class="mb-3"> <input type="text" id="v1" name='tblPlant_idPlant' placeholder="idPlant" value="" required></h3>
                                 <h3 class="mb-3"> <input type="text" id="v2" name='tblNbRangeFav_idRangeNb' placeholder="idRangeDate" value="" required></h3>
-                                <h3 class="mb-3"> <input type="submit" name='submit' onclick="myFunction()" placeholder="Submit" value="Submit"></input></h3>                                      
+                                <h3 class="mb-3"> <input type="submit" name='submit' onclick="myFunction()" value="Submit"></input></h3>                                      
                             </div>
                         </div>
                     </div>

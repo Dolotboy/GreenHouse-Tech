@@ -18,7 +18,7 @@
                                     <h2 class="mb-3"> <input type="text" name='problemType' placeholder="Problem Type" value="" required></h2>
                                     <h3 class="mb-3"> <input type="text" name='problemSolution' placeholder="Problem Solution" value="" required></h3>
                                     <h3 class="mb-3"> <input type="text" name='problemName' placeholder="Problem Name" value="" required></h3>    
-                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit"></h3>                             
+                                    <h3 class="mb-3"> <input type="submit" name='submit' value="Submit"></h3>                             
                                 </div>
                             </div>
                         </div>

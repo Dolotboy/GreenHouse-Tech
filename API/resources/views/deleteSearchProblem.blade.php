@@ -14,9 +14,9 @@
                         <div class="product-details">
                         <h3>Delete a problem</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"><input type="text" name='problem' placeholder="Problem"></h2>
-                                <h3 class="mb-0 text-primary"><input type="text" name='importanceLvl' placeholder="Importance Level"></h3>
-                                <h3 class="mb-0 text-primary"><input type="text" name='description' placeholder="Description"></h3>                              
+                                <h2 class="mb-3"> <input type="text" name='problem' placeholder="Problem"></h2>
+                                <h3 class="mb-3"> <input type="text" name='importanceLvl' placeholder="Importance Level"></h3>
+                                <h3 class="mb-3"> <input type="text" name='description' placeholder="Description"></h3>                              
                             </div>
                         </div>
                     </div>

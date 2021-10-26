@@ -13,9 +13,9 @@
                         <div class="product-details">
                         <h3>Add your favourite plant below</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h3 class="mb-0 text-primary"><input type="text" id='v1' name='TblPlant_idPlant' placeholder="Id Plant" value="" required></h3>
-                                <h3 class="mb-0 text-primary"><input type="text" id='v2' name='TblProfile_idProfile' placeholder="Id Profile" value="" required></h3>    
-                                <h3 class="mb-0 text-primary"><button type='submit' onclick="myFunction()">Envoyer</button></h3>              
+                                <h3 class="mb-3"> <input type="text" id='v1' name='TblPlant_idPlant' placeholder="Id Plant" value="" required></h3>
+                                <h3 class="mb-3"> <input type="text" id='v2' name='TblProfile_idProfile' placeholder="Id Profile" value="" required></h3>    
+                                <h3 class="mb-3"> <input type='submit' onclick="myFunction()" value="Submit"></input></h3>              
                             </div>
                         </div>
                     </div>

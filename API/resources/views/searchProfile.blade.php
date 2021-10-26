@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edit Problem')
+@section('title', 'Search Profile')
 @section('pageContent')
 @parent
 
@@ -10,10 +10,10 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                         <div class="product-details">
-                        <h3>Edit your problem</h3>
+                        <h3>Search your profile</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"><input type="text" id="v1" name='idProblem' placeholder="idProblem" value="" required></h2>   
-                                <h3 class="mb-3"><input type="submit" onclick="myFunction()" name='submit' placeholder="Submit"></h3>                             
+                                <h2 class="mb-3"> <input type="text" id="v1" name='idProfile' placeholder="idProfile" value="" required></h2>   
+                                <h3 class="mb-3"> <input type="submit" onclick="myFunction()" name='submit' value="Submit"></h3>                                       
                             </div>
                         </div>
                     </div>
@@ -24,10 +24,9 @@
 </div>
 
 <script>
-    function myFunction() {
-        let v1 = document.getElementById('v1').value;
-        let form = document.getElementById("form").action = '../api/edit/problem/editProblem/' + v1;
-    }
+function myFunction() {
+    let v1 = document.getElementById('v1').value;
+    let form = document.getElementById("form").action = '../api/edit/profile/editProfile/' + v1;
+}
 </script>
-
 @endsection

@@ -18,6 +18,7 @@
             <!-- // ****************** FIRST LINE ******************** // -->
 
             <div class='midContainer'>
+                
                 <div class='cbtn'>
                     <a href="{{route('newPlant')}}">
                         <h2>Ajouter une plante</h2> 

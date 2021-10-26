@@ -15,27 +15,27 @@ class ControllerEdit extends Controller
 {
     public function indexPlant(Request $request)
     {
-        return view('editSearchPlant');
+        return view('searchPlant');
     }
 
     public function indexProblem(Request $request)
     {
-        return view('editSearchProblem');
+        return view('searchProblem');
     }
 
     public function indexProfile(Request $request)
     {
-        return view('editSearchProfile');
+        return view('searchProfile');
     }
 
     public function indexFavCondDate(Request $request)
     {
-        return view('editSearchFavCondDate');
+        return view('searchFavCondDate');
     }
 
     public function indexFavCondNb(Request $request)
     {
-        return view('editSearchFavCondNb');
+        return view('searchFavCondNb');
     }
 
     public function editPlant(Request $request, $idPlant)
