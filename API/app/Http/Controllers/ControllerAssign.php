@@ -47,7 +47,7 @@ class ControllerAssign extends Controller
         }
         catch (Exception $e)
         {
-            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            return response()->json(['message'=> "We've encountered problems while saving data in the database, either this association already exists or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
         Controller::incrementVersion();
@@ -74,7 +74,7 @@ class ControllerAssign extends Controller
         }
         catch (Exception $e)
         {
-            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            return response()->json(['message'=> "We've encountered problems while saving data in the database,, either this association already exists or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
         Controller::incrementVersion();
