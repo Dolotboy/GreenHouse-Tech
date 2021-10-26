@@ -41,7 +41,8 @@ export default {
       },
       postCheckLogin(){
         let user = this.createUser();
-        console.log(JSON.stringify(user));
+        let that = this;
+
         $.ajax({
           url : 'http://testenv.apipcst.xyz/api/login/checkLogin/',
           datatype: 'json',
@@ -50,7 +51,7 @@ export default {
           data: JSON.stringify(user),
           success: function(status)
           {
-            alert(status); 
+            that.$emit("login", status); 
           }
         });
       }

@@ -28,7 +28,7 @@
       </ul>
     </nav>
     <router-view/>  
-    <Login v-if="showLogin" @close="toggleLogin"/>
+    <Login @login="downloadFavorites" v-if="showLogin" @close="toggleLogin"/>
     <Register v-if="showRegister" @close="toggleRegister"/>
   </div>
 </template>
@@ -48,9 +48,10 @@ export default {
   },
   data(){
       return{
-          envBack : "http://localhost:8000/",
-          env : "https://testenv.apipcst.xyz/",
+          env : "http://localhost:8000/",
+          envBack : "https://testenv.apipcst.xyz/",
           plants : [],
+          favorites : [],
           showLogin : false,
           showRegister : false,
           apiVersion : 0.0,
@@ -81,8 +82,6 @@ export default {
         console.log("else");
         links.style.display = "none";
         navMobile.style.height = "7.5vh";
-        // hamburger.style.top = posY + "px";
-        // hamburger.style.left = posX + "px";
       }
       
       this.mobileNavIsOpened = !this.mobileNavIsOpened;
@@ -125,16 +124,33 @@ export default {
       })
     },
     GetAllPlants(url){
-    return new Promise(resolve => {
-      $.get(url, function(donnees, status){
-        let json = JSON.parse(donnees);
-        let plants = [];
-        for(let i = 0; i< json.length; i++){
-          plants.push(json[i]);
-        }
-        resolve(plants);
+      return new Promise(resolve => {
+        $.get(url, function(donnees, status){
+          let json = JSON.parse(donnees);
+          let plants = [];
+          for(let i = 0; i< json.length; i++){
+            plants.push(json[i]);
+          }
+          resolve(plants);
+        })
       })
-    })
+    },
+    async downloadFavorites(profileId){
+      this.favorites = await this.getFavorites(this.env + "api/searchAll/favorite/" + profileId);
+      localStorage.setItem('favorites', JSON.stringify(this.favorites));
+      console.log(this.favorites);
+    },
+    getFavorites(url){
+      return new Promise(resolve => {
+        $.get(url, function(donnees, status){
+          let json = JSON.parse(donnees);
+          let favorites = [];
+          for(let i = 0; i< json.length; i++){
+            favorites.push(json[i]);
+          }
+          resolve(favorites);
+        })
+      })  
     }
   }   
 }

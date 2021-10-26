@@ -158,6 +158,25 @@ class ControllerDetail extends Controller
         return ("$json");
     } 
 
+    public function searchAllFavorites($idProfile)
+    {
+        if (is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        try
+        {
+            $favorites = Favorite::where("tblProfile_idProfile",$idProfile)->get();
+            $json = json_encode($favorites);
+            return ("$json");
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+    } 
+
     public function searchAllProfile()
     {
         try

@@ -1,6 +1,7 @@
 <template>
 <div class="wrapper">
   <h1>{{ plant.plantName }}</h1>
+  <p v-if="isFavorite">Fuck you</p>
   <p>{{ plant.idPlant }}</p>
   <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
 </div>
@@ -8,7 +9,7 @@
 
 <script>
 export default {
-    props : ['plant', 'idProfile'],
+    props : ['plant', 'idProfile', 'isFavorite'],
     methods : {
       postAddFavourite(){
         $.ajax({

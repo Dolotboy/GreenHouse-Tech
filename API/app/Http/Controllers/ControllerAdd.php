@@ -120,15 +120,13 @@ class ControllerAdd extends Controller
         try
         {
             $favorite->save();
+            Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
         }
         catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
-
-        Controller::incrementVersion();
-
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
     }
 
     public function indexProfile(Request $request)
@@ -140,8 +138,6 @@ class ControllerAdd extends Controller
     {
         $profile = new Profile();
         $salt = Str::random(40);
-
-        
 
         if (is_null($request->email) || 
             is_null($request->password) || 
