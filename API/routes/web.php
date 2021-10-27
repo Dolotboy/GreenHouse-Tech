@@ -23,8 +23,6 @@ Route::get('/search/plant/', [ControllerEdit::class, 'indexPlant'])->name('editS
 
 Route::get('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlantSent');
 
-//Route::get('/delete/plant/', [ControllerDelete::class, 'indexPlant'])->name('deleteSearchPlant');  // Supprime une plante et n'est plus utilisé car DELETE passe par la route EDIT
-
 // ***************** PLANT *******************
 
 // ***************** PROBLEM *******************
@@ -32,8 +30,6 @@ Route::get('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlant
 Route::get('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem');
 
 Route::get('/search/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem');
-
-//Route::get('/delete/problem', [ControllerDelete::class, 'indexProblem'])->name('deleteSearchProblem');
 
 Route::get('/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('newAssignProblem');
 
