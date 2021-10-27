@@ -12,6 +12,8 @@ use App\Models\Profile;
 use App\Models\AssignConditionDate;
 use App\Models\AssignProblem;
 use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Http\Response;
 
 class ControllerAssign extends Controller
 {
@@ -23,16 +25,30 @@ class ControllerAssign extends Controller
 
     public function assignFavConditionDate($idPlant,$idCondition)
     {
+        if (is_null($idPlant) ||
+            is_null($idCondition))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
         $assignFavorableConditionDate = new AssignConditionDate();
 
         $assignFavorableConditionDate->tblPlant_idPlant = $idPlant;
         $assignFavorableConditionDate->tblRangeDate_idRangeDate = $idCondition;
 
-        $assignFavorableConditionDate->save();
+        try
+        {
+            $assignFavorableConditionDate->save();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database, either this association already exists or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
 
         Controller::incrementVersion();
 
-        return("La condition favorable date a ete ajoute");
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+
     }
     
     public function indexFavCondNb()
@@ -42,34 +58,59 @@ class ControllerAssign extends Controller
 
     public function assignFavConditionNb($idPlant, $idCondition)
     {
+        if (is_null($idPlant) ||
+            is_null($idCondition))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
         $assignFavorableConditionNb = new AssignConditionNb();  
 
         $assignFavorableConditionNb->tblPlant_idPlant = $idPlant;
         $assignFavorableConditionNb->tblRangeNb_idRangeNb = $idCondition;
 
-        $assignFavorableConditionNb->save();
+        try
+        {
+            $assignFavorableConditionNb->save();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database, either this association already exists or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
 
         Controller::incrementVersion();
 
-        return("La condition favorable nb a ete ajoute");
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
     }
        
     public function indexProblem()
     {
         return view("assignProblem");
     }
-
     public function assignProblem($idPlant, $idProblem)
     {
+        if (is_null($idPlant) ||
+            is_null($idProblem))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
         $assignProblem = new AssignProblem();
 
         $assignProblem->tblPlant_idPlant = $idPlant;
         $assignProblem->tblProblem_idProblem = $idProblem;
 
-        $assignProblem->save();
+        try
+        {
+            $assignProblem->save();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database,, either this association already exists or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
 
         Controller::incrementVersion();
 
-        return ("Le problème a été assigné");
-    }
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+    } 
 }

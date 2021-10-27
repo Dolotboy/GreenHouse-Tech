@@ -7,6 +7,7 @@ use App\Models\AssignConditionNb;
 use App\Models\AssignConditionDate;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Response;
 
 class ControllerUnassign extends Controller
 {
@@ -31,30 +32,39 @@ class ControllerUnassign extends Controller
 
     public function unassignFavCondDate($idPlant, $idCondition)
     {
-        $unassignFavCondition = AssignConditionDate::where('tblPlant_idPlant', '=', $idPlant)
-        ->where('tblRangeDate_idRangeDate', '=', $idCondition)
-        ->get();
+        if (is_null($idPlant) ||
+            is_null($idCondition))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Condition: $idCondition"], 400);
+        }
+
+        try
+        {
+            $unassignFavCondition = AssignConditionDate::where('tblPlant_idPlant', '=', $idPlant)
+            ->where('tblRangeDate_idRangeDate', '=', $idCondition)
+            ->get();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The association doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Condition: $idCondition"], 400);
+        }
 
         if (is_null($unassignFavCondition))
         {
-            return('Error, assignation not found');
+            return response()->json(['message'=> "Error, association not found", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Condition: $idCondition"], 404);
         }
-        else
-        {
-            try
-            {
-                AssignConditionDate::where([
-                    ['tblPlant_idPlant', '=', $idPlant],
-                    ['tblRangeDate_idRangeDate', '=', $idCondition],
-                ])->delete();
-                return ("Assignation deleted !");
-            }
-            catch(Exception $e)
-            {
-                return('Error while deleting'.$e);
-            }
 
+        try
+        {
+            AssignConditionDate::where([
+                ['tblPlant_idPlant', '=', $idPlant],
+                ['tblRangeDate_idRangeDate', '=', $idCondition],])->delete();
             Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Condition: $idCondition"], 200);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Condition: $idCondition"], 400);
         }
     }
 
@@ -62,28 +72,39 @@ class ControllerUnassign extends Controller
 
     public function unassignFavCondNb($idPlant, $idCondition)
     {
-        $unassignFavCondition = AssignConditionNb::where('tblPlant_idPlant', '=', $idPlant)
-        ->where('tblRangeNb_idRangeNb', '=', $idCondition)
-        ->get();
+        if (is_null($idPlant) ||
+            is_null($idCondition))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Condition: $idCondition"], 400);
+        }
+
+        try
+        {
+            $unassignFavCondition = AssignConditionNb::where('tblPlant_idPlant', '=', $idPlant)
+            ->where('tblRangeNb_idRangeNb', '=', $idCondition)
+            ->get();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The association doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Condition: $idCondition"], 400);
+        }
 
         if (is_null($unassignFavCondition))
         {
-            return('Error, assignation not found');
+            return response()->json(['message'=> "Error, association not found", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Condition: $idCondition"], 404);
         }
-        else
+
+        try
         {
-            try
-            {
-                AssignConditionNb::where([
-                    ['tblPlant_idPlant', '=', $idPlant],
-                    ['tblRangeNb_idRangeNb', '=', $idCondition],
-                ])->delete();
-                return ("Assignation deleted !");
-            }
-            catch(Exception $e)
-            {
-                return('Error while deleting'.$e);
-            }
+            AssignConditionDate::where([
+                ['tblPlant_idPlant', '=', $idPlant],
+                ['tblRangeNb_idRangeNb', '=', $idCondition],])->delete();
+            Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Condition: $idCondition"], 200);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Condition: $idCondition"], 400);
         }
     }
 
@@ -91,13 +112,19 @@ class ControllerUnassign extends Controller
 
     public function unassignProblem($idPlant, $idProblem)
     {
+        if (is_null($idPlant) ||
+            is_null($idProblem))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
         $unassignProblem = AssignProblem::where('tblPlant_idPlant', '=', $idPlant)
         ->where('tblProblem_idProblem', '=', $idProblem)
         ->get();
 
         if (is_null($unassignProblem))
         {
-            return('Error, assignation not found');
+            return response()->json(['message'=> "The association doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Problem: $idProblem"], 400);
         }
         else
         {
@@ -107,14 +134,14 @@ class ControllerUnassign extends Controller
                     ['tblPlant_idPlant', '=', $idPlant],
                     ['tblProblem_idProblem', '=', $idProblem],
                 ])->delete();
-                return ("Assignation deleted !");
+                return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
             }
             catch(Exception $e)
             {
-                return('Error while deleting'.$e);
+                return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Problem: $idProblem"], 400);
             }
         }
 
         Controller::incrementVersion();
-    }
+    } 
 }

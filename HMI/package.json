@@ -9,16 +9,19 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "jquery": "^3.6.0",
-    "sass-loader": "^12.1.0",
-    "vue": "^3.2.19",
+    "vue": "^3.2.20",
     "vue-cli": "^2.9.6",
-    "vue-router": "^4.0.0-0"
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0"
+    "@vue/cli-plugin-babel": "^4.5.14",
+    "@vue/cli-plugin-router": "^4.5.14",
+    "@vue/cli-service": "^4.5.14",
+    "@vue/compiler-sfc": "^3.2.20",
+    "sa": "^0.2.50",
+    "sass": "^1.43.2",
+    "sass-loader": "^10.2.0",
+    "webpack": "^4.0.0"
   },
   "browserslist": [
     "> 1%",

@@ -10,7 +10,9 @@ use App\Models\Favorite;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Support\Str;
+use Illuminate\Http\Response;
 
 
 class ControllerAdd extends Controller
@@ -26,7 +28,22 @@ class ControllerAdd extends Controller
     public function addPlant(Request $request)
     {
         $plant = new Plant();
+        //$request = json_decode(file_get_contents("php://input"));
 
+        if (is_null($request->plantImg) || 
+            is_null($request->plantName) || 
+            is_null($request->plantType) || 
+            is_null($request->plantFamily) || 
+            is_null($request->plantSeason) || 
+            is_null($request->plantGroundType) || 
+            is_null($request->plantDaysConservation) || 
+            is_null($request->plantDescription) || 
+            is_null($request->plantDifficulty) || 
+            is_null($request->plantBestNeighbor))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+        
         $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
         $plant->plantType = $request->plantType;
@@ -38,11 +55,18 @@ class ControllerAdd extends Controller
         $plant->plantDifficulty = $request->plantDifficulty;
         $plant->plantBestNeighbor = $request->plantBestNeighbor;
         
-        $plant->save();
+        try
+        {
+            $plant->save();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
 
         Controller::incrementVersion();
 
-        return ("La plante#$plant->idPlant a été ajouté");
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $plant->idPlant], 200);
     }
 
     /* ------------------- PROBLEM ------------------- */
@@ -56,15 +80,28 @@ class ControllerAdd extends Controller
     {
         $problem = new Problem();
 
+        if (is_null($request->problemName) || 
+            is_null($request->problemType) || 
+            is_null($request->problemSolution))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
         $problem->problemName = $request->problemName;
         $problem->problemType = $request->problemType;
         $problem->problemSolution = $request->problemSolution;
         
-        $problem->save();
+        try
+        {
+            $problem->save();
+            Controller::incrementVersion();
 
-        Controller::incrementVersion();
-
-        return ("Le problème#$problem->idProblem a été ajouté");
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $problem->idProblem], 200);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
     }
 
 /* ------------------- FAVORITE ------------------- */
@@ -77,14 +114,26 @@ class ControllerAdd extends Controller
     public function addFavorite($idPlant, $idProfile)
     {
         $favorite = new Favorite();
-        
+
+        if (is_null($idPlant) || 
+            is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
         $favorite->tblPlant_idPlant = $idPlant;
         $favorite->tblProfile_idProfile = $idProfile;
-        $favorite->save();
 
-        Controller::incrementVersion();
+        try
+        {
+            $favorite->save();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database, either this association already exists or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
 
-        return ("Le favoris a été ajouté");
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
     }
 
 /* ------------------- PROFILE ------------------- */
@@ -99,23 +148,42 @@ class ControllerAdd extends Controller
         $profile = new Profile();
         $salt = Str::random(40);
 
-        $profile->email = $request->email;
-        $hashedPassword = $request->password . $salt;
+        
 
-        $profile->password = Hash::make($hashedPassword);
-        //$profile->password = $request->password;
-        //$profile->password = Hash::make($request->password);
+        if (is_null($request->email) || 
+            is_null($request->password) || 
+            is_null($request->firstName) || 
+            is_null($request->lastName))
+        { 
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+        else if (is_null($salt))
+        { 
+            return response()->json(['message'=> "A problem has been encountered while creating the salt", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
+        $profile->email = $request->email;
+        $saltedPassword = $request->password . $salt;
+
+        $profile->password = Controller::hashPassword($saltedPassword);
         $profile->salt = $salt;
 
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
-        $profile->access = $request->access;
-        
-        $profile->save();
+        $profile->access = "user";
+
+        try
+        {
+            $profile->save();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
 
         Controller::incrementVersion();
 
-        return ("Le profil a été ajouté");
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $profile->idProfile], 200);
     }
 
 /* ------------------- FAVORITE CONDITION DATE ------------------- */
@@ -129,16 +197,29 @@ class ControllerAdd extends Controller
     {
         $favorableCondition = new FavorableConditionDate();
 
+        if (is_null($request->start) || 
+            is_null($request->end) || 
+            is_null($request->location) ||
+            is_null($request->type))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
         $favorableCondition->type = $request->type;
         $favorableCondition->start = $request->start;
         $favorableCondition->end = $request->end;
         $favorableCondition->location = $request->location;
 
-        $favorableCondition->save();
-
-        Controller::incrementVersion();
-
-        return ("La condition favorable DATE a été ajouté");
+        try
+        {
+            $favorableCondition->save();
+            Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $favorableCondition->id], 200);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
     }
     
     public function indexFavCondNb(Request $request)
@@ -150,16 +231,28 @@ class ControllerAdd extends Controller
     {
         $favorableCondition = new FavorableConditionNb();
 
+        if (is_null($request->min) || 
+            is_null($request->max) || 
+            is_null($request->unit) ||
+            is_null($request->type))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
         $favorableCondition->type = $request->type;
         $favorableCondition->min = $request->min;
         $favorableCondition->max = $request->max;
         $favorableCondition->unit = $request->unit;
 
-        $favorableCondition->save();
-
-        Controller::incrementVersion();
-
-        return ("La condition favorable NB a été ajouté");
+        try
+        {
+            $favorableCondition->save();
+            Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $favorableCondition->id], 200);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
     }
-
 }

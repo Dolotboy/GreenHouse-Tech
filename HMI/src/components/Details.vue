@@ -1,10 +1,10 @@
 <template>
     <div class="details">
+        <p @click="toggleProblem">Problèmes</p>
         <h1>{{ plant.plantName }}</h1>
         <div class="detailsPlant">
             <p>Type de plante : {{ plant.plantType }}</p>
-            <p>Saison : {{plant.season}}</p>
-            <p>Problème : </p>
+            <p>Saison : {{plant.season}}</p>            
             <p>Condition favorable : </p>
             <p>Date de semance : </p>
             <p>Date de récolte :</p>
@@ -13,17 +13,36 @@
             <p>Type de sol : {{plant.groundType}}</p>
             <p>Fonctionnement : {{plant.description}}</p>              
         </div>
-        <div class="close-button" @click="$emit('close')" >X</div>        
+        <div class="close-button" @click="$emit('close')" >X</div>   
+        <Problem v-if="showProblem" @close="toggleProblem"/>     
     </div>
 </template>
 
+
+
 <script>
+import Problem from './Problem.vue'
+
 export default {
-    props : ['plant']
+    components :{
+        Problem
+     },
+    data(){
+      return{
+        showProblem : false
+      }
+  },
+    props : ['plant'],
+
+    methods: {
+        toggleProblem(){
+            this.showProblem = !this.showProblem;
+    }
+    } 
 }
 </script>
 
-<style>
+<style lang="scss">
 .details{
     position :absolute;
     top : 50%;
@@ -35,29 +54,37 @@ export default {
     width : 50vw;
     padding-left: 5%;
     padding-right: 5%;
+
+    h1{
+        font-size: 35px;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 1%;
+        right: 1%;
+        font-size: 30pt;
+
+        &:hover{
+            cursor: pointer;
+            border:solid;
+            border-width: 1px;
+            border-color: grey;
+        }
+    }
+    .detailsPlant{
+        display: flex;
+        flex-direction: column;
+
+        & > p{
+            font-size: 20px;
+            text-align: left;
+            margin:10px 0;
+        }    
+    }
 }
-.close-button {
-    position: absolute;
-    top: 1%;
-    right: 1%;
-    font-size: 30pt;
-}
-.close-button:hover{
+.details p:hover{
+    color: red;
     cursor: pointer;
-    border:solid;
-    border-width: 1px;
-    border-color: grey;
-}
-.details h1{
-    font-size: 35px;
-}
-.detailsPlant > p{
-    font-size: 20px;
-    text-align: left;
-    margin:10px 0;
-}    
-.detailsPlant{
-    display: flex;
-    flex-direction: column;
 }
 </style>
