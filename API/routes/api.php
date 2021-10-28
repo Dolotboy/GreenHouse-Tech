@@ -52,6 +52,12 @@ Route::get("searchAll/favorite/{idProfile}", [ControllerDetail::class, 'searchAl
 
 // ***************** PROFILE *******************
 
+// ***************** ADMIN *******************
+
+Route::put('/new/admin/addAdmin/{idProfile}', [ControllerEdit::class, 'addAdmin'],function ($idProfile){})->name('addAdmin');
+
+// ***************** ADMIN *******************
+
 // ***************** FAVORABLE CONDITION *******************
 
 Route::get("search/condition/{type}/{idCondition}", [ControllerDetail::class, 'searchFavCondition'],function ($type, $idCondition){})->name('detailFavCondition');
