@@ -42,9 +42,8 @@ export default {
       postCheckLogin(){
         let user = this.createUser();
         console.log(JSON.stringify(user));
-        //$.post("https://apitestenv.pcst.xyz/api/new/profile/addProfile", JSON.stringify(user));
         $.ajax({
-          url : 'http://apitestenv.pcst.xyz/api/login/checkLogin/',
+          url : 'http://testenv.apipcst.xyz/api/login/checkLogin/',
           datatype: 'json',
           contentType : 'application/json',
           type: 'post',

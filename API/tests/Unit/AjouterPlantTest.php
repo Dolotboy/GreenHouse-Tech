@@ -15,7 +15,6 @@ class AjouterPlantTest extends TestCase
     
     public function test_AjouterPlant()
     {
-        $this->withoutExceptionHandling();
 
         $response = $this->json('POST','/api/new/plant/addPlant', [
             'plantImg' => 'plantImg',
@@ -30,10 +29,6 @@ class AjouterPlantTest extends TestCase
             'plantBestNeighbor' => 'plantBestNeighbor'
         ]);
 
-        
-
-        $response->assertStatus(200);
-
-                  
+        $response->assertStatus(200);                  
     }
 }

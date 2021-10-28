@@ -19,26 +19,25 @@ class UpdaterProfilTest extends TestCase
 
     public function test_UpdaterProfile()
     {
-        $this->withoutExceptionHandling();
 
-        $data = Profile::find(25);     
+        $data = Profile::find(1);     
 
-        $response = $this->json('PUT','/api/edit/profile/editProfile/25', [
+        $response = $this->json('PUT','/api/edit/profile/editProfile/1', [
             $data->email => 'emailEdit',
-            'password' => 'password',
-            'firstName' => 'firstName',
-            'lastName' => 'lastName',
-            'access' => 'access'
+            $data->password => 'password',
+            $data->firstName => 'firstName',
+            $data->lastName => 'lastName',
+            $data->access => 'access'
         ]);
 
         $response->assertStatus(200);
 
-        $response = $this->json('PUT','/api/edit/profile/editProfile/25', [
+        $response = $this->json('PUT','/api/edit/profile/editProfile/1', [
             $data->email => 'email',
-            'password' => 'password',
-            'firstName' => 'firstName',
-            'lastName' => 'lastName',
-            'access' => 'access'
+            $data->password => 'password',
+            $data->firstName => 'firstName',
+            $data->lastName => 'lastName',
+            $data->access => 'access'
         ]);
 
         $response->assertStatus(200);

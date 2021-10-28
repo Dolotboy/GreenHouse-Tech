@@ -56,14 +56,14 @@ export default {
         console.log(JSON.stringify(user));
         //$.post("https://apitestenv.pcst.xyz/api/new/profile/addProfile", JSON.stringify(user));
         $.ajax({
-          url : 'http://apitestenv.pcst.xyz/api/new/profile/addProfile',
+          url : 'http://testenv.apipcst.xyz/api/new/profile/addProfile',
           datatype: 'json',
           contentType : 'application/json',
           type: 'post',
           data: JSON.stringify(user),
-          success: function()
+          success: function(status)
           {
-            alert("Inscription effectuée!"); 
+            alert(status); 
           }
         });
       }
