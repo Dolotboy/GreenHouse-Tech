@@ -1,0 +1,37 @@
+Add Plant 		OK
+Add problem		OK
+Add profile		OK
+Add favorite		OK
+Add FavDate		OK
+Add FavNb		OK
+
+Get Plant		OK
+Get Problem		OK
+Get Profile		OK
+Get FavDate		NO -> Pas de route
+Get FavNb		NO -> Pas de route
+Get favorite		NO -> Inexistant (Mais fonctionnel)
+Get package		OK
+Get lastVersion		OK
+
+Assign FavDate		OK
+Assign FavNb		OK
+Assign Prob		OK
+
+Unassign Prob		OK
+Unassign FavDate	OK
+Unassign FavNb		OK
+
+Del Plant		OK -> Route Get pas necessaire pour Yark, mais l'est pour interface
+Del Problem		OK -> Route Get pas necessaire pour Yark, mais l'est pour interface
+Del favorite		OK
+
+SearchAll Plant		OK
+SearchAll Problem	OK
+SearchAll Profile	OK
+SearchAll FavDate	NO -> Controller pas adapté
+SearchAll FavNb		NO -> Controller pas adapté
+
+Edit Plant		NO -> La route est la même que pour c'elle de web.php
+Edit Problem		NO -> La route est la même que pour c'elle de web.php (Get ?)
+Edit Profile		NO -> La route est la même que pour c'elle de web.php (Get ?)

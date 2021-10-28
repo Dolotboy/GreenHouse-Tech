@@ -96,7 +96,7 @@ class ControllerUnassign extends Controller
 
         try
         {
-            AssignConditionDate::where([
+            AssignConditionNb::where([
                 ['tblPlant_idPlant', '=', $idPlant],
                 ['tblRangeNb_idRangeNb', '=', $idCondition],])->delete();
             Controller::incrementVersion();

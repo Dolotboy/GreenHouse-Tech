@@ -93,7 +93,7 @@ Route::get('/edit/condition/editFavCondDate/{idCondition}', [ControllerEdit::cla
 
 //Route::get("search/condition/{type}/{idCondition}", [ControllerDetail::class, 'searchFavConditionDate'],function ($type, $idCondition){})->name('searchFavConditionDate');
 
-//Route::get("searchAll/condition/{type}", [ControllerDetail::class, 'searchAllFavCondition'],function ($type){})->name('detailAllFavCondition');
+Route::get("searchAll/condition/date", [ControllerDetail::class, 'searchAllFavConditionDate'],function (){})->name('detailAllFavConditionDate');
 
 Route::delete("/delete/condition/date/{idCondition}", [ControllerDelete::class, 'deleteFavConditionDate'],function ($idCondition){})->name('deleteFavConditionDate');
 Route::get("/delete/condition/date/{idCondition}", [ControllerDelete::class, 'deleteFavConditionDate'],function ($idCondition){})->name('deleteFavConditionDate');
@@ -113,7 +113,7 @@ Route::get('/edit/condition/editFavCondNb/{idCondition}', [ControllerEdit::class
 //Route::get("search/condition/{type}/{idCondition}", [ControllerDetail::class, 'searchFavConditionNb'],function ($type, $idCondition){})->name('searchFavConditionNb');
 //Route::get("search/condition/{type}/{idCondition}", [ControllerDetail::class, 'searchFavCondition'],function ($type, $idCondition){})->name('detailFavCondition');
 
-//Route::get("searchAll/condition/{type}", [ControllerDetail::class, 'searchAllFavCondition'],function ($type){})->name('detailAllFavCondition');
+Route::get("searchAll/condition/nb", [ControllerDetail::class, 'searchAllFavConditionNb'],function (){})->name('detailAllFavConditionNb');
 
 Route::delete("/delete/condition/number/{idCondition}", [ControllerDelete::class, 'deleteFavConditionNb'],function ($idCondition){})->name('deleteFavConditionNb');
 Route::get("/delete/condition/number/{idCondition}", [ControllerDelete::class, 'deleteFavConditionNb'],function ($idCondition){})->name('deleteFavConditionNb');
