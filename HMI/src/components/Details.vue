@@ -1,43 +1,53 @@
 <template>
     <div class="details">
-        <p @click="toggleProblem">Problèmes</p>
         <h1>{{ plant.plantName }}</h1>
         <div class="detailsPlant">
             <p>Type de plante : {{ plant.plantType }}</p>
-            <p>Saison : {{plant.season}}</p>            
-            <p>Condition favorable : </p>
+            <p>Saison : {{plant.plantSeason}}</p>            
             <p>Date de semance : </p>
             <p>Date de récolte :</p>
             <p>Temps de conservation : {{plant.daysConservation}} jour(s)</p>
             <p>Distance de plants : </p>
             <p>Type de sol : {{plant.groundType}}</p>
-            <p>Fonctionnement : {{plant.description}}</p>              
+            <p>Fonctionnement : {{plant.description}}</p>
+        </div>
+        <div>
+                <button class="buttonDetails" @click="toggleCondFav">Conditions Favorables</button>
+                <button class="buttonDetails" @click="toggleProblem">Problèmes</button>
         </div>
         <div class="close-button" @click="$emit('close')" >X</div>   
-        <Problem v-if="showProblem" @close="toggleProblem"/>     
+        <FavCondition :plant="plant" v-if="showCondFav" @close="toggleCondFav"/>
+        <Problem :plant="plant" v-if="showProblem" @close="toggleProblem"/>     
     </div>
 </template>
 
 
 
 <script>
+import FavCondition from './FavCondition.vue'
 import Problem from './Problem.vue'
 
 export default {
     components :{
+        FavCondition,
         Problem
      },
     data(){
       return{
+        showCondFav : false,
         showProblem : false
+
       }
   },
     props : ['plant'],
 
     methods: {
+        toggleCondFav(){
+            this.showCondFav = !this.showCondFav;
+        },
         toggleProblem(){
             this.showProblem = !this.showProblem;
-    }
+        }
     } 
 }
 </script>
@@ -80,11 +90,30 @@ export default {
             font-size: 20px;
             text-align: left;
             margin:10px 0;
-        }    
+        }     
     }
+    
+}
+.detailsPlantP{
+        display:inline;
 }
 .details p:hover{
     color: red;
     cursor: pointer;
 }
+.buttonDetails{
+  background-color: black;
+  color : white;
+  border : none;
+  padding : 10px;
+  font-size : 1.2rem;
+  width: 30%;
+  display:flex;
+
+  &:hover{
+    opacity : .8;
+    cursor : pointer;
+  }
+}
+
 </style>

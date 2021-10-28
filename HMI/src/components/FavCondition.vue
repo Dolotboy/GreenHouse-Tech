@@ -1,11 +1,9 @@
 <template>
-    <div class="Problems">
-        <div class="ProblemPlant">
-            <p>Problèmes </p>  
-            <div v-for='prob in plant.problems' class="ProblemInfo">
-                <p>Problème: {{prob.problemName}} </p>
-                <p>Type de problème: {{prob.problemType}} </p>
-                <p>Solution: {{prob.problemSolution}}</p>
+    <div class="FavConds">
+        <div class="FavCondPlant">
+            <p>Conditions favorables </p>  
+            <div v-for='fav in plant.favorableConditions' class="FavCondPlantInfo">
+                <p>{{fav.type}} optimale: {{fav.min}} - {{fav.max}} {{fav.unit}}</p>
             </div> 
             
         </div>
@@ -20,7 +18,7 @@ export default {
 </script>
 
 <style>
-.Problems{
+.FavConds{
     position :absolute;
     top : 50%;
     left : 50%;
@@ -47,17 +45,17 @@ export default {
 .details h1{
     font-size: 35px;
 }
-.ProblemPlant > p{
+.FavCondPlant > p{
     font-size: 30px;
     margin:10px 0;
 }   
-.ProblemInfo > p{
-    text-align: left;
+.FavCondPlantInfo > p{
     font-size: 15px;
+    text-align: left;
     margin:10px 0;
 
 }     
-.ProblemPlant{
+.FavCondPlant{
     display: flex;
     flex-direction: column;
 }

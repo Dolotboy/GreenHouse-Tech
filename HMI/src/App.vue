@@ -37,19 +37,19 @@
 import toolbox from './toolbox.js'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
-import Problem from './components/Problem.vue'
+import FavCondition from './components/FavCondition.vue'
 import $ from '../node_modules/jquery/dist/jquery.js'
 
 export default {
   components :{
     Login,
     Register,
-    Problem
+    FavCondition
   },
   data(){
       return{
           envBack : "http://localhost:8000/",
-          env : "https://testenv.apipcst.xyz/",
+          env : "http://testenv.apipcst.xyz/",
           plants : [],
           showLogin : false,
           showRegister : false,
@@ -165,11 +165,13 @@ button{
   padding : 10px;
   font-size : 1.2rem;
 
+
   &:hover{
     opacity : .8;
     cursor : pointer;
   }
 }
+
 
 #navDesktop{
   position : relative;
