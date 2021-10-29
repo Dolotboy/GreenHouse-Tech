@@ -167,7 +167,7 @@ class ControllerDetail extends Controller
 
         try
         {
-            $favorites = Favorite::where("tblProfile_idProfile",$idProfile)->get();
+            $favorites = Favorite::where("tblProfile_idProfile",$idProfile)->take(1)->get();
             $json = json_encode($favorites);
             return ("$json");
         }

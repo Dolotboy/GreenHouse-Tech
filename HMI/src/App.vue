@@ -7,8 +7,9 @@
           <li><router-link to="/about">À propos</router-link></li>
         </div>
         <div id="LoginRegister">
-          <li @click="toggleRegister">S'inscrire</li>
-          <li @click="toggleLogin">Se connecter</li>         
+          <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
+          <li v-if="!isLoggedIn" @click="toggleLogin">Se connecter</li>   
+          <li v-if="isLoggedIn">Bonjour, {{ profile.firstName }} !</li>       
         </div>
       </ul>
     </nav>
@@ -23,12 +24,15 @@
       <ul class="links">
           <li><router-link to="/">Accueil</router-link></li> 
           <li><router-link to="/about">À propos</router-link></li>
-          <li @click="toggleRegister">S'inscrire</li>
-          <li @click="toggleLogin">Se connecter</li> 
+          <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
+          <li v-if="!isLoggedIn" @click="toggleLogin">Se connecter</li> 
+          <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
       </ul>
     </nav>
     <router-view/>  
-    <Login @login="downloadFavorites" v-if="showLogin" @close="toggleLogin"/>
+    <div @click="login(1)">login</div>
+    <div @click="logout">logout</div>
+    <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
     <Register v-if="showRegister" @close="toggleRegister"/>
   </div>
 </template>
@@ -54,8 +58,10 @@ export default {
           favorites : [],
           showLogin : false,
           showRegister : false,
+          isLoggedIn : false,
           apiVersion : 0.0,
-          mobileNavIsOpened : false
+          mobileNavIsOpened : false,
+          profile : Object
       }
   },
   mounted(){
@@ -85,7 +91,6 @@ export default {
       }
       
       this.mobileNavIsOpened = !this.mobileNavIsOpened;
-      console.log(this.mobileNavIsOpened);
     },
     async Initialisation(){
       let version = localStorage.getItem('apiVersion');
@@ -109,7 +114,6 @@ export default {
       let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
-      console.log(this.plants);
       for(let i = 0; i < this.plants.length; i++){
         
         entrepot.add(toolbox.GenerateObject(this.plants[i]));
@@ -135,10 +139,36 @@ export default {
         })
       })
     },
+    async login(profileId){
+      this.downloadFavorites(profileId);
+      this.profile = await this.getObject(this.env + "api/search/profile/" + profileId); 
+    
+      localStorage.setItem('loggedInProfileId', this.profile.idProfile);
+      this.isLoggedIn = true;
+      this.showLogin = false;
+      this.plants = this.plants;
+    },
+    async logout(){
+      localStorage.setItem('loggedInProfileId', "");
+      this.profile = null;
+      this.isLoggedIn = false; 
+      this.favorites = [];
+      localStorage.setItem('favorites', JSON.stringify(this.favorites));
+      this.plants = this.plants;
+    },
+    async getObject(url){
+      return new Promise(resolve => {
+        $.get(url, function(donnees, status){
+          let object = JSON.parse(donnees);
+          if(object.length != null && object.length != undefined && object.length >= 0)
+            object = object[0];
+          resolve(object);
+        })
+      })  
+    },
     async downloadFavorites(profileId){
       this.favorites = await this.getFavorites(this.env + "api/searchAll/favorite/" + profileId);
       localStorage.setItem('favorites', JSON.stringify(this.favorites));
-      console.log(this.favorites);
     },
     getFavorites(url){
       return new Promise(resolve => {

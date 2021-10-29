@@ -100,6 +100,8 @@ export default {
       return strings;
     }, 
     checkIfIsFavorite(idPlant){
+      if(this.favorites == null)
+        return false;
       for(let i = 0; i < this.favorites.length; i++)
         if(this.favorites[i].tblPlant_idPlant == idPlant)
           return true;

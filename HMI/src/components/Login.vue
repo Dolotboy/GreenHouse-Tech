@@ -51,7 +51,7 @@ export default {
           data: JSON.stringify(user),
           success: function(status)
           {
-            that.$emit("login", status); 
+            that.$emit("loggedIn", status); 
           }
         });
       }
