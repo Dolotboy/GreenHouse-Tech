@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="productsGrid">
-      <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in visiblePlants' :plant="plant"/>    
+      <Plant class="plant" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
     </div>
     <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
 </template>
@@ -43,6 +43,7 @@ export default {
   data(){
     return {
       plants : [],
+      favorites : [],
       visiblePlants : [],
       detailedPlant : Object,
       showDetails : false,
@@ -52,11 +53,18 @@ export default {
   },
   mounted(){
     this.initialisation();
+    this.favorites = JSON.parse(localStorage.getItem('favorites'));
   },
   methods : {
     toggleDetails(num){
+      let plant = this.plants[0];
+      
+      for(let i = 0; i < this.plants.length; i++)
+        if(this.plants[i].idPlant == num)
+          plant = this.plants[i];
+          
       this.showDetails = !this.showDetails;
-      this.detailedPlant = this.plants[num];
+      this.detailedPlant = plant;
     },
     async filterData(){
       await this.initialisation();
@@ -73,6 +81,7 @@ export default {
       this.filterData();
     },
     async initialisation(){
+      this.favorites = JSON.parse(localStorage.getItem('favorites'));
       let db = await toolbox.setDb();
       this.plants = await toolbox.fetchData(db);
       this.visiblePlants = this.plants;
@@ -89,6 +98,14 @@ export default {
         if(plantType == "All" || this.plants[i].plantType == plantType)
           strings.push(this.plants[i].plantName);
       return strings;
+    }, 
+    checkIfIsFavorite(idPlant){
+      if(this.favorites == null)
+        return false;
+      for(let i = 0; i < this.favorites.length; i++)
+        if(this.favorites[i].tblPlant_idPlant == idPlant)
+          return true;
+      return false;
     }
   }
 }
