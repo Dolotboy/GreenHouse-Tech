@@ -42,23 +42,6 @@ class ControllerEdit extends Controller
 
     public function editPlant(Request $request, $idPlant)
     {
-        $plant = Plant::find($idPlant);
-
-        if (is_null($request->plantImg) || 
-            is_null($request->plantName) || 
-            is_null($request->plantType) || 
-            is_null($request->plantFamily) || 
-            is_null($request->plantSeason) || 
-            is_null($request->plantGroundType) || 
-            is_null($request->plantDaysConservation) || 
-            is_null($request->plantDescription) || 
-            is_null($request->plantDifficulty) || 
-            is_null($request->plantBestNeighbor) ||
-            is_null($idPlant))
-        {
-            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
-        }
-
         try
         {
             $plant = Plant::find($idPlant);    
@@ -79,7 +62,29 @@ class ControllerEdit extends Controller
 
     public function editPlantSent(Request $request, $idPlant)
     {
-        $plant = Plant::find($idPlant);
+        if (is_null($request->plantImg) || 
+        is_null($request->plantName) || 
+        is_null($request->plantType) || 
+        is_null($request->plantFamily) || 
+        is_null($request->plantSeason) || 
+        is_null($request->plantGroundType) || 
+        is_null($request->plantDaysConservation) || 
+        is_null($request->plantDescription) || 
+        is_null($request->plantDifficulty) || 
+        is_null($request->plantBestNeighbor) ||
+        is_null($idPlant))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+        }
+
+        try
+        {
+            $plant = Plant::find($idPlant);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+        }
  
         $plant->plantImg = $request->plantImg;
         $plant->plantName = $request->plantName;
@@ -145,15 +150,15 @@ class ControllerEdit extends Controller
         try
         {
             $problem->save();
+            Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProblem], 200);
         }
         catch (Exception $e)
         {
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
         }
 
-        Controller::incrementVersion();
 
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProblem], 200);
     }
 
     public function editProfile(Request $request, $idProfile)
@@ -168,7 +173,8 @@ class ControllerEdit extends Controller
         if (is_null($request->email) || 
             is_null($request->firstName) || 
             is_null($request->lastName) ||
-            is_null($request->access))
+            is_null($request->access) ||
+            is_null($idProfile))
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
@@ -195,15 +201,15 @@ class ControllerEdit extends Controller
         try
         {
             $profile->save();
+            Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
         }
         catch (Exception $e)
         {
+            //return response()->json(['message'=> $profile->access, 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
-
-        Controller::incrementVersion();
-
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
     }
 
     public function editFavCondDate(Request $request, $idCondition)
@@ -254,6 +260,7 @@ class ControllerEdit extends Controller
         {
             $favorableCondition->save();
             Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idCondition], 200);
         }
         catch (Exception $e)
         {

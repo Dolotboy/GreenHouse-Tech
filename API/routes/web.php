@@ -21,7 +21,7 @@ Route::get('/new/plant/', [ControllerAdd::class, 'indexPlant'])->name('newPlant'
 
 Route::get('/search/plant/', [ControllerEdit::class, 'indexPlant'])->name('editSearchPlant');      // Va chercher la plante
 
-Route::get('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlantSent');
+Route::get('/edit/plant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlant');
 
 // ***************** PLANT *******************
 

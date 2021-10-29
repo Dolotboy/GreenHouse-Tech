@@ -40,8 +40,6 @@ class ControllerDelete extends Controller
         {
             return response()->json(['message'=> "Error, plant not found", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
         }
-        else
-        {
             try
             {
                 DB::table('tblPlant_tblProblem')->where('tblPlant_idPlant', $idPlant)->delete();
@@ -64,7 +62,6 @@ class ControllerDelete extends Controller
             {
                 return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
             }
-        }
     }
 
     public function indexProblem()
