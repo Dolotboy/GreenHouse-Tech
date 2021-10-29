@@ -1,29 +1,16 @@
 <template>
     <div class="details">
         <h1>{{ plant.plantName }}</h1>
-        <div class="detailsPlant">
-            <p>Type de plante : {{ plant.plantType }}</p>
-<<<<<<< HEAD
-            <p>Saison : {{plant.plantSeason}}</p>            
-            <p>Date de semance : </p>
-            <p>Date de récolte :</p>
-            <p>Temps de conservation : {{plant.daysConservation}} jour(s)</p>
-            <p>Distance de plants : </p>
-            <p>Type de sol : {{plant.groundType}}</p>
-            <p>Fonctionnement : {{plant.description}}</p>
-        </div>
         <div>
-                <button class="buttonDetails" @click="toggleCondFav">Conditions Favorables</button>
-                <button class="buttonDetails" @click="toggleProblem">Problèmes</button>
-=======
             <p>Saison : {{plant.plantSeason}}</p>  
             <p>Temps de conservation : {{plant.plantDaysConservation}} jour(s)</p>
             <p>Type de sol : {{plant.plantGroundType}}</p>
             <p>Description : {{plant.plantDescription}}</p>   
             <p>Voisinage : {{plant.plantBestNeighbor}}</p>  
             <p>Difficulté : {{plant.plantDifficulty}}</p>  
-            <p>Famille : {{plant.plantFamily}}</p>              
->>>>>>> request#092
+            <p>Famille : {{plant.plantFamily}}</p>
+            <button class="buttonDetails" @click="toggleCondFav">Conditions Favorables</button>
+            <button class="buttonDetails" @click="toggleProblem">Problèmes</button>
         </div>
         <div class="close-button" @click="$emit('close')" >X</div>   
         <FavCondition :plant="plant" v-if="showCondFav" @close="toggleCondFav"/>
