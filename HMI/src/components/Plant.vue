@@ -13,15 +13,23 @@ export default {
     props : ['plant', 'idProfile', 'isFavorite'],
     methods : {
       postAddFavourite(){
+        let that = this;
         $.ajax({
-          url : 'http://localhost:8000/api/new/favorite/'+ this.plant.idPlant + '/'+ this.getLoggedInProfile(),
+          url : 'http://testenv.apipcst.xyz/api/new/favorite/'+ this.plant.idPlant + '/'+ this.getLoggedInProfile(),
           datatype: 'json',
           contentType : 'application/json',
           type: 'post',
-          data: "",
+          data: "{}",
           success: function(status)
           {
-            alert(status); 
+            alert("Added successfully");
+            let favorites = JSON.parse(localStorage.getItem('favorites'));
+            if(favorites == null || favorites == undefined)
+              favorites = [];
+
+            let fav = {"tblPlant_idPlant":that.plant.idPlant,"tblProfile_idProfile":that.getLoggedInProfile()};
+            favorites.push(fav);
+            localStorage.setItem('favorites', JSON.stringify(favorites)); 
           }
         });
       },

@@ -4,14 +4,13 @@
         <h1>{{ plant.plantName }}</h1>
         <div class="detailsPlant">
             <p>Type de plante : {{ plant.plantType }}</p>
-            <p>Saison : {{plant.season}}</p>            
-            <p>Condition favorable : </p>
-            <p>Date de semance : </p>
-            <p>Date de récolte :</p>
-            <p>Temps de conservation : {{plant.daysConservation}} jour(s)</p>
-            <p>Distance de plants : </p>
-            <p>Type de sol : {{plant.groundType}}</p>
-            <p>Fonctionnement : {{plant.description}}</p>              
+            <p>Saison : {{plant.plantSeason}}</p>  
+            <p>Temps de conservation : {{plant.plantDaysConservation}} jour(s)</p>
+            <p>Type de sol : {{plant.plantGroundType}}</p>
+            <p>Description : {{plant.plantDescription}}</p>   
+            <p>Voisinage : {{plant.plantBestNeighbor}}</p>  
+            <p>Difficulté : {{plant.plantDifficulty}}</p>  
+            <p>Famille : {{plant.plantFamily}}</p>              
         </div>
         <div class="close-button" @click="$emit('close')" >X</div>   
         <Problem v-if="showProblem" @close="toggleProblem"/>     

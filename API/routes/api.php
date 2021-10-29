@@ -78,10 +78,10 @@ Route::post('/new/profile/addProfile', [ControllerAdd::class, 'addProfile'])->na
 Route::get("thanus", [ControllerDetail::class, "thanus"])->name("thanus");
 
 Route::middleware('passkey')->group(function () {
-    Route::post('/new/favorite/{idPlant}/{idProfile}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
 });
 
 Route::middleware('passkeyAdmin')->group(function () {
+    Route::post('/new/favorite/{idPlant}/{idProfile}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
     Route::post("increment/last/version", [Controller::class, 'incrementVersion'])->name('incrementVersion');
     Route::post('/assign/condition/{type}/{idPlant}/{idCondition}', [ControllerAssign::class, 'assignFavCondition'],function ($type, $idPlant, $idCondition){})->name('assignFavCondition');
     Route::post('/new/condition/addFavCondition/{type}', [ControllerAdd::class, 'addFavCondition'],function ($type){})->name('addFavCondition');

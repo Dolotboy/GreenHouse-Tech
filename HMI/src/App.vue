@@ -153,7 +153,7 @@ export default {
       this.profile = null;
       this.isLoggedIn = false; 
       this.favorites = [];
-      localStorage.setItem('favorites', JSON.stringify(this.favorites));
+      localStorage.setItem('favorites', "[]");
       this.plants = this.plants;
     },
     async getObject(url){
