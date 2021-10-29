@@ -27,13 +27,15 @@ Route::get('/edit/plant/{idPlant}', [ControllerEdit::class, 'editPlant'],functio
 
 // ***************** PROBLEM *******************
 
-Route::get('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem');
+Route::get('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem'); // Display new problem form
 
-Route::get('/search/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem');
+Route::get('/search/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem'); // Display the page with form to search a problem
 
 Route::get('/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('newAssignProblem');
 
 Route::get('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('searchUnassignProblem');
+
+Route::get('/edit/problem/{idPlant}', [ControllerEdit::class, 'editProblem'],function ($idProblem){})->name('editProblem'); // Display the edit problem form
 
 // ***************** PROBLEM *******************
 

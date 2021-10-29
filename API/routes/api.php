@@ -34,7 +34,7 @@ Route::get("searchAll/plant/types", [ControllerDetail::class, 'searchAllPlantTyp
 // ***************** PLANT *******************
 
 // ***************** PROBLEM *******************
-Route::post('/new/problem/addProblem', [ControllerAdd::class, 'addProblem'])->name('addProblem');
+Route::post('/new/problem/addProblem', [ControllerAdd::class, 'addProblem'])->name('addProblem'); // When send is clicked
 
 Route::get("search/problem/{idProblem}", [ControllerDetail::class, 'searchProblem'],function ($idProblem){})->name('detailProblem');
 
