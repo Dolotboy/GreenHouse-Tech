@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Http;
 class GetVersionTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * A basic feature test example. Comme le 20-bit de guigui
      *
      * @return void
      */

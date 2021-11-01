@@ -260,4 +260,24 @@ class ControllerEdit extends Controller
 
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idCondition], 200);
     }
+
+    public function addAdmin(Request $request)
+    {
+        $data = Profile::find($request);
+
+        $profile->access = "admin";
+
+        try
+        {
+            $profile->save();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
+        Controller::incrementVersion();
+
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $profile->idProfile], 200);
+    }
 } 
