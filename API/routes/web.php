@@ -17,11 +17,11 @@ Route::get('/', function () {
 
 // ***************** PLANT *******************
 
-Route::get('/new/plant/', [ControllerAdd::class, 'indexPlant'])->name('newPlant');                 // Ajoute une plante
+Route::get('/new/plant/', [ControllerAdd::class, 'indexPlant'])->name('newPlant'); // Display the page with form to add plant
 
-Route::get('/search/plant/', [ControllerEdit::class, 'indexPlant'])->name('editSearchPlant');      // Va chercher la plante
+Route::get('/search/plant/', [ControllerEdit::class, 'indexPlant'])->name('editSearchPlant');      // Display the page with search a plant form
 
-Route::get('/edit/plant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlant');
+Route::get('/edit/plant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlant'); // Display the page with edit plant form
 
 // ***************** PLANT *******************
 
@@ -29,7 +29,7 @@ Route::get('/edit/plant/{idPlant}', [ControllerEdit::class, 'editPlant'],functio
 
 Route::get('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem'); // Display new problem form
 
-Route::get('/search/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem'); // Display the page with form to search a problem
+Route::get('/search/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem'); // Display the page with search a problem form
 
 Route::get('/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('newAssignProblem');
 

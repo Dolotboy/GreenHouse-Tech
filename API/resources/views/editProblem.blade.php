@@ -6,7 +6,7 @@
 <div id='mainContainer'>
 
     <div id="formContainer">
-        <form id="form" method='POST'>
+        <form id="form" action="{{route('editProblemSent', ['idProblem' => $problem['idProblem'] ])}}" method='POST'>
             @csrf
             @method('PUT')
 
@@ -20,7 +20,7 @@
                                     <h2 class="mb-3"> <input type="text"   id='v1' name='problemType' placeholder="Problem Type" value="{{ $problem["problemType"] }}" required></h2> 
                                     <h2 class="mb-3"> <input type="text"   id='v2' name='problemSolution' placeholder="Problem Solution" value="{{ $problem["problemSolution"] }}" required></h2> 
                                     <h3 class="mb-3"> <input type="text"   id='v3' name='problemName' placeholder="Problem Name" value="{{ $problem["problemName"] }}" required></h2>     
-                                    <h2 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" onclick="Edit()" value="Submit"></h2>                             
+                                    <h2 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Submit"></h2>                             
                                 </div>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
             </div>
         </form>
 
-        <form id="delete" method='DELETE'>
+        <form id="delete" action='{{route('deleteProblem', ['idProblem' => $problem['idProblem'] ])}}' method='DELETE'>
             @csrf
 
             <div class="row">
@@ -39,10 +39,7 @@
                             <div class="product-details">
                             <h3>Delete a problem</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h2 class="mb-3"> <input type="text"   name='problemType' placeholder="Problem Type" value="{{ $problem["problemType"] }}" required></h2> 
-                                    <h2 class="mb-3"> <input type="text"   name='problemSolution' placeholder="Problem Solution" value="{{ $problem["problemSolution"] }}" required></h2> 
-                                    <h3 class="mb-3"> <input type="text"   name='problemName' placeholder="Problem Name" value="{{ $problem["problemName"] }}" required></h2>     
-                                    <h2 class="mb-3"> <input type="submit" name='submit' placeholder="Delete" onclick="Delete()" value="Delete"></h2>                             
+                                    <h2 class="mb-3"> <input type="submit" name='submit' placeholder="Delete" value="Delete"></h2>                             
                                 </div>
                             </div>
                         </div>
@@ -52,22 +49,5 @@
         </form>
     </div>
 </div>
-
-<script>
-    function Delete(){
-        var idProblem = value="{{ $problem["idProblem"] }}";
-        let form = document.getElementById("delete").action = '../../../../api/delete/problem/' + idProblem;
-    }
-
-    function Edit()
-    {
-        let v1 = document.getElementById('v1').value;
-        let v2 = document.getElementById('v2').value;
-        let v3 = document.getElementById('v3').value;
-        var idProblem = value="{{ $problem["idProblem"] }}";
-        // https://www.codecheef.org/article/how-to-use-laravel-route-in-javascript-file
-        let form = document.getElementById("form").action = {{route('editPlantSent', $problem["idProblem"], ['problemName'=>v1, 'problemType'=>v2, 'problemSolution'=>v3])}};
-    }
-</script>
 
 @endsection
