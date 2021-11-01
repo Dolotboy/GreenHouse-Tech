@@ -61,6 +61,9 @@ export default {
       this.Initialisation()
   },
   methods :{
+    login(){
+      
+    },
     toggleRegister(){
       this.showRegister = !this.showRegister;
     },
