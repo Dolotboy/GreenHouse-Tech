@@ -4,8 +4,9 @@
 @parent
 
 <div id='mainContainer'>
-    <form method='DELETE' id="form">
+    <form method='post' id="form">
         @csrf
+        @method('delete')
 
         <div class="row">
             <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">

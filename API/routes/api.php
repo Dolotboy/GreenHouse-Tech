@@ -95,8 +95,8 @@ Route::middleware('passkey')->group(function () {
 
 Route::middleware('passkeyAdmin')->group(function () {
     Route::post("increment/last/version", [Controller::class, 'incrementVersion'])->name('incrementVersion');
-    Route::post('/assign/condition/nb/{idPlant}/{idCondition}', [ControllerAssign::class, 'assignFavConditionNb'],function ($idPlant, $idCondition){})->name('assignFavConditionNb');
-    Route::post('/assign/condition/date/{idPlant}/{idCondition}', [ControllerAssign::class, 'assignFavConditionDate'],function ($idPlant, $idCondition){})->name('assignFavConditionDate');
+    Route::post('/assign/condition/nb/{idPlant}/{idCondition}', [ControllerAssign::class, 'assignFavConditionNb'],function ($idPlant, $idCondition){})->name('assignFavConditionNb'); // Assign the fav condition nb to a plant
+    Route::post('/assign/condition/date/{idPlant}/{idCondition}', [ControllerAssign::class, 'assignFavConditionDate'],function ($idPlant, $idCondition){})->name('assignFavConditionDate'); // Assign the fav condition date to a plant
     Route::post('/assign/problem/{idPlant}/{idProblem}', [ControllerAssign::class, 'assignProblem'],function ($idPlant, $idProblem){})->name('assignProblem'); // Add the assocation of a plant and a problem
     Route::post('/new/problem/addProblem', [ControllerAdd::class, 'addProblem'])->name('addProblem'); // Add the problem
     Route::post('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('addPlant'); // Add the plant
@@ -106,8 +106,8 @@ Route::middleware('passkeyAdmin')->group(function () {
     Route::delete("/delete/favorite/{idPlant}/{idProfile}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite'); // Delete the favorite
     Route::delete("/delete/condition/number/{idCondition}", [ControllerDelete::class, 'deleteFavConditionNb'],function ($idCondition){})->name('deleteFavConditionNb'); // Delete the condition nb
     Route::delete("/delete/condition/date/{idCondition}", [ControllerDelete::class, 'deleteFavConditionDate'],function ($idCondition){})->name('deleteFavConditionDate'); // Delete the condition date
-    Route::post('/unassign/condition/nb/{idPlant}/{idCondition}', [ControllerUnassign::class, 'unassignFavConditionNb'],function ($idPlant, $idCondition){})->name('unassignFavConditionNb');
-    Route::post('/unassign/condition/date/{idPlant}/{idCondition}', [ControllerUnassign::class, 'unassignFavConditionDate'],function ($idPlant, $idCondition){})->name('unassignFavConditionDate');
+    Route::delete('/unassign/condition/nb/{idPlant}/{idCondition}', [ControllerUnassign::class, 'unassignFavCondNb'],function ($idPlant, $idCondition){})->name('unassignFavConditionNb'); // Unassign the fav condition nb
+    Route::delete('/unassign/condition/date/{idPlant}/{idCondition}', [ControllerUnassign::class, 'unassignFavCondDate'],function ($idPlant, $idCondition){})->name('unassignFavConditionDate'); // Unassign the fav condition date
     Route::delete("/delete/profile/{idProfile}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile'); // Delete the profile
     Route::delete("/delete/problem/{idProblem}", [ControllerDelete::class, 'deleteProblem'],function ($idProblem){})->name('deleteProblem'); // Delete the problem
     Route::delete('/unassign/problem/{idPlant}/{idProblem}', [ControllerUnassign::class, 'unassignProblem'],function ($idPlant, $idProblem){})->name('unassignProblem'); // Delete the assocation of a plant and a problem

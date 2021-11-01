@@ -65,9 +65,9 @@ Route::get('/search/conditionDate', [ControllerEdit::class, 'indexFavCondDate'])
 
 Route::get('/edit/conditionDate/{idCondition}', [ControllerEdit::class, 'editFavCondDate'],function ($idProfile){})->name('editFavCondDate'); // Display the page with condition date form
 
-Route::get('/assign/conditionDate', [ControllerAssign::class, 'indexFavCondDate'])->name('newAssignFavCondDate');
+Route::get('/assign/conditionDate', [ControllerAssign::class, 'indexFavCondDate'])->name('newAssignFavCondDate'); // Display the page with association form
 
-Route::get('/unassign/conditionDate', [ControllerUnassign::class, 'indexFavCondDate'])->name('deleteUnassignFavCondDate');
+Route::get('/unassign/conditionDate', [ControllerUnassign::class, 'indexFavCondDate'])->name('deleteUnassignFavCondDate'); // Display the page with association form
 
 // ***************** FAVORABLE CONDITION *******************
 
@@ -79,13 +79,8 @@ Route::get('/search/conditionNb', [ControllerEdit::class, 'indexFavCondNb'])->na
 
 Route::get('/edit/conditionNb/{idCondition}', [ControllerEdit::class, 'editFavCondNb'],function ($idProfile){})->name('editFavCondNb'); // Display the page with condition nb form
 
-Route::get('/assign/conditionNb', [ControllerAssign::class, 'indexFavCondNb'])->name('newAssignFavCondNb');
+Route::get('/assign/conditionNb', [ControllerAssign::class, 'indexFavCondNb'])->name('newAssignFavCondNb'); // Display the page with association form
 
-Route::get('/unassign/conditionNb', [ControllerUnassign::class, 'indexFavCondNb'])->name('deleteUnassignFavCondNb');
+Route::get('/unassign/conditionNb', [ControllerUnassign::class, 'indexFavCondNb'])->name('deleteUnassignFavCondNb'); // Display the page with association form
 
 // ***************** FAVORABLE CONDITION *******************
-
-// ***************** GET ALL *******************
-
-Route::get('/getAll/Plant', [ControllerDetail::class, 'searchAllPlant'])->name('searchAllPlant');
-
