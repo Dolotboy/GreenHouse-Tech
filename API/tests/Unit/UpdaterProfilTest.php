@@ -20,19 +20,20 @@ class UpdaterProfilTest extends TestCase
     public function test_UpdaterProfile()
     {
 
-        $data = Profile::find(1);     
+        $data = Profile::find(7);     
 
-        $response = $this->json('PUT','/api/edit/profile/editProfile/1', [
+        $response = $this->json('PUT','/api/edit/profile/editProfile/7', [
             $data->email => 'emailEdit',
             $data->password => 'password',
             $data->firstName => 'firstName',
             $data->lastName => 'lastName',
             $data->access => 'access'
         ]);
-
+        
+        $data->save();
         $response->assertStatus(200);
 
-        $response = $this->json('PUT','/api/edit/profile/editProfile/1', [
+        $response = $this->json('PUT','/api/edit/profile/editProfile/7', [
             $data->email => 'email',
             $data->password => 'password',
             $data->firstName => 'firstName',
@@ -40,6 +41,7 @@ class UpdaterProfilTest extends TestCase
             $data->access => 'access'
         ]);
 
+        $data->save();
         $response->assertStatus(200);
     }
 }
