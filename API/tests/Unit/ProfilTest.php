@@ -9,26 +9,21 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 
-class GetProfilErreurTest extends TestCase
+class ProfilTest extends TestCase
 {
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    public function test_GetProfilErreur()
+    public function test_Profile()
     {
-        try
-        {
-            $response = $this->get('http://127.0.0.1:8000/api/search/profile/99');
+        $this->withoutExceptionHandling();
 
-            $response->assertStatus(404);
-        
-        }
-        catch(Exception $e)
-        {
-            
-            return $e;
-        }
+        $data = Profil::find(6);
+        $dataEncode = json_encode($data);
+        $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/search/profil/6');
+
+        $this->assertEquals($dataEncode,$donneApi);
     }
 }
