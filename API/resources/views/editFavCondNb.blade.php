@@ -6,8 +6,9 @@
 <div id='mainContainer'>
     
     <div id="formContainer">
-        <form id="form" method='POST'>
+        <form id="form" action="{{route('editFavCondNbSent', ['idCondition' => $favorableCondition['idRangeNb'] ])}}" method='POST'>
             @csrf
+            @method('PUT')
 
             <div class="row">
                 <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -29,8 +30,9 @@
             </div>
         </form>
 
-        <form id="delete" method='DELETE'>
+        <form id="delete" action='{{route('deleteFavConditionNb', ['idCondition' => $favorableCondition['idRangeNb'] ])}}' method='post'>
             @csrf
+            @method('delete')
 
             <div class="row">
                 <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -39,11 +41,7 @@
                             <div class="product-details">
                                 <h3>Delete a favorable condition number</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h3 class="mb-3"> <input type="text" name='type' value="{{ $favorableCondition["type"] }}" required></h3>
-                                    <h3 class="mb-3"> <input type="text" name='min' value=" {{ $favorableCondition["min"] }}" required></h3>
-                                    <h3 class="mb-3"> <input type="text" name='max' value="{{ $favorableCondition["max"] }}" required></h3>  
-                                    <h3 class="mb-3"> <input type="text" name='unit' value="{{ $favorableCondition["unit"] }}" required></h3>  
-                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" onclick="Delete()" value="Submit"></h3>                                      
+                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Submit"></h3>                                      
                                 </div>
                             </div>
                         </div>
@@ -54,12 +52,5 @@
     </div>
 
 </div>
-
-<script>
-    function Delete(){
-        var favCondNb = value="{{ $favorableCondition["idRangeNb"] }}";
-        let form = document.getElementById("delete").action = '../../../../api/delete/condition/number/' + favCondNb;
-    }
-</script>
 
 @endsection

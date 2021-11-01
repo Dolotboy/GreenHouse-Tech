@@ -173,7 +173,7 @@ class ControllerDelete extends Controller
 
         try
         {
-            $profile = Problem::Find($idProfile);
+            $profile = Profile::Find($idProfile);
         }
         catch (Exception $e)
         {

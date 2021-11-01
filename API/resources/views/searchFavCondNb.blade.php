@@ -27,7 +27,7 @@
     <script>
         function myFunction() {
             let v1 = document.getElementById('v1').value;
-            let form = document.getElementById("form").action = '../api/edit/condition/editFavCondNb/' + v1;
+            let form = document.getElementById("form").action = '../edit/conditionNb/' + v1;
         }
     </script>
 @endsection

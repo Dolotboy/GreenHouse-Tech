@@ -6,8 +6,9 @@
 <div id='mainContainer'>
 
     <div id="formContainer">
-        <form id="form" method='POST'>
+        <form id="form" action="{{route('editFavCondDateSent', ['idCondition' => $favorableCondition['idRangeDate'] ])}}" method='POST'>
             @csrf
+            @method('PUT')
 
             <div class="row">
                 <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -29,8 +30,9 @@
             </div>
         </form>
 
-        <form id="delete" method='DELETE'>
+        <form id="delete" action='{{route('deleteFavConditionDate', ['idCondition' => $favorableCondition['idRangeDate'] ])}}' method='post'>
             @csrf
+            @method('delete')
 
             <div class="row">
                 <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -39,11 +41,7 @@
                             <div class="product-details">
                                 <h3>Delete a favorable condition date</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h3 class="mb-3"> <input type="text" name='type' value="{{ $favorableCondition["type"] }}" required></h3>
-                                    <h3 class="mb-3"> <input type="text" name='start' value=" {{ $favorableCondition["start"] }}" required></h3>
-                                    <h3 class="mb-3"> <input type="text" name='end' value="{{ $favorableCondition["end"] }}" required></h3>  
-                                    <h3 class="mb-3"> <input type="text" name='location' value="{{ $favorableCondition["location"] }}" required></h3>  
-                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" onclick="Delete()" value="Delete"></h3>                                      
+                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Delete"></h3>                                      
                                 </div>
                             </div>
                         </div>
@@ -53,11 +51,4 @@
         </form>
     </div>
 </div>
-
-<script>
-    function Delete(){
-        var favCondDate = "{{ $favorableCondition["idRangeDate"] }}";
-        let form = document.getElementById("delete").action = '../../../../api/delete/condition/date/' + favCondDate;
-    }
-</script>
 @endsection
