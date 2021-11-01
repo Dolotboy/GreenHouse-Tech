@@ -3,7 +3,7 @@
   <h1>{{ plant.plantName }}</h1>
   <p v-if="isFavorite">Favoris</p>
   <p>{{ plant.idPlant }}</p>
-  <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
+  <input class="star" type="checkbox" title="Favoris" :checked="isFavorite" @click="postAddFavourite()"> 
 </div>
 </template>
 
@@ -14,15 +14,20 @@ export default {
     methods : {
       postAddFavourite(){
         let that = this;
+        this.$emit('favClicked');
+        console.log(this.isFavorite); 
+        let url = "http://testenv.apipcst.xyz/api/new/favorite/";
+        if(this.isFavorite)
+          url = "http://testenv.apipcst.xyz/api/delete/favorite/";
+
         $.ajax({
-          url : 'http://testenv.apipcst.xyz/api/new/favorite/'+ this.plant.idPlant + '/'+ this.getLoggedInProfile(),
+          url : url + this.plant.idPlant + '/'+ this.getLoggedInProfile(),
           datatype: 'json',
           contentType : 'application/json',
           type: 'post',
           data: "{}",
           success: function(status)
           {
-            alert("Added successfully");
             let favorites = JSON.parse(localStorage.getItem('favorites'));
             if(favorites == null || favorites == undefined)
               favorites = [];
