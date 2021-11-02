@@ -17,33 +17,61 @@ use Illuminate\Http\Response;
 
 class ControllerAssign extends Controller
 {
-    public function assignFavCondition($type, $idPlant, $idCondition)
+
+    public function indexFavCondDate()
     {
-        if (is_null($type) ||
-            is_null($idPlant) ||
+        return view("assignFavCondDate");
+    }
+
+    public function assignFavConditionDate($idPlant,$idCondition)
+    {
+        if (is_null($idPlant) ||
             is_null($idCondition))
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
-        
-        if ($type == 1)
-        {
-            $assignFavorableCondition = new AssignConditionDate();
 
-            $assignFavorableCondition->tblPlant_idPlant = $idPlant;
-            $assignFavorableCondition->tblRangeDate_idRangeDate = $idCondition;
-        }
-        else if ($type == 2)
-        {
-            $assignFavorableCondition = new AssignConditionNb();
+        $assignFavorableConditionDate = new AssignConditionDate();
 
-            $assignFavorableCondition->tblPlant_idPlant = $idPlant;
-            $assignFavorableCondition->tblRangeNb_idRangeNb = $idCondition;  
-        }
-        
+        $assignFavorableConditionDate->tblPlant_idPlant = $idPlant;
+        $assignFavorableConditionDate->tblRangeDate_idRangeDate = $idCondition;
+
         try
         {
-            $assignFavorableCondition->save();
+            $assignFavorableConditionDate->save();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database, either this association already exists or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
+        Controller::incrementVersion();
+
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+
+    }
+    
+    public function indexFavCondNb()
+    {
+        return view("assignFavCondNb");
+    }
+
+    public function assignFavConditionNb($idPlant, $idCondition)
+    {
+        if (is_null($idPlant) ||
+            is_null($idCondition))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
+        $assignFavorableConditionNb = new AssignConditionNb();  
+
+        $assignFavorableConditionNb->tblPlant_idPlant = $idPlant;
+        $assignFavorableConditionNb->tblRangeNb_idRangeNb = $idCondition;
+
+        try
+        {
+            $assignFavorableConditionNb->save();
         }
         catch (Exception $e)
         {
@@ -54,7 +82,11 @@ class ControllerAssign extends Controller
 
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
     }
-
+       
+    public function indexProblem()
+    {
+        return view("assignProblem");
+    }
     public function assignProblem($idPlant, $idProblem)
     {
         if (is_null($idPlant) ||

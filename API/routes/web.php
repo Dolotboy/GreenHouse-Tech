@@ -1,76 +1,86 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ControllerAdd;
 use App\Http\Controllers\ControllerEdit;
 use App\Http\Controllers\ControllerDetail;
 use App\Http\Controllers\ControllerDelete;
+use App\Http\Controllers\ControllerAssign;
+use App\Http\Controllers\ControllerUnassign;
+
+// ***************** HOME *******************
 
 Route::get('/', function () {
     return view('home');
 });
+// ***************** HOME *******************
 
 // ***************** PLANT *******************
 
-Route::get('/new/plant', [ControllerAdd::class, 'indexPlant'])->name('newPlant');
+Route::get('/new/plant/', [ControllerAdd::class, 'indexPlant'])->name('newPlant'); // Display the page with form to add plant
 
-Route::post('/edit/plant', [ControllerEdit::class, 'indexPlant'])->name('editSearchPlant');
+Route::get('/search/plant/', [ControllerEdit::class, 'indexPlant'])->name('editSearchPlant'); // Display the page with search a plant form
 
-Route::post('/search/plant', [ControllerDetail::class, 'indexPlant'])->name('searchPlant');
-
-Route::post('/delete/plant', [ControllerDelete::class, 'indexPlant'])->name('deleteSearchPlant');
+Route::get('/edit/plant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlant'); // Display the page with edit plant form
 
 // ***************** PLANT *******************
 
 // ***************** PROBLEM *******************
 
-Route::post('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem');
+Route::get('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem'); // Display new problem form
 
-Route::post('/edit/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem');
+Route::get('/search/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem'); // Display the page with search a problem form
 
-Route::post('/search/problem', [ControllerDetail::class, 'indexProblem'])->name('searchProblem');
+Route::get('/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('newAssignProblem'); // Display the page with search an association of plant and problem
 
-Route::post('/delete/problem', [ControllerDelete::class, 'indexProblem'])->name('deleteSearchProblem');
+Route::get('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('searchUnassignProblem'); // Display the page with search an association of plant and problem
 
-Route::post('/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('newAssignProblem');
-
-Route::post('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('deleteUnassignProblem');
+Route::get('/edit/problem/{idPlant}', [ControllerEdit::class, 'editProblem'],function ($idProblem){})->name('editProblem'); // Display the page with edit problem form
 
 // ***************** PROBLEM *******************
 
 // ***************** FAVORITE *******************
 
-Route::post('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
+Route::get('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite'); // Display the page with favorite form
 
-Route::post('/delete/favorite', [ControllerDelete::class, 'indexFavorite'])->name('deleteSearchFavorite');
+Route::get('/delete/favorite', [ControllerDelete::class, 'indexFavorite'])->name('deleteSearchFavorite'); // Display the page with favorite form
 
 // ***************** FAVORITE *******************
 
 // ***************** PROFILE *******************
 
-Route::post('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile');
+Route::get('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile'); // Display the page with the profile form
 
-Route::post('/edit/profile', [ControllerEdit::class, 'indexProfile'])->name('editSearchProfile');
+Route::get('/search/profile', [ControllerEdit::class, 'indexProfile'])->name('editSearchProfile'); // Display the form with search a profile
 
-Route::post('/search/profile', [ControllerDetail::class, 'indexProfile'])->name('searchProfile');
-
-Route::post('/delete/profile', [ControllerDelete::class, 'indexProfile'])->name('deleteSearchProfile');
+Route::get('/edit/profile/{idProfile}', [ControllerEdit::class, 'editProfile'],function ($idProfile){})->name('editProfile'); // Display the page with edit profile form
 
 // ***************** PROFILE *******************
+
+// ***************** FAVORABLE CONDITION DATE *******************
+
+Route::get('/new/conditionDate', [ControllerAdd::class, 'indexFavCondDate'])->name('newFavCondDate'); // Display the page with new condition date form
+
+Route::get('/search/conditionDate', [ControllerEdit::class, 'indexFavCondDate'])->name('editSearchFavCondDate'); // Display the page with search condition date form
+
+Route::get('/edit/conditionDate/{idCondition}', [ControllerEdit::class, 'editFavCondDate'],function ($idProfile){})->name('editFavCondDate'); // Display the page with condition date form
+
+Route::get('/assign/conditionDate', [ControllerAssign::class, 'indexFavCondDate'])->name('newAssignFavCondDate'); // Display the page with association form
+
+Route::get('/unassign/conditionDate', [ControllerUnassign::class, 'indexFavCondDate'])->name('deleteUnassignFavCondDate'); // Display the page with association form
 
 // ***************** FAVORABLE CONDITION *******************
 
-Route::post('/new/condition', [ControllerAdd::class, 'indexFavCondition'])->name('newFavCondition');
+// ***************** FAVORABLE CONDITION NB *******************
 
-Route::post('/edit/condition', [ControllerEdit::class, 'indexFavCondition'])->name('editSearchFavCondition');
+Route::get('/new/conditionNb', [ControllerAdd::class, 'indexFavCondNb'])->name('newFavCondNb'); // Display the page with new condition nb form
 
-Route::post('/search/condition', [ControllerDetail::class, 'indexFavCondition'])->name('searchFavCondition');
+Route::get('/search/conditionNb', [ControllerEdit::class, 'indexFavCondNb'])->name('editSearchFavCondNb'); // Display the page with search condition nb form
 
-Route::post('/delete/condition', [ControllerDelete::class, 'indexFavCondition'])->name('deleteSearchFavCondition');
+Route::get('/edit/conditionNb/{idCondition}', [ControllerEdit::class, 'editFavCondNb'],function ($idProfile){})->name('editFavCondNb'); // Display the page with condition nb form
 
-Route::post('/assign/condition', [ControllerAssign::class, 'indexFavCondition'])->name('newAssignFavCondition');
+Route::get('/assign/conditionNb', [ControllerAssign::class, 'indexFavCondNb'])->name('newAssignFavCondNb'); // Display the page with association form
 
-Route::post('/unassign/condition', [ControllerUnassign::class, 'indexFavCondition'])->name('deleteUnassignFavCondition');
+Route::get('/unassign/conditionNb', [ControllerUnassign::class, 'indexFavCondNb'])->name('deleteUnassignFavCondNb'); // Display the page with association form
 
 // ***************** FAVORABLE CONDITION *******************
