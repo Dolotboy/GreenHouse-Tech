@@ -39,6 +39,8 @@ Route::get("searchAll/problem", [ControllerDetail::class, 'searchAllProblem'],fu
 
 // ***************** PROFILE *******************
 
+Route::post('/new/profile/addProfile', [ControllerAdd::class, 'addProfile'])->name('addProfile');
+
 Route::get("search/profile/{idProfile}", [ControllerDetail::class, 'searchProfile'],function ($idProfile){})->name('detailProfile');
 
 Route::get("searchAll/profile", [ControllerDetail::class, 'searchAllProfile'],function (){})->name('detailAllProfile');
