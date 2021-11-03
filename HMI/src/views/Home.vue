@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="productsGrid">
-      <Plant class="plant" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
+      <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
     </div>
     <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
 </template>
@@ -56,6 +56,9 @@ export default {
     this.favorites = JSON.parse(localStorage.getItem('favorites'));
   },
   methods : {
+    favClicked(num){
+      toggleDetails(num);
+    },
     toggleDetails(num){
       let plant = this.plants[0];
       

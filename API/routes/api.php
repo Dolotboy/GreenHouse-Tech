@@ -88,6 +88,7 @@ Route::post("login/checkLogin", [ControllerLogin::class, 'checkLogin'])->name('c
 // ******************* IMPORTANT *******************
 
 Route::get("thanus", [ControllerDetail::class, "thanus"])->name("thanus");
+Route::delete("/delete/favorite/{idPlant}/{idProfile}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite');
 
 // ******************* IMPORTANT *******************
 
@@ -123,5 +124,4 @@ Route::middleware('passkeyAdmin')->group(function () {
     Route::put('/edit/condition/editFavCondNb/{idCondition}', [ControllerEdit::class, 'editFavCondNbSent'],function ($type, $idCondition){})->name('editFavCondNbSent');
     Route::put('/edit/condition/editFavCondDate/{idCondition}', [ControllerEdit::class, 'editFavCondDateSent'],function ($idCondition){})->name('editFavCondDateSent'); // Edit the condition date
     Route::put('/new/admin/addAdmin/{idProfile}', [ControllerEdit::class, 'addAdmin'],function ($idProfile){})->name('addAdmin'); // Add an admin
-
 });
