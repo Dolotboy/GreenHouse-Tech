@@ -33,6 +33,22 @@ class ControllerAssign extends Controller
 
         $assignFavorableConditionDate = new AssignConditionDate();
 
+        try
+        {
+            $findAssociation = AssignConditionDate::where('tblPlant_idPlant', '=', $idPlant)
+            ->where('tblRangeDate_idRangeDate', '=', $idCondition)
+            ->get();
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "Error trying to find if this association already exist", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / ConditionDate: $idCondition"], 400);
+        }
+
+        if (!$findAssociation->isEmpty())
+        {
+            return response()->json(['message'=> "Error, the association already exist", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / ConditionDate: $idCondition"], 400); 
+        }
+
         $assignFavorableConditionDate->tblPlant_idPlant = $idPlant;
         $assignFavorableConditionDate->tblRangeDate_idRangeDate = $idCondition;
 
@@ -64,7 +80,23 @@ class ControllerAssign extends Controller
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
-        $assignFavorableConditionNb = new AssignConditionNb();  
+        $assignFavorableConditionNb = new AssignConditionNb(); 
+        
+        try
+        {
+            $findAssociation = AssignConditionNb::where('tblPlant_idPlant', '=', $idPlant)
+            ->where('tblRangeNb_idRangeNb', '=', $idCondition)
+            ->get();
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "Error trying to find if this association already exist", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / ConditionNb: $idCondition"], 400);
+        }
+
+        if (!$findAssociation->isEmpty())
+        {
+            return response()->json(['message'=> "Error, the association already exist", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / ConditionNb: $idCondition"], 400); 
+        }
 
         $assignFavorableConditionNb->tblPlant_idPlant = $idPlant;
         $assignFavorableConditionNb->tblRangeNb_idRangeNb = $idCondition;
@@ -97,6 +129,22 @@ class ControllerAssign extends Controller
 
         $assignProblem = new AssignProblem();
 
+        try
+        {
+            $findAssociation = AssignProblem::where('tblPlant_idPlant', '=', $idPlant)
+            ->where('tblProblem_idProblem', '=', $idProblem)
+            ->get();
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "Error trying to find if this association already exist", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Problem: $idProblem"], 400);
+        }
+
+        if (!$findAssociation->isEmpty())
+        {
+            return response()->json(['message'=> "Error, the association already exist", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Problem: $idProblem"], 400); 
+        }
+
         $assignProblem->tblPlant_idPlant = $idPlant;
         $assignProblem->tblProblem_idProblem = $idProblem;
 
@@ -106,7 +154,7 @@ class ControllerAssign extends Controller
         }
         catch (Exception $e)
         {
-            return response()->json(['message'=> "We've encountered problems while saving data in the database,, either this association already exists or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            return response()->json(['message'=> "We've encountered problems while saving data in the database, or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
         Controller::incrementVersion();

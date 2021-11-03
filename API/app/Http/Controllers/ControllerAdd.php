@@ -118,7 +118,23 @@ class ControllerAdd extends Controller
         if (is_null($idPlant) || 
             is_null($idProfile))
         {
-            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
+        }
+
+        try
+        {
+            $findAssociation = Favorite::where('tblPlant_idPlant', '=', $idPlant)
+            ->where('tblProfile_idProfile', '=', $idProfile)
+            ->get();
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "Error trying to find if this favorite already exist", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
+        }
+
+        if (!$findAssociation->isEmpty())
+        {
+            return response()->json(['message'=> "Error, the favorite already exist", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400); 
         }
 
         $favorite->tblPlant_idPlant = $idPlant;
@@ -128,13 +144,13 @@ class ControllerAdd extends Controller
         {
             $favorite->save();
             Controller::incrementVersion();
-            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Profile: $idProfile"], 200);
         }
         catch (Exception $e)
         {
-            return response()->json(['message'=> "We've encountered problems while saving data in the database, either this association already exists or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
         }
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Profile: $idProfile"], 200);
     }
 
 /* ------------------- PROFILE ------------------- */
