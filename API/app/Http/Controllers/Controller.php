@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Models\Version;
 use Exception;
+use Illuminate\Support\Str;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -56,5 +57,9 @@ class Controller extends BaseController
         if(password_verify($password, $hash))
             return 1;
         return 0;
+    }
+
+    public function generateToken(){
+        return Str::random(40);
     }
 } 

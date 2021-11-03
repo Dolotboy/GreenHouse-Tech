@@ -179,6 +179,7 @@ class ControllerAdd extends Controller
 
         $profile->email = $request->email;
         $saltedPassword = $request->password . $salt;
+        $token = Controller::generateToken();
 
         $profile->password = Controller::hashPassword($saltedPassword);
         $profile->salt = $salt;
@@ -186,6 +187,7 @@ class ControllerAdd extends Controller
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
         $profile->access = "user";
+        $profile->api_token = $token;
 
         try
         {
@@ -198,7 +200,7 @@ class ControllerAdd extends Controller
 
         Controller::incrementVersion();
 
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $profile->idProfile], 200);
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $token], 200);
     }
 
 /* ------------------- FAVORITE CONDITION DATE ------------------- */

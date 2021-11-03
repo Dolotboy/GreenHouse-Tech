@@ -83,6 +83,8 @@ Route::get("search/last/version", [Controller::class, 'searchLastVersion'])->nam
 
 Route::post("login/checkLogin", [ControllerLogin::class, 'checkLogin'])->name('checkLogin');
 
+Route::post("login/checkToken/", [ControllerLogin::class, 'checkToken'])->name('checkToken');
+
 // ******************* LOGIN *******************
 
 // ******************* IMPORTANT *******************
