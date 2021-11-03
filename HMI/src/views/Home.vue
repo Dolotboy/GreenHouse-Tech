@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="productsGrid">
-      <Plant class="plant" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
+      <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
     </div>
     <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
 </template>
@@ -58,7 +58,6 @@ export default {
   methods : {
     favClicked(num){
       toggleDetails(num);
-      this.$forceUpdate();
     },
     toggleDetails(num){
       let plant = this.plants[0];

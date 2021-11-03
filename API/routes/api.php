@@ -82,6 +82,7 @@ Route::get("search/last/version", [Controller::class, 'searchLastVersion'])->nam
 Route::post("login/checkLogin", [ControllerLogin::class, 'checkLogin'])->name('checkLogin');
 Route::post('/new/profile/addProfile', [ControllerAdd::class, 'addProfile'])->name('addProfile');
 Route::get("thanus", [ControllerDetail::class, "thanus"])->name("thanus");
+Route::delete("/delete/favorite/{idPlant}/{idProfile}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite');
 
 Route::middleware('passkey')->group(function () {
 });
@@ -95,7 +96,6 @@ Route::middleware('passkeyAdmin')->group(function () {
     Route::post('/new/problem/addProblem', [ControllerAdd::class, 'addProblem'])->name('addProblem');
     Route::post('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('addPlant');
 
-    Route::delete("/delete/favorite/{idPlant}/{idProfile}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite');
     Route::delete("/delete/condition/{type}/{idCondition}", [ControllerDelete::class, 'deleteFavCondition'],function ($type, $idCondition){})->name('deleteFavCondition');
     Route::delete('/unassign/condition/{type}/{idPlant}/{idCondition}', [ControllerUnassign::class, 'unassignFavCondition'],function ($type, $idPlant, $idCondition){})->name('unassignFavCondition');
     Route::delete("/delete/profile/{idProfile}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile');
