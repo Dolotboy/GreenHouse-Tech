@@ -9,6 +9,7 @@ use App\Models\Version;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Routing\Controller as BaseController;
+use App\Models\Profile;
 
 class Controller extends BaseController
 {

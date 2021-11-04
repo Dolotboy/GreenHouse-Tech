@@ -38,7 +38,9 @@ class ControllerLogin extends Controller
                 return response()->json(['message'=> "Please provide a valid token", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
 
             $profile = Profile::where('api_token', $token)->take(1)->get()[0];
-            return response()->json(['message'=> "Authentication succeeded", 'success' => true, 'status' => "Request succeeded", 'id' => $profile->idProfile], 200);
+            $profile->api_token = Controller::generateToken();
+            $profile->save();
+            return response()->json(['message'=> "Authentication succeeded", 'success' => true, 'status' => "Request succeeded", 'id' => $profile->api_token], 200);
         }
         catch (Exception $e)
         {

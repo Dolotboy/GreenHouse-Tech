@@ -161,7 +161,7 @@ class ControllerDetail extends Controller
         return ("$json");
     } 
 
-    public function searchAllFavorites($idProfile)
+    public function searchAllFavorites($request, $idProfile)
     {
         if (is_null($idProfile))
         {
