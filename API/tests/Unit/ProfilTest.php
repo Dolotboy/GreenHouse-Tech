@@ -20,10 +20,21 @@ class ProfilTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $data = Profil::find(6);
+        $data = Profile::find(1);
         $dataEncode = json_encode($data);
-        $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/search/profil/6');
+        //$donneApi = Http::get('http://127.0.0.1:8000/api/search/profile/1');
 
-        $this->assertEquals($dataEncode,$donneApi);
+        $donneApi = file_get_contents("http://127.0.0.1:8000/api/search/profile/1");
+        $donneApiJson = json_decode($donneApi);
+
+        //dd($data);    
+
+        $this->assertTrue(
+            ($data->idProfile == $donneApiJson->idProfile ) &&
+            $data->email == $donneApiJson->email &&
+            $data->username == $donneApiJson->username &&
+            $data->firstName == $donneApiJson->firstName &&
+            $data->lastName == $donneApiJson->lastName  
+        );
     }
 }
