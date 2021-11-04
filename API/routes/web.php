@@ -12,7 +12,7 @@ use App\Http\Controllers\ControllerUnassign;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 // ***************** HOME *******************
 
 // ***************** PLANT *******************

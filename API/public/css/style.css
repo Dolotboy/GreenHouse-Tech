@@ -7,6 +7,32 @@ html
     background-color: gray;
 }
 
+#topBanner
+{
+    width: 100%;
+}
+
+#topBanner a
+{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row;
+}
+
+#topBanner img
+{
+    width: 150px;
+    height: 150px;
+    padding: 20px;
+}
+
+#topBanner h1
+{
+    font-family: sans-serif;
+    color: white;
+}
+
 #mainContainer
 {
     display: flex;

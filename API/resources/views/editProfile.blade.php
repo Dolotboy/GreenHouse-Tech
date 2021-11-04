@@ -17,10 +17,10 @@
                             <div class="product-details">
                             <h3>Edit a profile</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h2 class="mb-3"> <input type="text"  name='email'   value="{{ $profile["email"] }}" required></h2>
-                                    <h3 class="mb-3"> <input type="text"  name='firstName' value="{{ $profile["firstName"] }}" required></h3>
-                                    <h3 class="mb-3"> <input type="text"  name='lastName'   value="{{ $profile["lastName"] }}" required></h3>   
-                                    <h3 class="mb-3"> <input type="text"  name='access'   value="{{ $profile["access"] }}" required></h3>  
+                                    <h2 class="mb-3">Email <input type="text"  name='email'   value="{{ $profile["email"] }}" required></h2>
+                                    <h3 class="mb-3">Firstname <input type="text"  name='firstName' value="{{ $profile["firstName"] }}" required></h3>
+                                    <h3 class="mb-3">Lastname <input type="text"  name='lastName'   value="{{ $profile["lastName"] }}" required></h3>   
+                                    <h3 class="mb-3">Access <input type="text"  name='access'   value="{{ $profile["access"] }}" required></h3>  
                                     <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Submit"></h3>                             
                                 </div>
                             </div>

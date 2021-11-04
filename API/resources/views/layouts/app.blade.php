@@ -18,6 +18,12 @@
 </head>
 
 <body>
+    <div id='topBanner'>
+        <a href='{{route('home')}}'>
+            <img src="{{URL::asset('/thumbs/logo.png')}}"/>
+            <h1>Projet Cegep Serre Tech</h2>
+        </a>
+    </div>
 @section('pageContent')
 @show <!-- Section's end -->
 </body>
