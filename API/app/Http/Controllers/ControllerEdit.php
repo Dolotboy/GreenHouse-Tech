@@ -168,12 +168,11 @@ class ControllerEdit extends Controller
         return view('editProfile', ["profile" => $profile]);
     }
 
-    public function editProfileSent(Request $request, $idProfile)
+    public function editProfileSent($unusedParameter, Request $request, $idProfile)
     {
         if (is_null($request->email) || 
             is_null($request->firstName) || 
             is_null($request->lastName) ||
-            is_null($request->access) ||
             is_null($idProfile))
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
@@ -196,7 +195,6 @@ class ControllerEdit extends Controller
         $profile->email = $request->email;
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
-        $profile->access = $request->access;
 
         try
         {
@@ -206,8 +204,6 @@ class ControllerEdit extends Controller
         }
         catch (Exception $e)
         {
-            //return response()->json(['message'=> $profile->access, 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
-
             return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
         }
     }

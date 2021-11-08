@@ -125,7 +125,7 @@ class ControllerDetail extends Controller
         return view('');
     }
 
-    public function searchProfile($idProfile)
+    public function searchProfile($request, $idProfile)
     {
         if (is_null($idProfile))
         {

@@ -111,7 +111,7 @@ class ControllerAdd extends Controller
         return view('newFavourite');
     }
 
-    public function addFavorite($idPlant, $idProfile)
+    public function addFavorite($idPlant,$request, $idProfile)
     {
         $favorite = new Favorite();
 

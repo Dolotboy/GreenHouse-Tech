@@ -118,7 +118,7 @@ class ControllerDelete extends Controller
         return view('deleteSearchFavorite');
     }
 
-    public function deleteFavorite($idPlant, $idProfile)
+    public function deleteFavorite($idPlant, $unUsedParameter, $idProfile)
     {
         if (is_null($idPlant) ||
             is_null($idProfile))
@@ -150,7 +150,7 @@ class ControllerDelete extends Controller
                     ['tblProfile_idProfile', '=', $idProfile],
                 ])->delete();
                 Controller::incrementVersion();
-                return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+                return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Profile: $idProfile"], 200);
             }
             catch(Exception $e)
             {
@@ -164,7 +164,7 @@ class ControllerDelete extends Controller
         return view('deleteSearchProfile');
     }
 
-    public function deleteProfile($idProfile)
+    public function deleteProfile($request, $idProfile)
     {
         if (is_null($idProfile))
         {
@@ -199,7 +199,7 @@ class ControllerDelete extends Controller
             {
                 Profile::destroy($idProfile);
                 Controller::incrementVersion();
-                return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+                return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
             }
             catch(Exception $e)
             {

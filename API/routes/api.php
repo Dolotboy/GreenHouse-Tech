@@ -89,11 +89,6 @@ Route::get("thanus", [ControllerDetail::class, "thanus"])->name("thanus");
 
 // ******************* IMPORTANT *******************
 
-Route::middleware('passkey', 'tokenConverter')->group(function () {
-    Route::post('/new/favorite/{idPlant}/{token}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite'); // Add the favorite
-    Route::delete("/delete/favorite/{idPlant}/{token}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite'); // Delete the favorite
-});
-
 Route::middleware('passkeyAdmin')->group(function () {
     Route::post("increment/last/version", [Controller::class, 'incrementVersion'])->name('incrementVersion');
     Route::post('/assign/condition/nb/{idPlant}/{idCondition}', [ControllerAssign::class, 'assignFavConditionNb'],function ($idPlant, $idCondition){})->name('assignFavConditionNb'); // Assign the fav condition nb to a plant
@@ -119,13 +114,12 @@ Route::middleware('passkeyAdmin')->group(function () {
     Route::put('/new/admin/addAdmin/{idProfile}', [ControllerEdit::class, 'addAdmin'],function ($idProfile){})->name('addAdmin'); // Add an admin
 });
 
-Route::middleware(['passkeyAdmin', 'tokenConverter'])->group(function () {
-    Route::post('/new/favorite/{idPlant}/{token}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
-    Route::delete("/delete/profile/{token}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile'); // Delete the profile
-    Route::put('/edit/profile/editProfile/{token}', [ControllerEdit::class, 'editProfileSent'],function ($idProfile){})->name('editProfileSent'); // Edit the profile   
-});
-
 Route::middleware('tokenConverter')->group(function () {
     Route::get("search/profile/{token}", [ControllerDetail::class, 'searchProfile'],function ($idProfile){})->name('detailProfile');
     Route::get("searchAll/favorite/{token}", [ControllerDetail::class, 'searchAllFavorites'],function ($idProfile){})->name('searchAllFavorites');
+    Route::post('/new/favorite/{idPlant}/{token}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
+    Route::delete("/delete/profile/{token}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile');
+    Route::put('/edit/profile/editProfile/{token}', [ControllerEdit::class, 'editProfileSent'],function ($idProfile){})->name('editProfileSent');
+    Route::post('/new/favorite/{idPlant}/{token}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
+    Route::delete("/delete/favorite/{idPlant}/{token}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite');
 });

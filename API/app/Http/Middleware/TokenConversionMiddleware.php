@@ -23,6 +23,7 @@ class TokenConversionMiddleware
         $idProfile = $this::getProfileId($request->route('token'));
         if($idProfile != null){
             $request->route()->setParameter('idProfile', $idProfile);
+            //return response()->json(json_encode($request->route()));
             return $next($request);
         }
         else 
