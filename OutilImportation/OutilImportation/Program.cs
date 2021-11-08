@@ -16,7 +16,7 @@ namespace OutilImportation
 
         static void Main(string[] args)
         {
-            string env = "http://testenv.apipcst.xyz/api/";
+            string env = "http://localhost:8000/api/";
             if (args.Length > 0)
                 env = args[0];
 
@@ -76,6 +76,7 @@ namespace OutilImportation
                 using (HttpClient client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Authorization", "Basic " + System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes("frank" + ":" + "frank")));
                     foreach (Plant veg in veggies)
                         await PushPlant(baseUrl, veg, client);
                 }

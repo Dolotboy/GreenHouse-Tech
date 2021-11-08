@@ -65,7 +65,7 @@ export default {
       }
   },
   mounted(){
-      this.Initialisation()
+      this.Initialisation();
   },
   methods :{
     toggleRegister(){
@@ -92,6 +92,10 @@ export default {
       
       this.mobileNavIsOpened = !this.mobileNavIsOpened;
     },
+    async checkToken(){
+      if(localStorage.getItem('loggedInToken') != null && localStorage.getItem('loggedInToken') != "")
+        this.login(localStorage.getItem('loggedInToken'));
+    },
     async Initialisation(){
       let version = localStorage.getItem('apiVersion');
       let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
@@ -104,6 +108,7 @@ export default {
       this.plants = await toolbox.fetchData(await toolbox.setDb());
       if(this.plants.length == 0)
         await this.DownloadContent();   
+      await this.checkToken();
     },
     async ClearDb(){
       let db = await toolbox.setDb();

@@ -13,11 +13,10 @@ class AddTokenTable extends Migration
      */
     public function up()
     {
-        Schema::table('tblProfile', function ($table) {
-            $table->string('api_token', 80)->after('password')
-                                ->unique()
-                                ->nullable()
-                                ->default(null);
+        Schema::create('tokens', function (Blueprint $table) {
+            $table->id();
+            $table->string('token');
+            $table->date('valid_until');
         });
     }
 
