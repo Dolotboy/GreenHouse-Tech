@@ -155,7 +155,7 @@ class ControllerDetail extends Controller
         $updatedAt = $profile->updated_at;
 
         
-        $array = array('idProfile' => $idProfile, 'email' => $email, 'username' => $username, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        $array = array('token' => $profile->api_token, 'email' => $email, 'username' => $username, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
         $json = json_encode($array);
     
         return ("$json");

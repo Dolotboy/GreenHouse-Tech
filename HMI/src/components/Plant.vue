@@ -86,7 +86,7 @@ export default {
         console.log(JSON.parse(localStorage.getItem('favorites')));
       },
       getLoggedInProfile(){
-        return localStorage.getItem('loggedInProfileId');
+        return localStorage.getItem('loggedInToken');
       }
     }
 }
