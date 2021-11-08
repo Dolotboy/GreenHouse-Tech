@@ -21,6 +21,20 @@
         <input type="radio" name="rdPlantType" value="vegetable" checked @click="radioValueChanged('All')">
       </div>
     </div>
+    <div class="cbPlantFamilyWrapper">
+      <div>
+        <label>Famille 1</label>
+        <input type="checkbox" name="cbPlantFamily" value="Family1">
+      </div>
+      <div>
+        <label>Famille 2</label>
+        <input type="checkbox" name="cbPlantFamily" value="Family2">
+      </div>
+      <div>
+        <label>Tous</label>
+        <input type="checkbox" name="cbPlantFamily" value="All" checked>
+      </div>
+    </div>
     <div class="productsGrid">
       <Plant class="plant" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
     </div>
@@ -131,13 +145,36 @@ body{
   width : 80%;
   margin : 2vh 0 0 10%;
 }
-
 .plant{
   background-color: #616161;
 
   &:hover{
     background-color : #600404;
     cursor : pointer;
+  }
+}
+.cbPlantFamilyWrapper{
+  display : inline-flex;
+  width: auto;
+  background: #616161;
+  color: #D2CCB1;
+  justify-content: center;
+  margin : 2vh 0;
+  border: 1px solid;
+  border-radius: 5px;
+
+  & > div{
+    display : flex;
+
+    label{
+      font-size : 2rem;
+    }
+
+    input[type=radio]{
+      height: 1.5rem;
+      width : 1.5rem;
+      margin : auto 1rem;
+    }
   }
 }
 .rdPlantTypeWrapper{

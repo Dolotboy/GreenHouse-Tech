@@ -4,7 +4,7 @@
       <ul>
         <div id="BasicNav">
           <li><router-link to="/">Accueil</router-link></li> 
-          <li><router-link to="/about">À propos</router-link></li>
+          <li><a href="http://apipcst.xyz" target="_blank">API Interface</a></li>
         </div>
         <div id="LoginRegister">
           <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
@@ -23,7 +23,6 @@
       </div>
       <ul class="links">
           <li><router-link to="/">Accueil</router-link></li> 
-          <li><router-link to="/about">À propos</router-link></li>
           <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
           <li v-if="!isLoggedIn" @click="toggleLogin">Se connecter</li> 
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 

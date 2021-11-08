@@ -94,10 +94,7 @@ export default {
 .detailsPlantP{
         display:inline;
 }
-.details p:hover{
-    color: red;
-    cursor: pointer;
-}
+
 .buttonDetails{
   background-color: black;
   color : white;
