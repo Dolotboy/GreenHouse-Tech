@@ -1477,7 +1477,8 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2021-09-14T13:31:32+00:00"
-        },
+        }
+    },
         {
             "name": "laravel/sanctum",
             "version": "v2.11.2",
@@ -3951,8 +3952,6 @@
         },
         {
             "name": "symfony/http-kernel",
-<<<<<<< HEAD
-<<<<<<< HEAD
             "version": "v5.3.9",
             "source": {
                 "type": "git",
@@ -3963,11 +3962,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-kernel/zipball/ceaf46a992f60e90645e7279825a830f733a17c5",
                 "reference": "ceaf46a992f60e90645e7279825a830f733a17c5",
-=======
-            "version": "v5.3.7",
-=======
             "version": "v5.3.9",
->>>>>>> 14f677465e8d04aee946c3e0862a883c1b009167
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
@@ -3975,14 +3970,9 @@
             },
             "dist": {
                 "type": "zip",
-<<<<<<< HEAD
                 "url": "https://api.github.com/repos/symfony/http-kernel/zipball/a3a78e37935a527b50376c22ac1cec35b57fe787",
                 "reference": "a3a78e37935a527b50376c22ac1cec35b57fe787",
->>>>>>> f5cf2059214903ee0782f3d13d4b278a04bb5c2c
-=======
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/ceaf46a992f60e90645e7279825a830f733a17c5",
-                "reference": "ceaf46a992f60e90645e7279825a830f733a17c5",
->>>>>>> 14f677465e8d04aee946c3e0862a883c1b009167
+
                 "shasum": ""
             },
             "require": {
@@ -4065,15 +4055,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
-<<<<<<< HEAD
-<<<<<<< HEAD
                 "source": "https://github.com/symfony/http-kernel/tree/v5.3.9"
-=======
-                "source": "https://github.com/symfony/http-kernel/tree/v5.3.7"
->>>>>>> f5cf2059214903ee0782f3d13d4b278a04bb5c2c
-=======
-                "source": "https://github.com/symfony/http-kernel/tree/v5.3.9"
->>>>>>> 14f677465e8d04aee946c3e0862a883c1b009167
             },
             "funding": [
                 {
@@ -4090,7 +4072,8 @@
                 }
             ],
             "time": "2021-09-28T10:25:11+00:00"
-        },
+        }
+    },
         {
             "name": "symfony/mime",
             "version": "v5.3.8",
@@ -4104,7 +4087,8 @@
                 "url": "https://api.github.com/repos/symfony/mime/zipball/a756033d0a7e53db389618653ae991eba5a19a11",
                 "reference": "a756033d0a7e53db389618653ae991eba5a19a11",
             "time": "2021-09-28T10:25:11+00:00"
-        },
+        }
+    },
         {
             "name": "symfony/mime",
             "version": "v5.3.8",
@@ -5415,7 +5399,8 @@
                 }
             ],
             "time": "2021-08-26T08:22:53+00:00"
-        },
+        }
+    },
         {
             "name": "symfony/translation-contracts",
             "version": "v2.4.0",
@@ -5591,7 +5576,8 @@
                 }
             ],
             "time": "2021-09-24T15:59:58+00:00"
-        },
+        }
+    },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.3",
@@ -6265,7 +6251,8 @@
                 }
             ],
             "time": "2021-10-03T12:00:00+00:00"
-        },
+        }
+    },
         {
             "name": "hamcrest/hamcrest-php",
             "version": "v2.0.1",
@@ -6386,7 +6373,8 @@
                 "source": "https://github.com/laravel/sail"
             },
             "time": "2021-10-01T13:32:17+00:00"
-        },
+        }
+    },
         {
             "name": "mockery/mockery",
             "version": "1.4.4",
@@ -7372,7 +7360,8 @@
                 }
             ],
             "time": "2021-09-25T07:38:51+00:00"
-        },
+        }
+    },
         {
             "name": "sebastian/cli-parser",
             "version": "1.0.1",
