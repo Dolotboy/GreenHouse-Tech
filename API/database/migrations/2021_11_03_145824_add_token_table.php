@@ -13,10 +13,13 @@ class AddTokenTable extends Migration
      */
     public function up()
     {
-        Schema::create('tokens', function (Blueprint $table) {
+        Schema::create('tblTokens', function (Blueprint $table) {
             $table->id();
             $table->string('token');
-            $table->date('valid_until');
+            $table->timestamp('valid_until');
+            $table->unsignedBigInteger('idProfile');
+            $table->foreign('idProfile')->references('idProfile')->on('tblProfile');
+            $table->timestamps();
         });
     }
 
