@@ -22,12 +22,11 @@ class ProfilTest extends TestCase
 
         $data = Profile::find(1);
         $dataEncode = json_encode($data);
-        //$donneApi = Http::get('http://127.0.0.1:8000/api/search/profile/1');
-
         $donneApi = file_get_contents("http://127.0.0.1:8000/api/search/profile/1");
         $donneApiJson = json_decode($donneApi);
 
-        //dd($data);    
+        
+          
 
         $this->assertTrue(
             ($data->idProfile == $donneApiJson->idProfile ) &&
