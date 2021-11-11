@@ -188,6 +188,18 @@
 
             <!-- // ****************** END ******************** // -->
 
+            <!-- // ****************** TENTH LINE ******************** // -->
+
+            <div class='midContainer'>
+                <div class='cbtn'>
+                    <a href="{{route('newAssignAdmin')}}">
+                        <h2>Assigner un admin</h2> 
+                    </a>
+                </div>
+            </div>
+
+            <!-- // ****************** END ******************** // -->
+
         </div>
 @endsection
 

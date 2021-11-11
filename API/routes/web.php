@@ -84,3 +84,5 @@ Route::get('/assign/conditionNb', [ControllerAssign::class, 'indexFavCondNb'])->
 Route::get('/unassign/conditionNb', [ControllerUnassign::class, 'indexFavCondNb'])->name('deleteUnassignFavCondNb'); // Display the page with association form
 
 // ***************** FAVORABLE CONDITION *******************
+
+Route::get('/assign/admin', [ControllerEdit::class, 'indexAdmin'])->name('newAssignAdmin'); // Display the page with admin form

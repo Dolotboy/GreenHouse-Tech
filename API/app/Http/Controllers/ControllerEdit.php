@@ -358,9 +358,14 @@ class ControllerEdit extends Controller
         }
     }
 
-    public function addAdmin(Request $request)
+    public function indexAdmin()
     {
-        $data = Profile::find($request);
+        return view('assignAdmin');
+    }
+
+    public function addAdmin(Request $request, $idProfile)
+    {
+        $profile = Profile::find($idProfile);
 
         $profile->access = "admin";
 
