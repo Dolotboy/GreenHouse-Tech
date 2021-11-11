@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Exception;
 use App\Models\Token;
+use \DateTime;
+use \DateInterval;
 
 class ControllerLogin extends Controller
 {
@@ -20,7 +22,8 @@ class ControllerLogin extends Controller
             if(Controller::comparePassword($saltedPassword, $profile->password) == 1){
                 $token = new Token();
                 $token->token = Controller::generateToken();
-                $token->valid_until = date('d-m-y', strtotime(' + 30 days'));
+                $now = new DateTime(date("y-m-d"));              
+                $token->valid_until = $now->add(new DateInterval('P30D'));
                 $token->idProfile = $profile->idProfile;
                 $token->save();
                 return response()->json(['message'=> "Profile found", 'success' => true, 'status' => "Login succeeded", 'id' => $token->token], 200);
@@ -41,8 +44,10 @@ class ControllerLogin extends Controller
                 return response()->json(['message'=> "Please provide a valid token", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
 
             $tokenObject = Token::where('token', $token)->take(1)->get()[0];
-            $now = date('d-m-y h:i:s');
-            if($now < $tokenObject->valid_until){
+            $now = new DateTime(date("y-m-d"));
+            $valid_until = $tokenObject->valid_until;
+            //return response()->json(['now' => $now, 'valid_until' => $valid_until, 'bool' => $now < new DateTime($valid_until)]);
+            if($now <= new DateTime($valid_until)){
                 $tokenObject->token = Controller::generateToken();
                 $tokenObject->save();
                 return response()->json(['message'=> "Authentication succeeded", 'success' => true, 'status' => "Request succeeded", 'id' => $tokenObject->token], 200);
@@ -51,7 +56,7 @@ class ControllerLogin extends Controller
         }
         catch (Exception $e)
         {
-            return response()->json(['message'=> "Profile not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
+            return response()->json(['message'=> "Profile not found", 'success' => false, 'status' => "Request Failed", 'id' => null, 'Exception' => $e], 404);
         }
     }
 }

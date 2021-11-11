@@ -16,7 +16,7 @@ class AddTokenTable extends Migration
         Schema::create('tblTokens', function (Blueprint $table) {
             $table->id();
             $table->string('token');
-            $table->timestamp('valid_until');
+            $table->date('valid_until');
             $table->unsignedBigInteger('idProfile');
             $table->foreign('idProfile')->references('idProfile')->on('tblProfile');
             $table->timestamps();
