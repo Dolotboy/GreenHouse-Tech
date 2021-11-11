@@ -5,7 +5,7 @@
 <div>
     Hi {{ $firstName }}, this mail has been sent to you to confirm you that the modifications on your account has been saved !
 </div>
-@component('mail::button', ['url' => 'http://www.wiki.pcst.xyz'])
+@component('mail::button', ['url' => 'http://wiki.pcst.xyz'])
 Come and explore !
 @endcomponent
 
