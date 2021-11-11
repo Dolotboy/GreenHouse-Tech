@@ -13,12 +13,16 @@ use App\Models\Version;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
+//use App\Mail\AccountCreated;
 
 class ControllerDetail extends Controller
 {
     public function indexPlant(Request $request)
     {
-        return view('newPlant');
+        $data = Plant::all();
+        
+        //return view('searchPlantTest',["plant" =­­­> $data]);
+        return view('searchPlantTest',["plant" => $data]);
     }
 
     public function searchPlant($idPlant)
@@ -198,31 +202,21 @@ class ControllerDetail extends Controller
         return ("$json");
     }
 
-    public function indexFavCondition(Request $request)
+    public function indexFavCondDate(Request $request)
     {
-        return view('');
+        return view('searchFavCondDate');
     }
 
-    public function searchFavCondition($type, $idCondition)
+    public function searchFavConditionDate($idCondition)
     {
-        if (is_null($type) ||
-            is_null($idCondition))
+        if (is_null($idCondition))
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
         }
 
         try
         {
-        if ($type == 1)
-        {
             $favorableCondition = FavorableConditionDate::find($idCondition);
-            $json = json_encode($favorableCondition);
-        }
-        else if($type == 2)
-        {
-            $favorableCondition = FavorableConditionNb::find($idCondition);
-            $json = json_encode($favorableCondition);
-        }
         }
         catch (Exception $e)
         { 
@@ -234,30 +228,47 @@ class ControllerDetail extends Controller
             return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
         }
 
+        $json = json_encode($favorableCondition);
+
         return $json;
     }
 
-    public function searchAllFavCondition($type)
+    public function indexFavCondNb(Request $request)
     {
-        if (is_null($type))
+        return view('searchFavCondNb');
+    }
+
+    public function searchFavConditionNb($idCondition)
+    {
+        if (is_null($idCondition))
         {
-            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
         }
 
         try
         {
-        if ($type == 1)
+            $favorableCondition = FavorableConditionNb::find($idCondition);
+        }
+        catch (Exception $e)
+        { 
+            return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+        }
+
+        if (is_null($favorableCondition))
+        {
+            return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
+        }
+        
+        $json = json_encode($favorableCondition);
+
+        return $json;
+    }
+
+    public function searchAllFavConditionDate()
+    {
+        try
         {
             $favCondition = FavorableConditionDate::All();
-
-            $json = json_encode($favCondition);
-        }
-        else if ($type ==2)
-        {
-            $favCondition = FavorableConditionNb::All();
-
-            $json = json_encode($favCondition);
-        }
         }
         catch (Exception $e)
         {
@@ -267,8 +278,28 @@ class ControllerDetail extends Controller
         {
             return response()->json(['message'=> "Error, conditions not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
+        $json = json_encode($favCondition);
 
-        return ("$json");
+        return $json;
+    }
+
+    public function searchAllFavConditionNb()
+    {
+        try
+        {
+            $favCondition = FavorableConditionNb::All();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "There is no condition or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+        if (is_null($favCondition))
+        {
+            return response()->json(['message'=> "Error, conditions not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
+        }
+        $json = json_encode($favCondition);
+
+        return $json;
     }
 
     public function indexPackage()

@@ -28,7 +28,7 @@
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
       </ul>
     </nav>
-    <router-view/>  
+    <router-view @update="this.$forceUpdate" @popLogin="toggleLogin"/>  
     <div @click="login(1)">login</div>
     <div @click="logout">logout</div>
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
@@ -51,7 +51,7 @@ export default {
   },
   data(){
       return{
-          envùback : "http://localhost:8000/",
+          envBack : "http://localhost:8000/",
           env : "http://testenv.apipcst.xyz/",
           plants : [],
           favorites : [],
@@ -84,7 +84,7 @@ export default {
       console.log(this.mobileNavIsOpened);
       if(!this.mobileNavIsOpened){
         links.style.display = "flex";
-        navMobile.style.height = "75vh";
+      navMobile.style.height = "100vh"; 
       }
       else{
         console.log("else");
@@ -141,9 +141,10 @@ export default {
         })
       })
     },
-    async login(profileId){
-      this.downloadFavorites(profileId);
-      this.profile = await this.getObject(this.env + "api/search/profile/" + profileId); 
+    async login(response){
+      this.downloadFavorites(response);
+      console.log(response);
+      this.profile = await this.getObject(this.env + "api/search/profile/" + response.id); 
     
       localStorage.setItem('loggedInProfileId', this.profile.idProfile);
       this.isLoggedIn = true;
@@ -235,7 +236,7 @@ button{
     overflow: hidden;
     background-color: #616161 ;
     display: flex;
-    justify-content: center;
+    justify-content: start;
 
     li {
       float: left;

@@ -1,0 +1,41 @@
+
+		       Interface       Yarc                           
+Add Plant 				OK
+Add problem				OK
+Add profile				OK
+Add favorite				OK
+Add FavDate				OK
+Add FavNb				OK
+
+Get Plant				OK
+Get Problem				OK
+Get Profile				OK
+Get FavDate				OK
+Get FavNb				OK
+Get favorite				NO -> Inexistant dans cette version (Mais fonctionnel)
+Get package				OK
+Get lastVersion				OK
+
+Assign FavDate				OK
+Assign FavNb				OK
+Assign Prob				OK
+
+Unassign Prob				OK
+Unassign FavDate			OK
+Unassign FavNb				OK
+
+Del Plant				OK -> Route Get pas necessaire pour Yark, mais l'est pour interface
+Del Problem				OK -> Route Get pas necessaire pour Yark, mais l'est pour interface
+Del favorite				OK
+
+SearchAll Plant				OK
+SearchAll Problem			OK
+SearchAll Profile			OK
+SearchAll FavDate			OK
+SearchAll FavNb				OK
+
+Edit Plant				OK
+Edit Problem				OK
+Edit Profile				NO -> Catch du save (Email en double)
+Edit FavDate				OK
+Edit FavNb				OK

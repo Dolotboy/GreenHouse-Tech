@@ -21,9 +21,9 @@ class PlantTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $data = Plant::find(1);
+        $data = Plant::find(8);
         $dataEncode = json_encode($data);
-        $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/search/plant/1');
+        $donneApi = Http::acceptJson()->get('http://127.0.0.1:8000/api/search/plant/8');
 
         $this->assertEquals($dataEncode,$donneApi);
 

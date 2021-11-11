@@ -56,7 +56,7 @@
       </div>
     </div>
     <div class="productsGrid">
-      <Plant class="plant" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
+      <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
     </div>
     <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
 </template>
@@ -225,9 +225,11 @@ body{
 .productsGrid{
   color: #D2CCB1;
   display : grid;
-  grid-template-columns : repeat(auto-fit, minmax(250px, 1fr));
-  width : 80%;
+  grid-template-columns : repeat(auto-fit, minmax(350px, 1fr));
+  width : 85%;
   margin : 2vh 0 0 10%;
+ column-gap: 30px;
+
 }
 .plant{
   background-color: #616161;
@@ -267,6 +269,7 @@ body{
   background: #616161;
   color: #D2CCB1;
   justify-content: center;
+  
   margin : 2vh 0;
   border: 1px solid;
   border-radius: 5px;
@@ -312,6 +315,7 @@ body{
 .autoCompleteForm{
   display : flex;
   justify-content: center;
+  
 
   .autocomplete{
     display : flex;
@@ -327,7 +331,8 @@ body{
   }
 
   #searchBar{
-    height : 3rem;
+    height:4vh;
+
   }
 
   #searchBarautocomplete-list{
@@ -346,5 +351,6 @@ body{
     height : 2.5rem;
     width : 2.5rem;
   }
+  
 }
 </style>
