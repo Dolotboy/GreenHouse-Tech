@@ -262,7 +262,7 @@ class ControllerAdd extends Controller
         {
             $favorableCondition->save();
             Controller::incrementVersion();
-            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $favorableCondition->id], 200);
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $favorableCondition->idRangeDate], 200);
         }
         catch (Exception $e)
         {
@@ -296,7 +296,7 @@ class ControllerAdd extends Controller
         {
             $favorableCondition->save();
             Controller::incrementVersion();
-            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $favorableCondition->id], 200);
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $favorableCondition->idRangeNb], 200);
         }
         catch (Exception $e)
         {

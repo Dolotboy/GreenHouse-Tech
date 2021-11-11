@@ -5,6 +5,9 @@ use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Exception;
+use App\Models\Token;
+use \DateTime;
+use \DateInterval;
 
 class ControllerLogin extends Controller
 {
@@ -17,16 +20,19 @@ class ControllerLogin extends Controller
             $saltedPassword = $password . $profile->salt;
         
             if(Controller::comparePassword($saltedPassword, $profile->password) == 1){
-                $token = Controller::generateToken();
-                $profile->api_token = $token;
-                $profile->save();
-                return response()->json(['message'=> "Profile found", 'success' => true, 'status' => "Login succeeded", 'id' => $token], 200);
+                $token = new Token();
+                $token->token = Controller::generateToken();
+                $now = new DateTime(date("y-m-d"));              
+                $token->valid_until = $now->add(new DateInterval('P30D'));
+                $token->idProfile = $profile->idProfile;
+                $token->save();
+                return response()->json(['message'=> "Profile found", 'success' => true, 'status' => "Login succeeded", 'id' => $token->token], 200);
             }
             return response()->json(['message'=> "Incorrect password", 'success' => false, 'status' => "login Failed", 'id' => null], 404);
         }
         catch (Exception $e)
         {
-            return response()->json(['message'=> "Profile not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
+            return response()->json(['message'=> "Profile not found", 'success' => false, 'status' => "Request Failed", 'id' => null, 'Exception' => $e], 404);
         }
     }
 
@@ -37,14 +43,20 @@ class ControllerLogin extends Controller
             if($token == null || $token == "")
                 return response()->json(['message'=> "Please provide a valid token", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
 
-            $profile = Profile::where('api_token', $token)->take(1)->get()[0];
-            $profile->api_token = Controller::generateToken();
-            $profile->save();
-            return response()->json(['message'=> "Authentication succeeded", 'success' => true, 'status' => "Request succeeded", 'id' => $profile->api_token], 200);
+            $tokenObject = Token::where('token', $token)->take(1)->get()[0];
+            $now = new DateTime(date("y-m-d"));
+            $valid_until = $tokenObject->valid_until;
+            //return response()->json(['now' => $now, 'valid_until' => $valid_until, 'bool' => $now < new DateTime($valid_until)]);
+            if($now <= new DateTime($valid_until)){
+                $tokenObject->token = Controller::generateToken();
+                $tokenObject->save();
+                return response()->json(['message'=> "Authentication succeeded", 'success' => true, 'status' => "Request succeeded", 'id' => $tokenObject->token], 200);
+            }
+            return response()->json(['message'=> "Token expired", 'success' => false, 'status' => "Request failed", 'id' => null], 400);
         }
         catch (Exception $e)
         {
-            return response()->json(['message'=> "Profile not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
+            return response()->json(['message'=> "Profile not found", 'success' => false, 'status' => "Request Failed", 'id' => null, 'Exception' => $e], 404);
         }
     }
 }
