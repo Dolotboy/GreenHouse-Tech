@@ -29,7 +29,7 @@
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
       </ul>
     </nav>
-    <router-view/>  
+    <router-view @update="this.$forceUpdate" @popLogin="toggleLogin"/>  
     <div @click="login(1)">login</div>
     <div @click="logout">logout</div>
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
@@ -52,8 +52,8 @@ export default {
   },
   data(){
       return{
-          env : "http://localhost:8000/",
-          envBack : "https://testenv.apipcst.xyz/",
+          envBack : "http://localhost:8000/",
+          env : "http://testenv.apipcst.xyz/",
           plants : [],
           favorites : [],
           showLogin : false,
@@ -139,9 +139,10 @@ export default {
         })
       })
     },
-    async login(profileId){
-      this.downloadFavorites(profileId);
-      this.profile = await this.getObject(this.env + "api/search/profile/" + profileId); 
+    async login(response){
+      this.downloadFavorites(response);
+      console.log(response);
+      this.profile = await this.getObject(this.env + "api/search/profile/" + response.id); 
     
       localStorage.setItem('loggedInProfileId', this.profile.idProfile);
       this.isLoggedIn = true;

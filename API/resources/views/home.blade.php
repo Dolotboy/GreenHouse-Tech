@@ -15,7 +15,10 @@
 @parent
         <div id='mainContainer'>
 
+            <!-- // ****************** FIRST LINE ******************** // -->
+
             <div class='midContainer'>
+                
                 <div class='cbtn'>
                     <a href="{{route('newPlant')}}">
                         <h2>Ajouter une plante</h2> 
@@ -24,22 +27,19 @@
 
                 <div class='cbtn'>
                     <a href="{{route('editSearchPlant')}}">
-                        <h2>Modifier une plante</h2> 
+                        <h2>Modifier/Supprimer une plante</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('searchPlant')}}">
-                        <h2>Chercher une plante</h2>
+                    <a href="{{route('detailAllPlant')}}">
+                        <h2>Voir tout les plantes</h2> 
                     </a>
                 </div>
 
-                <div class='cbtn'>
-                    <a href="{{route('deleteSearchPlant')}}">
-                        <h2>Supprimer une plante</h2>
-                    </a>
-                </div>
             </div>
+
+            <!-- // ****************** SECOND LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -50,22 +50,19 @@
 
                 <div class='cbtn'>
                     <a href="{{route('editSearchProblem')}}">
-                        <h2>Modifier un problème</h2> 
+                        <h2>Modifier/Supprimer un problème</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('searchProblem')}}">
-                        <h2>Chercher un problème</h2>
+                    <a href="{{route('detailAllProblem')}}">
+                        <h2>Voir tout les problèmes</h2> 
                     </a>
                 </div>
 
-                <div class='cbtn'>
-                    <a href="{{route('deleteSearchProblem')}}">
-                        <h2>Supprimer un problème</h2>
-                    </a>
-                </div>
             </div>
+
+            <!-- // ****************** THIRD LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -79,7 +76,10 @@
                         <h2>Supprimer un favori</h2>
                     </a>
                 </div>
+
             </div>
+
+            <!-- // ****************** FOURTH LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -90,62 +90,86 @@
 
                 <div class='cbtn'>
                     <a href="{{route('editSearchProfile')}}">
-                        <h2>Modifier un profil</h2> 
+                        <h2>Modifier/Supprimer un profil</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('searchProfile')}}">
-                        <h2>Chercher un profil</h2>
+                    <a href="{{route('detailAllProfile')}}">
+                        <h2>Voir tous les profils</h2> 
                     </a>
                 </div>
 
-                <div class='cbtn'>
-                    <a href="{{route('deleteSearchProfile')}}">
-                        <h2>Supprimer un profil</h2>
-                    </a>
-                </div>
             </div>
+
+            <!-- // ****************** FIFTH LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newFavCondition')}}">
-                        <h2>Ajouter une condition favorable</h2> 
+                    <a href="{{route('newFavCondDate')}}">
+                        <h2>Ajouter une condition favorable Date</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('editSearchFavCondition')}}">
-                        <h2>Modifier une condition favorable</h2> 
+                    <a href="{{route('editSearchFavCondDate')}}">
+                        <h2>Modifier/Supprimer une condition favorable Date</h2> 
                     </a>
                 </div>
 
-                <div class='cbtn'>
-                    <a href="{{route('searchFavCondition')}}">
-                        <h2>Chercher une condition favorable</h2>
-                    </a>
-                </div>
-
-                <div class='cbtn'>
-                    <a href="{{route('deleteSearchFavCondition')}}">
-                        <h2>Supprimer une condition favorable</h2>
-                    </a>
-                </div>
             </div>
+             <!-- // ****************** SIXTH LINE - FAVORITE CONDITION NB ******************** // -->
+
+             <div class='midContainer'>
+                <div class='cbtn'>
+                    <a href="{{route('newFavCondNb')}}">
+                        <h2>Ajouter une condition favorable Nb</h2> 
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('editSearchFavCondNb')}}">
+                        <h2>Modifier/Supprimer une condition favorable Nb</h2> 
+                    </a>
+                </div>
+
+             </div>
+
+           <!-- // ****************** SEVENTH LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newAssignFavCondition')}}">
-                        <h2>Assigner une condition favorable</h2> 
+                    <a href="{{route('newAssignFavCondDate')}}">
+                        <h2>Assigner une condition favorable Date</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteUnassignFavCondition')}}">
-                        <h2>Désassigner une condition favorable</h2> 
+                    <a href="{{route('deleteUnassignFavCondDate')}}">
+                        <h2>Désassigner une condition favorable Date</h2> 
                     </a>
                 </div>
+
             </div>
+
+            <!-- // ****************** EIGHTH LINE ******************** // -->
+
+            <div class='midContainer'>
+                <div class='cbtn'>
+                    <a href="{{route('newAssignFavCondNb')}}">
+                        <h2>Assigner une condition favorable Nb</h2> 
+                    </a>
+                </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('deleteUnassignFavCondNb')}}">
+                        <h2>Désassigner une condition favorable Nb</h2> 
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- // ****************** NINTH LINE ******************** // -->
 
             <div class='midContainer'>
                 <div class='cbtn'>
@@ -155,11 +179,14 @@
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteUnassignProblem')}}">
+                    <a href="{{route('searchUnassignProblem')}}">
                         <h2>Désassigner un problème</h2> 
                     </a>
                 </div>
+
             </div>
+
+            <!-- // ****************** END ******************** // -->
 
         </div>
 @endsection

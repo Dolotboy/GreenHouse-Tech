@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\DB;
 class ControllerDelete extends Controller
 {
     public function indexPlant()
-    {
-        return view('');
+    { 
+        return view('deleteSearchPlant');
     }
 
     public function deletePlant($idPlant)
@@ -40,8 +40,6 @@ class ControllerDelete extends Controller
         {
             return response()->json(['message'=> "Error, plant not found", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
         }
-        else
-        {
             try
             {
                 DB::table('tblPlant_tblProblem')->where('tblPlant_idPlant', $idPlant)->delete();
@@ -64,12 +62,11 @@ class ControllerDelete extends Controller
             {
                 return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
             }
-        }
     }
 
     public function indexProblem()
     {
-        return view('');
+        return view('deleteSearchProblem');
     }
 
     public function deleteProblem($idProblem)
@@ -118,7 +115,7 @@ class ControllerDelete extends Controller
 
     public function indexFavorite()
     {
-        return view('');
+        return view('deleteSearchFavorite');
     }
 
     public function deleteFavorite($idPlant, $idProfile)
@@ -164,7 +161,7 @@ class ControllerDelete extends Controller
 
     public function indexProfile()
     {
-        return view('');
+        return view('deleteSearchProfile');
     }
 
     public function deleteProfile($idProfile)
@@ -213,92 +210,91 @@ class ControllerDelete extends Controller
 
     public function indexFavCondition()
     {
-        return view('');
+        return view('deleteSearchFavCondition');
     }
 
-    public function deleteFavCondition($type, $idCondition)
+    public function deleteFavConditionDate($idCondition)
     {
-        if (is_null($type) ||
-            is_null($idCondition))
+        if (is_null($idCondition))
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
         }
 
-        if ($type == 1)
+        try
         {
-            try
-            {
-                $favorableCondition = FavorableConditionDate::Find($idCondition);
-            }
-            catch (Exception $e)
-            {
-                return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
-            }
-
-            if (is_null($idCondition))
-            {
-                return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
-            }
-            else
-            {
-                try
-                {
-                    DB::table('tblPlant_tblRangeDate')->where('tblRangeDate_idRangeDate', $idCondition)->delete();
-                }
-                catch (Exception $e)
-                {
-                    return response()->json(['message'=> "Error while deleting data in relation with the condition#$idCondition", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
-                }
-
-                try
-                {
-                    FavorableConditionDate::destroy($idCondition);
-                    Controller::incrementVersion();
-                    return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
-                }
-                catch(Exception $e)
-                {
-                    return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
-                }
-            }
+            $favorableCondition = FavorableConditionDate::Find($idCondition);
         }
-        else if ($type == 2)
+        catch (Exception $e)
         {
-            try
-            {
-                $favorableCondition = FavorableConditionNb::Find($idCondition);
-            }
-            catch (Exception $e)
-            {
-                return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
-            }
-
-            if (is_null($idCondition))
-            {
-                return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
-            }
-            else
-            {
-                try
-                {
-                    DB::table('tblPlant_tblRangeNb')->where('tblRangeNb_idRangeNb', $idCondition)->delete();
-                }
-                catch (Exception $e)
-                {
-                    return response()->json(['message'=> "Error while deleting data in relation with the condition#$idCondition", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
-                }
-
-                try
-                {
-                    FavorableConditionNb::destroy($idCondition);
-                    Controller::incrementVersion();
-                    return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
-                }
-                catch(Exception $e)
-                {
-                    return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
-                }
-            }
+            return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
         }
+
+        if (is_null($idCondition))
+        {
+            return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
+        }
+
+        try
+        {
+            DB::table('tblPlant_tblRangeDate')->where('tblRangeDate_idRangeDate', $idCondition)->delete();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "Error while deleting data in relation with the condition#$idCondition", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+        }
+
+        try
+        {
+            FavorableConditionDate::destroy($idCondition);
+            Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+
+        }
+    }
+
+    public function deleteFavConditionNb($idCondition)
+    {
+        if (is_null($idCondition))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+        }
+        
+        try
+        {
+            $favorableCondition = FavorableConditionNb::Find($idCondition);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+        }
+
+        if (is_null($idCondition))
+        {
+            return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
+        }
+
+        try
+        {
+            DB::table('tblPlant_tblRangeNb')->where('tblRangeNb_idRangeNb', $idCondition)->delete();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "Error while deleting data in relation with the condition#$idCondition", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+        }
+
+        try
+        {
+            FavorableConditionNb::destroy($idCondition);
+            Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }  
     }
 }

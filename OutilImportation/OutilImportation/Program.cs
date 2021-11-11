@@ -16,7 +16,8 @@ namespace OutilImportation
 
         static void Main(string[] args)
         {
-            string env = "http://testenv.apipcst.xyz/api/";
+            //string env = "http://testenv.apipcst.xyz/api/";
+            string env = "http://localhost:8000/api/";
             if (args.Length > 0)
                 env = args[0];
 
