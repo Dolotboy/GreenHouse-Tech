@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use app\Models\Version;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
 
 class GetVersionTest extends TestCase
 {
