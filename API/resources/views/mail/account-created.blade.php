@@ -5,7 +5,7 @@
 <div>
     Hi {{ $firstName }}, your account has been created !
 </div>
-@component('mail::button', ['url' => 'http://www.wiki.pcst.xyz'])
+@component('mail::button', ['url' => 'http://wiki.pcst.xyz'])
 Come and explore !
 @endcomponent
 

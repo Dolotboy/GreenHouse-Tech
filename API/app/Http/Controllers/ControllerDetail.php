@@ -126,7 +126,7 @@ class ControllerDetail extends Controller
         return view('');
     }
 
-    public function searchProfile($idProfile)
+    public function searchProfile($request, $idProfile)
     {
         if (is_null($idProfile))
         {
@@ -156,13 +156,13 @@ class ControllerDetail extends Controller
         $updatedAt = $profile->updated_at;
 
         
-        $array = array('idProfile' => $idProfile, 'email' => $email, 'username' => $username, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        $array = array('token' => $profile->api_token, 'email' => $email, 'username' => $username, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
         $json = json_encode($array);
     
         return ("$json");
     } 
 
-    public function searchAllFavorites($idProfile)
+    public function searchAllFavorites($request, $idProfile)
     {
         if (is_null($idProfile))
         {

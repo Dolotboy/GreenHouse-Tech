@@ -55,14 +55,15 @@ export default {
         let that = this;
 
         $.ajax({
-          url : 'http://testenv.apipcst.xyz/api/login/checkLogin/',
+          url : 'http://localhost:8000/api/login/checkLogin/',
           datatype: 'json',
           contentType : 'application/json',
           type: 'post',
           data: JSON.stringify(user),
           success: function(status)
           {
-            that.$emit("loggedIn", status); 
+            console.log(status);
+            that.$emit("loggedIn", status.id); 
           }
         });
       }

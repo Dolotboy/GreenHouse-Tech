@@ -16,8 +16,7 @@ namespace OutilImportation
 
         static void Main(string[] args)
         {
-            //string env = "http://testenv.apipcst.xyz/api/";
-            string env = "http://localhost:8000/api/";
+            string env = "http://testenv.apipcst.xyz/api/";
             if (args.Length > 0)
                 env = args[0];
 
@@ -77,6 +76,7 @@ namespace OutilImportation
                 using (HttpClient client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Add("Authorization", "Basic " + System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes("frank" + ":" + "frank")));
                     foreach (Plant veg in veggies)
                         await PushPlant(baseUrl, veg, client);
                 }
@@ -96,11 +96,11 @@ namespace OutilImportation
                 Interface.WriteLine($"\nPlant #{plantResponse.id} added successfully");
                 foreach (ConditionNb cond in plant.conditionsNbs)
                 {
-                    Response condResponse = await PostContent($"{baseUrl}new/condition/addFavCondition/2", new StringContent(cond.ToString(), Encoding.UTF8, "application/json"), client);
+                    Response condResponse = await PostContent($"{baseUrl}new/condition/addFavCondNb", new StringContent(cond.ToString(), Encoding.UTF8, "application/json"), client);
                     if (condResponse.success)
                     {
                         Interface.WriteLine($"Range #{condResponse.id} added successfully");
-                        Response assignResponse = await PostContent($"{baseUrl}assign/condition/2/{plantResponse.id}/{condResponse.id}", new StringContent("", Encoding.UTF8, "application/json"), client);
+                        Response assignResponse = await PostContent($"{baseUrl}assign/condition/nb/{plantResponse.id}/{condResponse.id}", new StringContent("", Encoding.UTF8, "application/json"), client);
                         if (assignResponse.success)
                             Interface.WriteLine($"Range #{condResponse.id} assigned successfully to plant #{plantResponse.id}");
                         else

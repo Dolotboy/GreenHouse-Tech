@@ -51,8 +51,8 @@ export default {
   },
   data(){
       return{
-          envBack : "http://localhost:8000/",
-          env : "http://testenv.apipcst.xyz/",
+          env : "http://localhost:8000/",
+          envBack : "http://testenv.apipcst.xyz/",
           plants : [],
           favorites : [],
           showLogin : false,
@@ -64,7 +64,7 @@ export default {
       }
   },
   mounted(){
-      this.Initialisation()
+      this.Initialisation();
   },
   methods :{
     login(){
@@ -94,6 +94,10 @@ export default {
       
       this.mobileNavIsOpened = !this.mobileNavIsOpened;
     },
+    async checkToken(){
+      if(localStorage.getItem('loggedInToken') != null && localStorage.getItem('loggedInToken') != "")
+        this.login(localStorage.getItem('loggedInToken'));
+    },
     async Initialisation(){
       let version = localStorage.getItem('apiVersion');
       let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
@@ -106,6 +110,7 @@ export default {
       this.plants = await toolbox.fetchData(await toolbox.setDb());
       if(this.plants.length == 0)
         await this.DownloadContent();   
+      await this.checkToken();
     },
     async ClearDb(){
       let db = await toolbox.setDb();
@@ -141,18 +146,18 @@ export default {
         })
       })
     },
-    async login(response){
-      this.downloadFavorites(response);
-      console.log(response);
-      this.profile = await this.getObject(this.env + "api/search/profile/" + response.id); 
-    
-      localStorage.setItem('loggedInProfileId', this.profile.idProfile);
+    async login(profileToken){
+      this.downloadFavorites(profileToken);
+      this.profile = await this.getObject(this.env + "api/search/profile/" + profileToken); 
+      console.log("test");
+      console.log(this.profile);
+      localStorage.setItem('loggedInToken', this.profile.token);
       this.isLoggedIn = true;
       this.showLogin = false;
       this.plants = this.plants;
     },
     async logout(){
-      localStorage.setItem('loggedInProfileId', "");
+      localStorage.setItem('loggedInToken', "");
       this.profile = null;
       this.isLoggedIn = false; 
       this.favorites = [];
