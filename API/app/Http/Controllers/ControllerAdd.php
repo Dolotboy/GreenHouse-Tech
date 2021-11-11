@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Response;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AccountCreated;
 
 class ControllerAdd extends Controller
 {
@@ -227,7 +228,7 @@ class ControllerAdd extends Controller
         }
 
         Controller::incrementVersion();
-
+        Mail::to($profile->email)->send(new AccountCreated($profile)); /*->cc("exemple@gmail.com")*/
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $profile->idProfile], 200);
     }
 

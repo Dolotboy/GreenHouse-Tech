@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AccountModified;
 
 class ControllerEdit extends Controller
 {
@@ -225,6 +227,7 @@ class ControllerEdit extends Controller
         {
             $profile->save();
             Controller::incrementVersion();
+            Mail::to($profile->email)->send(new AccountModified($profile)); /*->cc("exemple@gmail.com")*/
             return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
         }
         catch (Exception $e)
