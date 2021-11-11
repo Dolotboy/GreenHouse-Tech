@@ -1,9 +1,16 @@
 <template>
 <div class="wrapper">
+  <div class="image">
+  <img class="imageIcon" src="https://www.wingsforkids.org/wp-content/uploads/cropped-placeholder.jpg">
+  </div>
+  <div class="nom">
   <h1>{{ plant.plantName }}</h1>
-  <p v-if="isFavorite">Favoris</p>
   <p>{{ plant.idPlant }}</p>
+  </div>
+  <div class="end">
+  <p v-if="isFavorite">Favoris</p>
   <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
+  </div>
 </div>
 </template>
 
@@ -41,6 +48,57 @@ export default {
 </script>
 
 <style>
+@media screen and (max-width : 600px) {
+  html{
+    font-size : 5pt;
+    
+  }
+  .wrapper{
+    position: relative;
+    border : solid 1px black;
+    border-radius: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.image{
+  width: 20%;
+  background-color: firebrick;
+  height: 60%;
+  margin-left: 5%;
+
+}
+.imageIcon{
+  width: 100%;
+  height:100%;
+}
+.nom h1{
+  max-width: 100%;
+  text-align: center;
+}
+.nom{
+ width: 40%;
+ 
+}
+.end{
+  width: 20%;
+  height:5%
+}
+}
+.image{
+  width: 20%;
+  background-color: firebrick;
+  height: 60%;
+  margin-left: 5%;
+
+}
+.imageIcon{
+  width: 100%;
+  height:100%;
+}
 .wrapper{
     position: relative;
     border : solid 1px black;
