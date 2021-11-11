@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Response;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AccountCreated;
 
 class ControllerAdd extends Controller
 {
@@ -120,7 +121,37 @@ class ControllerAdd extends Controller
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
         }
+        /**************************** FIND THE PLANT ****************************/
+        try
+        {
+            $plant = Plant::Find($idPlant);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+        }
 
+        if(is_null($plant))
+        {
+            return response()->json(['message'=> "Error, the plant you entered doesn't exist", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
+        }
+
+        /**************************** FIND THE PROFILE ****************************/
+        try
+        {
+            $profile = Profile::Find($idProfile);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        if(is_null($profile))
+        {
+            return response()->json(['message'=> "Error, the profile you entered doesn't exist", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
+        }
+
+        /**************************** FIND THE ASSOCIATION ****************************/
         try
         {
             $findAssociation = Favorite::where('tblPlant_idPlant', '=', $idPlant)
@@ -199,8 +230,8 @@ class ControllerAdd extends Controller
         }
 
         Controller::incrementVersion();
-
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $token], 200);
+        Mail::to($profile->email)->send(new AccountCreated($profile)); /*->cc("exemple@gmail.com")*/
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $profile->idProfile], 200);
     }
 
 /* ------------------- FAVORITE CONDITION DATE ------------------- */

@@ -22,9 +22,9 @@ class UpdaterPlantTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $data = Plant::find(25);
+        $data = Plant::find(8);
 
-        $response = $this->json('PUT','/api/edit/plant/editPlant/25', [
+        $response = $this->json('PUT','/api/edit/plant/editPlant/8', [
             $data->plantImg => 'plantImgEdit',
             'plantName' => 'plantName',
             'plantType' => 'plantType',
@@ -39,7 +39,7 @@ class UpdaterPlantTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response = $this->json('PUT','/api/edit/plant/editPlant/25', [
+        $response = $this->json('PUT','/api/edit/plant/editPlant/8', [
             $data->plantImg => 'plantImg',
             'plantName' => 'plantName',
             'plantType' => 'plantType',

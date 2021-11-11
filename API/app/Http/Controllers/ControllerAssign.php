@@ -25,14 +25,45 @@ class ControllerAssign extends Controller
 
     public function assignFavConditionDate($idPlant,$idCondition)
     {
+        $assignFavorableConditionDate = new AssignConditionDate();
+
         if (is_null($idPlant) ||
             is_null($idCondition))
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
-        $assignFavorableConditionDate = new AssignConditionDate();
+        /**************************** FIND THE PLANT ****************************/
+        try
+        {
+            $plant = Plant::Find($idPlant);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+        }
 
+        if(is_null($plant))
+        {
+            return response()->json(['message'=> "Error, the plant you entered doesn't exist", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
+        }
+
+        /**************************** FIND THE CONDITION DATE ****************************/
+        try
+        {
+            $favorableCondtion = FavorableConditionDate::Find($idCondition);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+        }
+
+        if(is_null($favorableCondtion))
+        {
+            return response()->json(['message'=> "Error, the condition you entered doesn't exist", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
+        }
+
+        /**************************** FIND THE ASSOCIATION ****************************/
         try
         {
             $findAssociation = AssignConditionDate::where('tblPlant_idPlant', '=', $idPlant)
@@ -74,14 +105,45 @@ class ControllerAssign extends Controller
 
     public function assignFavConditionNb($idPlant, $idCondition)
     {
+        $assignFavorableConditionNb = new AssignConditionNb(); 
+
         if (is_null($idPlant) ||
             is_null($idCondition))
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
-        $assignFavorableConditionNb = new AssignConditionNb(); 
-        
+        /**************************** FIND THE PLANT ****************************/
+        try
+        {
+            $plant = Plant::Find($idPlant);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+        }
+
+        if(is_null($plant))
+        {
+            return response()->json(['message'=> "Error, the plant you entered doesn't exist", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
+        }
+
+        /**************************** FIND THE CONDITION NB ****************************/
+        try
+        {
+            $favorableCondtion = FavorableConditionNb::Find($idCondition);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+        }
+
+        if(is_null($favorableCondtion))
+        {
+            return response()->json(['message'=> "Error, the condition you entered doesn't exist", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
+        }
+
+        /**************************** FIND THE ASSOCIATION ****************************/
         try
         {
             $findAssociation = AssignConditionNb::where('tblPlant_idPlant', '=', $idPlant)
@@ -121,14 +183,45 @@ class ControllerAssign extends Controller
     }
     public function assignProblem($idPlant, $idProblem)
     {
+        $assignProblem = new AssignProblem();
+
         if (is_null($idPlant) ||
             is_null($idProblem))
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
         }
 
-        $assignProblem = new AssignProblem();
+        /**************************** FIND THE PLANT ****************************/
+        try
+        {
+            $plant = Plant::Find($idPlant);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+        }
 
+        if(is_null($plant))
+        {
+            return response()->json(['message'=> "Error, the plant you entered doesn't exist", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
+        }
+
+        /**************************** FIND THE PROBLEM ****************************/
+        try
+        {
+            $problem = Problem::Find($idProblem);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "The problem doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
+        }
+
+        if(is_null($problem))
+        {
+            return response()->json(['message'=> "Error, the problem you entered doesn't exist", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 404);
+        }
+
+        /**************************** FIND THE ASSOCIATION ****************************/
         try
         {
             $findAssociation = AssignProblem::where('tblPlant_idPlant', '=', $idPlant)

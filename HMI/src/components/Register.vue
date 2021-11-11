@@ -1,5 +1,10 @@
 <template>
+  
+
   <div class="register">
+ <!--   <div class="registerImage">
+           <img class="imageIcon" src="https://www.wingsforkids.org/wp-content/uploads/cropped-placeholder.jpg">
+    </div> -->
     <h1>S'inscrire</h1>
     <div class="form">
     <form @submit.prevent="login">
@@ -19,7 +24,7 @@
         <label for="password">Mot de passe</label>
         <input name="password" v-model="password" placeholder="Mot de passe" type="password" required>
       </div>
-      <button type="submit" @click="postCreateUser()">S'inscrire</button>      
+      <button type="submit" class="BtnIncription" @click="postCreateUser()">S'inscrire</button>      
     </form>
     </div>    
     <div class="close-button" @click="$emit('close')" >X</div> 
@@ -92,7 +97,6 @@ export default {
     top: 1%;
     right: 1%;
     font-size: 3rem;
-
     &:hover{
       cursor: pointer;
       border:solid;
@@ -115,4 +119,67 @@ export default {
       }
     }
 }
+    @media screen and (max-width : 600px) 
+{
+  .register{
+    position : absolute;
+    height: 90vh;
+    width : 100%;
+    top : 54%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(206, 205, 205);
+    border: solid;
+    border-color: black;
+    padding : 5% 5%;
+    h1{
+      margin-top:25%;
+      font-size: 4rem;
+  }
+  
+}
+.close-button {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    font-size: 3rem;
+
+    &:hover{
+      cursor: pointer;
+      border:solid;
+      border-width: 1px;
+      border-color: grey;
+  }
+}
+
+     
+.form{
+  display: flex;
+  justify-content: center;
+    font-size: 2rem;
+    margin: 5% 0;
+    form{
+      input {
+        height: 100%;
+        margin: 0 0 0 30px;
+  }
+      
+      }
+
+      input[type-submit]{
+        height: 100px;
+
+  }
+}
+.BtnIncription{
+      margin-top:5px;
+      width: 70vw;
+      height:20%;
+      font-size: 15px;
+      border-radius: 30px;
+      background-color: rgb(18, 15, 194);
+      
+    }
+}
+
 </style>

@@ -13,6 +13,7 @@ use App\Models\Version;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
+//use App\Mail\AccountCreated;
 
 class ControllerDetail extends Controller
 {

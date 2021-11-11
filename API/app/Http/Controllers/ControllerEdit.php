@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AccountModified;
 
 class ControllerEdit extends Controller
 {
@@ -54,7 +56,6 @@ class ControllerEdit extends Controller
         if (is_null($plant)) // Mostly when it doesn't exist
         {
             return response()->json(['message'=> "Error, plant not found", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
-            //return new Response(['message' => 'test'], 422);
         }
 
         return view('editPlant', ["plant" => $plant]);
@@ -113,7 +114,19 @@ class ControllerEdit extends Controller
 
     public function editProblem(Request $request, $idProblem)
     {
-        $problem = Problem::find($idProblem);
+        try
+        {
+            $problem = Problem::find($idProblem);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The problem doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 400);
+        }
+
+        if (is_null($problem)) // Mostly when it doesn't exist
+        {
+            return response()->json(['message'=> "Error, problem not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 404);
+        }
 
         return view('editProblem', ["problem" => $problem]);
     }
@@ -163,7 +176,19 @@ class ControllerEdit extends Controller
 
     public function editProfile(Request $request, $idProfile)
     {
-        $profile = Profile::find($idProfile);
+        try
+        {
+            $profile = Profile::find($idProfile);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        if (is_null($profile)) // Mostly when it doesn't exist
+        {
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
+        }
 
         return view('editProfile', ["profile" => $profile]);
     }
@@ -200,6 +225,7 @@ class ControllerEdit extends Controller
         {
             $profile->save();
             Controller::incrementVersion();
+            Mail::to($profile->email)->send(new AccountModified($profile)); /*->cc("exemple@gmail.com")*/
             return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
         }
         catch (Exception $e)
@@ -217,6 +243,11 @@ class ControllerEdit extends Controller
         catch (Exception $e)
         {
             return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+        }
+
+        if (is_null($favorableCondition)) // Mostly when it doesn't exist
+        {
+            return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
         }
 
         return view('editFavCondDate', ["favorableCondition" => $favorableCondition]);
@@ -273,6 +304,11 @@ class ControllerEdit extends Controller
         catch (Exception $e)
         {
             return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+        }
+
+        if (is_null($favorableCondition)) // Mostly when it doesn't exist
+        {
+            return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
         }
 
         return view('editFavCondNb', ["favorableCondition" => $favorableCondition]);

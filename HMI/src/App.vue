@@ -82,7 +82,7 @@ export default {
       console.log(this.mobileNavIsOpened);
       if(!this.mobileNavIsOpened){
         links.style.display = "flex";
-        navMobile.style.height = "75vh";
+      navMobile.style.height = "100vh"; 
       }
       else{
         console.log("else");
@@ -234,7 +234,7 @@ button{
     overflow: hidden;
     background-color: #616161 ;
     display: flex;
-    justify-content: center;
+    justify-content: start;
 
     li {
       float: left;
