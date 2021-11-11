@@ -51,8 +51,8 @@ export default {
   },
   data(){
       return{
-          env : "http://localhost:8000/",
-          envBack : "https://testenv.apipcst.xyz/",
+          envùback : "http://localhost:8000/",
+          env : "http://testenv.apipcst.xyz/",
           plants : [],
           favorites : [],
           showLogin : false,
