@@ -14,7 +14,7 @@
         <div class="info">
             <p><span >Temps de conservation :</span> {{plant.plantDaysConservation}} jour(s)</p>
             <p><span >Type de sol :</span> {{plant.plantGroundType}}</p>
-            <p><span >  Description :</span> {{plant.plantDescription}}</p>   
+            <p><span >Description :</span> {{plant.plantDescription}}</p>   
             <p><span >Voisinage :</span> {{plant.plantBestNeighbor}}</p>  
             <p><span >Difficulté :</span> {{plant.plantDifficulty}}</p>  
             <p><span >Famille :</span> {{plant.plantFamily}}</p>
@@ -45,7 +45,6 @@ export default {
       return{
         showCondFav : false,
         showProblem : false
-
       }
   },
     props : ['plant'],
