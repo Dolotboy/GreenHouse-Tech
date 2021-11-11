@@ -1,22 +1,33 @@
 <template>
     <div class="login">
-        <h1>Se connecter</h1>
+        <div class="loginImage">
+           <img class="imageIcon" src="https://www.wingsforkids.org/wp-content/uploads/cropped-placeholder.jpg">
+       </div>
+        <h1>Connexion</h1>
         <div class="loginForm">
-          <form>
-
-          <label for="uname"><b>Adresse Courriel : </b></label>
-            <input type="text" placeholder="Entrez votre email" name="uname" required  v-model="email">
-            <label for="psw"><b>Mot de passe : </b></label>
-            <input v-model="password" type="password" placeholder="Entrez le mot de passe" name="psw" required>
-          </form>
-            <button type="submit" @click="postCheckLogin()">Se connecter</button>
-            <label>
-              <input type="checkbox" name="remember"> Se rappeler de moi
-          </label>
-          <div class="container">
-            <span class="psw"><a href="#">Mot de passe oublié?</a></span>
+          <form >
+          <div>
+         <!-- <label for="uname"><b>Adresse Courriel : </b></label> -->
+            <input class="inputBox" type="text" placeholder="Entrez votre email" name="uname" required  v-model="email">
           </div>
+          <div>
+            <!-- <label for="psw"><b>Mot de passe : </b></label> -->
+            <input v-model="password" class="inputBox" type="password" placeholder="Entrez le mot de passe" name="psw" required>
+            </div>
+          </form>
+            <div class="checks">
+              <div>
+                <label>
+                <input type="checkbox" name="remember"> Se rappeler de moi
+              </label>
+              </div>
+            <div class="container">
+              <span class="psw"><a href="#">Mot de passe oublié?</a></span>
+            </div>
+          </div>
+          <button type="submit" class="BtnConnexion" @click="postCheckLogin()">Se connecter</button>
         </div>
+        
         <div class="close-button" @click="$emit('close')" >X</div>        
     </div>
 </template>
@@ -67,18 +78,26 @@ export default {
     top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
-    background: rgb(206, 205, 205);
+    background: rgb(151, 151, 151);
     border: solid;
     border-color: black;
-    width : 50vw;
-    max-width : 50vw;
+    width : 100%;
+    height:100%;
+    max-width : 100%;
     padding : 7.5%;
+    align-items: center;
 
     h1{
       font-size: 4rem;
-      margin-top : 0;
+      margin-top : 3%;
     }
-
+    .loginImage
+    {
+      width: 90%;
+      height: 40%;
+      background-color: blue;
+      max-width: 350px;
+    }
     .close-button {
       position: absolute;
       top: 1%;
@@ -94,7 +113,98 @@ export default {
     }
     .loginForm{
       font-size: 1.6rem;
+      flex-direction: column;
+       width: 70vw;
     }
+   
+    .inputBox
+    {
+      height:6vh;
+      margin-top:3%;
+      margin-bottom: 3%;
+      width: 85%;
+    
+      
+    }
+}
+@media screen and (max-width : 600px) 
+{
+  .login{
+    position : absolute;
+    display : flex;
+    flex-direction : column;
+    justify-content: center;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(151, 151, 151);
+    border: solid;
+    border-color: black;
+    width : 100%;
+    height:100%;
+    max-width : 100%;
+    padding : 7.5%;
+    align-items: center;
+    h1{
+      font-size: 4rem;
+      margin-top : 18px;
+    }
+    .loginImage
+    {
+      width: 90%;
+      height: 40%;
+      background-color: blue;
+      max-width: 350px;
+    }
+    .imageIcon{
+  width: 100%;
+  height:100%;
+}
+    .close-button {
+      position: absolute;
+      top: 1%;
+      right: 1%;
+      font-size: 3rem;
+
+      &:hover{
+        cursor: pointer;
+        border:solid;
+        border-width: 1px;
+        border-color: grey;
+      } 
+    }
+    .loginForm{
+      font-size: 1.6rem;
+      flex-direction: column;
+       width: 70vw;
+    }
+   
+    .inputBox
+    {
+      height:6vh;
+      margin-top:10px;
+      margin-bottom: 10px;
+      width: 80%;    
+    }
+    .checks{
+      display: flex;
+     flex-wrap: wrap;
+      height: 35px;
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 10px;
+    }   
+    .BtnConnexion{
+      margin-top:5px;
+      width: 70%;
+      height:20%;
+      font-size: 15px;
+      border-radius: 30px;
+      background-color: rgb(18, 15, 194);
+      
+    }
+}
 }
 
 @media screen and (max-width : 1000px) {

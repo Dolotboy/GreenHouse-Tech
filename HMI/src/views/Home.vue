@@ -130,9 +130,11 @@ body{
 .productsGrid{
   color: #D2CCB1;
   display : grid;
-  grid-template-columns : repeat(auto-fit, minmax(250px, 1fr));
-  width : 80%;
+  grid-template-columns : repeat(auto-fit, minmax(350px, 1fr));
+  width : 85%;
   margin : 2vh 0 0 10%;
+ column-gap: 30px;
+
 }
 
 .plant{
@@ -149,6 +151,7 @@ body{
   background: #616161;
   color: #D2CCB1;
   justify-content: center;
+  
   margin : 2vh 0;
   border: 1px solid;
   border-radius: 5px;
@@ -171,6 +174,7 @@ body{
 .autoCompleteForm{
   display : flex;
   justify-content: center;
+  
 
   .autocomplete{
     display : flex;
@@ -186,7 +190,8 @@ body{
   }
 
   #searchBar{
-    height : 3rem;
+    height:4vh;
+
   }
 
   #searchBarautocomplete-list{
@@ -205,5 +210,6 @@ body{
     height : 2.5rem;
     width : 2.5rem;
   }
+  
 }
 </style>
