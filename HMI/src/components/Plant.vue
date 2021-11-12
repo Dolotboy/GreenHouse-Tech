@@ -25,7 +25,7 @@ export default {
       addFavorite(){
         let that = this;
 
-        let url = "http://localhost:8000/api/new/favorite/";
+        let url = "http://localhost:8000/api/new/favorite/token/";
         let type = "post";
 
         return new Promise(resolve => {
@@ -52,7 +52,7 @@ export default {
       deleteFavorite(){
         let that = this;
 
-        let url = "http://testenv.apipcst.xyz/api/delete/favorite/";
+        let url = "http://localhost:8000/api/delete/favorite/token";
         let type = "delete";
 
         return new Promise(resolve => {
