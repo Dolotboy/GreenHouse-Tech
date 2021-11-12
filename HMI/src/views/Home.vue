@@ -210,6 +210,9 @@ body{
     height : 2.5rem;
     width : 2.5rem;
   }
-  
+  .productsGrid
+  {
+    justify-content: center;
+  }
 }
 </style>
