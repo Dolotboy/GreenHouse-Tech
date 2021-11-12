@@ -151,7 +151,6 @@ class ControllerDelete extends Controller
                     ['tblPlant_idPlant', '=', $idPlant],
                     ['tblProfile_idProfile', '=', $idProfile],
                 ])->delete();
-                Controller::incrementVersion();
                 return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Profile: $idProfile"], 200);
             }
             catch(Exception $e)
@@ -192,7 +191,6 @@ class ControllerDelete extends Controller
                     ['tblPlant_idPlant', '=', $idPlant],
                     ['tblProfile_idProfile', '=', $idProfile],
                 ])->delete();
-                Controller::incrementVersion();
                 return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Profile: $idProfile"], 200);
             }
             catch(Exception $e)
