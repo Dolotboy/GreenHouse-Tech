@@ -174,7 +174,6 @@ class ControllerAdd extends Controller
         try
         {
             $favorite->save();
-            Controller::incrementVersion();
             return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Profile: $idProfile"], 200);
         }
         catch (Exception $e)
@@ -246,7 +245,6 @@ class ControllerAdd extends Controller
         try
         {
             $favorite->save();
-            Controller::incrementVersion();
             return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Profile: $idProfile"], 200);
         }
         catch (Exception $e)
