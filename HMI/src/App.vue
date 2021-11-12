@@ -22,9 +22,10 @@
         </div>
       </div>
       <ul class="links">
-          <li><router-link to="/">Accueil</router-link></li> 
+          <li @click="toggleNavMobile"><router-link to="/">Accueil</router-link></li> 
+          <li @click="toggleNavMobile"><router-link to="/about">À propos</router-link></li>
           <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
-          <li v-if="!isLoggedIn" @click="toggleLogin">Se connecter</li> 
+          <li v-if="!isLoggedIn" @click="toggleLogin"> connecter </li> 
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
       </ul>
     </nav>
@@ -250,7 +251,7 @@ button{
     overflow: hidden;
     background-color: #616161 ;
     display: flex;
-    justify-content: start;
+    justify-content:center;
 
     li {
       float: left;
@@ -265,8 +266,8 @@ button{
         padding: 10px 15px;
 
         &:hover{
-          color: black;
-          background-color: #e6a800;
+          color: white;
+          background-color: #8d4705;
         }
       }
     }
@@ -303,7 +304,7 @@ li a {
 }
 li a:hover{
   color: black;
-  background-color: #e6a800;
+  background-color: gray;
 }
 .active {
   background-color : #01B0D3;
@@ -373,26 +374,25 @@ li a:hover{
   .links{
     display : none;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height : 75%;
+    height : 90%;
     position : absolute;
     bottom : 0;
     left: 0;
     list-style-type: none;
     width: 100%;
     padding: 0;
-    pointer-events: none;
 
     li{
       font-size: 3rem;
       text-decoration: none;
-      border : none;
+      margin: 2%;
       padding: 10px 15px;
-      color : white;
+ 
+      width: 50%;
+      
 
       &:hover{
-        background-color: #e6a800;
+        background-color: gray;
         cursor : pointer;
       }
 

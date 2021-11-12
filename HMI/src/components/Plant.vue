@@ -113,6 +113,7 @@ export default {
     border : solid 1px black;
     border-radius: 40px;
     margin-bottom: 20px;
+    max-width: 95%;
     display: flex;
     flex-direction: row;
     align-items: center;

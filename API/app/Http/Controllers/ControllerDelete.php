@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail; 
+use App\Mail\AccountDeleted; 
 
 class ControllerDelete extends Controller
 {
@@ -199,6 +201,7 @@ class ControllerDelete extends Controller
             {
                 Profile::destroy($idProfile);
                 Controller::incrementVersion();
+                Mail::to($profile->email)->send(new AccountDeleted($profile)); /*->cc("exemple@gmail.com")*/
                 return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
             }
             catch(Exception $e)
