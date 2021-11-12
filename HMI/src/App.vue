@@ -154,7 +154,7 @@ export default {
     async getProfile(profileToken){
       return new Promise(resolve =>{
         $.ajax({
-            url : 'http://localhost:8000/api/search/profile/' + profileToken,
+            url : 'http://localhost:8000/api/search/profile/token/' + profileToken,
             datatype: 'json',
             contentType : 'application/json',
             type: 'get',
@@ -185,7 +185,7 @@ export default {
       })  
     },
     async downloadFavorites(profileId){
-      this.favorites = await this.getFavorites(this.env + "api/searchAll/favorite/" + profileId);
+      this.favorites = await this.getFavorites(this.env + "api/searchAll/favorite/token/" + profileId);
       localStorage.setItem('favorites', JSON.stringify(this.favorites));
     },
     getFavorites(url){

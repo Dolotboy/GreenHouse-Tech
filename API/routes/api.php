@@ -121,7 +121,7 @@ Route::middleware('passkeyAdmin')->group(function () {
 });
 
 Route::middleware('tokenConverter')->group(function () {
-    Route::get("search/profile/token{token}", [ControllerDetail::class, 'searchProfile'],function ($idProfile){})->name('detailProfileToken');
+    Route::get("search/profile/token/{token}", [ControllerDetail::class, 'searchProfile'],function ($idProfile){})->name('detailProfileToken');
     Route::get("searchAll/favorite/token/{token}", [ControllerDetail::class, 'searchAllFavorites'],function ($idProfile){})->name('searchAllFavoritesToken');
     Route::post('/new/favorite/token/{idPlant}/{token}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavoriteToken');
     Route::delete("/delete/profile/token/{token}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfileToken');
