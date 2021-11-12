@@ -164,7 +164,7 @@ class ControllerDelete extends Controller
         return view('deleteSearchProfile');
     }
 
-    public function deleteProfile($request, $idProfile)
+    public function deleteProfile(Request $request, $idProfile)
     {
         if (is_null($idProfile))
         {

@@ -67,9 +67,6 @@ export default {
       this.Initialisation();
   },
   methods :{
-    login(){
-      
-    },
     toggleRegister(){
       this.showRegister = !this.showRegister;
     },
@@ -77,17 +74,14 @@ export default {
       this.showLogin = !this.showLogin;
     },
     toggleNavMobile(){
-      console.log("clicked");
       let links = document.querySelector(".links");
       let navMobile = document.querySelector("#navMobile");
       let hamburger = document.querySelector(".hamburger-wrapper");
-      console.log(this.mobileNavIsOpened);
       if(!this.mobileNavIsOpened){
         links.style.display = "flex";
       navMobile.style.height = "100vh"; 
       }
       else{
-        console.log("else");
         links.style.display = "none";
         navMobile.style.height = "7.5vh";
       }
@@ -148,13 +142,28 @@ export default {
     },
     async login(profileToken){
       this.downloadFavorites(profileToken);
-      this.profile = await this.getObject(this.env + "api/search/profile/" + profileToken); 
-      console.log("test");
-      console.log(this.profile);
-      localStorage.setItem('loggedInToken', this.profile.token);
+      let profileString = await this.getProfile(profileToken);
+      this.profile = JSON.parse(profileString);
+      
+      localStorage.setItem('loggedInToken', profileToken);
       this.isLoggedIn = true;
       this.showLogin = false;
       this.plants = this.plants;
+    },
+    async getProfile(profileToken){
+      return new Promise(resolve =>{
+        $.ajax({
+            url : 'http://localhost:8000/api/search/profile/' + profileToken,
+            datatype: 'json',
+            contentType : 'application/json',
+            type: 'get',
+            data: ``,
+            success: function(profile)
+            {
+              resolve(profile);
+            }
+        });
+      });
     },
     async logout(){
       localStorage.setItem('loggedInToken', "");

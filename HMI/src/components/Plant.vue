@@ -12,7 +12,7 @@
   </div>
   <div class="end">
   <p v-if="isFavorite">Favoris</p>
-  <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
+  <input class="star" type="checkbox" title="Favoris" :checked="isFavorite" @click="toggleFavorite()"> 
   </div>
 </div>
 </template>
@@ -25,7 +25,7 @@ export default {
       addFavorite(){
         let that = this;
 
-        let url = "http://testenv.apipcst.xyz/api/new/favorite/";
+        let url = "http://localhost:8000/api/new/favorite/";
         let type = "post";
 
         return new Promise(resolve => {

@@ -140,7 +140,6 @@ Route::middleware('passkeyAdmin')->group(function () {
 Route::middleware('tokenConverter')->group(function () {
     Route::get("search/profile/{token}", [ControllerDetail::class, 'searchProfile'],function ($idProfile){})->name('detailProfile');
     Route::get("searchAll/favorite/{token}", [ControllerDetail::class, 'searchAllFavorites'],function ($idProfile){})->name('searchAllFavorites');
-    Route::post('/new/favorite/{idPlant}/{token}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
     Route::delete("/delete/profile/{token}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile');
     Route::put('/edit/profile/editProfile/{token}', [ControllerEdit::class, 'editProfileSent'],function ($idProfile){})->name('editProfileSent');
     Route::post('/new/favorite/{idPlant}/{token}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');

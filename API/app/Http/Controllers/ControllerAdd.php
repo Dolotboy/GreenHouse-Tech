@@ -115,6 +115,7 @@ class ControllerAdd extends Controller
     public function addFavorite($idPlant,$request, $idProfile)
     {
         $favorite = new Favorite();
+        //return response()->json(['1' => $idPlant, '2' => $request, '3' => $idProfile]);
 
         if (is_null($idPlant) || 
             is_null($idProfile))
