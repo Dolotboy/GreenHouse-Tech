@@ -112,7 +112,78 @@ class ControllerAdd extends Controller
         return view('newFavourite');
     }
 
-    public function addFavorite($idPlant,$request, $idProfile)
+    public function addFavorite($idPlant, $idProfile)
+    {
+        $favorite = new Favorite();
+
+        if (is_null($idPlant) || 
+            is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
+        }
+        /**************************** FIND THE PLANT ****************************/
+        try
+        {
+            $plant = Plant::Find($idPlant);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
+        }
+
+        if(is_null($plant))
+        {
+            return response()->json(['message'=> "Error, the plant you entered doesn't exist", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
+        }
+
+        /**************************** FIND THE PROFILE ****************************/
+        try
+        {
+            $profile = Profile::Find($idProfile);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        if(is_null($profile))
+        {
+            return response()->json(['message'=> "Error, the profile you entered doesn't exist", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
+        }
+
+        /**************************** FIND THE ASSOCIATION ****************************/
+        try
+        {
+            $findAssociation = Favorite::where('tblPlant_idPlant', '=', $idPlant)
+            ->where('tblProfile_idProfile', '=', $idProfile)
+            ->get();
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "Error trying to find if this favorite already exist", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
+        }
+
+        if (!$findAssociation->isEmpty())
+        {
+            return response()->json(['message'=> "Error, the favorite already exist", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400); 
+        }
+
+        $favorite->tblPlant_idPlant = $idPlant;
+        $favorite->tblProfile_idProfile = $idProfile;
+
+        try
+        {
+            $favorite->save();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Profile: $idProfile"], 200);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
+        }
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Profile: $idProfile"], 200);
+    }
+
+    public function addFavoriteToken($idPlant,$request, $idProfile)
     {
         $favorite = new Favorite();
         //return response()->json(['1' => $idPlant, '2' => $request, '3' => $idProfile]);
@@ -218,7 +289,6 @@ class ControllerAdd extends Controller
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
         $profile->access = "user";
-        $profile->api_token = $token;
 
         try
         {

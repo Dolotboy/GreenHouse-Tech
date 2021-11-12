@@ -126,7 +126,7 @@ class ControllerDetail extends Controller
         return view('');
     }
 
-    public function searchProfile($request, $idProfile)
+    public function searchProfile($idProfile)
     {
         if (is_null($idProfile))
         {
@@ -160,9 +160,64 @@ class ControllerDetail extends Controller
         $json = json_encode($array);
     
         return ("$json");
+    }
+
+    public function searchProfileToken($request, $idProfile)
+    {
+        if (is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        try
+        {
+            $profile = Profile::find($idProfile);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        if (is_null($profile))
+        {
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
+        }
+
+        $idProfile = $profile->idProfile;
+        $email = $profile->email;
+        $username = $profile->username;
+        $firstName = $profile->firstName;
+        $lastName = $profile->lastName;
+        $createdAt = $profile->created_at;
+        $updatedAt = $profile->updated_at;
+
+        
+        $array = array('token' => $profile->api_token, 'email' => $email, 'username' => $username, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        $json = json_encode($array);
+    
+        return ("$json");
     } 
 
-    public function searchAllFavorites($request, $idProfile)
+    public function searchAllFavorites($idProfile)
+    {
+        if (is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        try
+        {
+            $favorites = Favorite::where("tblProfile_idProfile",$idProfile)->get();
+            $json = json_encode($favorites);
+            return ("$json");
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+    } 
+
+    public function searchAllFavoritesToken($request, $idProfile)
     {
         if (is_null($idProfile))
         {
