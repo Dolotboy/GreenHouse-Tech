@@ -121,11 +121,11 @@ Route::middleware('passkeyAdmin')->group(function () {
 });
 
 Route::middleware('tokenConverter')->group(function () {
-    Route::get("search/profile/token{token}", [ControllerDetail::class, 'searchProfile'],function ($idProfile){})->name('detailProfileToken');
-    Route::get("searchAll/favorite/token/{token}", [ControllerDetail::class, 'searchAllFavorites'],function ($idProfile){})->name('searchAllFavoritesToken');
-    Route::post('/new/favorite/token/{idPlant}/{token}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavoriteToken');
-    Route::delete("/delete/profile/token/{token}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfileToken');
-    Route::put('/edit/profile/editProfile/token/{token}', [ControllerEdit::class, 'editProfileSent'],function ($idProfile){})->name('editProfileSentToken');
+    Route::get("search/profile/token{token}", [ControllerDetail::class, 'searchProfileToken'],function ($idProfile){})->name('detailProfileToken');
+    Route::get("searchAll/favorite/token/{token}", [ControllerDetail::class, 'searchAllFavoritesToken'],function ($idProfile){})->name('searchAllFavoritesToken');
+    Route::post('/new/favorite/token/{idPlant}/{token}', [ControllerAdd::class, 'addFavoriteToken'],function ($idPlant, $idProfile){})->name('addFavoriteToken');
+    Route::delete("/delete/profile/token/{token}", [ControllerDelete::class, 'deleteProfileToken'],function ($idProfile){})->name('deleteProfileToken');
+    Route::put('/edit/profile/editProfile/token/{token}', [ControllerEdit::class, 'editProfileSentToken'],function ($idProfile){})->name('editProfileSentToken');
     // Route en double ???  Route::post('/new/favorite/{idPlant}/{token}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
-    Route::delete("/delete/favorite/token/{idPlant}/{token}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavoriteToken');
+    Route::delete("/delete/favorite/token/{idPlant}/{token}", [ControllerDelete::class, 'deleteFavoriteToken'],function ($idPlant, $idProfile){})->name('deleteFavoriteToken');
 });

@@ -120,7 +120,48 @@ class ControllerDelete extends Controller
         return view('deleteSearchFavorite');
     }
 
-    public function deleteFavorite($idPlant, $unUsedParameter, $idProfile)
+    public function deleteFavorite($idPlant, $idProfile)
+    {
+        if (is_null($idPlant) ||
+            is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
+        }
+
+        try
+        {
+            $favorite = Favorite::where('tblPlant_idPlant', '=', $idPlant)
+            ->where('tblProfile_idProfile', '=', $idProfile)
+            ->get();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The favorite doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 400);
+        }
+
+        if (is_null($favorite))
+        {
+            return response()->json(['message'=> "Error, favorite not found", 'success' => false, 'status' => "Request Failed", 'id' => "Plant: $idPlant / Profile: $idProfile"], 404);
+        }
+        else
+        {
+            try
+            {
+                Favorite::where([
+                    ['tblPlant_idPlant', '=', $idPlant],
+                    ['tblProfile_idProfile', '=', $idProfile],
+                ])->delete();
+                Controller::incrementVersion();
+                return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Profile: $idProfile"], 200);
+            }
+            catch(Exception $e)
+            {
+                return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            }
+        }
+    }
+
+    public function deleteFavoriteToken($idPlant, $unUsedParameter, $idProfile)
     {
         if (is_null($idPlant) ||
             is_null($idProfile))
@@ -166,7 +207,52 @@ class ControllerDelete extends Controller
         return view('deleteSearchProfile');
     }
 
-    public function deleteProfile($request, $idProfile)
+    public function deleteProfile($idProfile)
+    {
+        if (is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        try
+        {
+            $profile = Profile::Find($idProfile);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        if (is_null($profile))
+        {
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
+        }
+        else
+        {
+            try
+            {
+                DB::table('tblFavorites')->where('tblProfile_idProfile', $idProfile)->delete();
+            }
+            catch (Exception $e)
+            {
+                return response()->json(['message'=> "Error while deleting data in relation with the profile#$idProfile", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+            }
+
+            try
+            {
+                Profile::destroy($idProfile);
+                Controller::incrementVersion();
+                Mail::to($profile->email)->send(new AccountDeleted($profile)); /*->cc("exemple@gmail.com")*/
+                return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
+            }
+            catch(Exception $e)
+            {
+                return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            }
+        }
+    }
+
+    public function deleteProfileToken($request, $idProfile)
     {
         if (is_null($idProfile))
         {

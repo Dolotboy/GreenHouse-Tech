@@ -19,7 +19,6 @@
                                     <input type="checkbox" onclick="showPass()">Show Password</input>
                                     <h3 class="mb-3"> <input type="text" name='firstName' placeholder="First Name" value="" required></h3>
                                     <h3 class="mb-3"> <input type="text" name='lastName' placeholder="Last Name" value="" required></h3>   
-                                    <h3 class="mb-3"> <input type="text" name='access' placeholder="Access" value="" required></h3>  
                                     <h3 class="mb-3"> <input type="submit" name='submit' value="Submit"></h3>                             
                                 </div>
                             </div>
