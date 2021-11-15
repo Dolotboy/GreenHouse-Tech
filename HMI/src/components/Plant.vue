@@ -136,7 +136,7 @@ export default {
   text-align: center;
 }
 .nom{
- width: 40%;
+ width:50%;
  
 }
 .end{

@@ -5,7 +5,9 @@
  <!--   <div class="registerImage">
            <img class="imageIcon" src="https://www.wingsforkids.org/wp-content/uploads/cropped-placeholder.jpg">
     </div> -->
+    
     <h1>S'inscrire</h1>
+    <div class="problem"></div>
     <div class="form">
     <form @submit.prevent="login">
       <div class="lblInp-div" id="firstName">
@@ -20,13 +22,13 @@
         <label for="email">Adresse courriel</label>
         <input name="email" v-model="email" placeholder="Adresse Courriel" type="email" required>
       </div>
-      <div class="lblInp-div" id="password">
+      <div class="lblInp-div " id="password">
         <label for="password">Mot de passe</label>
-        <input name="password" v-model="password" placeholder="Mot de passe" type="password" required>
+        <input  class="passDiv" name="password" v-model="password" placeholder="Mot de passe" type="password" required>
       </div>
-      <div class="lblInp-div" id="confPassword">
-        <label for="confPasswird">Confirmer le mot de passe</label>
-        <input name="password" v-model="password" placeholder="Mot de passe" type="password" required>
+      <div class="lblInp-div" id="confirmPassword">
+        <label for="confirmPassword">Confirmer le mot de passe</label>
+        <input  class="passDiv" name="confpassword" v-model="confirmPassword" placeholder="Mot de passe" type="password" required>
       </div>
       <button type="submit" class="BtnIncription" @click="postCreateUser()">S'inscrire</button>      
     </form>
@@ -61,6 +63,8 @@ export default {
         return user;
       },
       postCreateUser(){
+      if(this.password == this.confirmPassword)
+      {
         let user = this.createUser();
         console.log(JSON.stringify(user));
         //$.post("https://apitestenv.pcst.xyz/api/new/profile/addProfile", JSON.stringify(user));
@@ -76,6 +80,14 @@ export default {
           }
         });
       }
+      else
+      {
+        var element = document.querySelector(".passDiv");
+        var text= document.querySelector(".problem");
+        text.innerHTML="les mot de passe ne correspondent pas";
+        element.style.border="solid red"; 
+      }
+      }
     }
 }
 </script>
@@ -83,18 +95,27 @@ export default {
 <style lang="scss">
 .register{
     position : absolute;
+    caret-color: transparent;
     top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
     background: rgb(206, 205, 205);
     border: solid;
     border-color: black;
-    width : 50vw;
+    width : 70vw;
     padding : 7.5% 7.5%;
 
     h1{
       font-size: 4rem;
   }
+}
+.passDiv
+{
+
+}
+.problem{
+  color: red;
+  height: 5%;
 }
 .close-button {
     position: absolute;
@@ -138,7 +159,7 @@ export default {
     border-color: black;
     padding : 5% 5%;
     h1{
-      margin-top:25%;
+      margin-top:20%;
       font-size: 4rem;
   }
   
@@ -171,10 +192,8 @@ export default {
   }
       
       }
-
       input[type-submit]{
         height: 100px;
-
   }
 }
 .BtnIncription{

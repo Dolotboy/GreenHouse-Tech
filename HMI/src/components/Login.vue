@@ -135,6 +135,7 @@ export default {
     overflow-y: auto;
     flex-direction : column;
     justify-content: center;
+    caret-color: transparent;
     top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);

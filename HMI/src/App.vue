@@ -239,7 +239,7 @@ button{
 
 #navDesktop{
   position : relative;
-
+  caret-color: transparent;
   &> ul{
     position : relative;
   }
@@ -339,6 +339,7 @@ li a:hover{
   color : white;
   width : 100vw;
   height : 7.5vh;
+  caret-color: transparent;
 
   .top-wrapper{
     position : relative;

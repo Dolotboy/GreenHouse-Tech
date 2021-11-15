@@ -107,7 +107,7 @@ export default {
       if(dataType.includes("ALL"))
         return;
 
-      for(let i= 0; i < this.visiblePlants.length; i++)
+      for(let i= 0; i < visiblePlants.length; i++)
         if(dataType.includes(this.visiblePlants[i].plantType.toUpperCase()))
           tempPlants.push(this.visiblePlants[i]);
 
@@ -143,6 +143,7 @@ export default {
     },
     activateAllCheckbox(selector){
       let checkboxes = document.querySelectorAll(selector);
+      console.log(checkboxes)
       for(let i = 0; i < checkboxes.length; i++)
         if(checkboxes[i].value.toUpperCase() == "ALL"){
           checkboxes[i].checked = true;
@@ -228,6 +229,7 @@ body{
   width : 85%;
   margin : 2vh 0 0 10%;
  column-gap: 30px;
+ caret-color: transparent;
 
 }
 .plant{

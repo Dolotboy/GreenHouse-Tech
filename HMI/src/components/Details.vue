@@ -74,6 +74,7 @@ export default {
 .details{
   position: absolute;
     display: flex;
+    caret-color: transparent;
     top : 54%;
     left : 50%;
     transform: translate(-50%, -50%);
