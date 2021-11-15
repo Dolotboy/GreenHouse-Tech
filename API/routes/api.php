@@ -83,6 +83,8 @@ Route::post("login/checkLogin", [ControllerLogin::class, 'checkLogin'])->name('c
 
 Route::post("login/checkToken/", [ControllerLogin::class, 'checkToken'])->name('checkToken');
 
+Route::get("login/email/confirm/{token}", [ControllerLogin::class, 'confirmEmail'],function ($token){})->name('confirmEmail');
+
 // ******************* LOGIN *******************
 
 // ******************* IMPORTANT *******************
