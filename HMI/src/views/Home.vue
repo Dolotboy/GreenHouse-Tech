@@ -4,8 +4,74 @@
     <div class="bg-text">
       <p>Aide à la décision</p>
       <h1>Serre-Tech</h1>
+    <div class="logo" @click="filterAlphabetical">
+      <img src="../../Images/LogoV1.png">
     </div>
   </div>
+    <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
+      <div class="autocomplete" style="width:300px;">
+        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
+      </div>
+    </form>
+    <div class="filtersWrapper" @click="filterData">
+      <div class="filterPlantTypeWrapper">
+        <div>
+          <label>Fruits</label>
+          <input type="radio" name="rdPlantType" value="fruit" class="typeFilter">
+        </div>
+        <div>
+          <label>Légumes</label>
+          <input type="radio" name="rdPlantType" value="vegetable" class="typeFilter">
+        </div>
+        <div>
+          <label>Tous</label>
+          <input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>
+        </div>
+      </div>
+      <div class="filterPlantFamilyWrapper">
+        <div>
+          <label>Famille 1</label>
+          <input type="checkbox" name="cbPlantFamily" value="family1" class="familyFilter">
+        </div>
+        <div>
+          <label>Famille 2</label>
+          <input type="checkbox" name="cbPlantFamily" value="family2" class="familyFilter">
+        </div>
+        <div>
+          <label>Tous</label>
+          <input type="checkbox" name="cbPlantFamily" value="ALL" class="familyFilter" checked>
+        </div>
+      </div>
+      <div class="filterPlantDifficultyWrapper">
+        <div>
+          <label>Facile</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="EASY" class="difficultyFilter">
+        </div>
+        <div>
+          <label>Intermédiaire</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="INTERMEDIATE" class="difficultyFilter">
+        </div>
+        <div>
+          <label>Difficile</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="DIFFICULT" class="difficultyFilter">
+        </div>
+        <div>
+          <label>Tous</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="ALL" class="difficultyFilter" checked>
+        </div>
+      </div>
+      <div class="filterAlphaWrapper">
+        <div>
+          <label>Alphabétique</label>
+          <input type="checkbox" checked id="chkAlphabetical">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="productsGrid">
+    <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
+  </div>
+  <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>  
 </template>
 
 <style lang="scss">
@@ -46,7 +112,7 @@ box-sizing: border-box;
 
 
 </style>
-<!--<script>
+<script>
 import Details from '../components/Details.vue'
 import Plant from '../components/Plant.vue'
 import $ from '../../node_modules/jquery/dist/jquery.js'
@@ -75,6 +141,10 @@ export default {
     this.favorites = JSON.parse(localStorage.getItem('favorites'));
   },
   methods : {
+    filterAlphabetical(){
+      if(document.querySelector("#chkAlphabetical").checked)
+        this.visiblePlants.sort((a, b) => a.plantName.localeCompare(b.plantName))
+    },
     filterType(){
       let typeRadios = document.querySelectorAll(".typeFilter");
       let dataType = [];
@@ -124,7 +194,8 @@ export default {
     filterData(){
       this.visiblePlants = this.plants;
       this.filterType();
-      this.filterFamily();      
+      this.filterFamily();
+      this.filterAlphabetical();      
     },
     activateAllCheckbox(selector){
       let checkboxes = document.querySelectorAll(selector);
@@ -153,14 +224,6 @@ export default {
             this.visiblePlants.push(this.plants[i]);
           }
         }
-    },
-    checkboxValueChanged(value){
-      this.checkboxFilterValue = value;
-      this.filterData();
-    },
-    radioValueChanged(value){
-      this.radioFilterValue = value;
-      this.filterData();
     },
     async initialisation(){
       this.favorites = JSON.parse(localStorage.getItem('favorites'));
@@ -191,78 +254,9 @@ export default {
     }
   }
 }
-</script>-->
+</script>
 
-
-
-
-
-
-
-<!--<template>
-  <div class="logo">
-    <img src="../../Images/LogoV1.png">
-  </div>
-    <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
-      <div class="autocomplete" style="width:300px;">
-        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
-      </div>
-    </form>
-    <div class="filtersWrapper" @click="filterData">
-      <div class="rdPlantTypeWrapper">
-        <div>
-          <label>Fruits</label>
-          <input type="radio" name="rdPlantType" value="fruit" class="typeFilter">
-        </div>
-        <div>
-          <label>Légumes</label>
-          <input type="radio" name="rdPlantType" value="vegetable" class="typeFilter">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>
-        </div>
-      </div>
-      <div class="cbPlantFamilyWrapper">
-        <div>
-          <label>Famille 1</label>
-          <input type="checkbox" name="cbPlantFamily" value="family1" class="familyFilter">
-        </div>
-        <div>
-          <label>Famille 2</label>
-          <input type="checkbox" name="cbPlantFamily" value="family2" class="familyFilter">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="checkbox" name="cbPlantFamily" value="ALL" class="familyFilter" checked>
-        </div>
-      </div>
-      <div class="cbPlantDifficultyWrapper">
-        <div>
-          <label>Facile</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="EASY" class="difficultyFilter">
-        </div>
-        <div>
-          <label>Intermédiaire</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="INTERMEDIATE" class="difficultyFilter">
-        </div>
-        <div>
-          <label>Difficile</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="DIFFICULT" class="difficultyFilter">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="ALL" class="difficultyFilter" checked>
-        </div>
-      </div>
-    </div>
-    <div class="productsGrid">
-      <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
-    </div>
-    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
-</template>-->
-
-<!--<style lang="scss">
+<style lang="scss">
 body{
   background-color: #292929;
 }
@@ -292,76 +286,30 @@ body{
     cursor : pointer;
   }
 }
-.cbPlantFamilyWrapper{
-  display : inline-flex;
-  width: auto;
-  background: #616161;
-  color: #D2CCB1;
-  justify-content: center;
-  margin : 2vh 0;
-  border: 1px solid;
-  border-radius: 5px;
 
+.filtersWrapper{
   & > div{
-    display : flex;
+    display : inline-flex;
+    width: auto;
+    background: #616161;
+    color: #D2CCB1;
+    justify-content: center;
+    margin : 2vh 0;
+    border: 1px solid;
+    border-radius: 5px;
 
-    label{
-      font-size : 2rem;
-    }
+    & > div{
+      display : flex;
 
-    input[type=radio]{
-      height: 1.5rem;
-      width : 1.5rem;
-      margin : auto 1rem;
-    }
-  }
-}
-.rdPlantTypeWrapper{
-  display : inline-flex;
-  width: auto;
-  background: #616161;
-  color: #D2CCB1;
-  justify-content: center;
-  
-  margin : 2vh 0;
-  border: 1px solid;
-  border-radius: 5px;
+      label{
+        font-size : 2rem;
+      }
 
-  & > div{
-    display : flex;
-
-    label{
-      font-size : 2rem;
-    }
-
-    input[type=radio]{
-      height: 1.5rem;
-      width : 1.5rem;
-      margin : auto 1rem;
-    }
-  }
-}
-.cbPlantDifficultyWrapper{
-  display : inline-flex;
-  width: auto;
-  background: #616161;
-  color: #D2CCB1;
-  justify-content: center;
-  margin : 2vh 0;
-  border: 1px solid;
-  border-radius: 5px;
-
-  & > div{
-    display : flex;
-
-    label{
-      font-size : 2rem;
-    }
-
-    input[type=radio]{
-      height: 1.5rem;
-      width : 1.5rem;
-      margin : auto 1rem;
+      input[type=radio]{
+        height: 1.5rem;
+        width : 1.5rem;
+        margin : auto 1rem;
+      }
     }
   }
 }
@@ -409,4 +357,4 @@ body{
     justify-content: center;
   }
 }
-</style>-->
+</style>
