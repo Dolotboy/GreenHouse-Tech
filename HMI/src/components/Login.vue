@@ -132,6 +132,7 @@ export default {
   .login{
     position : absolute;
     display : flex;
+    overflow-y: auto;
     flex-direction : column;
     justify-content: center;
     top : 50%;

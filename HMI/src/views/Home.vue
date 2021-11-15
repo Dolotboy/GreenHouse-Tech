@@ -1,6 +1,12 @@
 <template>
-  <div class="logo">
-    <img src="../../Images/LogoV1.png">
+  <div>
+    <div class="bg-image"></div>
+    <div class="bg-text">
+      <p>Aide à la décision</p>
+      <h1>Serre-Tech</h1>
+    <div class="logo" @click="filterAlphabetical">
+      <img src="../../Images/LogoV1.png">
+    </div>
   </div>
     <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
       <div class="autocomplete" style="width:300px;">
@@ -8,7 +14,7 @@
       </div>
     </form>
     <div class="filtersWrapper" @click="filterData">
-      <div class="rdPlantTypeWrapper">
+      <div class="filterPlantTypeWrapper">
         <div>
           <label>Fruits</label>
           <input type="radio" name="rdPlantType" value="fruit" class="typeFilter">
@@ -22,7 +28,7 @@
           <input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>
         </div>
       </div>
-      <div class="cbPlantFamilyWrapper">
+      <div class="filterPlantFamilyWrapper">
         <div>
           <label>Famille 1</label>
           <input type="checkbox" name="cbPlantFamily" value="family1" class="familyFilter">
@@ -36,7 +42,7 @@
           <input type="checkbox" name="cbPlantFamily" value="ALL" class="familyFilter" checked>
         </div>
       </div>
-      <div class="cbPlantDifficultyWrapper">
+      <div class="filterPlantDifficultyWrapper">
         <div>
           <label>Facile</label>
           <input type="checkbox" name="cbPlantDifficulty" value="EASY" class="difficultyFilter">
@@ -54,13 +60,58 @@
           <input type="checkbox" name="cbPlantDifficulty" value="ALL" class="difficultyFilter" checked>
         </div>
       </div>
+      <div class="filterAlphaWrapper">
+        <div>
+          <label>Alphabétique</label>
+          <input type="checkbox" checked id="chkAlphabetical">
+        </div>
+      </div>
     </div>
-    <div class="productsGrid">
-      <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
-    </div>
-    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
+  </div>
+  <div class="productsGrid">
+    <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
+  </div>
+  <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>  
 </template>
 
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+body, html{
+  height: 100%;
+}
+* {    
+box-sizing: border-box;
+}
+.bg-image{
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/PlantBackground.jpg');
+  height: 100vh;
+  background-position: center;
+  background-size: auto, cover;
+  background-attachment: scroll, fixed;
+}
+.bg-text{
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+  font-weight: 800;
+  top: 50%;
+  left: 50%;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+
+    p{
+      font-size: 20px;
+      font-weight: 200;
+    }   
+    h1{
+      font-size: 90px;
+      font-weight: 600;
+    }
+}
+
+
+</style>
 <script>
 import Details from '../components/Details.vue'
 import Plant from '../components/Plant.vue'
@@ -90,6 +141,10 @@ export default {
     this.favorites = JSON.parse(localStorage.getItem('favorites'));
   },
   methods : {
+    filterAlphabetical(){
+      if(document.querySelector("#chkAlphabetical").checked)
+        this.visiblePlants.sort((a, b) => a.plantName.localeCompare(b.plantName))
+    },
     filterType(){
       let typeRadios = document.querySelectorAll(".typeFilter");
       let dataType = [];
@@ -139,7 +194,8 @@ export default {
     filterData(){
       this.visiblePlants = this.plants;
       this.filterType();
-      this.filterFamily();      
+      this.filterFamily();
+      this.filterAlphabetical();      
     },
     activateAllCheckbox(selector){
       let checkboxes = document.querySelectorAll(selector);
@@ -168,14 +224,6 @@ export default {
             this.visiblePlants.push(this.plants[i]);
           }
         }
-    },
-    checkboxValueChanged(value){
-      this.checkboxFilterValue = value;
-      this.filterData();
-    },
-    radioValueChanged(value){
-      this.radioFilterValue = value;
-      this.filterData();
     },
     async initialisation(){
       this.favorites = JSON.parse(localStorage.getItem('favorites'));
@@ -238,76 +286,30 @@ body{
     cursor : pointer;
   }
 }
-.cbPlantFamilyWrapper{
-  display : inline-flex;
-  width: auto;
-  background: #616161;
-  color: #D2CCB1;
-  justify-content: center;
-  margin : 2vh 0;
-  border: 1px solid;
-  border-radius: 5px;
 
+.filtersWrapper{
   & > div{
-    display : flex;
+    display : inline-flex;
+    width: auto;
+    background: #616161;
+    color: #D2CCB1;
+    justify-content: center;
+    margin : 2vh 0;
+    border: 1px solid;
+    border-radius: 5px;
 
-    label{
-      font-size : 2rem;
-    }
+    & > div{
+      display : flex;
 
-    input[type=radio]{
-      height: 1.5rem;
-      width : 1.5rem;
-      margin : auto 1rem;
-    }
-  }
-}
-.rdPlantTypeWrapper{
-  display : inline-flex;
-  width: auto;
-  background: #616161;
-  color: #D2CCB1;
-  justify-content: center;
-  
-  margin : 2vh 0;
-  border: 1px solid;
-  border-radius: 5px;
+      label{
+        font-size : 2rem;
+      }
 
-  & > div{
-    display : flex;
-
-    label{
-      font-size : 2rem;
-    }
-
-    input[type=radio]{
-      height: 1.5rem;
-      width : 1.5rem;
-      margin : auto 1rem;
-    }
-  }
-}
-.cbPlantDifficultyWrapper{
-  display : inline-flex;
-  width: auto;
-  background: #616161;
-  color: #D2CCB1;
-  justify-content: center;
-  margin : 2vh 0;
-  border: 1px solid;
-  border-radius: 5px;
-
-  & > div{
-    display : flex;
-
-    label{
-      font-size : 2rem;
-    }
-
-    input[type=radio]{
-      height: 1.5rem;
-      width : 1.5rem;
-      margin : auto 1rem;
+      input[type=radio]{
+        height: 1.5rem;
+        width : 1.5rem;
+        margin : auto 1rem;
+      }
     }
   }
 }
