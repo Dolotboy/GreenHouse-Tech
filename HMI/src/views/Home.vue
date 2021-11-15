@@ -1,67 +1,52 @@
 <template>
-  <div class="logo">
-    <img src="../../Images/LogoV1.png">
+  <div>
+    <div class="bg-image"></div>
+    <div class="bg-text">
+      <p>Aide à la décision</p>
+      <h1>Serre-Tech</h1>
+    </div>
   </div>
-    <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
-      <div class="autocomplete" style="width:300px;">
-        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
-      </div>
-    </form>
-    <div class="filtersWrapper" @click="filterData">
-      <div class="rdPlantTypeWrapper">
-        <div>
-          <label>Fruits</label>
-          <input type="radio" name="rdPlantType" value="fruit" class="typeFilter">
-        </div>
-        <div>
-          <label>Légumes</label>
-          <input type="radio" name="rdPlantType" value="vegetable" class="typeFilter">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>
-        </div>
-      </div>
-      <div class="cbPlantFamilyWrapper">
-        <div>
-          <label>Famille 1</label>
-          <input type="checkbox" name="cbPlantFamily" value="family1" class="familyFilter">
-        </div>
-        <div>
-          <label>Famille 2</label>
-          <input type="checkbox" name="cbPlantFamily" value="family2" class="familyFilter">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="checkbox" name="cbPlantFamily" value="ALL" class="familyFilter" checked>
-        </div>
-      </div>
-      <div class="cbPlantDifficultyWrapper">
-        <div>
-          <label>Facile</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="EASY" class="difficultyFilter">
-        </div>
-        <div>
-          <label>Intermédiaire</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="INTERMEDIATE" class="difficultyFilter">
-        </div>
-        <div>
-          <label>Difficile</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="DIFFICULT" class="difficultyFilter">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="ALL" class="difficultyFilter" checked>
-        </div>
-      </div>
-    </div>
-    <div class="productsGrid">
-      <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
-    </div>
-    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
 </template>
 
-<script>
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+body, html{
+  height: 100%;
+}
+* {    
+box-sizing: border-box;
+}
+.bg-image{
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/PlantBackground.jpg');
+  height: 100vh;
+  background-position: center;
+  background-size: auto, cover;
+  background-attachment: scroll, fixed;
+}
+.bg-text{
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+  font-weight: 800;
+  top: 50%;
+  left: 50%;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+
+    p{
+      font-size: 20px;
+      font-weight: 200;
+    }   
+    h1{
+      font-size: 90px;
+      font-weight: 600;
+    }
+}
+
+
+</style>
+<!--<script>
 import Details from '../components/Details.vue'
 import Plant from '../components/Plant.vue'
 import $ from '../../node_modules/jquery/dist/jquery.js'
@@ -207,9 +192,78 @@ export default {
     }
   }
 }
-</script>
+</script>-->
 
-<style lang="scss">
+
+
+
+
+
+
+<!--<template>
+  <div class="logo">
+    <img src="../../Images/LogoV1.png">
+  </div>
+    <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
+      <div class="autocomplete" style="width:300px;">
+        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
+      </div>
+    </form>
+    <div class="filtersWrapper" @click="filterData">
+      <div class="rdPlantTypeWrapper">
+        <div>
+          <label>Fruits</label>
+          <input type="radio" name="rdPlantType" value="fruit" class="typeFilter">
+        </div>
+        <div>
+          <label>Légumes</label>
+          <input type="radio" name="rdPlantType" value="vegetable" class="typeFilter">
+        </div>
+        <div>
+          <label>Tous</label>
+          <input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>
+        </div>
+      </div>
+      <div class="cbPlantFamilyWrapper">
+        <div>
+          <label>Famille 1</label>
+          <input type="checkbox" name="cbPlantFamily" value="family1" class="familyFilter">
+        </div>
+        <div>
+          <label>Famille 2</label>
+          <input type="checkbox" name="cbPlantFamily" value="family2" class="familyFilter">
+        </div>
+        <div>
+          <label>Tous</label>
+          <input type="checkbox" name="cbPlantFamily" value="ALL" class="familyFilter" checked>
+        </div>
+      </div>
+      <div class="cbPlantDifficultyWrapper">
+        <div>
+          <label>Facile</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="EASY" class="difficultyFilter">
+        </div>
+        <div>
+          <label>Intermédiaire</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="INTERMEDIATE" class="difficultyFilter">
+        </div>
+        <div>
+          <label>Difficile</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="DIFFICULT" class="difficultyFilter">
+        </div>
+        <div>
+          <label>Tous</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="ALL" class="difficultyFilter" checked>
+        </div>
+      </div>
+    </div>
+    <div class="productsGrid">
+      <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
+    </div>
+    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
+</template>-->
+
+<!--<style lang="scss">
 body{
   background-color: #292929;
 }
@@ -353,4 +407,4 @@ body{
   }
   
 }
-</style>
+</style>-->

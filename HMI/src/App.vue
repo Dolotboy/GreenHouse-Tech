@@ -1,16 +1,15 @@
 <template>
   <div>
     <nav id="navDesktop">
+      <div class="logo">
+        <img src="./assets/LogoV2.png" alt="Logo">
+      </div>
       <ul>
-        <div id="BasicNav">
           <li><router-link to="/">Accueil</router-link></li> 
           <li><a href="http://apipcst.xyz" target="_blank">API Interface</a></li>
-        </div>
-        <div id="LoginRegister">
           <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
           <li v-if="!isLoggedIn" @click="toggleLogin">Se connecter</li>   
           <li v-if="isLoggedIn">Bonjour, {{ profile.firstName }} !</li>       
-        </div>
       </ul>
     </nav>
     <nav id="navMobile">
@@ -29,8 +28,8 @@
       </ul>
     </nav>
     <router-view @update="this.$forceUpdate" @popLogin="toggleLogin"/>  
-    <div @click="login(1)">login</div>
-    <div @click="logout">logout</div>
+    <!--<div @click="login(1)">login</div>
+    <div @click="logout">logout</div>-->
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
     <Register v-if="showRegister" @close="toggleRegister"/>
   </div>
@@ -196,7 +195,7 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -219,86 +218,63 @@ button{
   padding : 10px;
   font-size : 1.2rem;
 
-
   &:hover{
     opacity : .8;
     cursor : pointer;
   }
 }
 
-
 #navDesktop{
-  position : relative;
-
-  &> ul{
-    position : relative;
-  }
-
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #616161 ;
-    display: flex;
-    justify-content: start;
-
-    li {
-      float: left;
-      border-right: 1px solid darkgrey;
-      border-left: 1px solid darkgrey; 
-
-      a {
-        display: block;
-        color: white;
-        text-decoration: none;
-        text-align: center;
-        padding: 10px 15px;
-
-        &:hover{
-          color: black;
-          background-color: #e6a800;
-        }
-      }
+  position : fixed;
+  padding : 0 20%;
+  display : flex;
+  justify-content: space-between;
+  width : 100vw;
+  align-items: center;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+    
+  .logo{
+    width: 60px;
+    height: 60px;
+    img{
+      max-height: 100%;
+      max-width: 100%;
     }
-  }
-}
-#LoginRegister :hover{
-  color: #D2CCB1;
-  background-color: #8d4705;
-  cursor: pointer;
-}
-#LoginRegister {
-  position: absolute;
-  right: 0%;
-  top: 0%;
-}
-#LoginRegister li{
+  } 
+
+ul {
   list-style-type: none;
   overflow: hidden;
-  color: #d8d5ca;
-  height: 100%;
-  padding: 10px 15px;
+  background-color: transparent;
+  display: flex;
+  justify-content: start;
+  color: white;
+  text-decoration: none;  
+  
 }
 li {
-  float: left;
-  border-right: 1px solid darkgrey;
-  border-left: 1px solid darkgrey; 
-}
-li a {
+  opacity: 0.7;
+  font-weight: 700;
+  a{
+    text-decoration: none;  
+    color : #fff;  
+  }
+  &:hover{
+    color: #fff;
+    cursor: pointer;
+    opacity: 1;
+  }
+}  
+ul li {
   display: block;
-  color: #d8d5ca;
+  color: #fff;
   text-decoration: none;
   text-align: center;
   padding: 10px 15px;
 }
-li a:hover{
-  color: black;
-  background-color: #e6a800;
 }
-.active {
-  background-color : #01B0D3;
-}
+
 .lblInp-div{
   display : flex;
   justify-content : end;
