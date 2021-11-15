@@ -193,7 +193,48 @@ class ControllerEdit extends Controller
         return view('editProfile', ["profile" => $profile]);
     }
 
-    public function editProfileSent($unusedParameter, Request $request, $idProfile)
+    public function editProfileSent(Request $request, $idProfile)
+    {
+        if (is_null($request->email) || 
+            is_null($request->firstName) || 
+            is_null($request->lastName) ||
+            is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        try
+        {
+            $profile = Profile::find($idProfile);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        if (is_null($profile))
+        {
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
+        }
+
+        $profile->email = $request->email;
+        $profile->firstName = $request->firstName;
+        $profile->lastName = $request->lastName;
+
+        try
+        {
+            $profile->save();
+            Controller::incrementVersion();
+            Mail::to($profile->email)->send(new AccountModified($profile)); /*->cc("exemple@gmail.com")*/
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+    }
+
+    public function editProfileSentToken($unusedParameter, Request $request, $idProfile)
     {
         if (is_null($request->email) || 
             is_null($request->firstName) || 
@@ -356,9 +397,26 @@ class ControllerEdit extends Controller
         }
     }
 
-    public function addAdmin(Request $request)
+    public function indexAdmin()
     {
-        $data = Profile::find($request);
+        return view('assignAdmin');
+    }
+
+    public function addAdmin(Request $request, $idProfile)
+    {
+        try
+        {
+            $profile = Profile::find($idProfile);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        if (is_null($profile))
+        {
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
+        }
 
         $profile->access = "admin";
 

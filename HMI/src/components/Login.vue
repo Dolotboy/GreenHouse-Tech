@@ -62,7 +62,6 @@ export default {
           data: JSON.stringify(user),
           success: function(status)
           {
-            console.log(status);
             that.$emit("loggedIn", status.id); 
           }
         });
@@ -133,6 +132,7 @@ export default {
   .login{
     position : absolute;
     display : flex;
+    overflow-y: auto;
     flex-direction : column;
     justify-content: center;
     top : 50%;

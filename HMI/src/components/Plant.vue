@@ -12,7 +12,7 @@
   </div>
   <div class="end">
   <p v-if="isFavorite">Favoris</p>
-  <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
+  <input class="star" type="checkbox" title="Favoris" :checked="isFavorite" @click="toggleFavorite()"> 
   </div>
 </div>
 </template>
@@ -25,7 +25,7 @@ export default {
       addFavorite(){
         let that = this;
 
-        let url = "http://testenv.apipcst.xyz/api/new/favorite/";
+        let url = "http://localhost:8000/api/new/favorite/token/";
         let type = "post";
 
         return new Promise(resolve => {
@@ -52,7 +52,7 @@ export default {
       deleteFavorite(){
         let that = this;
 
-        let url = "http://testenv.apipcst.xyz/api/delete/favorite/";
+        let url = "http://localhost:8000/api/delete/favorite/token";
         let type = "delete";
 
         return new Promise(resolve => {
@@ -113,6 +113,7 @@ export default {
     border : solid 1px black;
     border-radius: 40px;
     margin-bottom: 20px;
+    max-width: 95%;
     display: flex;
     flex-direction: row;
     align-items: center;

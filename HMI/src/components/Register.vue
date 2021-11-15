@@ -24,6 +24,10 @@
         <label for="password">Mot de passe</label>
         <input name="password" v-model="password" placeholder="Mot de passe" type="password" required>
       </div>
+      <div class="lblInp-div" id="confPassword">
+        <label for="confPasswird">Confirmer le mot de passe</label>
+        <input name="password" v-model="password" placeholder="Mot de passe" type="password" required>
+      </div>
       <button type="submit" class="BtnIncription" @click="postCreateUser()">S'inscrire</button>      
     </form>
     </div>    
@@ -123,9 +127,10 @@ export default {
 {
   .register{
     position : absolute;
-    height: 90vh;
+    height: 100%;
+    overflow-y: auto;
     width : 100%;
-    top : 54%;
+    top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
     background: rgb(206, 205, 205);
@@ -156,6 +161,7 @@ export default {
 .form{
   display: flex;
   justify-content: center;
+
     font-size: 2rem;
     margin: 5% 0;
     form{
@@ -174,7 +180,7 @@ export default {
 .BtnIncription{
       margin-top:5px;
       width: 70vw;
-      height:20%;
+      height:15%;
       font-size: 15px;
       border-radius: 30px;
       background-color: rgb(18, 15, 194);

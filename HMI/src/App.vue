@@ -21,9 +21,7 @@
         </div>
       </div>
       <ul class="links">
-          <li><router-link to="/">Accueil</router-link></li> 
           <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
-          <li v-if="!isLoggedIn" @click="toggleLogin">Se connecter</li> 
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
       </ul>
     </nav>
@@ -66,9 +64,6 @@ export default {
       this.Initialisation();
   },
   methods :{
-    login(){
-      
-    },
     toggleRegister(){
       this.showRegister = !this.showRegister;
     },
@@ -76,17 +71,14 @@ export default {
       this.showLogin = !this.showLogin;
     },
     toggleNavMobile(){
-      console.log("clicked");
       let links = document.querySelector(".links");
       let navMobile = document.querySelector("#navMobile");
       let hamburger = document.querySelector(".hamburger-wrapper");
-      console.log(this.mobileNavIsOpened);
       if(!this.mobileNavIsOpened){
         links.style.display = "flex";
       navMobile.style.height = "100vh"; 
       }
       else{
-        console.log("else");
         links.style.display = "none";
         navMobile.style.height = "7.5vh";
       }
@@ -147,10 +139,6 @@ export default {
     },
     async login(profileToken){
       this.downloadFavorites(profileToken);
-      this.profile = await this.getObject(this.env + "api/search/profile/" + profileToken); 
-      console.log("test");
-      console.log(this.profile);
-      localStorage.setItem('loggedInToken', this.profile.token);
       this.isLoggedIn = true;
       this.showLogin = false;
       this.plants = this.plants;
@@ -174,7 +162,6 @@ export default {
       })  
     },
     async downloadFavorites(profileId){
-      this.favorites = await this.getFavorites(this.env + "api/searchAll/favorite/" + profileId);
       localStorage.setItem('favorites', JSON.stringify(this.favorites));
     },
     getFavorites(url){
@@ -232,8 +219,8 @@ button{
   width : 100vw;
   align-items: center;
   text-transform: uppercase;
-  font-size: 1.2rem;
-    
+  font-size: 1.2rem;    
+  
   .logo{
     width: 60px;
     height: 60px;
@@ -251,11 +238,9 @@ ul {
   justify-content: start;
   color: white;
   text-decoration: none;  
-  
 }
 li {
   opacity: 0.7;
-  font-weight: 700;
   a{
     text-decoration: none;  
     color : #fff;  
@@ -340,26 +325,19 @@ ul li {
   .links{
     display : none;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height : 75%;
     position : absolute;
     bottom : 0;
     left: 0;
     list-style-type: none;
     width: 100%;
     padding: 0;
-    pointer-events: none;
 
     li{
       font-size: 3rem;
       text-decoration: none;
-      border : none;
       padding: 10px 15px;
-      color : white;
 
       &:hover{
-        background-color: #e6a800;
         cursor : pointer;
       }
 

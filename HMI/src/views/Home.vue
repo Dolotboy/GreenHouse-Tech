@@ -92,7 +92,7 @@ export default {
       if(dataType.includes("ALL"))
         return;
 
-      for(let i= 0; i < visiblePlants.length; i++)
+      for(let i= 0; i < this.visiblePlants.length; i++)
         if(dataType.includes(this.visiblePlants[i].plantType.toUpperCase()))
           tempPlants.push(this.visiblePlants[i]);
 
@@ -128,7 +128,6 @@ export default {
     },
     activateAllCheckbox(selector){
       let checkboxes = document.querySelectorAll(selector);
-      console.log(checkboxes)
       for(let i = 0; i < checkboxes.length; i++)
         if(checkboxes[i].value.toUpperCase() == "ALL"){
           checkboxes[i].checked = true;
@@ -405,6 +404,9 @@ body{
     height : 2.5rem;
     width : 2.5rem;
   }
-  
+  .productsGrid
+  {
+    justify-content: center;
+  }
 }
 </style>-->
