@@ -24,6 +24,7 @@ export default {
     position :absolute;
     top : 50%;
     left : 50%;
+    overflow-y: auto;
     transform: translate(-50%, -50%);
     background: rgb(206, 205, 205);
     border: solid;
