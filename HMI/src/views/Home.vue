@@ -75,41 +75,6 @@
 </template>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-
-body, html{
-  height: 100%;
-}
-* {    
-box-sizing: border-box;
-}
-.bg-image{
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/PlantBackground.jpg');
-  height: 100vh;
-  background-position: center;
-  background-size: auto, cover;
-  background-attachment: scroll, fixed;
-}
-.bg-text{
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
-  position: absolute;
-  font-weight: 800;
-  top: 50%;
-  left: 50%;
-  text-transform: uppercase;
-  transform: translate(-50%, -50%);
-
-    p{
-      font-size: 20px;
-      font-weight: 200;
-    }   
-    h1{
-      font-size: 90px;
-      font-weight: 600;
-    }
-}
-
 
 </style>
 <script>
@@ -258,6 +223,44 @@ export default {
 </script>
 
 <style lang="scss">
+@media screen and (min-width : 601px){
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+body, html{
+  height: 100%;
+}
+* {    
+box-sizing: border-box;
+}
+.bg-image{
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/PlantBackground.jpg');
+  height: 100vh;
+  background-position: center;
+  background-size: auto, cover;
+  background-attachment: scroll, fixed;
+}
+.bg-text{
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+  font-weight: 800;
+  top: 50%;
+  left: 50%;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+
+    p{
+      font-size: 20px;
+      font-weight: 200;
+    }   
+    h1{
+      font-size: 90px;
+      font-weight: 600;
+    }
+}
+
+
+}
 body{
   background-color: #292929;
 }
@@ -321,7 +324,7 @@ body{
   
 
   .autocomplete{
-    display : flex;
+    display : block;
     position : relative;
   }
 

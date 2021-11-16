@@ -20,14 +20,17 @@
           <div></div>
         </div>
       </div>
-      <ul class="links">
+     <ul class="links">
+          <li @click="toggleNavMobile"><router-link to="/">Accueil</router-link></li> 
+          <li @click="toggleNavMobile"><router-link to="/about">À propos</router-link></li>
           <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"> connecter </li> 
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
       </ul>
     </nav>
     <router-view @update="this.$forceUpdate" @popLogin="toggleLogin"/>  
-    <!--<div @click="login(1)">login</div>
-    <div @click="logout">logout</div>-->
+    <div @click="login(1)">login</div>
+    <div @click="logout">logout</div>
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
     <Register v-if="showRegister" @close="toggleRegister"/>
   </div>
@@ -77,10 +80,12 @@ export default {
       if(!this.mobileNavIsOpened){
         links.style.display = "flex";
       navMobile.style.height = "100vh"; 
+      navMobile.style.width="40vw";
       }
       else{
         links.style.display = "none";
         navMobile.style.height = "7.5vh";
+        navMobile.style.width="0vw"
       }
       
       this.mobileNavIsOpened = !this.mobileNavIsOpened;
@@ -285,14 +290,14 @@ ul li {
 
 #navMobile{
   display : none;
-  position : relative;
+  position : absolute;
   top : 0;
   left : 0;
-  background: black;
-  color : white;
-  width : 100vw;
+  background: rgb(88, 88, 88);
+  color : black;
   height : 7.5vh;
   caret-color: transparent;
+  z-index:999;
 
   .top-wrapper{
     position : relative;
@@ -328,19 +333,24 @@ ul li {
   .links{
     display : none;
     flex-direction: column;
-    position : absolute;
+    height : 90%;
+    position : relative;
     bottom : 0;
     left: 0;
     list-style-type: none;
     width: 100%;
     padding: 0;
-
     li{
       font-size: 3rem;
       text-decoration: none;
+      margin: 2%;
       padding: 10px 15px;
+ 
+      width: 90%;
+      
 
       &:hover{
+        background-color: gray;
         cursor : pointer;
       }
 
@@ -367,7 +377,12 @@ ul li {
     }
   }
 }
-
+@media screen and (min-width : 601px) {
+  .hamburger-wrapper{
+    display: none;
+  }
+ 
+}
 @media screen and (max-width : 600px) {
   html{
     font-size : 5pt;
