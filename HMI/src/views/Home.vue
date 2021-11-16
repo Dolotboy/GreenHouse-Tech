@@ -13,7 +13,7 @@
         <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
       </div>
     </form>
-    <div class="filtersWrapper" @click="filterData">
+    <div class="filtersWrapper" @click="filterData($event)">
       <div class="filterPlantTypeWrapper">
         <div>
           <label>Fruits</label>
@@ -31,33 +31,33 @@
       <div class="filterPlantFamilyWrapper">
         <div>
           <label>Famille 1</label>
-          <input type="checkbox" name="cbPlantFamily" value="family1" class="familyFilter">
+          <input type="checkbox" name="familyFilter" value="family1" class="chkPlantFamily">
         </div>
         <div>
           <label>Famille 2</label>
-          <input type="checkbox" name="cbPlantFamily" value="family2" class="familyFilter">
+          <input type="checkbox" name="familyFilter" value="family2" class="chkPlantFamily">
         </div>
         <div>
           <label>Tous</label>
-          <input type="checkbox" name="cbPlantFamily" value="ALL" class="familyFilter" checked>
+          <input type="checkbox" name="familyFilter" value="ALL" class="chkPlantFamily"  checked>
         </div>
       </div>
       <div class="filterPlantDifficultyWrapper">
         <div>
           <label>Facile</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="EASY" class="difficultyFilter">
+          <input type="checkbox" name="difficultyFilter" value="1" class="chkPlantDifficulty">
         </div>
         <div>
           <label>Intermédiaire</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="INTERMEDIATE" class="difficultyFilter">
+          <input type="checkbox" name="difficultyFilter" value="2" class="chkPlantDifficulty">
         </div>
         <div>
           <label>Difficile</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="DIFFICULT" class="difficultyFilter">
+          <input type="checkbox" name="difficultyFilter" value="3" class="chkPlantDifficulty">
         </div>
         <div>
           <label>Tous</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="ALL" class="difficultyFilter" checked>
+          <input type="checkbox" name="difficultyFilter" value="ALL" class="chkPlantDifficulty" checked>
         </div>
       </div>
       <div class="filterAlphaWrapper">
@@ -153,10 +153,6 @@ export default {
       for(let i=0; i<typeRadios.length; i++)
         if(typeRadios[i].checked)
           dataType.push(typeRadios[i].value.toUpperCase());
-      if(dataType.length == 0){
-        this.activateAllCheckbox(".typeFilter");
-        dataType.push("ALL");
-      }
 
       //if all is checked, do not filter
       if(dataType.includes("ALL"))
@@ -169,17 +165,14 @@ export default {
       this.visiblePlants = tempPlants;
     },
     filterFamily(){
-      let familyCheckboxes = document.querySelectorAll(".familyFilter");
+      let familyCheckboxes = document.querySelectorAll(".chkPlantFamily");
       let dataFamily = [];
       let tempPlants = [];
 
+      this.toggleCheckboxAll(".chkPlantFamily");
       for(let i=0; i<familyCheckboxes.length; i++)
         if(familyCheckboxes[i].checked)
           dataFamily.push(familyCheckboxes[i].value.toUpperCase());
-      if(dataFamily.length == 0){
-        this.activateAllCheckbox(".familyFilter");
-        dataFamily.push("ALL");
-      }
 
       //if all is checked, do not filter
       if(dataFamily.includes("ALL"))
@@ -191,20 +184,64 @@ export default {
 
       this.visiblePlants = tempPlants;
     },
-    filterData(){
+    filterDifficulty(){
+      let difficultyCheckboxes = document.querySelectorAll(".chkPlantDifficulty");
+      let dataDifficulty = [];
+      let tempPlants = [];
+
+      this.toggleCheckboxAll(".chkPlantDifficulty");  
+      for(let i=0; i<difficultyCheckboxes.length; i++)
+        if(difficultyCheckboxes[i].checked)
+          dataDifficulty.push(difficultyCheckboxes[i].value);
+
+      //if all is checked, do not filter
+      if(dataDifficulty.includes("ALL"))
+        return;
+
+      for(let i = 0; i < this.visiblePlants.length; i++)
+        if(dataDifficulty.includes(this.visiblePlants[i].plantDifficulty.toString()))
+          tempPlants.push(this.visiblePlants[i]);
+
+      this.visiblePlants = tempPlants;
+    },
+    filterData(event){
+      let el = event.target;
+      if(el.type == "checkbox" && el.value.toUpperCase() == "ALL" && el.className.startsWith("chk"))
+        this.setFilterToDefault(el.className);
+
       this.visiblePlants = this.plants;
       this.filterType();
       this.filterFamily();
+      this.filterDifficulty();
       this.filterAlphabetical();      
     },
-    activateAllCheckbox(selector){
+    toggleCheckboxAll(selector){
       let checkboxes = document.querySelectorAll(selector);
-      console.log(checkboxes)
-      for(let i = 0; i < checkboxes.length; i++)
-        if(checkboxes[i].value.toUpperCase() == "ALL"){
-          checkboxes[i].checked = true;
-          return;
+      let cpt = 0; 
+      let chkAll = null;
+
+      for(let i = 0; i < checkboxes.length; i++){
+        if(checkboxes[i].checked){
+          cpt++;
         }
+        if(checkboxes[i].value.toUpperCase() == "ALL")
+          chkAll = checkboxes[i];
+      }
+
+      if(chkAll == null)
+        return;
+      if(cpt == 0)
+        chkAll.checked = true;
+      else if (cpt > 1)
+        chkAll.checked = false;
+    },
+    setFilterToDefault(selector){
+      let checkboxes = document.querySelectorAll("." + selector);
+      for(let i = 0; i < checkboxes.length; i++)
+        if(checkboxes[i].value.toUpperCase() == "ALL")
+          checkboxes[i].checked = true;
+        else
+          checkboxes[i].checked = false;
     },
     toggleDetails(num){
       let plant = this.plants[0];
