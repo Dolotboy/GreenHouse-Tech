@@ -23,8 +23,8 @@
      <ul class="links">
           <li @click="toggleNavMobile"><router-link to="/">Accueil</router-link></li> 
           <li @click="toggleNavMobile"><router-link to="/about">À propos</router-link></li>
-          <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
-          <li v-if="!isLoggedIn" @click="toggleLogin"> connecter </li> 
+          <li v-if="!isLoggedIn" @click="toggleRegister"><img src="">inscrire</li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"><img  url="../assets/baseline_login_black_18dp.png">connecter </li> 
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
       </ul>
     </nav>
@@ -293,8 +293,8 @@ ul li {
   position : absolute;
   top : 0;
   left : 0;
-  background: rgb(88, 88, 88);
-  color : black;
+  background: rgb(251, 252, 253);
+  color : white;
   height : 7.5vh;
   caret-color: transparent;
   z-index:999;
@@ -337,6 +337,7 @@ ul li {
     position : relative;
     bottom : 0;
     left: 0;
+    
     list-style-type: none;
     width: 100%;
     padding: 0;
@@ -354,9 +355,11 @@ ul li {
         cursor : pointer;
       }
 
+
       a{
         color : white;
       }
+  
     }
   }
 }
