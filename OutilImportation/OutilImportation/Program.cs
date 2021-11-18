@@ -16,7 +16,7 @@ namespace OutilImportation
 
         static void Main(string[] args)
         {
-            string env = "http://testenv.apipcst.xyz/api/";
+            string env = "http://127.0.0.1:8000/api/";
             if (args.Length > 0)
                 env = args[0];
 
@@ -30,11 +30,11 @@ namespace OutilImportation
         static void LoadVeggies(List<Plant> veggies)
         {
             Excel.Application app = new Excel.Application();
-            Excel.Workbook wb = app.Workbooks.Open(baseDir + "veggies.xlsx");
+            Excel.Workbook wb = app.Workbooks.Open(baseDir + "veggies2.xlsx");
             Excel.Worksheet ws = (Excel.Worksheet)wb.Sheets[1];
             Excel.Range range = ws.UsedRange;
 
-            for (int i = 2; i < 15; i++)
+            for (int i = 2; i < 22 ; i++)
             {
                 if (ConvertCellToString(range.Cells[i, 1]) == "")
                     break;
@@ -42,22 +42,23 @@ namespace OutilImportation
                 string now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 List<ConditionNb> conds = new List<ConditionNb>()
                 {
-                    new ConditionNb(){type = "temperature", min = ConvertCellToString(range.Cells[i, 2], true), max = ConvertCellToString(range.Cells[i, 3], true), unit = "°C", create_at = now, updated_at = now},
-                    new ConditionNb(){type = "humidity", min = ConvertCellToString(range.Cells[i, 4], true), max = ConvertCellToString(range.Cells[i, 5], true), unit = "%", create_at = now, updated_at = now},
-                    new ConditionNb(){type = "ph", min = ConvertCellToString(range.Cells[i, 15], true), max = ConvertCellToString(range.Cells[i, 16], true), unit = "ph", create_at = now, updated_at = now},
-                    new ConditionNb(){type = "plantSpacing", min = ConvertCellToString(range.Cells[i, 7], true), max = ConvertCellToString(range.Cells[i, 8], true), unit = "cm", create_at = now, updated_at = now},
+                    new ConditionNb(){type = "temperature", min = ConvertCellToString(range.Cells[i, 11], true), max = ConvertCellToString(range.Cells[i, 12], true), unit = "°C", create_at = now, updated_at = now},
+                    new ConditionNb(){type = "humidity", min = ConvertCellToString(range.Cells[i, 13], true), max = ConvertCellToString(range.Cells[i, 14], true), unit = "%", create_at = now, updated_at = now},
+                    new ConditionNb(){type = "ph", min = ConvertCellToString(range.Cells[i, 19], true), max = ConvertCellToString(range.Cells[i, 20], true), unit = "ph", create_at = now, updated_at = now},
+                    new ConditionNb(){type = "plantSpacing", min = ConvertCellToString(range.Cells[i, 16], true), max = ConvertCellToString(range.Cells[i, 17], true), unit = "cm", create_at = now, updated_at = now},
+                    new ConditionNb(){type = "exposureTime", min = ConvertCellToString(range.Cells[i, 21], true), max = ConvertCellToString(range.Cells[i, 22], true), unit = "°H", create_at = now, updated_at = now},
                 };
                 Plant veg = new Plant()
                 {
-                    plantImg = "empty",
-                    plantName = ConvertCellToString(range.Cells[i, 1]),
-                    plantType = ConvertCellToString(range.Cells[i, 14]),
-                    plantFamily = "empty",
-                    plantSeason = "empty",
-                    plantGroundType = ConvertCellToString(range.Cells[i, 12]),
-                    plantDaysConservation = ConvertCellToString(range.Cells[i, 13], true),
-                    plantDescription = ConvertCellToString(range.Cells[i, 11]),
-                    plantDifficulty = "1",
+                    plantImg = ConvertCellToString(range.Cells[i, 1]),
+                    plantName = ConvertCellToString(range.Cells[i, 2]),
+                    plantType = ConvertCellToString(range.Cells[i, 3]),
+                    plantFamily = ConvertCellToString(range.Cells[i, 4]),
+                    plantSeason = ConvertCellToString(range.Cells[i, 5]),
+                    plantGroundType = ConvertCellToString(range.Cells[i, 6]),
+                    plantDaysConservation = ConvertCellToString(range.Cells[i, 7], true),
+                    plantDescription = ConvertCellToString(range.Cells[i, 8]),
+                    plantDifficulty = ConvertCellToString(range.Cells[i, 9]),
                     plantBestNeighbor = ConvertCellToString(range.Cells[i, 10]),
                     conditionsNbs = conds
                 };
