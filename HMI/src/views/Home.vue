@@ -4,16 +4,13 @@
     <div class="bg-text">
       <p>Aide à la décision</p>
       <h1>Serre-Tech</h1>
-    <div class="logo" @click="filterAlphabetical">
-      <img src="../../Images/LogoV1.png">
-    </div>
   </div>
-    <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
-      <div class="autocomplete" style="width:300px;">
-        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
-      </div>
-    </form>
-    <div class="filtersWrapper" @click="filterData($event)">
+    <div style="margin-top : 100px;" class="filtersWrapper" @click="filterData($event)">
+      <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
+        <div class="autocomplete" style="width:300px;">
+          <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
+        </div>
+      </form>
       <div class="filterPlantTypeWrapper">
         <div>
           <label>Fruits</label>
@@ -117,7 +114,7 @@ import Details from '../components/Details.vue'
 import Plant from '../components/Plant.vue'
 import $ from '../../node_modules/jquery/dist/jquery.js'
 import toolbox from '../toolbox.js'
-import autoComplete from '../autocomplete.js'
+import autoComplete, { autocomplete } from '../autocomplete.js'
 
 export default {
   name: 'Home',
@@ -158,7 +155,7 @@ export default {
       if(dataType.includes("ALL"))
         return;
 
-      for(let i= 0; i < visiblePlants.length; i++)
+      for(let i= 0; i < this.visiblePlants.length; i++)
         if(dataType.includes(this.visiblePlants[i].plantType.toUpperCase()))
           tempPlants.push(this.visiblePlants[i]);
 
@@ -204,16 +201,28 @@ export default {
 
       this.visiblePlants = tempPlants;
     },
-    filterData(event){
-      let el = event.target;
-      if(el.type == "checkbox" && el.value.toUpperCase() == "ALL" && el.className.startsWith("chk"))
-        this.setFilterToDefault(el.className);
-
+    async filterData(event){
+      if(event != null){
+        let el = event.target;
+        if(el.type == "checkbox" && el.value.toUpperCase() == "ALL" && el.className.startsWith("chk"))
+          this.setFilterToDefault(el.className);
+      }
       this.visiblePlants = this.plants;
+
+      if(this.searchBarValue != null && this.searchBarValue != ""){
+        let tempPlants = [];
+        for(let i = 0; i< this.visiblePlants.length; i++)
+          if(this.visiblePlants[i].plantName.toUpperCase().startsWith(this.searchBarValue.toUpperCase()))
+            tempPlants.push(this.visiblePlants[i]);
+        this.visiblePlants = tempPlants;
+        console.log("god")
+        return;
+      }
+          
       this.filterType();
       this.filterFamily();
       this.filterDifficulty();
-      this.filterAlphabetical();      
+      this.filterAlphabetical();    
     },
     toggleCheckboxAll(selector){
       let checkboxes = document.querySelectorAll(selector);
@@ -253,16 +262,6 @@ export default {
       this.showDetails = !this.showDetails;
       this.detailedPlant = plant;
     },
-    async filterDataOld(){
-      await this.initialisation();
-      this.visiblePlants = [];
-      for(let i = 0; i < this.plants.length; i++)
-        if(this.plants[i].plantName.toLowerCase().startsWith(this.searchBarValue.toLowerCase())) {
-          if(this.radioFilterValue == "All" || this.plants[i].plantType == this.radioFilterValue){
-            this.visiblePlants.push(this.plants[i]);
-          }
-        }
-    },
     async initialisation(){
       this.favorites = JSON.parse(localStorage.getItem('favorites'));
       let db = await toolbox.setDb();
@@ -272,13 +271,12 @@ export default {
       autoComplete.autocomplete(document.getElementById("searchBar"), strings);
       document.addEventListener('filter', (event) => {
         this.searchBarValue = event.detail;
-        this.filterData();
+        this.filterData(null);
       });
     },
     getAllStrings(plantType){
       let strings = [];
-      for(let i = 0; i < this.plants.length; i++)
-        if(plantType == "All" || this.plants[i].plantType == plantType)
+      for(let i = 0; i < this.visiblePlants.length; i++)
           strings.push(this.plants[i].plantName);
       return strings;
     }, 

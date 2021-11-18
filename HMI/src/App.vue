@@ -212,7 +212,7 @@ button{
 }
 
 #navDesktop{
-
+  top : 0;
   position : fixed;
   padding : 0 20%;
   caret-color: transparent;
