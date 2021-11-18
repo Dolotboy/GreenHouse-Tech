@@ -289,6 +289,7 @@ class ControllerAdd extends Controller
         $profile->firstName = $request->firstName;
         $profile->lastName = $request->lastName;
         $profile->access = "user";
+        $profile->emailConfirmed = false;
 
         try
         {

@@ -212,8 +212,10 @@ button{
 }
 
 #navDesktop{
+  top : 0;
   position : fixed;
   padding : 0 20%;
+  caret-color: transparent;
   display : flex;
   justify-content: space-between;
   width : 100vw;
@@ -290,6 +292,7 @@ ul li {
   color : white;
   width : 100vw;
   height : 7.5vh;
+  caret-color: transparent;
 
   .top-wrapper{
     position : relative;

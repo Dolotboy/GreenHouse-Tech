@@ -14,7 +14,7 @@ class AddTokenTable extends Migration
     public function up()
     {
         Schema::create('tblTokens', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('idToken');
             $table->string('token');
             $table->date('valid_until');
             $table->unsignedBigInteger('idProfile');
