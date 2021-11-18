@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
   <div class="image">
-  <img class="imageIcon" src="https://www.wingsforkids.org/wp-content/uploads/cropped-placeholder.jpg">
+    <img class="imageIcon" :src="plant.plantImg" alt="Image vegetable">
   </div>
   <div class="nom">
   <h1>{{ plant.plantName }}</h1>
@@ -122,14 +122,15 @@ export default {
 }
 .image{
   width: 20%;
-  background-color: firebrick;
   height: 60%;
-  margin-left: 5%;
-
+  position : absolute;
+  top : 50%;
+  left : 5%;
+  transform: translateY(-50%);
 }
 .imageIcon{
-  width: 100%;
-  height:100%;
+  max-width: 100%;
+  max-height:100%;
 }
 .nom h1{
   max-width: 100%;
@@ -146,10 +147,11 @@ export default {
 }
 .image{
   width: 20%;
-  background-color: firebrick;
   height: 60%;
-  margin-left: 5%;
-
+  position : absolute;
+  top : 50%;
+  left : 5%;
+  transform : translateY(-50%);
 }
 .imageIcon{
   width: 100%;
