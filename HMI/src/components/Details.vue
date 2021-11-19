@@ -2,7 +2,7 @@
     <div class="details">
        
         <div class="column">
-        <div class="top"><img  src="../../Images/LogoV1.png"></div>
+        <div class="top"><img :src="plant.plantImg"></div>
         <div class="detailsTop">
         <div class="image"><img class=""></div>
         <div class="infoTop" >

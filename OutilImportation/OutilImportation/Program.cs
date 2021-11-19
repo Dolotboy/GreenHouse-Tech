@@ -13,6 +13,8 @@ namespace OutilImportation
     class Program
     {
         static string baseDir = Directory.GetCurrentDirectory().Split(new string[] { "bin" }, StringSplitOptions.None)[0];
+        static DateTime lastApiCall = default(DateTime);
+        static int apiCallInterval = 2;
 
         static void Main(string[] args)
         {
@@ -70,20 +72,23 @@ namespace OutilImportation
             app.Quit();
         }
 
+        static HttpClient GenerateClient()
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Add("Authorization", "Basic " + System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes("frank" + ":" + "frank")));
+            return client;
+        }
+
         static async void PushData(string baseUrl, List<Plant> veggies)
         {
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Add("Authorization", "Basic " + System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes("frank" + ":" + "frank")));
-                    foreach (Plant veg in veggies)
-                        await PushPlant(baseUrl, veg, client);
-                }
+                foreach (Plant veg in veggies)
+                    await PushPlant(baseUrl, veg, GenerateClient());
                 Interface.WriteLine("Everything was pushed.");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Interface.WriteLine(e.Message);
             }
@@ -120,11 +125,16 @@ namespace OutilImportation
             string responseString;
             try
             {
+                int secondsSinceLastAPICall = (int)((DateTime.Now - lastApiCall).TotalSeconds);
+                if (lastApiCall != default(DateTime) && secondsSinceLastAPICall < apiCallInterval)
+                    await Task.Delay((apiCallInterval - secondsSinceLastAPICall) * 1000);
+
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 responseString = await response.Content.ReadAsStringAsync();
+                lastApiCall = DateTime.Now;
                 return JsonConvert.DeserializeObject<Response>(responseString);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new Response() { id = "-1", message = $"{e.Message}\n{e.InnerException}", success = false };
             }
