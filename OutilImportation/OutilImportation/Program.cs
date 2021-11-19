@@ -14,11 +14,11 @@ namespace OutilImportation
     {
         static string baseDir = Directory.GetCurrentDirectory().Split(new string[] { "bin" }, StringSplitOptions.None)[0];
         static DateTime lastApiCall = default(DateTime);
-        static int apiCallInterval = 2;
+        static double apiCallInterval = 0.25;
 
         static void Main(string[] args)
         {
-            string env = "http://testenv.apipcst.xyz/api/";
+            string env = "http://localhost:8000/api/";
             if (args.Length > 0)
                 env = args[0];
 
@@ -35,12 +35,10 @@ namespace OutilImportation
             Excel.Workbook wb = app.Workbooks.Open(baseDir + "veggies.xlsx");
             Excel.Worksheet ws = (Excel.Worksheet)wb.Sheets[1];
             Excel.Range range = ws.UsedRange;
+            int i = 2;
 
-            for (int i = 2; i < 15; i++)
-            {
-                if (ConvertCellToString(range.Cells[i, 1]) == "")
-                    break;
-
+            while(ConvertCellToString(range.Cells[i, 1]) != "empty")
+            { 
                 string now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 List<ConditionNb> conds = new List<ConditionNb>()
                 {
@@ -66,6 +64,7 @@ namespace OutilImportation
                 veggies.Add(veg);
                 if (i % 5 == 0)
                     Interface.WriteLine($"Loaded {i} vegetals");
+                i++;
             }
             wb.Close();
             app.Quit();
@@ -124,13 +123,15 @@ namespace OutilImportation
             string responseString;
             try
             {
-                int secondsSinceLastAPICall = (int)((DateTime.Now - lastApiCall).TotalSeconds);
+                double secondsSinceLastAPICall = (DateTime.Now - lastApiCall).TotalSeconds;
                 if (lastApiCall != default(DateTime) && secondsSinceLastAPICall < apiCallInterval)
-                    await Task.Delay((apiCallInterval - secondsSinceLastAPICall) * 1000);
+                    await Task.Delay(TimeSpan.FromSeconds((apiCallInterval - secondsSinceLastAPICall)));
 
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 responseString = await response.Content.ReadAsStringAsync();
                 lastApiCall = DateTime.Now;
+                Response test = JsonConvert.DeserializeObject<Response>(responseString);
+
                 return JsonConvert.DeserializeObject<Response>(responseString);
             }
             catch (Exception e)
