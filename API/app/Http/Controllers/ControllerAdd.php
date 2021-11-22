@@ -8,13 +8,14 @@ use App\Models\FavorableConditionDate;
 use App\Models\FavorableConditionNb;
 use App\Models\Favorite;
 use App\Models\Profile;
+use App\Models\Family;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\AccountCreated;
+//use Illuminate\Support\Facades\Mail;
+//use App\Mail\AccountCreated;
 
 class ControllerAdd extends Controller
 {
@@ -23,7 +24,8 @@ class ControllerAdd extends Controller
 
     public function indexPlant(Request $request)
     {
-        return view('newPlant');        
+        $family = Family::All();
+        return view('newPlant', ["family" => $family]);        
     }
 
     public function addPlant(Request $request)
@@ -68,6 +70,37 @@ class ControllerAdd extends Controller
         Controller::incrementVersion();
 
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $plant->idPlant], 200);
+    }
+
+    public function indexFamily(Request $request)
+    {
+        return view('newFamily');        
+    }
+
+    public function addFamily(Request $request)
+    {
+        $family = new Family();
+        //$request = json_decode(file_get_contents("php://input"));
+
+        if (is_null($request->familyName))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+        
+        $family->familyName = $request->familyName;
+        
+        try
+        {
+            $family->save();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
+        Controller::incrementVersion();
+
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $family->idFamily], 200);
     }
 
     /* ------------------- PROBLEM ------------------- */
@@ -300,7 +333,7 @@ class ControllerAdd extends Controller
         }
 
         Controller::incrementVersion();
-        Mail::to($profile->email)->send(new AccountCreated($profile)); /*->cc("exemple@gmail.com")*/
+        //Mail::to($profile->email)->send(new AccountCreated($profile)); /*->cc("exemple@gmail.com")*/
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $profile->idProfile], 200);
     }
 
