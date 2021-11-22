@@ -20,12 +20,18 @@
           <div></div>
         </div>
       </div>
-      <ul class="links">
-          <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
+     
+     <ul class="links">
+          <li @click="toggleNavMobile"><img  src=".\assets\outline_home_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;"  to="/">Accueil</router-link></p></li> 
+          <li @click="toggleNavMobile"><img  src=".\assets\outline_info_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;" to="/about">À propos</router-link></p></li>
+          <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>inscrire</p></li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>connecter</p></li> 
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
+          <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>déconnection</p></li> 
       </ul>
+     
     </nav>
-    <router-view :key="$route.Home" @popLogin="toggleLogin"/>  
+    <router-view @popLogin="toggleLogin"/>  
     <!--<div @click="login(1)">login</div>
     <div @click="logout">logout</div>-->
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
@@ -69,7 +75,7 @@ export default {
   },
   methods :{
     toggleRegister(){
-      this.showRegister = !this.showRegister;
+      this.showRegister = !this.showRegister;   
     },
     toggleLogin(){
       this.showLogin = !this.showLogin;
@@ -79,14 +85,15 @@ export default {
       let navMobile = document.querySelector("#navMobile");
       let hamburger = document.querySelector(".hamburger-wrapper");
       if(!this.mobileNavIsOpened){
-        links.style.display = "flex";
+      links.style.display = "flex";
       navMobile.style.height = "100vh"; 
+      navMobile.style.width="40vw";
       }
       else{
         links.style.display = "none";
         navMobile.style.height = "7.5vh";
+        navMobile.style.width="0vw"
       }
-      
       this.mobileNavIsOpened = !this.mobileNavIsOpened;
     },
     async checkToken(){
@@ -121,8 +128,7 @@ export default {
       let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
-      for(let i = 0; i < this.plants.length; i++){
-        
+      for(let i = 0; i < this.plants.length; i++){   
         entrepot.add(toolbox.GenerateObject(this.plants[i]));
       }
     },
@@ -200,26 +206,22 @@ export default {
 *{
   box-sizing: border-box;
 }
-
 html, body{
   font-size : 10pt;
   margin : 0;
   padding : 0;
 }
-
 button{
   background-color: black;
   color : white;
   border : none;
   padding : 10px;
   font-size : 1.2rem;
-
   &:hover{
     opacity : .8;
     cursor : pointer;
   }
 }
-
 #navDesktop{
   top : 0;
   position : fixed;
@@ -231,7 +233,6 @@ button{
   align-items: center;
   text-transform: uppercase;
   font-size: 1.2rem;    
-  
   .logo{
     width: 60px;
     height: 60px;
@@ -240,7 +241,7 @@ button{
       max-width: 100%;
     }
   } 
-
+  
 ul {
   list-style-type: none;
   overflow: hidden;
@@ -270,122 +271,144 @@ ul li {
   padding: 10px 15px;
 }
 }
-
 .lblInp-div{
   display : flex;
   justify-content : end;
   height : 2rem;
   margin : 20px 0;
-
   label{
     font-size : 2rem;
-
     &:after{
       content : " :";
     }
   }
-
   input{
     width : 50%;
     height : 100%;
     margin-left : 1vw;
   }
 }
-
 #navMobile{
   display : none;
-  position : relative;
+  position : fixed;
   top : 0;
   left : 0;
-  background: black;
-  color : white;
-  width : 100vw;
+  background: rgb(68, 68, 68);
+  color : rgb(255, 255, 255);
   height : 7.5vh;
   caret-color: transparent;
+  z-index:50;
 
   .top-wrapper{
     position : relative;
     top : 0;
     left : 0;
     height : 7.5vh;
+    background-color: rgb(0, 78, 42);
+    z-index:60;
+    display: flex;
   }
-
   .hamburger-wrapper{
       position : absolute;
       top : 50%;
+      min-width: 45px;
+      min-height: 45px;
       left : 0;
       display : flex;
+      flex:1;
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
       width : 10vw;
       height : 10vw;
       transform : translate(0,-50%);
-
       &:hover{
         cursor : pointer;
         opacity : 0.8;
       }
-
       div{
         width : 80%;
-        height : 15%;
+        height : 13%;
         background: white;
       }
   }
-
+ .profilNum
+ {
+   flex:1;
+  p{
+    display:none;
+  }
+ }
   .links{
     display : none;
     flex-direction: column;
-    position : absolute;
+    height: 90vh;
+    position : relative;
     bottom : 0;
     left: 0;
     list-style-type: none;
     width: 100%;
     padding: 0;
-
+    #logout{
+         position: fixed;
+         width: 40vw;
+         bottom: 0;
+        }
     li{
-      font-size: 3rem;
+      display:flex;
+      align-items:center;
+      font-size: 2.5rem;
       text-decoration: none;
-      padding: 10px 15px;
-
+      margin: 1%;
+      padding: 10px 5px;
+      width: 99%;
+      height: 7vh;    
+      text-align: center;
+       img
+       {
+         flex:1;
+         max-height: 24px;
+          max-width: 24px;
+       }
+       p{
+         flex:1;
+       }
       &:hover{
+        background-color: gray;
         cursor : pointer;
       }
-
       a{
         color : white;
       }
     }
   }
 }
-
 @media screen and (max-width : 1200px) {
   html{
     font-size : 7.5pt;
   }
-  
   .lblInp-div{
     flex-direction: column;
     align-items: start;
     height : 7rem;
-
     input{
       width : 100% !important;
       margin : 0 !important;
     }
   }
 }
-
+@media screen and (min-width : 601px) {
+  .hamburger-wrapper{
+    display: none;
+  } 
+}
 @media screen and (max-width : 600px) {
   html{
     font-size : 5pt;
   }
-    
   #navDesktop{
     display : none;
   }
-
   #navMobile{
     display : block;
   }
