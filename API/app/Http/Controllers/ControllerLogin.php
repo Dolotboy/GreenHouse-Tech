@@ -59,4 +59,15 @@ class ControllerLogin extends Controller
             return response()->json(['message'=> "Profile not found", 'success' => false, 'status' => "Request Failed", 'id' => null, 'Exception' => $e], 404);
         }
     }
+
+    public function confirmEmail(Request $request)
+    {
+        $response = $this->checkToken($request);
+        $decodedResponse = json_decode($response);
+
+        if ($decodedResponse->success)
+        {
+            // Change email to confirmed
+        }
+    }
 }

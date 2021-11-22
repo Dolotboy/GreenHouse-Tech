@@ -8,6 +8,7 @@ use App\Models\FavorableConditionDate;
 use App\Models\FavorableConditionNb;
 use App\Models\Favorite;
 use App\Models\Profile;
+use App\Models\Family;
 use App\Models\AssignProblem;
 use App\Models\Version;
 use Illuminate\Http\Request;
@@ -441,6 +442,26 @@ class ControllerDetail extends Controller
     {
         try
         {
+            $families = Family::All();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "Error while retrieving families or there is no family in the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
+        }
+        if (is_null($families))
+        {
+            return response()->json(['message'=> "Error, families not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
+        }
+
+        $json = json_encode($families);
+
+        return $json;
+    }
+
+    /*public function searchAllPlantFamilies()
+    {
+        try
+        {
         $families = Plant::select('plantFamily')->groupBy('plantFamily')->get();
         }
         catch (Exception $e)
@@ -455,7 +476,7 @@ class ControllerDetail extends Controller
         $json = json_encode($families);
 
         return $json;
-    }
+    }*/
 
     public function searchAllPlantDifficulties()
     {
