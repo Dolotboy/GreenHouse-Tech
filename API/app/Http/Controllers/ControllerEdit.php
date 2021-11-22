@@ -58,13 +58,22 @@ class ControllerEdit extends Controller
         {
             return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
+
+        try
+        {
+            $family = Family::All();
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "There is no family or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
         
         if (is_null($plant)) // Mostly when it doesn't exist
         {
             return response()->json(['message'=> "Error, plant not found", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
         }
 
-        return view('editPlant', ["plant" => $plant]);
+        return view('editPlant', ["plant" => $plant, "family" => $family]);
     }
 
     public function editPlantSent(Request $request, $idPlant)

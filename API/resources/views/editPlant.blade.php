@@ -19,13 +19,67 @@
                                 <div class="border-bottom pb-3 mb-3">
                                     <h3 class="mb-3">Plant Img: <input type="text" name='plantImg' value="{{ $plant["plantImg"] }}" required></h3>
                                     <h3 class="mb-3">Plant Name: <input type="text" name='plantName' value=" {{ $plant["plantName"] }}" required></h3>
-                                    <h3 class="mb-3">Plant Type: <input type="text" name='plantType' value="{{ $plant["plantType"] }}" required></h3>
-                                    <h3 class="mb-3">Plant Family: <input type="text" name='plantFamily' value="{{ $plant["plantFamily"] }}" required></h3>
+                                    <h3 class="mb-3"> Plant Type:
+                                        <select id="plantType" name='plantType'>
+                                            @if( $plant['plantType'] == "Fruit")
+                                            {
+                                                <option value="Fruit" selected>Fruit</option>
+                                                <option value="Légume">Légume</option>
+                                            }
+                                            @else
+                                            {
+                                                <option value="Fruit">Fruit</option>
+                                                <option value="Légume" selected>Légume</option>
+                                            }
+                                            @endif
+
+                                        </select>
+                                    </h3>
+                                    <h3 class="mb-3"> Plant Family:
+                                        <select id="plantFamily" name='plantFamily'>
+                                            @foreach ($family as $f)
+                                            @if($plant['plantFamily'] == $f['familyName'])
+                                            { 
+                                                <option value="{{ $f['familyName'] }}" selected>{{ $f['familyName'] }}</option>
+                                            }   
+                                            @else
+                                             {
+                                                <option value="{{ $f['familyName'] }}">{{ $f['familyName'] }}</option>
+                                             }   
+                                            @endif
+                                            @endforeach
+                                        </select>
+                                    </h3>
                                     <h3 class="mb-3">Plant Season: <input type="text" name='plantSeason' value="{{ $plant["plantSeason"] }}" required></h3>
                                     <h3 class="mb-3">Plant Ground Type: <input type="text" name='plantGroundType' value="{{ $plant["plantGroundType"] }}" required></h3>
                                     <h3 class="mb-3">Plant Days Conservations: <input type="text" name='plantDaysConservation' value="{{ $plant["plantDaysConservation"] }}" required></h3>
                                     <h3 class="mb-3">Plant Description <input type="text" name='plantDescription' value="{{ $plant["plantDescription"] }}" required></h3>  
-                                    <h3 class="mb-3">Plant Difficulty <input type="text" name='plantDifficulty' placeholder="Plant Difficulty" value="{{ $plant["plantDifficulty"] }}" required></h3>
+                                    <h3 class="mb-3"> Plant Difficulty: 
+                                        <select id="plantDifficulty" name='plantDifficulty'>
+                                            @if( $plant['plantDifficulty'] == "1")
+                                            {
+                                                echo"
+                                                <option value='1' selected>1</option>
+                                                <option value='2'>2</option>
+                                                <option value='3'>3</option>";
+                                            }
+                                            @elseif( $plant['plantDifficulty'] == "2")
+                                            {
+                                                echo"
+                                                <option value='1'>1</option>
+                                                <option value='2' selected>2</option>
+                                                <option value='3'>3</option>";
+                                            }
+                                            @else 
+                                            {
+                                                echo"
+                                                <option value='1'>1</option>
+                                                <option value='2'>2</option>
+                                                <option value='3' selected>3</option>"; 
+                                            }
+                                            @endif
+                                        </select>
+                                    </h3>
                                     <h3 class="mb-3">Plant Best Neighbor <input type="text" name='plantBestNeighbor' placeholder="Plant Best Neighbor" value="{{ $plant["plantBestNeighbor"] }}" required></h3>     
                                     <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Submit"></h3>                                
                                 </div>
