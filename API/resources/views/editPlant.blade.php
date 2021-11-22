@@ -32,7 +32,6 @@
                                                 <option value="Légume" selected>Légume</option>
                                             }
                                             @endif
-
                                         </select>
                                     </h3>
                                     <h3 class="mb-3"> Plant Family:
