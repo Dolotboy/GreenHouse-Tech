@@ -14,10 +14,10 @@
                         <div class="product-details">
                         <h3>Add a favorite condition date</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h3 class="mb-3"> <input type="text" name='type' placeholder="Type" value="" required></h3>
-                                <h3 class="mb-3"> <input type="date" name='start' placeholder="Start" value="" required></h3>
-                                <h3 class="mb-3"> <input type="date" name='end' placeholder="End" value="" required></h3>   
-                                <h3 class="mb-3"> <input type="text" name='location' placeholder="Location" value="" required></h3>                                 
+                                <h3 class="mb-3">Type: <input type="text" name='type' placeholder="Type" value="" required></h3>
+                                <h3 class="mb-3">Start: <input type="date" name='start' placeholder="Start" value="" required></h3>
+                                <h3 class="mb-3">End: <input type="date" name='end' placeholder="End" value="" required></h3>   
+                                <h3 class="mb-3">Location: <input type="text" name='location' placeholder="Location" value="" required></h3>                                 
                                 <h3 class="mb-3"> <input type="submit" name='submit' value="Submit"></h3>                              
                             </div>
                         </div>
