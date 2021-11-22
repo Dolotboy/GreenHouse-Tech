@@ -20,8 +20,8 @@ export default {
 
 <style>
 .sk-cube-grid {
-  width: 15vw;
-  height: 15vw;
+  width: 10vw;
+  height: 10vw;
   position : absolute;
   top : 50%;
   left : 50%;
