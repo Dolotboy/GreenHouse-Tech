@@ -1,4 +1,4 @@
-exports.fetchData = (db) => {
+exports.fetchData = async (db) => {
     return new Promise(resolve => {
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");
