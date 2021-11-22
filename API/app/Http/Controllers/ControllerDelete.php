@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Family;
 use App\Models\Plant;
 use App\Models\Problem;
 use App\Models\FavorableConditionDate;
@@ -12,8 +13,8 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail; 
-use App\Mail\AccountDeleted; 
+//use Illuminate\Support\Facades\Mail; 
+//use App\Mail\AccountDeleted; 
 
 class ControllerDelete extends Controller
 {
@@ -64,6 +65,44 @@ class ControllerDelete extends Controller
             {
                 return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
             }
+    }
+
+    public function indexFamily()
+    { 
+        return view('deleteSearchFamily');
+    }
+
+    public function deleteFamily($idFamily)
+    {
+        if (is_null($idFamily))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idFamily], 400);
+        }
+
+        try
+        {
+            $family = Family::Find($idFamily);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The family doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idFamily], 400);
+        }
+
+        if (is_null($family))
+        {
+            return response()->json(['message'=> "Error, family not found", 'success' => false, 'status' => "Request Failed", 'id' => $idFamily], 404);
+        }
+            
+        try
+        {
+            Family::destroy($idFamily);
+            Controller::incrementVersion();
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idFamily], 200);
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while deleting data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idFamily], 400);
+        }
     }
 
     public function indexProblem()
@@ -240,7 +279,7 @@ class ControllerDelete extends Controller
             {
                 Profile::destroy($idProfile);
                 Controller::incrementVersion();
-                Mail::to($profile->email)->send(new AccountDeleted($profile)); /*->cc("exemple@gmail.com")*/
+                //Mail::to($profile->email)->send(new AccountDeleted($profile)); /*->cc("exemple@gmail.com")*/
                 return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
             }
             catch(Exception $e)
@@ -285,7 +324,7 @@ class ControllerDelete extends Controller
             {
                 Profile::destroy($idProfile);
                 Controller::incrementVersion();
-                Mail::to($profile->email)->send(new AccountDeleted($profile)); /*->cc("exemple@gmail.com")*/
+                //Mail::to($profile->email)->send(new AccountDeleted($profile)); /*->cc("exemple@gmail.com")*/
                 return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
             }
             catch(Exception $e)
