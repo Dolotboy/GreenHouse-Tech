@@ -62,6 +62,7 @@ export default {
           data: JSON.stringify(user),
           success: function(status)
           {
+            localStorage.setItem("loggedInToken", status.id);
             that.$emit("loggedIn", status.id); 
           }
         });

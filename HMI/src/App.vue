@@ -105,7 +105,6 @@ export default {
 
       let version = localStorage.getItem('apiVersion');
       let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
-      this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
       if(version == undefined || version != apiVersion){
         await this.ClearDb();
         localStorage.setItem('apiVersion', apiVersion);
@@ -117,7 +116,6 @@ export default {
       await this.checkToken();
 
       this.showLoading = false;
-      this.$router.push('/')
     },
     async ClearDb(){
       let db = await toolbox.setDb();
@@ -131,6 +129,7 @@ export default {
       for(let i = 0; i < this.plants.length; i++){   
         entrepot.add(toolbox.GenerateObject(this.plants[i]));
       }
+      location.reload();
     },
     GetApiVersion(url){
       return new Promise(resolve =>{
