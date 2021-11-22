@@ -25,26 +25,29 @@
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
       </ul>
     </nav>
-    <router-view @update="this.$forceUpdate" @popLogin="toggleLogin"/>  
+    <router-view :key="$route.Home" @popLogin="toggleLogin"/>  
     <!--<div @click="login(1)">login</div>
     <div @click="logout">logout</div>-->
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
     <Register v-if="showRegister" @close="toggleRegister"/>
+    <Loading v-if="showLoading"/>  
   </div>
 </template>
 
 <script>
-import toolbox from './toolbox.js'
-import Login from './components/Login.vue'
-import Register from './components/Register.vue'
-import FavCondition from './components/FavCondition.vue'
-import $ from '../node_modules/jquery/dist/jquery.js'
+import toolbox from './toolbox.js';
+import Login from './components/Login.vue';
+import Register from './components/Register.vue';
+import Loading from './components/Loading.vue';
+import FavCondition from './components/FavCondition.vue';
+import $ from '../node_modules/jquery/dist/jquery.js';
 
 export default {
   components :{
     Login,
     Register,
-    FavCondition
+    FavCondition,
+    Loading
   },
   data(){
       return{
@@ -54,6 +57,7 @@ export default {
           favorites : [],
           showLogin : false,
           showRegister : false,
+          showLoading : false,
           isLoggedIn : false,
           apiVersion : 0.0,
           mobileNavIsOpened : false,
@@ -90,6 +94,8 @@ export default {
         this.login(localStorage.getItem('loggedInToken'));
     },
     async Initialisation(){
+      this.showLoading = true;
+
       let version = localStorage.getItem('apiVersion');
       let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
       this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
@@ -102,6 +108,9 @@ export default {
       if(this.plants.length == 0)
         await this.DownloadContent();   
       await this.checkToken();
+
+      this.showLoading = false;
+      this.$router.push('/')
     },
     async ClearDb(){
       let db = await toolbox.setDb();
