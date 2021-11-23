@@ -17,13 +17,13 @@
                                     <h3 class="mb-3">Plant Img: <input type="text"   name='plantImg' placeholder="image Plant" value="" required></h3>
                                     <h3 class="mb-3">Plant Name: <input type="text"   name='plantName' placeholder="Plant Name" value="" required></h3>
                                     <h3 class="mb-3"> Plant Type:
-                                        <select id="plantType" name='plantType'>
+                                        <select id="plantType" name='plantType' required>
                                             <option value="Fruit">Fruit</option>
                                             <option value="Légume">Légume</option>
                                         </select>
                                     </h3>
                                     <h3 class="mb-3"> Plant Family:
-                                        <select id="plantFamily" name='plantFamily'>
+                                        <select id="plantFamily" name='plantFamily' required>
                                             @foreach ($family as $f)
                                                 <option value="{{ $f['familyName'] }}">{{ $f['familyName'] }}</option>
                                             @endforeach
@@ -34,7 +34,7 @@
                                     <h3 class="mb-3"> Plant Days Conservation: <input type="text"   name='plantDaysConservation' placeholder="Days of conservation" value="" required></h3>
                                     <h3 class="mb-3"> Plant Description: <input type="text"   name='plantDescription' placeholder="Plant Description" value="" required></h3>  
                                     <h3 class="mb-3"> Plant Difficulty: 
-                                        <select id="plantDifficulty" name='plantDifficulty'>
+                                        <select id="plantDifficulty" name='plantDifficulty' required>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>

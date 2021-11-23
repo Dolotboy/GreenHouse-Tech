@@ -17,9 +17,9 @@
                             <div class="product-details">
                             <h3>Edit a problem</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h2 class="mb-3">Problem Type: <input type="text"   id='v1' name='problemType' placeholder="Problem Type" value="{{ $problem["problemType"] }}" required></h2> 
-                                    <h2 class="mb-3">Problem Solution: <input type="text"   id='v2' name='problemSolution' placeholder="Problem Solution" value="{{ $problem["problemSolution"] }}" required></h2> 
-                                    <h3 class="mb-3">Problem Name: <input type="text"   id='v3' name='problemName' placeholder="Problem Name" value="{{ $problem["problemName"] }}" required></h2>     
+                                    <h3 class="mb-3">Problem Type: <input type="text"   id='v1' name='problemType' placeholder="Problem Type" value="{{ $problem["problemType"] }}" required></h3> 
+                                    <h3 class="mb-3">Problem Solution: <input type="text"   id='v2' name='problemSolution' placeholder="Problem Solution" value="{{ $problem["problemSolution"] }}" required></h3> 
+                                    <h3 class="mb-3">Problem Name: <input type="text"   id='v3' name='problemName' placeholder="Problem Name" value="{{ $problem["problemName"] }}" required></h3>     
                                     <h2 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Submit"></h2>                             
                                 </div>
                             </div>

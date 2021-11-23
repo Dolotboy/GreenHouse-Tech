@@ -14,7 +14,7 @@
                             <div class="product-details">
                             <h3>Add a Family</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h2 class="mb-3"> <input type="text"   name='familyName' placeholder="Family Name" value="" required></h2>
+                                    <h2 class="mb-3">Family Name: <input type="text"   name='familyName' placeholder="Family Name" value="" required></h2>
                                     <h3 class="mb-3"> <input type="submit" name='submit' value="Submit"></h3>                                     
                                 </div>
                             </div>
