@@ -10,10 +10,10 @@
   <!-- <input class="star" type="checkbox" title="Favoris" :checked="isFavorite" @click="toggleFavorite">  -->
 
   </div>
-  <div class="end">
+  <!--<div class="end">
   <p v-if="isFavorite">Favoris</p>
   <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
-  </div>
+  </div>-->
 </div>
 </template>
 
@@ -108,16 +108,15 @@ export default {
     font-size : 5pt;
     
   }
-  .wrapper{
-    position: relative;
-    border : solid 1px black;
-    border-radius: 40px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    
+.wrapper{
+  position: relative;
+  border : solid 1px #f0e567;
+  border-radius: 40px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;   
 }
 .image{
   width: 20%;
@@ -155,8 +154,8 @@ export default {
   height:100%;
 }
 .wrapper{
-    position: relative;
-    border : solid 1px black;
+  position: relative;
+  border-radius: 15px 50px 30px;
 }
 .star {
     top: 5px;

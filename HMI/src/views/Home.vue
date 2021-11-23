@@ -1,66 +1,308 @@
 <template>
-  <div class="logo">
-    <img src="../../Images/LogoV1.png">
+  <div>
+    <div class="main">
+      <div class="bg-image"></div>
+      <div>
+        <div class="bg-text">
+          <p>Aide à la décision</p>
+          <h1>Serre-Tech</h1>
+        </div>  
+      </div>
+      <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
+        <div class="autocomplete" style="width:300px;">
+          <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
+        </div>
+      </form>
+        <div class="indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="filters" @click="filterData">
+          <ul>
+          <li><a href="#" class="item">Type<i class="fas fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a><input type="radio" name="rdPlantType" value="fruit" class="typeFilter">Fruits</a></li>
+              <li><a><input type="radio" name="rdPlantType" value="légume" class="typeFilter">Légumes</a></li>
+              <li><a><input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>Tous</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="item">Famille<i class="fa fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a href="#"><input type="checkbox">Blue</a></li>
+              <li><a href="#"><input type="checkbox">Black</a></li>
+              <li><a href="#"><input type="checkbox">Orange</a></li>
+              <li><a href="#"><input type="checkbox">Green</a></li>
+              <li><a href="#"><input type="checkbox">Red</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="item">Difficulté<i class="fa fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a><input type="checkbox" name="cbPlantDifficulty" value="1" class="difficultyFilter">Facile</a></li>
+              <li><a><input type="checkbox" name="cbPlantDifficulty" value="2" class="difficultyFilter">Intermédiaire</a></li>
+              <li><a><input type="checkbox" name="cbPlantDifficulty" value="3" class="difficultyFilter">Difficile</a></li>
+              <li><a><input type="checkbox" name="cbPlantDifficulty" value="ALL" class="difficultyFilter" checked>Tous</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="productsGrid">
+        <Plant class="plant" style="margin-top: 6vh;" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
+      </div>
+        <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>  
+      </div>
   </div>
-    <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
-      <div class="autocomplete" style="width:300px;">
-        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
-      </div>
-    </form>
-    <div class="filtersWrapper" @click="filterData">
-      <div class="rdPlantTypeWrapper">
-        <div>
-          <label>Fruits</label>
-          <input type="radio" name="rdPlantType" value="fruit" class="typeFilter">
-        </div>
-        <div>
-          <label>Légumes</label>
-          <input type="radio" name="rdPlantType" value="vegetable" class="typeFilter">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>
-        </div>
-      </div>
-      <div class="cbPlantFamilyWrapper">
-        <div>
-          <label>Famille 1</label>
-          <input type="checkbox" name="cbPlantFamily" value="family1" class="familyFilter">
-        </div>
-        <div>
-          <label>Famille 2</label>
-          <input type="checkbox" name="cbPlantFamily" value="family2" class="familyFilter">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="checkbox" name="cbPlantFamily" value="ALL" class="familyFilter" checked>
-        </div>
-      </div>
-      <div class="cbPlantDifficultyWrapper">
-        <div>
-          <label>Facile</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="EASY" class="difficultyFilter">
-        </div>
-        <div>
-          <label>Intermédiaire</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="INTERMEDIATE" class="difficultyFilter">
-        </div>
-        <div>
-          <label>Difficile</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="DIFFICULT" class="difficultyFilter">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="checkbox" name="cbPlantDifficulty" value="ALL" class="difficultyFilter" checked>
-        </div>
-      </div>
-    </div>
-    <div class="productsGrid">
-      <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
-    </div>
-    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
 </template>
 
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+body, html{
+  height: 100%;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/PlantBackground.png');
+  background-position: center;
+  background-size: auto, cover;
+  background-attachment: fixed;
+}
+* {    
+box-sizing: border-box;
+}
+html{
+  scroll-behavior: smooth;
+}
+.bg-image{
+  height: 100vh;
+}
+.bg-text{
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+  font-weight: 800;
+  top: 50%;
+  left: 50%;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+
+    p{
+      font-size: 20px;
+      font-weight: 200;
+    }   
+    h1{
+      font-size: 90px;
+      font-weight: 600;
+    }
+}
+.autoCompleteForm{
+  display : inline-block;
+  float: right;
+  padding: 1vh 5vw 1vh 5vw;
+
+  .autocomplete{
+    display : flex;
+    position : relative;
+  }
+
+  .autocomplete-active{
+    background : blue;
+  }
+
+  .autocomplete > *{
+    width : 100%
+  }
+
+  #searchBar{
+    height:4vh;
+
+  }
+
+  #searchBarautocomplete-list{
+    position : absolute;
+    top : 100%;
+    background : white;
+  }
+
+  #searchBarautocomplete-list:hover{
+    cursor : pointer;
+  }
+}
+.indicator{
+  position:absolute;
+  width:50px;
+  height:50px;
+  transform:rotate(45deg) translate(-50%, -50%);
+  left : 50%; 
+  top : 80%;
+
+  span{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    box-sizing:border-box;
+    border:none;
+    border-bottom:3px solid #fff;
+    border-right:3px solid #fff;
+    animation:animate 1s linear infinite;
+    &:nth-child(1){
+      top:-30px;
+      left:-30px;
+      animation-delay:0s;
+    }
+    &:nth-child(2){
+      top:-15px;
+      left:-15px;
+      animation-delay:0.2s;
+    }
+    &:nth-child(3){
+      top:0;
+      left:0;
+      animation-delay:0.4s;
+    }
+    &:nth-child(4){
+      top:15px;
+      left:15px;
+      animation-delay:0.6s;
+    }
+    &:nth-child(5){
+      top:30px;
+      left:30px;
+      animation-delay:0.8s;
+    }
+  }
+}
+@keyframes animate{
+  0%{
+    border-color:#fff;
+    transform:translate(0,0);
+  }
+   20%{
+    border-color:#fff;
+     transform:translate(15px,15px);
+  }
+   20.1%,100%{
+    border-color:#007200;
+  }
+}
+
+
+.filters ul {
+width: 620px;
+margin: 0 auto;
+
+  li {
+    float: left;
+    list-style: none;
+    margin-right: 10px;
+    position: relative;
+    z-index : 10;
+       
+    a {
+      text-transform: uppercase;
+      position: relative;
+      text-decoration: none;
+      color: white;
+      background-color: black;
+      border: 1px solid #fff;
+      letter-spacing: 1px;
+      padding: 10px 15px 10px 25px;
+      display: block;
+      width: 150px;
+      z-index: 5000;
+
+      i {
+        font-size: 12px !important;
+        position: absolute;
+        right: 10px;
+        top: 14px;
+        color: red;
+      }
+    }
+    
+    .drop-down {
+      position: absolute;
+      padding: 0;
+      display: none;
+      margin: 0;
+      left: 0;
+      z-index: 0;
+      
+      input {
+        display: inline-block;
+        float: left;
+      }  
+      li {
+        position: relative;
+        float: none;
+        z-index : 10;
+        
+        a {
+          border-top: none;
+          width: 150px;
+          
+          &:hover {
+            background: #000000;
+            color: #ffffff;
+          }
+        }
+      }
+      
+      li:nth-of-type(1) a {
+        border-top: none;
+      }
+    }
+  }
+}
+
+.accent {
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: blue;
+  position: absolute;
+  transition: 0.3s ease;
+}
+
+.animate {
+  width: 100%;
+  transition: 0.3s ease;
+}
+.item{
+  background-color: rgba(0,0,0,0.9);
+  color: white;
+    
+    &:hover{
+      color:black;
+      background: white;
+    }
+}
+
+.productsGrid{
+  color: #FFFFFF;
+  text-shadow:  0 -2px 10px #f0e567, 0 -10px 20px #f0e567;
+  display : grid;
+  grid-template-columns : repeat(auto-fit, minmax(500px, 1fr));
+  width : 100%;
+  padding : 2vh 5vw 0 5vw;
+  column-gap: 30px;
+  row-gap: 30px;
+}
+.plant{
+  background: rgba(255, 255, 255, .1);
+  box-shadow: 10px 10px 5px rgba(255, 255, 255, .2);
+  
+  &:hover{
+    cursor : pointer;
+    background: rgba(255, 255, 255, .05);
+    box-shadow: 10px 10px 5px rgba(255, 255, 255, .15);
+  }
+}
+</style>
 <script>
 import Details from '../components/Details.vue'
 import Plant from '../components/Plant.vue'
@@ -88,6 +330,14 @@ export default {
   mounted(){
     this.initialisation();
     this.favorites = JSON.parse(localStorage.getItem('favorites'));
+    //animations for filters
+      $("li").mouseover(function(){
+        $(this).find('.drop-down').slideDown(300);
+        $(this).find(".accent").addClass("animate");
+      }).mouseleave(function(){
+        $(this).find(".drop-down").slideUp(300);
+          $(this).find(".accent").removeClass("animate");
+      });
   },
   methods : {
     filterType(){
@@ -107,7 +357,7 @@ export default {
       if(dataType.includes("ALL"))
         return;
 
-      for(let i= 0; i < visiblePlants.length; i++)
+      for(let i= 0; i < this.visiblePlants.length; i++)
         if(dataType.includes(this.visiblePlants[i].plantType.toUpperCase()))
           tempPlants.push(this.visiblePlants[i]);
 
@@ -139,7 +389,8 @@ export default {
     filterData(){
       this.visiblePlants = this.plants;
       this.filterType();
-      this.filterFamily();      
+      this.filterFamily();
+      this.filterDifficulty();      
     },
     activateAllCheckbox(selector){
       let checkboxes = document.querySelectorAll(selector);
@@ -209,7 +460,70 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<!--<template>
+  <div class="logo">
+    <img src="../../Images/LogoV1.png">
+  </div>
+    <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
+      <div class="autocomplete" style="width:300px;">
+        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
+      </div>
+    </form>
+    <div class="filtersWrapper" @click="filterData">
+      <div class="rdPlantTypeWrapper">
+        <div>
+          <label>Fruits</label>
+          <input type="radio" name="rdPlantType" value="fruit" class="typeFilter">
+        </div>
+        <div>
+          <label>Légumes</label>
+          <input type="radio" name="rdPlantType" value="vegetable" class="typeFilter">
+        </div>
+        <div>
+          <label>Tous</label>
+          <input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>
+        </div>
+      </div>
+      <div class="cbPlantFamilyWrapper">
+        <div>
+          <label>Famille 1</label>
+          <input type="checkbox" name="cbPlantFamily" value="family1" class="familyFilter">
+        </div>
+        <div>
+          <label>Famille 2</label>
+          <input type="checkbox" name="cbPlantFamily" value="family2" class="familyFilter">
+        </div>
+        <div>
+          <label>Tous</label>
+          <input type="checkbox" name="cbPlantFamily" value="ALL" class="familyFilter" checked>
+        </div>
+      </div>
+      <div class="cbPlantDifficultyWrapper">
+        <div>
+          <label>Facile</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="EASY" class="difficultyFilter">
+        </div>
+        <div>
+          <label>Intermédiaire</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="INTERMEDIATE" class="difficultyFilter">
+        </div>
+        <div>
+          <label>Difficile</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="DIFFICULT" class="difficultyFilter">
+        </div>
+        <div>
+          <label>Tous</label>
+          <input type="checkbox" name="cbPlantDifficulty" value="ALL" class="difficultyFilter" checked>
+        </div>
+      </div>
+    </div>
+    <div class="productsGrid">
+      <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
+    </div>
+    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
+</template>-->
+
+<!--<style lang="scss">
 body{
   background-color: #292929;
 }
@@ -353,4 +667,4 @@ body{
   }
   
 }
-</style>
+</style>-->
