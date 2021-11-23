@@ -19,13 +19,15 @@
 
 <script>
 import $ from '../../node_modules/jquery/dist/jquery.js'
+import toolbox from '../toolbox.js';
+
 export default {
     props : ['plant', 'idProfile', 'isFavorite'],
     methods : {
       addFavorite(){
         let that = this;
 
-        let url = "http://localhost:8000/api/new/favorite/token/";
+        let url = toolbox.env + "new/favorite/token/";
         let type = "post";
 
         return new Promise(resolve => {
@@ -51,7 +53,7 @@ export default {
       deleteFavorite(){
         let that = this;
 
-        let url = "http://localhost:8000/api/delete/favorite/token";
+        let url = toolbox.env + "delete/favorite/token";
         let type = "delete";
 
         return new Promise(resolve => {

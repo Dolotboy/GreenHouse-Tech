@@ -57,8 +57,8 @@ export default {
   },
   data(){
       return{
-          env : "http://localhost:8000/",
-          envBack : "http://testenv.apipcst.xyz/",
+          //env : "http://localhost:8000/",
+          //envBack : "http://testenv.apipcst.xyz/",
           plants : [],
           favorites : [],
           showLogin : false,
@@ -104,7 +104,7 @@ export default {
       this.showLoading = true;
 
       let version = localStorage.getItem('apiVersion');
-      let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
+      let apiVersion = await this.GetApiVersion(toolbox.env + "search/last/version");
       if(version == undefined || version != apiVersion){
         await this.ClearDb();
         localStorage.setItem('apiVersion', apiVersion);
@@ -122,7 +122,7 @@ export default {
       toolbox.ClearDb(db);
     },
     async DownloadContent(){
-      this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
+      this.plants = await this.GetAllPlants(toolbox.env + "searchAll/package");
       let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;

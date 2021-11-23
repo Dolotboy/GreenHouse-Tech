@@ -33,7 +33,9 @@
 </template>
 
 <script>
+import toolbox from '../toolbox.js';
 import $ from '../../node_modules/jquery/dist/jquery.js'
+
 export default {
   name: "App",
     data() {
@@ -55,7 +57,7 @@ export default {
         let that = this;
 
         $.ajax({
-          url : 'http://localhost:8000/api/login/checkLogin/',
+          url : toolbox.env + 'login/checkLogin/',
           datatype: 'json',
           contentType : 'application/json',
           type: 'post',
