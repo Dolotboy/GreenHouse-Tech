@@ -2,7 +2,7 @@
     <div class="details">
        
         <div class="column">
-        <div class="top"><img  src="../../Images/LogoV1.png"></div>
+        <div class="top"><img :src="plant.plantImg"></div>
         <div class="detailsTop">
         <div class="image"><img class=""></div>
         <div class="infoTop" >
@@ -74,6 +74,7 @@ export default {
 .details{
   position: absolute;
     display: flex;
+    caret-color: transparent;
     top : 54%;
     left : 50%;
     transform: translate(-50%, -50%);

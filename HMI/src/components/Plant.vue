@@ -1,7 +1,7 @@
 <template>
 <div class="wrapper">
   <div class="image">
-  <img class="imageIcon" src="https://www.wingsforkids.org/wp-content/uploads/cropped-placeholder.jpg">
+    <img class="imageIcon" :src="plant.plantImg" alt="Image vegetable">
   </div>
   <div class="nom">
   <h1>{{ plant.plantName }}</h1>
@@ -19,13 +19,15 @@
 
 <script>
 import $ from '../../node_modules/jquery/dist/jquery.js'
+import toolbox from '../toolbox.js';
+
 export default {
     props : ['plant', 'idProfile', 'isFavorite'],
     methods : {
       addFavorite(){
         let that = this;
 
-        let url = "http://testenv.apipcst.xyz/api/new/favorite/";
+        let url = toolbox.env + "new/favorite/token/";
         let type = "post";
 
         return new Promise(resolve => {
@@ -42,7 +44,6 @@ export default {
                 favorites = [];
 
               let fav = {"tblPlant_idPlant":that.plant.idPlant,"tblProfile_idProfile":that.getLoggedInProfile()};
-              favorites.pop
               favorites.push(fav);
               localStorage.setItem('favorites', JSON.stringify(favorites)); 
             }
@@ -52,7 +53,7 @@ export default {
       deleteFavorite(){
         let that = this;
 
-        let url = "http://testenv.apipcst.xyz/api/delete/favorite/";
+        let url = toolbox.env + "delete/favorite/token";
         let type = "delete";
 
         return new Promise(resolve => {
@@ -83,7 +84,7 @@ export default {
       },
       async toggleFavorite(event){
         this.$emit('favClicked');
-
+        console.log(this.getLoggedInProfile());
         if(this.getLoggedInProfile() == null || this.getLoggedInProfile() == undefined || this.getLoggedInProfile() == "" || this.getLoggedInProfile() == "null"){
           this.$emit("popLogin");
           event.target.checked = false;
@@ -120,21 +121,22 @@ export default {
 }
 .image{
   width: 20%;
-  background-color: firebrick;
   height: 60%;
-  margin-left: 5%;
-
+  position : absolute;
+  top : 50%;
+  left : 5%;
+  transform: translateY(-50%);
 }
 .imageIcon{
-  width: 100%;
-  height:100%;
+  max-width: 100%;
+  max-height:100%;
 }
 .nom h1{
   max-width: 100%;
   text-align: center;
 }
 .nom{
- width: 40%;
+ width:50%;
  
 }
 .end{
@@ -144,10 +146,11 @@ export default {
 }
 .image{
   width: 20%;
-  background-color: firebrick;
   height: 60%;
-  margin-left: 5%;
-
+  position : absolute;
+  top : 50%;
+  left : 5%;
+  transform : translateY(-50%);
 }
 .imageIcon{
   width: 100%;

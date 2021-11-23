@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTokenTable extends Migration
+class FamilyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class AddTokenTable extends Migration
      */
     public function up()
     {
-        Schema::create('tblTokens', function (Blueprint $table) {
-            $table->bigIncrements('idToken');
-            $table->string('token');
-            $table->date('valid_until');
-            $table->unsignedBigInteger('idProfile');
-            $table->foreign('idProfile')->references('idProfile')->on('tblProfile');
+        Schema::create('tblFamily', function (Blueprint $table) {
+            $table->bigIncrements('idFamily');
+            $table->longText('familyName');
             $table->timestamps();
+        });
+
+        Schema::table('tblFamily', function (Blueprint $table) {
+            $table->unique('familyName');
         });
     }
 

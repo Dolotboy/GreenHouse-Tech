@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Profile;
+use App\Models\Token;
 use Exception;
 
 class TokenConversionMiddleware
@@ -32,7 +32,7 @@ class TokenConversionMiddleware
 
     public function getProfileId($token){
         try{
-            return Profile::where('api_token', $token)->take(1)->get()[0]->idProfile;
+            return Token::where('token', $token)->take(1)->get()[0]->idProfile;
         }
         catch(Exception $e){
             return null;

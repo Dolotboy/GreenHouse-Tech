@@ -8,18 +8,24 @@ use App\Models\FavorableConditionDate;
 use App\Models\FavorableConditionNb;
 use App\Models\Favorite;
 use App\Models\Profile;
+use App\Models\Family;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\AccountModified;
+//use Illuminate\Support\Facades\Mail;
+//use App\Mail\AccountModified;
 
 class ControllerEdit extends Controller
 {
     public function indexPlant(Request $request)
     {
         return view('searchPlant');
+    }
+
+    public function indexFamily(Request $request)
+    {
+        return view('searchFamily');
     }
 
     public function indexProblem(Request $request)
@@ -52,13 +58,22 @@ class ControllerEdit extends Controller
         {
             return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 400);
         }
+
+        try
+        {
+            $family = Family::All();
+        }
+        catch(Exception $e)
+        {
+            return response()->json(['message'=> "There is no family or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
         
         if (is_null($plant)) // Mostly when it doesn't exist
         {
             return response()->json(['message'=> "Error, plant not found", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
         }
 
-        return view('editPlant', ["plant" => $plant]);
+        return view('editPlant', ["plant" => $plant, "family" => $family]);
     }
 
     public function editPlantSent(Request $request, $idPlant)
@@ -110,6 +125,58 @@ class ControllerEdit extends Controller
         Controller::incrementVersion();
 
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idPlant], 200);
+    }
+
+    public function editFamily(Request $request, $idFamily)
+    {
+        try
+        {
+            $family = Family::find($idFamily);    
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The family doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idFamily], 400);
+        }
+        
+        if (is_null($family)) // Mostly when it doesn't exist
+        {
+            return response()->json(['message'=> "Error, family not found", 'success' => false, 'status' => "Request Failed", 'id' => $idFamily], 404);
+        }
+
+        return view('editFamily', ["family" => $family]);
+    }
+
+    public function editFamilySent(Request $request, $idFamily)
+    {
+        if (is_null($request->familyName) || 
+            is_null($idFamily))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idFamily], 400);
+        }
+
+        try
+        {
+            $family = Family::find($idFamily);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The plant doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idFamily], 400);
+        }
+ 
+        $family->familyName = $request->familyName;
+
+        try
+        {
+            $family->save();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idFamily], 400);
+        }
+
+        Controller::incrementVersion();
+
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idFamily], 200);
     }
 
     public function editProblem(Request $request, $idProblem)
@@ -193,7 +260,7 @@ class ControllerEdit extends Controller
         return view('editProfile', ["profile" => $profile]);
     }
 
-    public function editProfileSent($unusedParameter, Request $request, $idProfile)
+    public function editProfileSent(Request $request, $idProfile)
     {
         if (is_null($request->email) || 
             is_null($request->firstName) || 
@@ -225,7 +292,48 @@ class ControllerEdit extends Controller
         {
             $profile->save();
             Controller::incrementVersion();
-            Mail::to($profile->email)->send(new AccountModified($profile)); /*->cc("exemple@gmail.com")*/
+            //Mail::to($profile->email)->send(new AccountModified($profile)); /*->cc("exemple@gmail.com")*/
+            return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+    }
+
+    public function editProfileSentToken($unusedParameter, Request $request, $idProfile)
+    {
+        if (is_null($request->email) || 
+            is_null($request->firstName) || 
+            is_null($request->lastName) ||
+            is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        try
+        {
+            $profile = Profile::find($idProfile);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        if (is_null($profile))
+        {
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
+        }
+
+        $profile->email = $request->email;
+        $profile->firstName = $request->firstName;
+        $profile->lastName = $request->lastName;
+
+        try
+        {
+            $profile->save();
+            Controller::incrementVersion();
+            //Mail::to($profile->email)->send(new AccountModified($profile)); /*->cc("exemple@gmail.com")*/
             return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idProfile], 200);
         }
         catch (Exception $e)
@@ -356,11 +464,65 @@ class ControllerEdit extends Controller
         }
     }
 
-    public function addAdmin(Request $request)
+    public function indexAddAdmin()
     {
-        $data = Profile::find($request);
+        return view('assignAdmin');
+    }
+
+    public function addAdmin(Request $request, $idProfile)
+    {
+        try
+        {
+            $profile = Profile::find($idProfile);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        if (is_null($profile))
+        {
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
+        }
 
         $profile->access = "admin";
+
+        try
+        {
+            $profile->save();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "We've encountered problems while saving data in the database or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+
+        Controller::incrementVersion();
+
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $profile->idProfile], 200);
+    }
+
+    public function indexRemoveAdmin()
+    {
+        return view('unassignAdmin');
+    }
+
+    public function removeAdmin(Request $request, $idProfile)
+    {
+        try
+        {
+            $profile = Profile::find($idProfile);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        if (is_null($profile))
+        {
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
+        }
+
+        $profile->access = "user";
 
         try
         {

@@ -14,10 +14,26 @@
                         <div class="product-details">
                         <h3>Add a favorite condition Nb</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h2 class="mb-3"> <input type="text" name='type' placeholder="Range Type" value="" required></h2>
-                                <h3 class="mb-3"> <input type="text" name='min' placeholder="Min" value="" required></h3>
-                                <h3 class="mb-3"> <input type="text" name='max' placeholder="Max" value="" required></h3>        
-                                <h3 class="mb-3"> <input type="text" name='unit' placeholder="Unit" value="" required></h3>                             
+                                <h3 class="mb-3"> Type: 
+                                    <select id="type" name='type' required>
+                                        <option value="temperature">Temperature</option>
+                                        <option value="humidity">Humidity</option>
+                                        <option value="ph">PH</option>
+                                        <option value="plantSpacing">Plant Spacing</option>
+                                        <option value="exposureTime">Exposure Time</option>
+                                    </select>
+                                </h3>
+                                <h3 class="mb-3">Min: <input type="text" name='min' placeholder="Min" value="" required></h3>
+                                <h3 class="mb-3">Max: <input type="text" name='max' placeholder="Max" value="" required></h3>        
+                                <h3 class="mb-3">Unit:
+                                    <select id="unit" name='unit' required>
+                                        <option value="°C">°C</option>
+                                        <option value="%">%</option>
+                                        <option value="ph">PH</option>
+                                        <option value="cm">cm</option>
+                                        <option value="°H">°H</option>
+                                    </select>
+                                </h3>                           
                                 <h3 class="mb-3"> <input type="submit" name='submit' value="Submit"></h3>                              
                             </div>
                         </div>

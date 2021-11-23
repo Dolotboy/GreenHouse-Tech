@@ -1,4 +1,7 @@
-exports.fetchData = (db) => {
+exports.envBack = "http://localhost:8000/api/";
+exports.env = "http://testenv.apipcst.xyz/api/"
+
+exports.fetchData = async (db) => {
     return new Promise(resolve => {
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");

@@ -7,7 +7,8 @@
           <p>Aide à la décision</p>
           <h1>Serre-Tech</h1>
         </div>  
-      </div>
+      </div>      
+  </div>
       <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
         <div class="autocomplete" style="width:300px;">
           <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
@@ -19,7 +20,7 @@
           <span></span>
           <span></span>
         </div>
-        <div class="filters" @click="filterData">
+        <div class="filters" @click="filterData($event)">
           <ul>
           <li><a href="#" class="item">Type<i class="fas fa-chevron-down"></i></a>
             <span class="accent"></span>
@@ -32,21 +33,28 @@
           <li><a href="#" class="item">Famille<i class="fa fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
-              <li><a href="#"><input type="checkbox">Blue</a></li>
-              <li><a href="#"><input type="checkbox">Black</a></li>
-              <li><a href="#"><input type="checkbox">Orange</a></li>
-              <li><a href="#"><input type="checkbox">Green</a></li>
-              <li><a href="#"><input type="checkbox">Red</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Blue</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Black</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Orange</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Green</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Red</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily" value="ALL" checked>All</a></li>
             </ul>
           </li>
           <li><a href="#" class="item">Difficulté<i class="fa fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
-              <li><a><input type="checkbox" name="cbPlantDifficulty" value="1" class="difficultyFilter">Facile</a></li>
-              <li><a><input type="checkbox" name="cbPlantDifficulty" value="2" class="difficultyFilter">Intermédiaire</a></li>
-              <li><a><input type="checkbox" name="cbPlantDifficulty" value="3" class="difficultyFilter">Difficile</a></li>
-              <li><a><input type="checkbox" name="cbPlantDifficulty" value="ALL" class="difficultyFilter" checked>Tous</a></li>
+              <li><a><input type="checkbox" value="1" class="chkPlantDifficulty">Facile</a></li>
+              <li><a><input type="checkbox" value="2" class="chkPlantDifficulty">Intermédiaire</a></li>
+              <li><a><input type="checkbox" value="3" class="chkPlantDifficulty">Difficile</a></li>
+              <li><a><input type="checkbox" value="ALL" class="chkPlantDifficulty" checked>Tous</a></li>
             </ul>
+          </li>
+          <li class="filterAlphaWrapper">
+            <div>
+              <label>Alphabétique</label>
+              <input type="checkbox" checked id="chkAlphabetical">
+            </div>
           </li>
         </ul>
       </div>
@@ -55,15 +63,17 @@
       </div>
         <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>  
       </div>
-  </div>
 </template>
 
+<style lang="scss">
+
+</style>
 <script>
 import Details from '../components/Details.vue'
 import Plant from '../components/Plant.vue'
 import $ from '../../node_modules/jquery/dist/jquery.js'
 import toolbox from '../toolbox.js'
-import autoComplete from '../autocomplete.js'
+import autoComplete, { autocomplete } from '../autocomplete.js'
 
 export default {
   name: 'Home',
@@ -95,6 +105,10 @@ export default {
       });
   },
   methods : {
+    filterAlphabetical(){
+      if(document.querySelector("#chkAlphabetical").checked)
+        this.visiblePlants.sort((a, b) => a.plantName.localeCompare(b.plantName))
+    },
     filterType(){
       let typeRadios = document.querySelectorAll(".typeFilter");
       let dataType = [];
@@ -103,10 +117,6 @@ export default {
       for(let i=0; i<typeRadios.length; i++)
         if(typeRadios[i].checked)
           dataType.push(typeRadios[i].value.toUpperCase());
-      if(dataType.length == 0){
-        this.activateAllCheckbox(".typeFilter");
-        dataType.push("ALL");
-      }
 
       //if all is checked, do not filter
       if(dataType.includes("ALL"))
@@ -119,17 +129,14 @@ export default {
       this.visiblePlants = tempPlants;
     },
     filterFamily(){
-      let familyCheckboxes = document.querySelectorAll(".familyFilter");
+      let familyCheckboxes = document.querySelectorAll(".chkPlantFamily");
       let dataFamily = [];
       let tempPlants = [];
 
+      this.toggleCheckboxAll(".chkPlantFamily");
       for(let i=0; i<familyCheckboxes.length; i++)
         if(familyCheckboxes[i].checked)
           dataFamily.push(familyCheckboxes[i].value.toUpperCase());
-      if(dataFamily.length == 0){
-        this.activateAllCheckbox(".familyFilter");
-        dataFamily.push("ALL");
-      }
 
       //if all is checked, do not filter
       if(dataFamily.includes("ALL"))
@@ -141,20 +148,77 @@ export default {
 
       this.visiblePlants = tempPlants;
     },
-    filterData(){
+    filterDifficulty(){
+      let difficultyCheckboxes = document.querySelectorAll(".chkPlantDifficulty");
+      let dataDifficulty = [];
+      let tempPlants = [];
+
+      this.toggleCheckboxAll(".chkPlantDifficulty");  
+      for(let i=0; i<difficultyCheckboxes.length; i++)
+        if(difficultyCheckboxes[i].checked)
+          dataDifficulty.push(difficultyCheckboxes[i].value);
+
+      //if all is checked, do not filter
+      if(dataDifficulty.includes("ALL"))
+        return;
+
+      for(let i = 0; i < this.visiblePlants.length; i++)
+        if(dataDifficulty.includes(this.visiblePlants[i].plantDifficulty.toString()))
+          tempPlants.push(this.visiblePlants[i]);
+
+      this.visiblePlants = tempPlants;
+    },
+    async filterData(event){
+      if(event != null){
+        let el = event.target;
+        if(el.type == "checkbox" && el.value.toUpperCase() == "ALL" && el.className.startsWith("chk"))
+          this.setFilterToDefault(el.className);
+      }
       this.visiblePlants = this.plants;
+
+      if(this.searchBarValue != null && this.searchBarValue != ""){
+        console.log(this.visiblePlants);
+        let tempPlants = [];
+        for(let i = 0; i< this.visiblePlants.length; i++)
+          if(this.visiblePlants[i].plantName.toUpperCase().startsWith(this.searchBarValue.toUpperCase()))
+            tempPlants.push(this.visiblePlants[i]);
+        this.visiblePlants = tempPlants;
+        console.log("god")
+        return;
+      }
+          
       this.filterType();
       this.filterFamily();
-      this.filterDifficulty();      
+      this.filterDifficulty();
+      this.filterAlphabetical();    
     },
-    activateAllCheckbox(selector){
+    toggleCheckboxAll(selector){
       let checkboxes = document.querySelectorAll(selector);
-      console.log(checkboxes)
-      for(let i = 0; i < checkboxes.length; i++)
-        if(checkboxes[i].value.toUpperCase() == "ALL"){
-          checkboxes[i].checked = true;
-          return;
+      let cpt = 0; 
+      let chkAll = null;
+
+      for(let i = 0; i < checkboxes.length; i++){
+        if(checkboxes[i].checked){
+          cpt++;
         }
+        if(checkboxes[i].value.toUpperCase() == "ALL")
+          chkAll = checkboxes[i];
+      }
+
+      if(chkAll == null)
+        return;
+      if(cpt == 0)
+        chkAll.checked = true;
+      else if (cpt > 1)
+        chkAll.checked = false;
+    },
+    setFilterToDefault(selector){
+      let checkboxes = document.querySelectorAll("." + selector);
+      for(let i = 0; i < checkboxes.length; i++)
+        if(checkboxes[i].value.toUpperCase() == "ALL")
+          checkboxes[i].checked = true;
+        else
+          checkboxes[i].checked = false;
     },
     toggleDetails(num){
       let plant = this.plants[0];
@@ -166,40 +230,21 @@ export default {
       this.showDetails = !this.showDetails;
       this.detailedPlant = plant;
     },
-    async filterDataOld(){
-      await this.initialisation();
-      this.visiblePlants = [];
-      for(let i = 0; i < this.plants.length; i++)
-        if(this.plants[i].plantName.toLowerCase().startsWith(this.searchBarValue.toLowerCase())) {
-          if(this.radioFilterValue == "All" || this.plants[i].plantType == this.radioFilterValue){
-            this.visiblePlants.push(this.plants[i]);
-          }
-        }
-    },
-    checkboxValueChanged(value){
-      this.checkboxFilterValue = value;
-      this.filterData();
-    },
-    radioValueChanged(value){
-      this.radioFilterValue = value;
-      this.filterData();
-    },
     async initialisation(){
       this.favorites = JSON.parse(localStorage.getItem('favorites'));
       let db = await toolbox.setDb();
       this.plants = await toolbox.fetchData(db);
       this.visiblePlants = this.plants;
-      let strings = await this.getAllStrings(this.radioFilterValue);
+      let strings = this.getAllStrings(this.radioFilterValue);
       autoComplete.autocomplete(document.getElementById("searchBar"), strings);
       document.addEventListener('filter', (event) => {
         this.searchBarValue = event.detail;
-        this.filterData();
+        this.filterData(null);
       });
     },
     getAllStrings(plantType){
       let strings = [];
-      for(let i = 0; i < this.plants.length; i++)
-        if(plantType == "All" || this.plants[i].plantType == plantType)
+      for(let i = 0; i < this.visiblePlants.length; i++)
           strings.push(this.plants[i].plantName);
       return strings;
     }, 
@@ -216,7 +261,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@media screen and (min-width : 601px){
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
 body, html{
   height: 100%;
@@ -253,13 +299,24 @@ html{
       font-weight: 600;
     }
 }
+}
+.logo{
+  margin-top: 1%;
+  height: 10vh;
+
+  img{
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
 .autoCompleteForm{
   display : inline-block;
   float: right;
   padding: 1vh 5vw 1vh 5vw;
 
   .autocomplete{
-    display : flex;
+    display : block;
     position : relative;
   }
 
@@ -275,7 +332,6 @@ html{
     height:4vh;
 
   }
-
   #searchBarautocomplete-list{
     position : absolute;
     top : 100%;
@@ -441,7 +497,7 @@ margin: 0 auto;
 
 .productsGrid{
   color: #FFFFFF;
-  text-shadow:  0 -2px 10px #f0e567, 0 -10px 20px #f0e567;
+  text-shadow:  0 -2px 10px #f0e567;
   display : grid;
   grid-template-columns : repeat(auto-fit, minmax(500px, 1fr));
   width : 100%;
@@ -452,6 +508,7 @@ margin: 0 auto;
 .plant{
   background: rgba(255, 255, 255, .1);
   box-shadow: 10px 10px 5px rgba(255, 255, 255, .2);
+  height: 15vh;
   
   &:hover{
     cursor : pointer;

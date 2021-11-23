@@ -6,7 +6,7 @@
       </div>
       <ul>
           <li><router-link to="/">Accueil</router-link></li> 
-          <li><a href="http://apipcst.xyz" target="_blank">API</a></li>
+          <li><a href="http://apipcst.xyz" target="_blank">API Interface</a></li>
           <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
           <li v-if="!isLoggedIn" @click="toggleLogin">Se connecter</li>   
           <li v-if="isLoggedIn">Bonjour, {{ profile.firstName }} !</li>       
@@ -20,40 +20,49 @@
           <div></div>
         </div>
       </div>
-      <ul class="links">
-          <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
+     <ul class="links">
+          <li @click="toggleNavMobile"><img  src=".\assets\outline_home_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;"  to="/">Accueil</router-link></p></li> 
+          <li @click="toggleNavMobile"><img  src=".\assets\outline_info_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;" to="/about">À propos</router-link></p></li>
+          <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>S'inscrire</p></li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>Se connecter</p></li> 
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
+          <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>Déconnexion</p></li> 
       </ul>
+     
     </nav>
-    <router-view @update="this.$forceUpdate" @popLogin="toggleLogin"/>  
+    <router-view @popLogin="toggleLogin"/>  
     <!--<div @click="login(1)">login</div>
     <div @click="logout">logout</div>-->
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
     <Register v-if="showRegister" @close="toggleRegister"/>
+    <Loading v-if="showLoading"/>  
   </div>
 </template>
 
 <script>
-import toolbox from './toolbox.js'
-import Login from './components/Login.vue'
-import Register from './components/Register.vue'
-import FavCondition from './components/FavCondition.vue'
-import $ from '../node_modules/jquery/dist/jquery.js'
+import toolbox from './toolbox.js';
+import Login from './components/Login.vue';
+import Register from './components/Register.vue';
+import Loading from './components/Loading.vue';
+import FavCondition from './components/FavCondition.vue';
+import $ from '../node_modules/jquery/dist/jquery.js';
 
 export default {
   components :{
     Login,
     Register,
-    FavCondition
+    FavCondition,
+    Loading
   },
   data(){
       return{
-          env : "http://testenv.apipcst.xyz/",
-          envBack : "http://localhost:8000/",
+          //env : "http://localhost:8000/",
+          //envBack : "http://testenv.apipcst.xyz/",
           plants : [],
           favorites : [],
           showLogin : false,
           showRegister : false,
+          showLoading : false,
           isLoggedIn : false,
           apiVersion : 0.0,
           mobileNavIsOpened : false,
@@ -65,7 +74,7 @@ export default {
   },
   methods :{
     toggleRegister(){
-      this.showRegister = !this.showRegister;
+      this.showRegister = !this.showRegister;   
     },
     toggleLogin(){
       this.showLogin = !this.showLogin;
@@ -75,14 +84,15 @@ export default {
       let navMobile = document.querySelector("#navMobile");
       let hamburger = document.querySelector(".hamburger-wrapper");
       if(!this.mobileNavIsOpened){
-        links.style.display = "flex";
+      links.style.display = "flex";
       navMobile.style.height = "100vh"; 
+      navMobile.style.width="40vw";
       }
       else{
         links.style.display = "none";
         navMobile.style.height = "7.5vh";
+        navMobile.style.width="0vw"
       }
-      
       this.mobileNavIsOpened = !this.mobileNavIsOpened;
     },
     async checkToken(){
@@ -90,9 +100,10 @@ export default {
         this.login(localStorage.getItem('loggedInToken'));
     },
     async Initialisation(){
+      this.showLoading = true;
+
       let version = localStorage.getItem('apiVersion');
-      let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
-      this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
+      let apiVersion = await this.GetApiVersion(toolbox.env + "search/last/version");
       if(version == undefined || version != apiVersion){
         await this.ClearDb();
         localStorage.setItem('apiVersion', apiVersion);
@@ -102,20 +113,22 @@ export default {
       if(this.plants.length == 0)
         await this.DownloadContent();   
       await this.checkToken();
+
+      this.showLoading = false;
     },
     async ClearDb(){
       let db = await toolbox.setDb();
       toolbox.ClearDb(db);
     },
     async DownloadContent(){
-      this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
+      this.plants = await this.GetAllPlants(toolbox.env + "searchAll/package");
       let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
-      for(let i = 0; i < this.plants.length; i++){
-        
+      for(let i = 0; i < this.plants.length; i++){   
         entrepot.add(toolbox.GenerateObject(this.plants[i]));
       }
+      location.reload();
     },
     GetApiVersion(url){
       return new Promise(resolve =>{
@@ -191,13 +204,11 @@ export default {
 *{
   box-sizing: border-box;
 }
-
 html, body{
   font-size : 10pt;
   margin : 0;
   padding : 0;
 }
-
 button{
   background-color: black;
   color : white;
@@ -212,8 +223,11 @@ button{
 }
 
 #navDesktop{
+  top : 0;
   position : fixed;
   padding : 0 20%;
+  caret-color: transparent;
+
   display : flex;
   justify-content: space-between;
   width : 100vw;
@@ -222,6 +236,7 @@ button{
   font-size: 1.2rem;   
   z-index: 1000; 
   background-color: rgba(0,0,0,0.9);
+
 
   .logo{
     width: 60px;
@@ -267,115 +282,140 @@ ul li {
   justify-content : end;
   height : 2rem;
   margin : 20px 0;
-
   label{
     font-size : 2rem;
-
     &:after{
       content : " :";
     }
   }
-
   input{
     width : 50%;
     height : 100%;
     margin-left : 1vw;
   }
 }
-
 #navMobile{
   display : none;
-  position : relative;
+  position : fixed;
   top : 0;
   left : 0;
-  background: black;
-  color : white;
-  width : 100vw;
+  background: rgb(68, 68, 68);
+  color : rgb(255, 255, 255);
   height : 7.5vh;
+  caret-color: transparent;
+  z-index:50;
 
   .top-wrapper{
     position : relative;
     top : 0;
     left : 0;
     height : 7.5vh;
+    background-color: rgb(0, 78, 42);
+    z-index:60;
+    display: flex;
   }
-
   .hamburger-wrapper{
       position : absolute;
       top : 50%;
+      min-width: 45px;
+      min-height: 45px;
       left : 0;
       display : flex;
+      flex:1;
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
       width : 10vw;
       height : 10vw;
       transform : translate(0,-50%);
-
       &:hover{
         cursor : pointer;
         opacity : 0.8;
       }
-
       div{
         width : 80%;
-        height : 15%;
+        height : 13%;
         background: white;
       }
   }
-
+ .profilNum
+ {
+   flex:1;
+  p{
+    display:none;
+  }
+ }
   .links{
     display : none;
     flex-direction: column;
-    position : absolute;
+    height: 90vh;
+    position : relative;
     bottom : 0;
     left: 0;
     list-style-type: none;
     width: 100%;
     padding: 0;
 
+    #logout{
+         position: fixed;
+         width: 40vw;
+         bottom: 0;
+        }
     li{
-      font-size: 3rem;
+      display:flex;
+      align-items:center;
+      font-size: 2.5rem;
       text-decoration: none;
-      padding: 10px 15px;
-
+      margin: 1%;
+      padding: 10px 5px;
+      width: 99%;
+      height: 7vh;    
+      text-align: center;
+       img
+       {
+         flex:1;
+         max-height: 24px;
+          max-width: 24px;
+       }
+       p{
+         flex:1;
+       }
       &:hover{
+        background-color: gray;
         cursor : pointer;
       }
-
       a{
         color : white;
       }
     }
   }
 }
-
 @media screen and (max-width : 1200px) {
   html{
     font-size : 7.5pt;
   }
-  
   .lblInp-div{
     flex-direction: column;
     align-items: start;
     height : 7rem;
-
     input{
       width : 100% !important;
       margin : 0 !important;
     }
   }
 }
-
+@media screen and (min-width : 601px) {
+  .hamburger-wrapper{
+    display: none;
+  } 
+}
 @media screen and (max-width : 600px) {
   html{
     font-size : 5pt;
   }
-    
   #navDesktop{
     display : none;
   }
-
   #navMobile{
     display : block;
   }

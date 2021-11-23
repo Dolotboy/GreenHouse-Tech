@@ -25,6 +25,16 @@ Route::get('/edit/plant/{idPlant}', [ControllerEdit::class, 'editPlant'],functio
 
 // ***************** PLANT *******************
 
+// ***************** FAMILY ******************
+
+Route::get('/new/family/', [ControllerAdd::class, 'indexFamily'])->name('newFamily'); // Display the page with form to add family
+
+Route::get('/search/family/', [ControllerEdit::class, 'indexFamily'])->name('editSearchFamily'); // Display the page with search a family form
+
+Route::get('/edit/family/{idFamily}', [ControllerEdit::class, 'editFamily'],function ($idFamily){})->name('editFamily'); // Display the page with edit family form
+
+// ***************** FAMILY ******************
+
 // ***************** PROBLEM *******************
 
 Route::get('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem'); // Display new problem form
@@ -84,3 +94,7 @@ Route::get('/assign/conditionNb', [ControllerAssign::class, 'indexFavCondNb'])->
 Route::get('/unassign/conditionNb', [ControllerUnassign::class, 'indexFavCondNb'])->name('deleteUnassignFavCondNb'); // Display the page with association form
 
 // ***************** FAVORABLE CONDITION *******************
+
+Route::get('/assign/admin', [ControllerEdit::class, 'indexAddAdmin'])->name('newAssignAdmin'); // Display the page with admin form
+
+Route::get('/unassign/admin', [ControllerEdit::class, 'indexRemoveAdmin'])->name('deleteUnassignAdmin'); // Display the page with admin form

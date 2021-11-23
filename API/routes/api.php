@@ -15,29 +15,6 @@ use App\Http\Controllers\ControllerLogin;
     return $request->user();
 });*/
 
-
-Route::post("increment/last/version", [Controller::class, 'incrementVersion'])->name('incrementVersion');
-    Route::post('/assign/condition/{type}/{idPlant}/{idCondition}', [ControllerAssign::class, 'assignFavCondition'],function ($type, $idPlant, $idCondition){})->name('assignFavCondition');
-    Route::post('/new/condition/addFavCondition/{type}', [ControllerAdd::class, 'addFavCondition'],function ($type){})->name('addFavCondition');
-    Route::post('/assign/problem/{idPlant}/{idProblem}', [ControllerAssign::class, 'assignProblem'],function ($idPlant, $idProblem){})->name('assignProblem');
-    Route::post('/new/problem/addProblem', [ControllerAdd::class, 'addProblem'])->name('addProblem');
-    Route::post('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('addPlant');
-
-    Route::delete("/delete/favorite/{idPlant}/{idProfile}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite');
-    Route::delete("/delete/condition/{type}/{idCondition}", [ControllerDelete::class, 'deleteFavCondition'],function ($type, $idCondition){})->name('deleteFavCondition');
-    Route::delete('/unassign/condition/{type}/{idPlant}/{idCondition}', [ControllerUnassign::class, 'unassignFavCondition'],function ($type, $idPlant, $idCondition){})->name('unassignFavCondition');
-    Route::delete("/delete/profile/{idProfile}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile');
-    Route::delete("/delete/problem/{idProblem}", [ControllerDelete::class, 'deleteProblem'],function ($idProblem){})->name('deleteProblem');
-    Route::delete('/unassign/problem/{idPlant}/{idProblem}', [ControllerUnassign::class, 'unassignProblem'],function ($idPlant, $idProblem){})->name('unassignProblem');
-    Route::delete("/delete/plant/{idPlant}", [ControllerDelete::class, 'deletePlant'],function ($idPlant){})->name('deletePlant');
-
-    Route::put('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($idPlant){})->name('editPlant');
-    Route::put('/edit/problem/editProblem/{idProblem}', [ControllerEdit::class, 'editProblem'],function ($idProblem){})->name('editProblem');
-    Route::put('/edit/profile/editProfile/{idProfile}', [ControllerEdit::class, 'editProfile'],function ($idProfile){})->name('editProfile');    
-    Route::put('/edit/condition/editFavCondition/{type}/{idCondition}', [ControllerEdit::class, 'editFavCondition'],function ($type, $idCondition){})->name('editFavCondition');
-
-
-
 // ***************** PLANT *******************
 
 Route::get("search/plant/{idPlant}", [ControllerDetail::class, 'searchPlant'],function ($idPlant){})->name('detailPlant');
@@ -67,7 +44,9 @@ Route::post('/new/profile/addProfile', [ControllerAdd::class, 'addProfile'])->na
 Route::get("searchAll/profile", [ControllerDetail::class, 'searchAllProfile'],function (){})->name('detailAllProfile');
 
 // ***************** PROFILE *******************
+Route::get("search/profile/{idProfile}", [ControllerDetail::class, 'searchProfile'],function ($idProfile){})->name('detailProfile');
 
+Route::get("searchAll/favorite/{idProfile}", [ControllerDetail::class, 'searchAllFavorites'],function ($idProfile){})->name('searchAllFavorites');
 // ***************** FAVORABLE CONDITION *******************
 // ***************** FAVORABLE CONDITION DATE *******************
 
@@ -104,6 +83,8 @@ Route::post("login/checkLogin", [ControllerLogin::class, 'checkLogin'])->name('c
 
 Route::post("login/checkToken/", [ControllerLogin::class, 'checkToken'])->name('checkToken');
 
+Route::get("login/email/confirm/{token}", [ControllerLogin::class, 'confirmEmail'],function ($token){})->name('confirmEmail');
+
 // ******************* LOGIN *******************
 
 // ******************* IMPORTANT *******************
@@ -121,6 +102,8 @@ Route::middleware('passkeyAdmin')->group(function () {
     Route::post('/new/plant/addPlant', [ControllerAdd::class, 'addPlant'])->name('addPlant'); // Add the plant
     Route::post('/new/condition/addFavCondNb', [ControllerAdd::class, 'addFavConditionNb'])->name('addFavConditionNb'); // Add the condition nb
     Route::post('/new/condition/addFavCondDate', [ControllerAdd::class, 'addFavConditionDate'])->name('addFavConditionDate'); // Add the condition date
+    Route::post('/new/favorite/{idPlant}/{idProfile}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite'); // Add the favorite
+    Route::post('/new/family/addFamily', [ControllerAdd::class, 'addFamily'],function (){})->name('addFamily'); // Add the family
 
     Route::delete("/delete/condition/number/{idCondition}", [ControllerDelete::class, 'deleteFavConditionNb'],function ($idCondition){})->name('deleteFavConditionNb'); // Delete the condition nb
     Route::delete("/delete/condition/date/{idCondition}", [ControllerDelete::class, 'deleteFavConditionDate'],function ($idCondition){})->name('deleteFavConditionDate'); // Delete the condition date
@@ -129,20 +112,25 @@ Route::middleware('passkeyAdmin')->group(function () {
     Route::delete("/delete/problem/{idProblem}", [ControllerDelete::class, 'deleteProblem'],function ($idProblem){})->name('deleteProblem'); // Delete the problem
     Route::delete('/unassign/problem/{idPlant}/{idProblem}', [ControllerUnassign::class, 'unassignProblem'],function ($idPlant, $idProblem){})->name('unassignProblem'); // Delete the assocation of a plant and a problem
     Route::delete("/delete/plant/{idPlant}", [ControllerDelete::class, 'deletePlant'],function ($idPlant){})->name('deletePlant'); // Delete the plant
+    Route::delete("/delete/family/{idFamily}", [ControllerDelete::class, 'deleteFamily'],function ($idFamily){})->name('deleteFamily'); // Delete the family
+    Route::delete("/delete/profile/{idProfile}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile'); // Delete the profile
+    Route::delete("/delete/favorite/{idPlant}/{idProfile}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite'); // Delete the favorite
 
     Route::put('/edit/plant/editPlant/{idPlant}', [ControllerEdit::class, 'editPlantSent'],function ($idPlant){})->name('editPlantSent'); // Edit the plant
+    Route::put('/edit/family/editFamily/{idFamily}', [ControllerEdit::class, 'editFamilySent'],function ($idFamily){})->name('editFamilySent'); // Edit the family
     Route::put('/edit/problem/editProblem/{idProblem}', [ControllerEdit::class, 'editProblemSent'],function ($idProblem){})->name('editProblemSent'); // Edit the problem
     Route::put('/edit/condition/editFavCondNb/{idCondition}', [ControllerEdit::class, 'editFavCondNbSent'],function ($type, $idCondition){})->name('editFavCondNbSent');
     Route::put('/edit/condition/editFavCondDate/{idCondition}', [ControllerEdit::class, 'editFavCondDateSent'],function ($idCondition){})->name('editFavCondDateSent'); // Edit the condition date
     Route::put('/new/admin/addAdmin/{idProfile}', [ControllerEdit::class, 'addAdmin'],function ($idProfile){})->name('addAdmin'); // Add an admin
+    Route::put('/delete/admin/removeAdmin/{idProfile}', [ControllerEdit::class, 'removeAdmin'],function ($idProfile){})->name('removeAdmin'); // Remove an admin
+    Route::put('/edit/profile/editProfile/{idProfile}', [ControllerEdit::class, 'editProfileSent'],function ($idProfile){})->name('editProfileSent'); // Edit the profile
 });
 
 Route::middleware('tokenConverter')->group(function () {
-    Route::get("search/profile/{token}", [ControllerDetail::class, 'searchProfile'],function ($idProfile){})->name('detailProfile');
-    Route::get("searchAll/favorite/{token}", [ControllerDetail::class, 'searchAllFavorites'],function ($idProfile){})->name('searchAllFavorites');
-    Route::post('/new/favorite/{idPlant}/{token}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
-    Route::delete("/delete/profile/{token}", [ControllerDelete::class, 'deleteProfile'],function ($idProfile){})->name('deleteProfile');
-    Route::put('/edit/profile/editProfile/{token}', [ControllerEdit::class, 'editProfileSent'],function ($idProfile){})->name('editProfileSent');
-    Route::post('/new/favorite/{idPlant}/{token}', [ControllerAdd::class, 'addFavorite'],function ($idPlant, $idProfile){})->name('addFavorite');
-    Route::delete("/delete/favorite/{idPlant}/{token}", [ControllerDelete::class, 'deleteFavorite'],function ($idPlant, $idProfile){})->name('deleteFavorite');
+    Route::get("search/profile/token/{token}", [ControllerDetail::class, 'searchProfileToken'],function ($idProfile){})->name('detailProfileToken');
+    Route::get("searchAll/favorite/token/{token}", [ControllerDetail::class, 'searchAllFavoritesToken'],function ($idProfile){})->name('searchAllFavoritesToken');
+    Route::post('/new/favorite/token/{idPlant}/{token}', [ControllerAdd::class, 'addFavoriteToken'],function ($idPlant, $idProfile){})->name('addFavoriteToken');
+    Route::delete("/delete/profile/token/{token}", [ControllerDelete::class, 'deleteProfileToken'],function ($idProfile){})->name('deleteProfileToken');
+    Route::put('/edit/profile/editProfile/token/{token}', [ControllerEdit::class, 'editProfileSentToken'],function ($idProfile){})->name('editProfileSentToken');
+    Route::delete("/delete/favorite/token/{idPlant}/{token}", [ControllerDelete::class, 'deleteFavoriteToken'],function ($idPlant, $idProfile){})->name('deleteFavoriteToken');
 });

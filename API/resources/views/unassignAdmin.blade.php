@@ -1,20 +1,20 @@
 @extends('layouts.app')
-@section('title', 'New Favourite')
+@section('title', 'Unassign Admin')
 @section('pageContent')
 @parent
 
 <div id='mainContainer'>
     <form id="form" method='POST'>
-
+        @csrf
+        @method('PUT')
         <div class="row">
             <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                         <div class="product-details">
-                        <h3>Add your favourite plant below</h3>
+                        <h3>Add the account you wanna remove from admin here</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h3 class="mb-3">Id Plant: <input type="text" id='v1' name='TblPlant_idPlant' placeholder="Id Plant" value="" required></h3>
-                                <h3 class="mb-3">Id Profile: <input type="text" id='v2' name='TblProfile_idProfile' placeholder="Id Profile" value="" required></h3>    
+                                <h3 class="mb-3"> <input type="text" id='v1' name='TblPlant_idPlant' placeholder="Id profile" value="" required></h3>
                                 <h3 class="mb-3"> <input type='submit' onclick="myFunction()" value="Submit"></input></h3>              
                             </div>
                         </div>
@@ -27,8 +27,7 @@
     <script>
         function myFunction() {
             let v1 = document.getElementById('v1').value;
-            let v2 = document.getElementById('v2').value;
-            let form = document.getElementById("form").action = '/api/new/favorite/' + v1 + '/' + v2;
+            let form = document.getElementById("form").action = '../api/delete/admin/removeAdmin/' + v1;
         }
     </script>
 </div>
