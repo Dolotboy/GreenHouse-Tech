@@ -92,7 +92,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .register{
     position : absolute;
     caret-color: transparent;

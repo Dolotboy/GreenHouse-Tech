@@ -102,7 +102,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 @media screen and (max-width : 600px) {
   html{
     font-size : 5pt;
@@ -114,29 +114,29 @@ export default {
     border-radius: 40px;
     margin-bottom: 20px;
     max-width: 95%;
-    display: flex;
+    display:flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
+   
+
     
 }
 .image{
-  width: 20%;
-  height: 60%;
-  position : absolute;
-  top : 50%;
-  left : 5%;
-  transform: translateY(-50%);
+  width: 20vw;
+  height: 60vh;
 }
 .imageIcon{
   max-width: 100%;
   max-height:100%;
+ 
 }
 .nom h1{
   max-width: 100%;
   text-align: center;
 }
 .nom{
+  display:block;
  width:50%;
  
 }
@@ -148,10 +148,8 @@ export default {
 .image{
   width: 20%;
   height: 60%;
-  position : absolute;
-  top : 50%;
-  left : 5%;
-  transform : translateY(-50%);
+  align-items: center;
+  align-content: center;
 }
 .imageIcon{
   width: 100%;

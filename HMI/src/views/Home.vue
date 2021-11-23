@@ -1,22 +1,27 @@
 <template>
+ 
   <div>
     <div class="bg-image"></div>
     <div class="bg-text">
       <p>Aide à la décision</p>
       <h1>Serre-Tech</h1>
+      <div class="logoMobile">
+      <img  src="../assets/LogoV2.png" alt="Logo">
+    </div>
   </div>
+  
     <div style="margin-top : 100px;" class="filtersWrapper" @click="filterData($event)">
       <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
         <div class="autocomplete" style="width:300px;">
           <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
         </div>
       </form>
-      <div class="filterPlantTypeWrapper">
+      <div class="filterPlantTypeWrapper" >
         <div>
           <label>Fruits</label>
           <input type="radio" name="rdPlantType" value="fruit" class="typeFilter">
         </div>
-        <div>
+        <div c>
           <label>Légumes</label>
           <input type="radio" name="rdPlantType" value="vegetable" class="typeFilter">
         </div>
@@ -25,7 +30,7 @@
           <input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>
         </div>
       </div>
-      <div class="filterPlantFamilyWrapper">
+      <div class="filterPlantFamilyWrapper" >
         <div>
           <label>Famille 1</label>
           <input type="checkbox" name="familyFilter" value="family1" class="chkPlantFamily">
@@ -39,7 +44,7 @@
           <input type="checkbox" name="familyFilter" value="ALL" class="chkPlantFamily"  checked>
         </div>
       </div>
-      <div class="filterPlantDifficultyWrapper">
+      <div class="filterPlantDifficultyWrapper" >
         <div>
           <label>Facile</label>
           <input type="checkbox" name="difficultyFilter" value="1" class="chkPlantDifficulty">
@@ -257,10 +262,16 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style  lang="scss">
 @media screen and (min-width : 601px){
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
+.logoMobile{
+  display:none;
+}
+.togglefilter{
+  display:none;
+}
 body, html{
   height: 100%;
 }
@@ -297,7 +308,7 @@ box-sizing: border-box;
 
 }
 body{
-  background-color: #292929;
+  background-color: #26272c;
 }
 .logo{
   margin-top: 1%;
@@ -386,15 +397,29 @@ body{
     cursor : pointer;
   }
 }
+//css specifiquemet pour mobile
 
 @media screen and (max-width : 600px){
   input[type=radio]{
     height : 2.5rem;
     width : 2.5rem;
   }
+   .logoMobile{
+    display: flex;
+    width: 100%;
+    max-height: 25vh;
+    justify-content: center;
+    img{
+        width:40%;
+        max-width:250px;
+        max-height: 250px;
+    }
+  }
+  
   .productsGrid
   {
     justify-content: center;
   }
+  
 }
 </style>

@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .FavConds{
     position :absolute;
     top : 50%;

@@ -2,9 +2,9 @@
     <div class="details">
        
         <div class="column">
-        <div class="top"><img :src="plant.plantImg"></div>
+        <div class="top"></div>
         <div class="detailsTop">
-        <div class="image"><img class=""></div>
+        <div class="image"><img class="im" :src="plant.plantImg"></div>
         <div class="infoTop" >
             <p><span>Nom : </span> {{ plant.plantName }}</p>
             <p><span>Saison : </span>{{plant.plantSeason}}</p>
@@ -60,7 +60,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss" >
 .top{
   margin-top: 3%;
   height: 10vh;
@@ -102,10 +102,13 @@ export default {
     height: 20%;  
 }
 .image{
-    height: 100%;
+    height: 20vh;
     width:35%;
     max-width: 30%;
-    background-color: red;
+}
+.im{
+     max-width: 100%;
+        max-height:100%;
 }
 .infoTop
 {
