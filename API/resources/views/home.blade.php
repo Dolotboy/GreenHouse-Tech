@@ -196,8 +196,32 @@
                         <h2>Assigner un admin</h2> 
                     </a>
                 </div>
+
+                <div class='cbtn'>
+                    <a href="{{route('deleteUnassignAdmin')}}">
+                        <h2>Supprimer un admin</h2> 
+                    </a>
+                </div>
             </div>
 
+            <!-- // ****************** END ******************** // -->
+
+            <!-- // ****************** ELEVENTH LINE ******************** // -->
+
+                        <div class='midContainer'>
+                            <div class='cbtn'>
+                                <a href="{{route('newFamily')}}">
+                                    <h2>Ajouter une famille</h2> 
+                                </a>
+                            </div>
+            
+                            <div class='cbtn'>
+                                <a href="{{route('editSearchFamily')}}">
+                                    <h2>Modifier/Supprimer une famille</h2> 
+                                </a>
+                            </div>
+                        </div>
+            
             <!-- // ****************** END ******************** // -->
 
         </div>

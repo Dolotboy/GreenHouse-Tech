@@ -23,7 +23,7 @@
         </div>
         <div c>
           <label>Légumes</label>
-          <input type="radio" name="rdPlantType" value="vegetable" class="typeFilter">
+          <input type="radio" name="rdPlantType" value="légume" class="typeFilter">
         </div>
         <div>
           <label>Tous</label>
@@ -73,7 +73,7 @@
   <div class="productsGrid">
     <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
   </div>
-  <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>  
+  <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
 </template>
 
 <style lang="scss">
@@ -237,7 +237,7 @@ export default {
       let db = await toolbox.setDb();
       this.plants = await toolbox.fetchData(db);
       this.visiblePlants = this.plants;
-      let strings = await this.getAllStrings(this.radioFilterValue);
+      let strings = this.getAllStrings(this.radioFilterValue);
       autoComplete.autocomplete(document.getElementById("searchBar"), strings);
       document.addEventListener('filter', (event) => {
         this.searchBarValue = event.detail;
