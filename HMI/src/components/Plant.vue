@@ -7,12 +7,12 @@
   <h1>{{ plant.plantName }}</h1>
   <p>{{ plant.idPlant }}</p>
 
-  <!-- <input class="star" type="checkbox" title="Favoris" :checked="isFavorite" @click="toggleFavorite">  -->
+  <input class="star" type="checkbox" title="Favoris" :checked="isFavorite" @click="toggleFavorite"> 
 
   </div>
   <div class="end">
-    <p v-if="isFavorite">Favoris</p>
-    <input class="star" type="checkbox" title="Favoris" :checked="isFavorite" @click="toggleFavorite($event)"> 
+  <p v-if="isFavorite">Favoris</p>
+  <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
   </div>
 </div>
 </template>
@@ -114,14 +114,11 @@ export default {
     border : solid 1px black;
     border-radius: 40px;
     margin-bottom: 20px;
-    max-width: 95%;
+    max-width: 95vw;
     display:flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
-   
-
-    
+    justify-content: space-evenly; 
 }
 .image{
   width: 20vw;
@@ -158,9 +155,18 @@ export default {
   max-height: 60px;
   max-width: 50px;
 }
+@media screen and (min-width : 601px) 
+{
 .wrapper{
-    position: relative;
-    border : solid 1px black;
+  position: relative;
+  border : solid 1px #f0e567;
+  border-radius: 40px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;   
+}
 }
 .star {
     top: 5px;

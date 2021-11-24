@@ -1,79 +1,70 @@
 <template>
  
-  <div>
-    <div class="bg-image"></div>
-    <div class="bg-text">
-      <p>Aide à la décision</p>
-      <h1>Serre-Tech</h1>
+  <div class="main">
+      <div class="bg-image"></div>
+      <div>
+        <div class="bg-text">
+          <p>Aide à la décision</p>
+          <h1>Serre-Tech</h1>
+        </div>
       <div class="logoMobile">
       <img  src="../assets/LogoV2.png" alt="Logo">
     </div>
   </div>
-  
-    <div style="margin-top : 100px;" class="filtersWrapper" @click="filterData($event)">
       <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
         <div class="autocomplete" style="width:300px;">
           <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
         </div>
       </form>
-      <div class="filterPlantTypeWrapper" >
-        <div>
-          <label>Fruits</label>
-          <input type="radio" name="rdPlantType" value="fruit" class="typeFilter">
+        <div class="indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-        <div c>
-          <label>Légumes</label>
-          <input type="radio" name="rdPlantType" value="légume" class="typeFilter">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>
-        </div>
+        <div class="filters" @click="filterData($event)">
+          <ul>
+          <li><a href="#" class="item">Type<i class="fas fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a><input type="radio" name="rdPlantType" value="fruit" class="typeFilter">Fruits</a></li>
+              <li><a><input type="radio" name="rdPlantType" value="légume" class="typeFilter">Légumes</a></li>
+              <li><a><input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>Tous</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="item">Famille<i class="fa fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Blue</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Black</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Orange</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Green</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Red</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily" value="ALL" checked>All</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="item">Difficulté<i class="fa fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a><input type="checkbox" value="1" class="chkPlantDifficulty">Facile</a></li>
+              <li><a><input type="checkbox" value="2" class="chkPlantDifficulty">Intermédiaire</a></li>
+              <li><a><input type="checkbox" value="3" class="chkPlantDifficulty">Difficile</a></li>
+              <li><a><input type="checkbox" value="ALL" class="chkPlantDifficulty" checked>Tous</a></li>
+            </ul>
+          </li>
+          <li class="filterAlphaWrapper">
+            <div>
+              <label>Alphabétique</label>
+              <input type="checkbox" checked id="chkAlphabetical">
+            </div>
+          </li>
+        </ul>
       </div>
-      <div class="filterPlantFamilyWrapper" >
-        <div>
-          <label>Famille 1</label>
-          <input type="checkbox" name="familyFilter" value="family1" class="chkPlantFamily">
-        </div>
-        <div>
-          <label>Famille 2</label>
-          <input type="checkbox" name="familyFilter" value="family2" class="chkPlantFamily">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="checkbox" name="familyFilter" value="ALL" class="chkPlantFamily"  checked>
-        </div>
+      <div class="productsGrid">
+        <Plant class="plant" style="margin-top: 6vh;" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
       </div>
-      <div class="filterPlantDifficultyWrapper" >
-        <div>
-          <label>Facile</label>
-          <input type="checkbox" name="difficultyFilter" value="1" class="chkPlantDifficulty">
-        </div>
-        <div>
-          <label>Intermédiaire</label>
-          <input type="checkbox" name="difficultyFilter" value="2" class="chkPlantDifficulty">
-        </div>
-        <div>
-          <label>Difficile</label>
-          <input type="checkbox" name="difficultyFilter" value="3" class="chkPlantDifficulty">
-        </div>
-        <div>
-          <label>Tous</label>
-          <input type="checkbox" name="difficultyFilter" value="ALL" class="chkPlantDifficulty" checked>
-        </div>
+        <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>  
       </div>
-      <div class="filterAlphaWrapper">
-        <div>
-          <label>Alphabétique</label>
-          <input type="checkbox" checked id="chkAlphabetical">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="productsGrid">
-    <Plant class="plant" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
-  </div>
-  <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
 </template>
 
 <style lang="scss">
@@ -106,6 +97,14 @@ export default {
   mounted(){
     this.initialisation();
     this.favorites = JSON.parse(localStorage.getItem('favorites'));
+    //animations for filters
+      $("li").mouseover(function(){
+        $(this).find('.drop-down').slideDown(300);
+        $(this).find(".accent").addClass("animate");
+      }).mouseleave(function(){
+        $(this).find(".drop-down").slideUp(300);
+          $(this).find(".accent").removeClass("animate");
+      });
   },
   methods : {
     filterAlphabetical(){
@@ -180,6 +179,7 @@ export default {
       this.visiblePlants = this.plants;
 
       if(this.searchBarValue != null && this.searchBarValue != ""){
+        console.log(this.visiblePlants);
         let tempPlants = [];
         for(let i = 0; i< this.visiblePlants.length; i++)
           if(this.visiblePlants[i].plantName.toUpperCase().startsWith(this.searchBarValue.toUpperCase()))
@@ -274,16 +274,19 @@ export default {
 }
 body, html{
   height: 100%;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/PlantBackground.png');
+  background-position: center;
+  background-size: auto, cover;
+  background-attachment: fixed;
 }
 * {    
 box-sizing: border-box;
 }
+html{
+  scroll-behavior: smooth;
+}
 .bg-image{
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/PlantBackground.jpg');
   height: 100vh;
-  background-position: center;
-  background-size: auto, cover;
-  background-attachment: scroll, fixed;
 }
 .bg-text{
   color: #fff;
@@ -319,55 +322,11 @@ body{
     max-width: 100%;
   }
 }
-.productsGrid{
-  color: #D2CCB1;
-  display : grid;
-  grid-template-columns : repeat(auto-fit, minmax(350px, 1fr));
-  width : 85%;
-  margin : 2vh 0 0 10%;
- column-gap: 30px;
- caret-color: transparent;
 
-}
-.plant{
-  background-color: #616161;
-
-  &:hover{
-    background-color : #600404;
-    cursor : pointer;
-  }
-}
-
-.filtersWrapper{
-  & > div{
-    display : inline-flex;
-    width: auto;
-    background: #616161;
-    color: #D2CCB1;
-    justify-content: center;
-    margin : 2vh 0;
-    border: 1px solid;
-    border-radius: 5px;
-
-    & > div{
-      display : flex;
-
-      label{
-        font-size : 2rem;
-      }
-
-      input[type=radio]{
-        height: 1.5rem;
-        width : 1.5rem;
-        margin : auto 1rem;
-      }
-    }
-  }
-}
 .autoCompleteForm{
-  display : flex;
-  justify-content: center;
-  
+  display : inline-block;
+  float: right;
+  padding: 1vh 5vw 1vh 5vw;
 
   .autocomplete{
     display : block;
@@ -386,7 +345,6 @@ body{
     height:4vh;
 
   }
-
   #searchBarautocomplete-list{
     position : absolute;
     top : 100%;
@@ -397,28 +355,195 @@ body{
     cursor : pointer;
   }
 }
-//css specifiquemet pour mobile
 
-@media screen and (max-width : 600px){
-  input[type=radio]{
-    height : 2.5rem;
-    width : 2.5rem;
+.indicator{
+  position:absolute;
+  width:50px;
+  height:50px;
+  transform:rotate(45deg) translate(-50%, -50%);
+  left : 50%; 
+  top : 80%;
+
+  span{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    box-sizing:border-box;
+    border:none;
+    border-bottom:3px solid #fff;
+    border-right:3px solid #fff;
+    animation:animate 1s linear infinite;
+    &:nth-child(1){
+      top:-30px;
+      left:-30px;
+      animation-delay:0s;
+    }
+    &:nth-child(2){
+      top:-15px;
+      left:-15px;
+      animation-delay:0.2s;
+    }
+    &:nth-child(3){
+      top:0;
+      left:0;
+      animation-delay:0.4s;
+    }
+    &:nth-child(4){
+      top:15px;
+      left:15px;
+      animation-delay:0.6s;
+    }
+    &:nth-child(5){
+      top:30px;
+      left:30px;
+      animation-delay:0.8s;
+    }
   }
-   .logoMobile{
+}
+@keyframes animate{
+  0%{
+    border-color:#fff;
+    transform:translate(0,0);
+  }
+   20%{
+    border-color:#fff;
+     transform:translate(15px,15px);
+  }
+   20.1%,100%{
+    border-color:#007200;
+  }
+}
+
+
+.filters ul {
+width: 620px;
+margin: 0 auto;
+
+  li {
+    float: left;
+    list-style: none;
+    margin-right: 10px;
+    position: relative;
+    z-index : 10;
+       
+    a {
+      text-transform: uppercase;
+      position: relative;
+      text-decoration: none;
+      color: white;
+      background-color: black;
+      border: 1px solid #fff;
+      letter-spacing: 1px;
+      padding: 10px 15px 10px 25px;
+      display: block;
+      width: 150px;
+      z-index: 5000;
+
+      i {
+        font-size: 12px !important;
+        position: absolute;
+        right: 10px;
+        top: 14px;
+        color: red;
+      }
+    }
+    
+    .drop-down {
+      position: absolute;
+      padding: 0;
+      display: none;
+      margin: 0;
+      left: 0;
+      z-index: 0;
+      
+      input {
+        display: inline-block;
+        float: left;
+      }  
+      li {
+        position: relative;
+        float: none;
+        z-index : 10;
+        
+        a {
+          border-top: none;
+          width: 150px;
+          
+          &:hover {
+            background: #000000;
+            color: #ffffff;
+          }
+        }
+      }
+      
+      li:nth-of-type(1) a {
+        border-top: none;
+      }
+    }
+  }
+  //css specifiquemet pour mobile
+}
+.productsGrid
+  {
+    justify-content: center;
+  }
+.logoMobile{
     display: flex;
     width: 100%;
-    max-height: 25vh;
+    max-height: 40vh;
     justify-content: center;
     img{
-        width:40%;
+        width:50vw;
         max-width:250px;
         max-height: 250px;
     }
-  }
+}
+
+.accent {
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: blue;
+  position: absolute;
+  transition: 0.3s ease;
+}
+
+.animate {
+  width: 100%;
+  transition: 0.3s ease;
+}
+.item{
+  background-color: rgba(0,0,0,0.9);
+  color: white;
+    
+    &:hover{
+      color:black;
+      background: white;
+    }
+}
+
+.productsGrid{
+  color: #FFFFFF;
+  text-shadow:  0 -2px 10px #f0e567;
+  display : grid;
+  grid-template-columns : repeat(auto-fit, minmax(500px, 1fr));
+  width : 100%;
+  padding : 2vh 5vw 0 5vw;
+  column-gap: 30px;
+  row-gap: 30px;
+}
+.plant{
+  background: rgba(255, 255, 255, .1);
+  box-shadow: 10px 10px 5px rgba(255, 255, 255, .2);
+  height: 15vh;
   
-  .productsGrid
-  {
-    justify-content: center;
+  &:hover{
+    cursor : pointer;
+    background: rgba(255, 255, 255, .05);
+    box-shadow: 10px 10px 5px rgba(255, 255, 255, .15);
   }
   
 }
