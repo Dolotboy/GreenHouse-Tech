@@ -117,7 +117,7 @@ export default {
     .loginForm{
       font-size: 1.6rem;
       flex-direction: column;
-       width: 70vw;
+       width: 70%;
     }
    
     .inputBox
@@ -125,9 +125,7 @@ export default {
       height:6vh;
       margin-top:3%;
       margin-bottom: 3%;
-      width: 85%;
-    
-      
+      width: 70vw;
     }
 }
 @media screen and (max-width : 600px) 
@@ -181,7 +179,7 @@ export default {
     .loginForm{
       font-size: 1.6rem;
       flex-direction: column;
-       width: 70vw;
+       width: 80vw;
     }
    
     .inputBox
@@ -189,7 +187,7 @@ export default {
       height:6vh;
       margin-top:10px;
       margin-bottom: 10px;
-      width: 80%;    
+      width: 100%;    
     }
     .checks{
       display: flex;
@@ -202,7 +200,7 @@ export default {
     }   
     .BtnConnexion{
       margin-top:5px;
-      width: 70%;
+      width: 80vw;
       height:20%;
       font-size: 15px;
       border-radius: 30px;

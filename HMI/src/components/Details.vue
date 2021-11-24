@@ -14,7 +14,7 @@
         <div class="info">
             <p><span >Temps de conservation :</span> {{plant.plantDaysConservation}} jour(s)</p>
             <p><span >Type de sol :</span> {{plant.plantGroundType}}</p>
-            <p><span >Description :</span> {{plant.plantDescription}}</p>   
+            <p><span >Description :</span> {{plant.plantDescription}} </p>   
             <p><span >Voisinage :</span> {{plant.plantBestNeighbor}}</p>  
             <p><span >Difficulté :</span> {{plant.plantDifficulty}}</p>  
             <p><span >Famille :</span> {{plant.plantFamily}}</p>
@@ -64,6 +64,7 @@ export default {
 .top{
   margin-top: 3%;
   height: 10vh;
+  max-height:50px;
   align-items: center;
   img
   {
@@ -75,14 +76,14 @@ export default {
   position: absolute;
     display: flex;
     caret-color: transparent;
-    top : 54%;
+    top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
     background: rgb(224, 224, 224);
     border: solid;
     border-color: black;
     width : 100%;
-    height: 93%;
+    height: 100%;
     padding-left: 5%;
     padding-right: 5%;
     h1{
@@ -114,13 +115,13 @@ export default {
 {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    align-content: flex-start;
     width: 60%;
     text-align: start;
 }
 .info
 {
-    display: lex;
+    display: flex;
     max-width: 90vw;
     min-width: 90vw;
     height: 40vh;

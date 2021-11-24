@@ -32,8 +32,8 @@
      
     </nav>
     <router-view @popLogin="toggleLogin"/>  
-    <!--<div @click="login(1)">login</div>
-    <div @click="logout">logout</div>-->
+    <div @click="login(1)">login</div>
+    <div @click="logout">logout</div>
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
     <Register v-if="showRegister" @close="toggleRegister"/>
     <Loading v-if="showLoading"/>  

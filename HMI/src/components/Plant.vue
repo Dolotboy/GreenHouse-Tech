@@ -155,6 +155,8 @@ export default {
 .imageIcon{
   width: 100%;
   height:100%;
+  max-height: 60px;
+  max-width: 50px;
 }
 .wrapper{
     position: relative;
