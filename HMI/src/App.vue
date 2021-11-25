@@ -20,14 +20,13 @@
           <div></div>
         </div>
       </div>
-     
      <ul class="links">
           <li @click="toggleNavMobile"><img  src=".\assets\outline_home_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;"  to="/">Accueil</router-link></p></li> 
           <li @click="toggleNavMobile"><img  src=".\assets\outline_info_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;" to="/about">À propos</router-link></p></li>
-          <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>inscrire</p></li>
-          <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>connecter</p></li> 
+          <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>S'inscrire</p></li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>Se connecter</p></li> 
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
-          <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>déconnection</p></li> 
+          <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>Déconnexion</p></li> 
       </ul>
      
     </nav>
@@ -216,22 +215,29 @@ button{
   border : none;
   padding : 10px;
   font-size : 1.2rem;
+
   &:hover{
     opacity : .8;
     cursor : pointer;
   }
 }
+
 #navDesktop{
   top : 0;
   position : fixed;
   padding : 0 20%;
   caret-color: transparent;
+
   display : flex;
   justify-content: space-between;
   width : 100vw;
   align-items: center;
   text-transform: uppercase;
-  font-size: 1.2rem;    
+  font-size: 1.2rem;   
+  z-index: 1000; 
+  background-color: rgba(0,0,0,0.9);
+
+
   .logo{
     width: 60px;
     height: 60px;
@@ -240,7 +246,7 @@ button{
       max-width: 100%;
     }
   } 
-  
+
 ul {
   list-style-type: none;
   overflow: hidden;
@@ -270,6 +276,7 @@ ul li {
   padding: 10px 15px;
 }
 }
+
 .lblInp-div{
   display : flex;
   justify-content : end;
@@ -348,6 +355,7 @@ ul li {
     list-style-type: none;
     width: 100%;
     padding: 0;
+
     #logout{
          position: fixed;
          width: 40vw;
