@@ -114,4 +114,11 @@ return [
     'labelAssignAdmin' => 'Assigner un admin',
     'labelUnassignAdmin' => 'Désassigner un admin',
 
+    'labelAddFamily' => 'Ajouter une famille',
+    'labelFamilyName' => 'Nom de la famille',
+    'labelFamilyId' => 'ID de la famille',
+    'labelEditFamily' => 'Modifier la famille',
+    'labelDeleteFamily' => 'Supprimer la famille',
+    'labelSearchFamily' => 'Chercher une famille',
+
 ];

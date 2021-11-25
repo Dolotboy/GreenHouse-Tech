@@ -32,7 +32,7 @@ Route::get('/{lang}/edit/plant/{idPlant}', [ControllerEdit::class, 'editPlant'],
 
 Route::get('/{lang}/new/family/', [ControllerAdd::class, 'indexFamily'],function ($lang){})->name('newFamily'); // Display the page with form to add family
 
-Route::get('/{lang}/search/family/', [ControllerEdit::class, 'indexFamily'])->name('editSearchFamily'); // Display the page with search a family form
+Route::get('/{lang}/search/family/', [ControllerEdit::class, 'indexFamily'],function ($lang){})->name('editSearchFamily'); // Display the page with search a family form
 
 Route::get('/{lang}/edit/family/{idFamily}', [ControllerEdit::class, 'editFamily'],function ($lang, $idFamily){})->name('editFamily'); // Display the page with edit family form
 
