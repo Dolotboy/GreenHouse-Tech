@@ -12,10 +12,10 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                         <div class="product-details">
-                        <h3>Add the account you wanna remove from admin here</h3>
+                        <h3>{{__('interface.labelUnassignAdmin')}}</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h3 class="mb-3"> <input type="text" id='v1' name='TblPlant_idPlant' placeholder="Id profile" value="" required></h3>
-                                <h3 class="mb-3"> <input type='submit' onclick="myFunction()" value="Submit"></input></h3>              
+                                <h3 class="mb-3">{{__('interface.labelPlantId')}} <input type="text" id='v1' name='TblPlant_idPlant' placeholder="Id profile" value="" required></h3>
+                                <h3 class="mb-3"> <input type='submit' onclick="myFunction()" value="{{__('interface.submit')}}"></input></h3>              
                             </div>
                         </div>
                     </div>

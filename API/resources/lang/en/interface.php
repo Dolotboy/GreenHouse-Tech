@@ -63,6 +63,9 @@ return [
     'labelSearchProblem' => 'Search a problem',
     'labelEditProblem' => 'Edit a problem',
     'labelDeleteProblem' => 'Delete a problem',
+    'labelAssignProblem' => 'Assign a problem',
+    'labelUnassignProblem' => 'Unassign a problem',
+    'labelProblemId' => 'Problem ID',
 
     'labelAddFavorite' => 'Add a favorite',
     'labelDeleteFavorite' => 'Delete a favorite',
@@ -107,5 +110,8 @@ return [
     'labelCondNumberExposureTime' => 'ExposureTime',
     'labelAssignCondNumber' => 'Assign a favorable number condition',
     'labelUnassignCondNumber' => 'Unassign a favorable number condition',
+
+    'labelAssignAdmin' => 'Assign an admin',
+    'labelUnassignAdmin' => 'Unassign an admin',
 
 ];

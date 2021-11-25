@@ -63,6 +63,9 @@ return [
     'labelSearchProblem' => 'Chercher un problème',
     'labelEditProblem' => 'Modifier un problème',
     'labelDeleteProblem' => 'Supprimer un problème',
+    'labelAssignProblem' => 'Assigner un problème',
+    'labelUnassignProblem' => 'Désassigner un problème',
+    'labelProblemId' => 'ID du problème',
 
     'labelAddFavorite' => 'Ajouter un favori',
     'labelDeleteFavorite' => 'Supprimer un favori',
@@ -107,5 +110,8 @@ return [
     'labelCondNumberExposureTime' => 'Temps ensoleillement',
     'labelAssignCondNumber' => 'Assigner une condition favorable nombre',
     'labelUnassignCondNumber' => 'Désassigner une condition favorable nombre',
+
+    'labelAssignAdmin' => 'Assigner un admin',
+    'labelUnassignAdmin' => 'Désassigner un admin',
 
 ];

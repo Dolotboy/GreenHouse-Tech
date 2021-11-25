@@ -78,9 +78,9 @@ Route::get('/{lang}/search/conditionDate', [ControllerEdit::class, 'indexFavCond
 
 Route::get('/{lang}/edit/conditionDate/{idCondition}', [ControllerEdit::class, 'editFavCondDate'],function ($lang, $idCondition){})->name('editFavCondDate'); // Display the page with condition date form
 
-Route::get('/{lang}/assign/conditionDate', [ControllerAssign::class, 'indexFavCondDate'])->name('newAssignFavCondDate'); // Display the page with association form
+Route::get('/{lang}/assign/conditionDate', [ControllerAssign::class, 'indexFavCondDate'],function ($lang){})->name('newAssignFavCondDate'); // Display the page with association form
 
-Route::get('/{lang}/unassign/conditionDate', [ControllerUnassign::class, 'indexFavCondDate'])->name('deleteUnassignFavCondDate'); // Display the page with association form
+Route::get('/{lang}/unassign/conditionDate', [ControllerUnassign::class, 'indexFavCondDate'],function ($lang){})->name('deleteUnassignFavCondDate'); // Display the page with association form
 
 // ***************** FAVORABLE CONDITION *******************
 
@@ -92,12 +92,12 @@ Route::get('/{lang}/search/conditionNb', [ControllerEdit::class, 'indexFavCondNb
 
 Route::get('/{lang}/edit/conditionNb/{idCondition}', [ControllerEdit::class, 'editFavCondNb'],function ($lang, $idProfile){})->name('editFavCondNb'); // Display the page with condition nb form
 
-Route::get('/{lang}/assign/conditionNb', [ControllerAssign::class, 'indexFavCondNb'])->name('newAssignFavCondNb'); // Display the page with association form
+Route::get('/{lang}/assign/conditionNb', [ControllerAssign::class, 'indexFavCondNb'],function ($lang){})->name('newAssignFavCondNb'); // Display the page with association form
 
-Route::get('/{lang}/unassign/conditionNb', [ControllerUnassign::class, 'indexFavCondNb'])->name('deleteUnassignFavCondNb'); // Display the page with association form
+Route::get('/{lang}/unassign/conditionNb', [ControllerUnassign::class, 'indexFavCondNb'],function ($lang){})->name('deleteUnassignFavCondNb'); // Display the page with association form
 
 // ***************** FAVORABLE CONDITION *******************
 
-Route::get('/{lang}/assign/admin', [ControllerEdit::class, 'indexAddAdmin'])->name('newAssignAdmin'); // Display the page with admin form
+Route::get('/{lang}/assign/admin', [ControllerEdit::class, 'indexAddAdmin'],function ($lang){})->name('newAssignAdmin'); // Display the page with admin form
 
-Route::get('/{lang}/unassign/admin', [ControllerEdit::class, 'indexRemoveAdmin'])->name('deleteUnassignAdmin'); // Display the page with admin form
+Route::get('/{lang}/unassign/admin', [ControllerEdit::class, 'indexRemoveAdmin'],function ($lang){})->name('deleteUnassignAdmin'); // Display the page with admin form

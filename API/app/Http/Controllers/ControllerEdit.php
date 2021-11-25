@@ -477,8 +477,9 @@ class ControllerEdit extends Controller
         }
     }
 
-    public function indexAddAdmin()
+    public function indexAddAdmin($lang)
     {
+        App::setLocale($lang);
         return view('assignAdmin');
     }
 
@@ -514,8 +515,9 @@ class ControllerEdit extends Controller
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $profile->idProfile], 200);
     }
 
-    public function indexRemoveAdmin()
+    public function indexRemoveAdmin($lang)
     {
+        App::setLocale($lang);
         return view('unassignAdmin');
     }
 
