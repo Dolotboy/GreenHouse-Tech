@@ -65,7 +65,18 @@ return [
     'labelDeleteProblem' => 'Supprimer un problème',
 
     'labelAddFavorite' => 'Ajouter un favori',
+    'labelDeleteFavorite' => 'Supprimer un favori',
     'labelPlantId' => 'ID de la plante',
     'labelProfileId' => 'ID du profil',
+
+    'labelAddProfile' => 'Ajouter un profil',
+    'labelProfileEmail' => 'Mail',
+    'labelProfilePassword' => 'Mot de passe',
+    'labelProfileShowPassword' => 'Afficher le mot de passe',
+    'labelProfileFirstname' => 'Prénom',
+    'labelProfileLastname' => 'Nom',
+    'labelSearchProfile' => 'Chercher un profil',
+    'labelEditProfile' => 'Modifier un profil',
+    'labelDeleteProfile' => 'Supprimer un profil',
 
 ];

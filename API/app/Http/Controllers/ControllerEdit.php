@@ -251,7 +251,7 @@ class ControllerEdit extends Controller
 
     }
 
-    public function editProfile(Request $request, $idProfile)
+    public function editProfile(Request $request, $lang, $idProfile)
     {
         try
         {
@@ -266,7 +266,8 @@ class ControllerEdit extends Controller
         {
             return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
         }
-
+        
+        App::setLocale($lang);
         return view('editProfile', ["profile" => $profile]);
     }
 

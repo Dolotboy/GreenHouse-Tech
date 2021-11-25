@@ -69,4 +69,13 @@ return [
     'labelPlantId' => 'Plant ID',
     'labelProfileId' => 'Profile ID',
 
+    'labelAddProfile' => 'Add a profile',
+    'labelProfileEmail' => 'Email',
+    'labelProfilePassword' => 'Password',
+    'labelProfileShowPassword' => 'Show Password',
+    'labelProfileFirstname' => 'Firstname',
+    'labelProfileLastname' => 'Lastname',
+    'labelSearchProfile' => 'Search a profile',
+    'labelEditProfile' => 'Edit a profile',
+    'labelDeleteProfile' => 'Delete a profile',
 ];

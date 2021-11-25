@@ -64,9 +64,9 @@ Route::get('/{lang}/delete/favorite', [ControllerDelete::class, 'indexFavorite']
 
 Route::get('/{lang}/new/profile', [ControllerAdd::class, 'indexProfile'],function ($lang){})->name('newProfile'); // Display the page with the profile form
 
-Route::get('/{lang}/search/profile', [ControllerEdit::class, 'indexProfile'])->name('editSearchProfile'); // Display the form with search a profile
+Route::get('/{lang}/search/profile', [ControllerEdit::class, 'indexProfile'],function ($lang){})->name('editSearchProfile'); // Display the form with search a profile
 
-Route::get('/{lang}/edit/profile/{idProfile}', [ControllerEdit::class, 'editProfile'],function ($idProfile){})->name('editProfile'); // Display the page with edit profile form
+Route::get('/{lang}/edit/profile/{idProfile}', [ControllerEdit::class, 'editProfile'],function ($lang, $idProfile){})->name('editProfile'); // Display the page with edit profile form
 
 // ***************** PROFILE *******************
 
