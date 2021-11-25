@@ -15,13 +15,13 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                             <div class="product-details">
-                                <h3>Edit a favorable condition date</h3>
+                                <h3>{{__('interface.labelEditCondDate')}}</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h3 class="mb-3">Type: <input type="text" name='type' value="{{ $favorableCondition["type"] }}" required></h3>
-                                    <h3 class="mb-3">Start Date: <input type="text" name='start' value=" {{ $favorableCondition["start"] }}" required></h3>
-                                    <h3 class="mb-3">End Date: <input type="text" name='end' value="{{ $favorableCondition["end"] }}" required></h3>  
-                                    <h3 class="mb-3">Location: <input type="text" name='location' value="{{ $favorableCondition["location"] }}" required></h3>  
-                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Submit"></h3>                                      
+                                    <h3 class="mb-3">{{__('interface.labelCondDateType')}} <input type="text" name='type' value="{{ $favorableCondition["type"] }}" required></h3>
+                                    <h3 class="mb-3">{{__('interface.labelCondDateStart')}} <input type="text" name='start' value=" {{ $favorableCondition["start"] }}" required></h3>
+                                    <h3 class="mb-3">{{__('interface.labelCondDateEnd')}} <input type="text" name='end' value="{{ $favorableCondition["end"] }}" required></h3>  
+                                    <h3 class="mb-3">{{__('interface.labelCondDateLocation')}} <input type="text" name='location' value="{{ $favorableCondition["location"] }}" required></h3>  
+                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="{{__('interface.submit')}}"></h3>                                      
                                 </div>
                             </div>
                         </div>
@@ -39,9 +39,9 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                             <div class="product-details">
-                                <h3>Delete a favorable condition date</h3>
+                                <h3>{{__('interface.labelDeleteCondDate')}}</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Delete"></h3>                                      
+                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="{{__('interface.delete')}}"></h3>                                      
                                 </div>
                             </div>
                         </div>

@@ -266,7 +266,7 @@ class ControllerEdit extends Controller
         {
             return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
         }
-        
+
         App::setLocale($lang);
         return view('editProfile', ["profile" => $profile]);
     }
@@ -353,7 +353,7 @@ class ControllerEdit extends Controller
         }
     }
 
-    public function editFavCondDate(Request $request, $idCondition)
+    public function editFavCondDate(Request $request, $lang, $idCondition)
     {
         try
         {
@@ -369,6 +369,7 @@ class ControllerEdit extends Controller
             return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
         }
 
+        App::setLocale($lang);
         return view('editFavCondDate', ["favorableCondition" => $favorableCondition]);
     }
 
@@ -414,7 +415,7 @@ class ControllerEdit extends Controller
         }
     }
 
-    public function editFavCondNb(Request $request, $idCondition)
+    public function editFavCondNb(Request $request, $lang, $idCondition)
     {
         try
         {
@@ -430,6 +431,7 @@ class ControllerEdit extends Controller
             return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
         }
 
+        App::setLocale($lang);
         return view('editFavCondNb', ["favorableCondition" => $favorableCondition]);
     }
 

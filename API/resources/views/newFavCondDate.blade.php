@@ -12,13 +12,13 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                         <div class="product-details">
-                        <h3>Add a favorite condition date</h3>
+                        <h3>{{__('interface.labelAddCondDate')}}</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h3 class="mb-3">Type: <input type="text" name='type' placeholder="Type" value="" required></h3>
-                                <h3 class="mb-3">Start: <input type="date" name='start' placeholder="Start" value="" required></h3>
-                                <h3 class="mb-3">End: <input type="date" name='end' placeholder="End" value="" required></h3>   
-                                <h3 class="mb-3">Location: <input type="text" name='location' placeholder="Location" value="" required></h3>                                 
-                                <h3 class="mb-3"> <input type="submit" name='submit' value="Submit"></h3>                              
+                                <h3 class="mb-3">{{__('interface.labelCondDateType')}} <input type="text" name='type' placeholder="Type" value="" required></h3>
+                                <h3 class="mb-3">{{__('interface.labelCondDateStart')}} <input type="date" name='start' placeholder="Start" value="" required></h3>
+                                <h3 class="mb-3">{{__('interface.labelCondDateEnd')}} <input type="date" name='end' placeholder="End" value="" required></h3>   
+                                <h3 class="mb-3">{{__('interface.labelCondDateLocation')}} <input type="text" name='location' placeholder="Location" value="" required></h3>                                 
+                                <h3 class="mb-3"> <input type="submit" name='submit' value="{{__('interface.submit')}} "></h3>                              
                             </div>
                         </div>
                     </div>

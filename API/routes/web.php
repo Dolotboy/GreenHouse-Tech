@@ -74,9 +74,9 @@ Route::get('/{lang}/edit/profile/{idProfile}', [ControllerEdit::class, 'editProf
 
 Route::get('/{lang}/new/conditionDate', [ControllerAdd::class, 'indexFavCondDate'],function ($lang){})->name('newFavCondDate'); // Display the page with new condition date form
 
-Route::get('/{lang}/search/conditionDate', [ControllerEdit::class, 'indexFavCondDate'])->name('editSearchFavCondDate'); // Display the page with search condition date form
+Route::get('/{lang}/search/conditionDate', [ControllerEdit::class, 'indexFavCondDate'],function ($lang){})->name('editSearchFavCondDate'); // Display the page with search condition date form
 
-Route::get('/{lang}/edit/conditionDate/{idCondition}', [ControllerEdit::class, 'editFavCondDate'],function ($idProfile){})->name('editFavCondDate'); // Display the page with condition date form
+Route::get('/{lang}/edit/conditionDate/{idCondition}', [ControllerEdit::class, 'editFavCondDate'],function ($lang, $idCondition){})->name('editFavCondDate'); // Display the page with condition date form
 
 Route::get('/{lang}/assign/conditionDate', [ControllerAssign::class, 'indexFavCondDate'])->name('newAssignFavCondDate'); // Display the page with association form
 
@@ -88,9 +88,9 @@ Route::get('/{lang}/unassign/conditionDate', [ControllerUnassign::class, 'indexF
 
 Route::get('/{lang}/new/conditionNb', [ControllerAdd::class, 'indexFavCondNb'],function ($lang){})->name('newFavCondNb'); // Display the page with new condition nb form
 
-Route::get('/{lang}/search/conditionNb', [ControllerEdit::class, 'indexFavCondNb'])->name('editSearchFavCondNb'); // Display the page with search condition nb form
+Route::get('/{lang}/search/conditionNb', [ControllerEdit::class, 'indexFavCondNb'],function ($lang){})->name('editSearchFavCondNb'); // Display the page with search condition nb form
 
-Route::get('/{lang}/edit/conditionNb/{idCondition}', [ControllerEdit::class, 'editFavCondNb'],function ($idProfile){})->name('editFavCondNb'); // Display the page with condition nb form
+Route::get('/{lang}/edit/conditionNb/{idCondition}', [ControllerEdit::class, 'editFavCondNb'],function ($lang, $idProfile){})->name('editFavCondNb'); // Display the page with condition nb form
 
 Route::get('/{lang}/assign/conditionNb', [ControllerAssign::class, 'indexFavCondNb'])->name('newAssignFavCondNb'); // Display the page with association form
 
