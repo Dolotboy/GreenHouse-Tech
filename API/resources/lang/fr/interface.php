@@ -88,6 +88,8 @@ return [
     'labelDeleteCondDate' => 'Supprimer une condition favorable date',
     'labelSearchCondDate' => 'Chercher une condition favorable date',
     'labelCondDateId' => 'ID de la condition favorable date',
+    'labelAssignCondDate' => 'Assigner une condition favorable date',
+    'labelUnassignCondDate' => 'Désassigner une condition favorable date',
 
     'labelAddCondNumber' => 'Ajouter une condition favorable nombre',
     'labelCondNumberType' => 'Type',
@@ -103,5 +105,7 @@ return [
     'labelCondNumberPh' => 'Ph',
     'labelCondNumberPlantSpacing' => 'Espacement des plants',
     'labelCondNumberExposureTime' => 'Temps ensoleillement',
+    'labelAssignCondNumber' => 'Assigner une condition favorable nombre',
+    'labelUnassignCondNumber' => 'Désassigner une condition favorable nombre',
 
 ];

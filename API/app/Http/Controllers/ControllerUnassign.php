@@ -8,23 +8,27 @@ use App\Models\AssignConditionDate;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 
 class ControllerUnassign extends Controller
 {
     /* ------------------------- INDEX PAGE ---------------------------- */
     
-    public function indexFavCondDate()
+    public function indexFavCondDate($lang)
     {
+        App::setLocale($lang);
         return view('unassignFavCondDate');
     }
 
-    public function indexFavCondNb()
+    public function indexFavCondNb($lang)
     {
+        App::setLocale($lang);
         return view('unassignFavCondNb');
     }
 
-    public function indexProblem()
+    public function indexProblem($lang)
     {
+        App::setLocale($lang);
         return view('unassingProblem');
     }
 

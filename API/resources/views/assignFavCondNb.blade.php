@@ -12,11 +12,11 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                         <div class="product-details">
-                        <h3>Assign a favorite condition nb to a plant</h3>
+                        <h3>{{__('interface.labelAssignCondNumber')}}</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h3 class="mb-3"> <input type="text" id="v1" name='tblPlant_idPlant' placeholder="idPlant" value="" required></h3>
-                                <h3 class="mb-3"> <input type="text" id="v2" name='tblNbRangeFav_idRangeNb' placeholder="idRangeDate" value="" required></h3>
-                                <h3 class="mb-3"> <input type="submit" name='submit' onclick="myFunction()" placeholder="Submit" value="Submit"></input></h3>                                      
+                                <h3 class="mb-3">{{__('interface.labelPlantId')}} <input type="text" id="v1" name='tblPlant_idPlant' placeholder="idPlant" value="" required></h3>
+                                <h3 class="mb-3">{{__('interface.labelCondNumberId')}} <input type="text" id="v2" name='tblNbRangeFav_idRangeNb' placeholder="idRangeDate" value="" required></h3>
+                                <h3 class="mb-3"> <input type="submit" name='submit' onclick="myFunction()" placeholder="Submit" value="{{__('interface.submit')}}"></input></h3>                                      
                             </div>
                         </div>
                     </div>
