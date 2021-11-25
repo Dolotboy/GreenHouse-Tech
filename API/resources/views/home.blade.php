@@ -20,20 +20,20 @@
             <div class='midContainer'>
                 
                 <div class='cbtn'>
-                    <a href="{{route('newPlant')}}">
-                        <h2>Ajouter une plante</h2> 
+                    <a href="{{route('newPlant',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeAddPlant')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('editSearchPlant')}}">
-                        <h2>Modifier/Supprimer une plante</h2> 
+                    <a href="{{route('editSearchPlant',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeEditDeletePlant')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
                     <a href="{{route('detailAllPlant')}}">
-                        <h2>Voir tout les plantes</h2> 
+                        <h2>{{__('interface.homeSeeAllPlant')}}</h2> 
                     </a>
                 </div>
 
@@ -43,20 +43,20 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newProblem')}}">
-                        <h2>Ajouter un problème</h2> 
+                    <a href="{{route('newProblem',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeAddProblem')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('editSearchProblem')}}">
-                        <h2>Modifier/Supprimer un problème</h2> 
+                    <a href="{{route('editSearchProblem',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeEditDeleteProblem')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
                     <a href="{{route('detailAllProblem')}}">
-                        <h2>Voir tout les problèmes</h2> 
+                        <h2>{{__('interface.homeSeeAllProblem')}}</h2> 
                     </a>
                 </div>
 
@@ -66,14 +66,14 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newFavorite')}}">
-                        <h2>Ajouter un favori</h2> 
+                    <a href="{{route('newFavorite',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeAddFavorite')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteSearchFavorite')}}">
-                        <h2>Supprimer un favori</h2>
+                    <a href="{{route('deleteSearchFavorite',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeEditDeleteFavorite')}}</h2>
                     </a>
                 </div>
 
@@ -83,20 +83,20 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newProfile')}}">
-                        <h2>Ajouter un profil</h2> 
+                    <a href="{{route('newProfile',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeAddProfile')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('editSearchProfile')}}">
-                        <h2>Modifier/Supprimer un profil</h2> 
+                    <a href="{{route('editSearchProfile',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeEditDeleteProfile')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
                     <a href="{{route('detailAllProfile')}}">
-                        <h2>Voir tous les profils</h2> 
+                        <h2>{{__('interface.homeSeeAllProfile')}}</h2> 
                     </a>
                 </div>
 
@@ -106,14 +106,14 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newFavCondDate')}}">
-                        <h2>Ajouter une condition favorable Date</h2> 
+                    <a href="{{route('newFavCondDate',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeAddCondDate')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('editSearchFavCondDate')}}">
-                        <h2>Modifier/Supprimer une condition favorable Date</h2> 
+                    <a href="{{route('editSearchFavCondDate',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeEditDeleteCondDate')}}</h2> 
                     </a>
                 </div>
 
@@ -122,14 +122,14 @@
 
              <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newFavCondNb')}}">
-                        <h2>Ajouter une condition favorable Nb</h2> 
+                    <a href="{{route('newFavCondNb',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeAddCondNumber')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('editSearchFavCondNb')}}">
-                        <h2>Modifier/Supprimer une condition favorable Nb</h2> 
+                    <a href="{{route('editSearchFavCondNb',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeEditDeleteCondNumber')}}</h2> 
                     </a>
                 </div>
 
@@ -139,14 +139,14 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newAssignFavCondDate')}}">
-                        <h2>Assigner une condition favorable Date</h2> 
+                    <a href="{{route('newAssignFavCondDate',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeAssignCondDate')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteUnassignFavCondDate')}}">
-                        <h2>Désassigner une condition favorable Date</h2> 
+                    <a href="{{route('deleteUnassignFavCondDate',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeUnassignCondDate')}}</h2> 
                     </a>
                 </div>
 
@@ -156,14 +156,14 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newAssignFavCondNb')}}">
-                        <h2>Assigner une condition favorable Nb</h2> 
+                    <a href="{{route('newAssignFavCondNb',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeAssignCondNumber')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteUnassignFavCondNb')}}">
-                        <h2>Désassigner une condition favorable Nb</h2> 
+                    <a href="{{route('deleteUnassignFavCondNb',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeUnassignCondNumber')}}</h2> 
                     </a>
                 </div>
 
@@ -173,14 +173,14 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newAssignProblem')}}">
-                        <h2>Assigner un problème</h2> 
+                    <a href="{{route('newAssignProblem',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeAssignProblem')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('searchUnassignProblem')}}">
-                        <h2>Désassigner un problème</h2> 
+                    <a href="{{route('searchUnassignProblem',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeUnassignProblem')}}</h2> 
                     </a>
                 </div>
 
@@ -192,14 +192,14 @@
 
             <div class='midContainer'>
                 <div class='cbtn'>
-                    <a href="{{route('newAssignAdmin')}}">
-                        <h2>Assigner un admin</h2> 
+                    <a href="{{route('newAssignAdmin',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeAssignAdmin')}}</h2> 
                     </a>
                 </div>
 
                 <div class='cbtn'>
-                    <a href="{{route('deleteUnassignAdmin')}}">
-                        <h2>Supprimer un admin</h2> 
+                    <a href="{{route('deleteUnassignAdmin',[app()->getLocale()])}}">
+                        <h2>{{__('interface.homeUnassignAdmin')}}</h2> 
                     </a>
                 </div>
             </div>
@@ -210,14 +210,14 @@
 
                         <div class='midContainer'>
                             <div class='cbtn'>
-                                <a href="{{route('newFamily')}}">
-                                    <h2>Ajouter une famille</h2> 
+                                <a href="{{route('newFamily',[app()->getLocale()])}}">
+                                    <h2>{{__('interface.homeAddFamily')}}</h2> 
                                 </a>
                             </div>
             
                             <div class='cbtn'>
-                                <a href="{{route('editSearchFamily')}}">
-                                    <h2>Modifier/Supprimer une famille</h2> 
+                                <a href="{{route('editSearchFamily',[app()->getLocale()])}}">
+                                    <h2>{{__('interface.homeEditDeleteFamily')}}</h2> 
                                 </a>
                             </div>
                         </div>

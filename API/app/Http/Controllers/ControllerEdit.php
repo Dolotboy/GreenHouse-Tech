@@ -13,42 +13,49 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 //use Illuminate\Support\Facades\Mail;
 //use App\Mail\AccountModified;
 
 class ControllerEdit extends Controller
 {
-    public function indexPlant(Request $request)
+    public function indexPlant(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('searchPlant');
     }
 
-    public function indexFamily(Request $request)
+    public function indexFamily(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('searchFamily');
     }
 
-    public function indexProblem(Request $request)
+    public function indexProblem(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('searchProblem');
     }
 
-    public function indexProfile(Request $request)
+    public function indexProfile(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('searchProfile');
     }
 
-    public function indexFavCondDate(Request $request)
+    public function indexFavCondDate(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('searchFavCondDate');
     }
 
-    public function indexFavCondNb(Request $request)
+    public function indexFavCondNb(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('searchFavCondNb');
     }
 
-    public function editPlant(Request $request, $idPlant)
+    public function editPlant(Request $request, $lang, $idPlant)
     {
         try
         {
@@ -73,6 +80,7 @@ class ControllerEdit extends Controller
             return response()->json(['message'=> "Error, plant not found", 'success' => false, 'status' => "Request Failed", 'id' => $idPlant], 404);
         }
 
+        App::setLocale($lang);
         return view('editPlant', ["plant" => $plant, "family" => $family]);
     }
 
@@ -127,7 +135,7 @@ class ControllerEdit extends Controller
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idPlant], 200);
     }
 
-    public function editFamily(Request $request, $idFamily)
+    public function editFamily(Request $request, $lang, $idFamily)
     {
         try
         {
@@ -143,6 +151,7 @@ class ControllerEdit extends Controller
             return response()->json(['message'=> "Error, family not found", 'success' => false, 'status' => "Request Failed", 'id' => $idFamily], 404);
         }
 
+        App::setLocale($lang);
         return view('editFamily', ["family" => $family]);
     }
 
@@ -179,7 +188,7 @@ class ControllerEdit extends Controller
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $idFamily], 200);
     }
 
-    public function editProblem(Request $request, $idProblem)
+    public function editProblem(Request $request, $lang, $idProblem)
     {
         try
         {
@@ -195,6 +204,7 @@ class ControllerEdit extends Controller
             return response()->json(['message'=> "Error, problem not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProblem], 404);
         }
 
+        App::setLocale($lang);
         return view('editProblem', ["problem" => $problem]);
     }
 

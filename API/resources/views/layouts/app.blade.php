@@ -19,7 +19,7 @@
 
 <body>
     <div id='topBanner'>
-        <a href='{{route('home')}}'>
+        <a href='{{route('home',[app()->getLocale()])}}'>
             <img src="{{URL::asset('/thumbs/logo.png')}}"/>
             <h1>Projet Cegep Serre Tech</h2>
         </a>
