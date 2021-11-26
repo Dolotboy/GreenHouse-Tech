@@ -1,3 +1,4 @@
+
 <template>
   <div class="logo">
     <img src="../../Images/LogoV1.png">
@@ -13,21 +14,30 @@
         <input type="radio" name="rdPlantType" value="fruit" @click="radioValueChanged('Fruit')">
       </div>
       <div>
-        <label>Légumes</label>
+        <label>{{ $t("message.leg") }}</label>
         <input type="radio" name="rdPlantType" value="vegetable" @click="radioValueChanged('Vegetable')">
       </div>
       <div>
         <label>Tous</label>
         <input type="radio" name="rdPlantType" value="vegetable" checked @click="radioValueChanged('All')">
       </div>
+      <div>
+  <button id="BtnFr">Fr</button>
+  <button id="BtnEn">En</button>
+</div>
     </div>
+    
     <div class="productsGrid">
       <Plant class="plant" @click="toggleDetails(plant.idPlant - 1)" v-for='plant in visiblePlants' :plant="plant"/>    
     </div>
-    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>   
+    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>  
+    
+     
 </template>
 
+
 <script>
+
 import Details from '../components/Details.vue'
 import Plant from '../components/Plant.vue'
 import $ from '../../node_modules/jquery/dist/jquery.js'

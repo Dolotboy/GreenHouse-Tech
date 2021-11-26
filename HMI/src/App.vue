@@ -57,7 +57,20 @@ export default {
           mobileNavIsOpened : false
       }
   },
+  
   mounted(){
+    window.onload=function(){
+    document.getElementById("BtnFr").addEventListener("click", function() {
+    localStorage.setItem("locale","fr");
+    location.reload();
+  });
+  
+  document.getElementById("BtnEn").addEventListener("click", function() {
+    localStorage.setItem("locale","en");
+    location.reload();
+  });
+}
+    
       this.Initialisation()
   },
   methods :{
