@@ -15,26 +15,26 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                             <div class="product-details">
-                                <h3>Edit a plant</h3>
+                                <h3>{{__('interface.labelEditPlant')}}</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h3 class="mb-3">Plant Img: <input type="text" name='plantImg' value="{{ $plant["plantImg"] }}" required></h3>
-                                    <h3 class="mb-3">Plant Name: <input type="text" name='plantName' value=" {{ $plant["plantName"] }}" required></h3>
-                                    <h3 class="mb-3"> Plant Type:
+                                    <h3 class="mb-3">{{__('interface.labelPlantImg')}} <input type="text" name='plantImg' value="{{ $plant["plantImg"] }}" required></h3>
+                                    <h3 class="mb-3">{{__('interface.labelPlantName')}} <input type="text" name='plantName' value=" {{ $plant["plantName"] }}" required></h3>
+                                    <h3 class="mb-3"> {{__('interface.labelPlantType')}}
                                         <select id="plantType" name='plantType'>
                                             @if( $plant['plantType'] == "Fruit")
                                             {
-                                                <option value="Fruit" selected>Fruit</option>
-                                                <option value="Légume">Légume</option>
+                                                <option value="Fruit" selected>{{__('interface.labelFruit')}}</option>
+                                                <option value="Légume">{{__('interface.labelVegetable')}}</option>
                                             }
                                             @else
                                             {
-                                                <option value="Fruit">Fruit</option>
-                                                <option value="Légume" selected>Légume</option>
+                                                <option value="Fruit">{{__('interface.labelFruit')}}</option>
+                                                <option value="Légume" selected>{{__('interface.labelVegetable')}}</option>
                                             }
                                             @endif
                                         </select>
                                     </h3>
-                                    <h3 class="mb-3"> Plant Family:
+                                    <h3 class="mb-3"> {{__('interface.labelVegetable')}}
                                         <select id="plantFamily" name='plantFamily'>
                                             @foreach ($family as $f)
                                             @if($plant['plantFamily'] == $f['familyName'])
@@ -49,11 +49,11 @@
                                             @endforeach
                                         </select>
                                     </h3>
-                                    <h3 class="mb-3">Plant Season: <input type="text" name='plantSeason' value="{{ $plant["plantSeason"] }}" required></h3>
-                                    <h3 class="mb-3">Plant Ground Type: <input type="text" name='plantGroundType' value="{{ $plant["plantGroundType"] }}" required></h3>
-                                    <h3 class="mb-3">Plant Days Conservations: <input type="text" name='plantDaysConservation' value="{{ $plant["plantDaysConservation"] }}" required></h3>
-                                    <h3 class="mb-3">Plant Description <input type="text" name='plantDescription' value="{{ $plant["plantDescription"] }}" required></h3>  
-                                    <h3 class="mb-3"> Plant Difficulty: 
+                                    <h3 class="mb-3">{{__('interface.labelPlantSeasons')}} <input type="text" name='plantSeason' value="{{ $plant["plantSeason"] }}" required></h3>
+                                    <h3 class="mb-3">{{__('interface.labelPlantGroundType')}} <input type="text" name='plantGroundType' value="{{ $plant["plantGroundType"] }}" required></h3>
+                                    <h3 class="mb-3">{{__('interface.labelPlantDaysConservation')}} <input type="text" name='plantDaysConservation' value="{{ $plant["plantDaysConservation"] }}" required></h3>
+                                    <h3 class="mb-3">{{__('interface.labelPlantDescription')}} <input type="text" name='plantDescription' value="{{ $plant["plantDescription"] }}" required></h3>  
+                                    <h3 class="mb-3"> {{__('interface.labelPlantDifficulty')}} 
                                         <select id="plantDifficulty" name='plantDifficulty'>
                                             @if( $plant['plantDifficulty'] == "1")
                                             {
@@ -79,8 +79,8 @@
                                             @endif
                                         </select>
                                     </h3>
-                                    <h3 class="mb-3">Plant Best Neighbor <input type="text" name='plantBestNeighbor' placeholder="Plant Best Neighbor" value="{{ $plant["plantBestNeighbor"] }}" required></h3>     
-                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Submit"></h3>                                
+                                    <h3 class="mb-3">{{__('interface.labelPlantBestNeighbor')}} <input type="text" name='plantBestNeighbor' placeholder="Plant Best Neighbor" value="{{ $plant["plantBestNeighbor"] }}" required></h3>     
+                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="{{__('interface.submit')}}"></h3>                                
                                 </div>
                             </div>
                         </div>
@@ -98,9 +98,9 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                             <div class="product-details">
-                                <h3>Delete a plant</h3>
+                                <h3>{{__('interface.labelDeletePlant')}}</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h3 class="mb-3"> <input type="submit" name='delete' placeholder="Delete" value="delete"></h3>                                  
+                                    <h3 class="mb-3"> <input type="submit" name='delete' placeholder="Delete" value="{{__('interface.delete')}}"></h3>                                  
                                 </div>
                             </div>
                         </div>

@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 //use Illuminate\Support\Facades\Mail;
 //use App\Mail\AccountCreated;
 
@@ -22,9 +23,10 @@ class ControllerAdd extends Controller
 
     /* ------------------- PLANT ------------------- */
 
-    public function indexPlant(Request $request)
+    public function indexPlant(Request $request, $lang)
     {
         $family = Family::All();
+        App::setLocale($lang);
         return view('newPlant', ["family" => $family]);        
     }
 
@@ -72,8 +74,9 @@ class ControllerAdd extends Controller
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $plant->idPlant], 200);
     }
 
-    public function indexFamily(Request $request)
+    public function indexFamily(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('newFamily');        
     }
 
@@ -105,8 +108,9 @@ class ControllerAdd extends Controller
 
     /* ------------------- PROBLEM ------------------- */
 
-    public function indexProblem(Request $request)
+    public function indexProblem(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('newProblem');
     }
 
@@ -140,8 +144,9 @@ class ControllerAdd extends Controller
 
 /* ------------------- FAVORITE ------------------- */
 
-    public function indexFavorite(Request $request)
+    public function indexFavorite(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('newFavourite');
     }
 
@@ -290,8 +295,9 @@ class ControllerAdd extends Controller
 
 /* ------------------- PROFILE ------------------- */
 
-    public function indexProfile(Request $request)
+    public function indexProfile(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('newProfile');
     }
 
@@ -340,8 +346,9 @@ class ControllerAdd extends Controller
 
 /* ------------------- FAVORITE CONDITION DATE ------------------- */
 
-    public function indexFavCondDate(Request $request)
+    public function indexFavCondDate(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('newFavCondDate');
     }
 
@@ -374,8 +381,9 @@ class ControllerAdd extends Controller
         }
     }
     
-    public function indexFavCondNb(Request $request)
+    public function indexFavCondNb(Request $request, $lang)
     {
+        App::setLocale($lang);
         return view('newFavCondNb');
     }
 

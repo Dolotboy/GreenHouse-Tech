@@ -7,17 +7,18 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
+    "core-js": "^3.19.1",
     "jquery": "^3.6.0",
-    "vue": "^3.2.20",
+    "vue": "^3.2.22",
     "vue-cli": "^2.9.6",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue-scrollto": "^2.20.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.14",
     "@vue/cli-plugin-router": "^4.5.14",
     "@vue/cli-service": "^4.5.14",
-    "@vue/compiler-sfc": "^3.2.20",
+    "@vue/compiler-sfc": "^3.2.22",
     "sa": "^0.2.50",
     "sass": "^1.43.2",
     "sass-loader": "^10.2.0",

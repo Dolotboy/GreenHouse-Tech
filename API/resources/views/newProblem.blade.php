@@ -13,12 +13,12 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                             <div class="product-details">
-                            <h3>Add a problem</h3>
+                            <h3>{{__('interface.labelAddProblem')}}</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h3 class="mb-3">Problem type: <input type="text" name='problemType' placeholder="Problem Type" value="" required></h3>
-                                    <h3 class="mb-3">Problem Solution: <input type="text" name='problemSolution' placeholder="Problem Solution" value="" required></h3>
-                                    <h3 class="mb-3">Problem Name: <input type="text" name='problemName' placeholder="Problem Name" value="" required></h3>    
-                                    <h3 class="mb-3"> <input type="submit" name='submit' value="Submit"></h3>                             
+                                    <h3 class="mb-3">{{__('interface.labelProblemType')}} <input type="text" name='problemType' placeholder="Problem Type" value="" required></h3>
+                                    <h3 class="mb-3">{{__('interface.labelProblemSolution')}} <input type="text" name='problemSolution' placeholder="Problem Solution" value="" required></h3>
+                                    <h3 class="mb-3">{{__('interface.labelProblemName')}} <input type="text" name='problemName' placeholder="Problem Name" value="" required></h3>    
+                                    <h3 class="mb-3"> <input type="submit" name='submit' value="{{__('interface.submit')}}"></h3>                             
                                 </div>
                             </div>
                         </div>

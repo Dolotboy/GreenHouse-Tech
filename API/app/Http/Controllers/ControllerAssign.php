@@ -14,12 +14,14 @@ use App\Models\AssignProblem;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 
 class ControllerAssign extends Controller
 {
 
-    public function indexFavCondDate()
+    public function indexFavCondDate($lang)
     {
+        App::setLocale($lang);
         return view("assignFavCondDate");
     }
 
@@ -98,8 +100,9 @@ class ControllerAssign extends Controller
 
     }
     
-    public function indexFavCondNb()
+    public function indexFavCondNb($lang)
     {
+        App::setLocale($lang);
         return view("assignFavCondNb");
     }
 
@@ -177,8 +180,9 @@ class ControllerAssign extends Controller
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => null], 200);
     }
        
-    public function indexProblem()
+    public function indexProblem($lang)
     {
+        App::setLocale($lang);
         return view("assignProblem");
     }
     public function assignProblem($idPlant, $idProblem)

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 //use Illuminate\Support\Facades\Mail; 
 //use App\Mail\AccountDeleted; 
 
@@ -154,8 +155,9 @@ class ControllerDelete extends Controller
         }
     }
 
-    public function indexFavorite()
+    public function indexFavorite($lang)
     {
+        App::setLocale($lang);
         return view('deleteSearchFavorite');
     }
 

@@ -15,56 +15,56 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                             <div class="product-details">
-                                <h3>Edit a favorable condition number</h3>
+                                <h3>{{__('interface.labelEditCondNumber')}}</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h3 class="mb-3">Type:
+                                    <h3 class="mb-3">{{__('interface.labelCondNumberType')}}
                                         <select id="type" name='type' required>
                                         @if( $favorableCondition['type'] == "temperature")
                                         {
-                                            <option value="temperature" selected>Temperature</option>
-                                            <option value="humidity">Humidity</option>
-                                            <option value="ph">PH</option>
-                                            <option value="plantSpacing">Plant Spacing</option>
-                                            <option value="exposureTime">Exposure Time</option>
+                                            <option value="temperature" selected>{{__('interface.labelCondNumberTemperature')}}</option>
+                                            <option value="humidity">{{__('interface.labelCondNumberHumidity')}}</option>
+                                            <option value="ph">{{__('interface.labelCondNumberPh')}}</option>
+                                            <option value="plantSpacing">{{__('interface.labelCondNumberPlantSpacing')}}</option>
+                                            <option value="exposureTime">{{__('interface.labelCondNumberExposureTime')}}</option>
                                         }
                                         @elseif ($favorableCondition['type'] == "humidity")
                                         {
-                                            <option value="temperature">Temperature</option>
-                                            <option value="humidity" selected>Humidity</option>
-                                            <option value="ph">PH</option>
-                                            <option value="plantSpacing">Plant Spacing</option>
-                                            <option value="exposureTime">Exposure Time</option>
+                                            <option value="temperature">{{__('interface.labelCondNumberTemperature')}}</option>
+                                            <option value="humidity" selected>{{__('interface.labelCondNumberHumidity')}}</option>
+                                            <option value="ph">{{__('interface.labelCondNumberPh')}}</option>
+                                            <option value="plantSpacing">{{__('interface.labelCondNumberPlantSpacing')}}</option>
+                                            <option value="exposureTime">{{__('interface.labelCondNumberExposureTime')}}</option>
                                         }
                                         @elseif ($favorableCondition['type'] == "ph")
                                         {
-                                            <option value="temperature">Temperature</option>
-                                            <option value="humidity">Humidity</option>
-                                            <option value="ph" selected>PH</option>
-                                            <option value="plantSpacing">Plant Spacing</option>
-                                            <option value="exposureTime">Exposure Time</option>
+                                            <option value="temperature">{{__('interface.labelCondNumberTemperature')}}</option>
+                                            <option value="humidity">{{__('interface.labelCondNumberHumidity')}}</option>
+                                            <option value="ph" selected>{{__('interface.labelCondNumberPh')}}</option>
+                                            <option value="plantSpacing">{{__('interface.labelCondNumberPlantSpacing')}}</option>
+                                            <option value="exposureTime">{{__('interface.labelCondNumberExposureTime')}}</option>
                                         }
                                         @elseif ($favorableCondition['type'] == "plantSpacing")
                                         {
-                                            <option value="temperature">Temperature</option>
-                                            <option value="humidity">Humidity</option>
-                                            <option value="ph">PH</option>
-                                            <option value="plantSpacing" selected>Plant Spacing</option>
-                                            <option value="exposureTime">Exposure Time</option>
+                                            <option value="temperature">{{__('interface.labelCondNumberTemperature')}}</option>
+                                            <option value="humidity">{{__('interface.labelCondNumberHumidity')}}</option>
+                                            <option value="ph">{{__('interface.labelCondNumberPh')}}</option>
+                                            <option value="plantSpacing" selected>{{__('interface.labelCondNumberPlantSpacing')}}</option>
+                                            <option value="exposureTime">{{__('interface.labelCondNumberExposureTime')}}</option>
                                         }
                                         @elseif ($favorableCondition['type'] == "exposureTime")
                                         {
-                                            <option value="temperature">Temperature</option>
-                                            <option value="humidity">Humidity</option>
-                                            <option value="ph">PH</option>
-                                            <option value="plantSpacing">Plant Spacing</option>
-                                            <option value="exposureTime" selected>Exposure Time</option>
+                                            <option value="temperature">{{__('interface.labelCondNumberTemperature')}}</option>
+                                            <option value="humidity">{{__('interface.labelCondNumberHumidity')}}</option>
+                                            <option value="ph">{{__('interface.labelCondNumberPh')}}</option>
+                                            <option value="plantSpacing">{{__('interface.labelCondNumberPlantSpacing')}}</option>
+                                            <option value="exposureTime" selected>{{__('interface.labelCondNumberExposureTime')}}</option>
                                         }
                                         @endif
                                         </select>
                                     </h3>
-                                    <h3 class="mb-3">Minimum: <input type="text" name='min' value=" {{ $favorableCondition["min"] }}" required></h3>
-                                    <h3 class="mb-3">Maximum: <input type="text" name='max' value="{{ $favorableCondition["max"] }}" required></h3>  
-                                    <h3 class="mb-3">Unit: 
+                                    <h3 class="mb-3">{{__('interface.labelCondNumberMin')}} <input type="text" name='min' value=" {{ $favorableCondition["min"] }}" required></h3>
+                                    <h3 class="mb-3">{{__('interface.labelCondNumberMax')}} <input type="text" name='max' value="{{ $favorableCondition["max"] }}" required></h3>  
+                                    <h3 class="mb-3">{{__('interface.labelCondNumberUnit')}} 
                                         <select id="unit" name='unit' required>
                                         @if( $favorableCondition['unit'] == "°C")
                                         {
@@ -109,7 +109,7 @@
                                         @endif
                                         </select>
                                     </h3>
-                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Submit"></h3>                                      
+                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="{{__('interface.submit')}}"></h3>                                      
                                 </div>
                             </div>
                         </div>
@@ -127,9 +127,9 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                             <div class="product-details">
-                                <h3>Delete a favorable condition number</h3>
+                                <h3>{{__('interface.labelDeleteCondNumber')}}</h3>
                                 <div class="border-bottom pb-3 mb-3">
-                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="Submit"></h3>                                      
+                                    <h3 class="mb-3"> <input type="submit" name='submit' placeholder="Submit" value="{{__('interface.submit')}}"></h3>                                      
                                 </div>
                             </div>
                         </div>

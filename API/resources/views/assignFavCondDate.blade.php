@@ -12,11 +12,11 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 border-left m-b-30">
                         <div class="product-details">
-                        <h3>Assign a favorite condition date to a plant</h3>
+                        <h3>{{__('interface.labelAssignCondDate')}}</h3>
                             <div class="border-bottom pb-3 mb-3">
-                                <h3 class="mb-3"> <input type="text" id="v1" name='tblPlant_idPlant' placeholder="idPlant" value="" required></h3>
-                                <h3 class="mb-3"> <input type="text" id="v2" name='tblRangeDate_idRangeDate' placeholder="idRangeDate" value="" required></h3>
-                                <h3 class="mb-3"> <input type="submit" name='submit' onclick="myFunction()" value="Submit"/></h3>                                      
+                                <h3 class="mb-3">{{__('interface.labelPlantId')}} <input type="text" id="v1" name='tblPlant_idPlant' placeholder="idPlant" value="" required></h3>
+                                <h3 class="mb-3">{{__('interface.labelCondDateId')}} <input type="text" id="v2" name='tblRangeDate_idRangeDate' placeholder="idRangeDate" value="" required></h3>
+                                <h3 class="mb-3"> <input type="submit" name='submit' onclick="myFunction()" value="{{__('interface.submit')}}"/></h3>                                      
                             </div>
                         </div>
                     </div>
