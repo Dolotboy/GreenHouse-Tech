@@ -27,7 +27,7 @@ export default {
       addFavorite(){
         let that = this;
 
-        let url = toolbox.env + "new/favorite/token/";
+        let url = toolbox.getApiUrl() + "new/favorite/token/";
         let type = "post";
 
         return new Promise(resolve => {
@@ -53,7 +53,7 @@ export default {
       deleteFavorite(){
         let that = this;
 
-        let url = toolbox.env + "delete/favorite/token";
+        let url = toolbox.getApiUrl() + "delete/favorite/token";
         let type = "delete";
 
         return new Promise(resolve => {

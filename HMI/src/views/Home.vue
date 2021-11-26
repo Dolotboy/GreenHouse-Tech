@@ -79,6 +79,7 @@ import Details from '../components/Details.vue'
 import Plant from '../components/Plant.vue'
 import $ from '../../node_modules/jquery/dist/jquery.js'
 import toolbox from '../toolbox.js'
+//import autoComplete, { autocomplete } from 'https://wiki.pcst.xyz/autocomplete.js'
 import autoComplete, { autocomplete } from '../autocomplete.js'
 
 export default {

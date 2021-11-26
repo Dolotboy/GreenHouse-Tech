@@ -57,7 +57,7 @@ export default {
         let that = this;
 
         $.ajax({
-          url : toolbox.env + 'login/checkLogin/',
+          url : toolbox.getApiUrl() + 'login/checkLogin/',
           datatype: 'json',
           contentType : 'application/json',
           type: 'post',
