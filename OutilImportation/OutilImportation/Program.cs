@@ -14,11 +14,13 @@ namespace OutilImportation
     {
         static string baseDir = Directory.GetCurrentDirectory().Split(new string[] { "bin" }, StringSplitOptions.None)[0];
         static DateTime lastApiCall = default(DateTime);
-        static double apiCallInterval = 0.25;
+        static double apiCallInterval = 2;
 
         static void Main(string[] args)
         {
             string env = "http://localhost:8000/api/";
+            //string env = "https://testenv.apipcst.xyz/api/";
+            //string env = "http://apipcst.xyz/api/";
             if (args.Length > 0)
                 env = args[0];
 
@@ -75,7 +77,7 @@ namespace OutilImportation
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Authorization", "Basic " + System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes("frank" + ":" + "frank")));
+            client.DefaultRequestHeaders.Add("Authorization", "Basic " + System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes("admin@pcst.xyz" + ":" + "PcstAdmin2021")));
             return client;
         }
 
