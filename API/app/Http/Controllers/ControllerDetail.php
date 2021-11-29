@@ -535,3 +535,5 @@ class ControllerDetail extends Controller
         </html>";
     }
 }
+
+// API By Maxime Lepage

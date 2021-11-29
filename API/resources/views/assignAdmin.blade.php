@@ -27,7 +27,7 @@
     <script>
         function myFunction() {
             let v1 = document.getElementById('v1').value;
-            let form = document.getElementById("form").action = '../api/new/admin/addAdmin/' + v1;
+            let form = document.getElementById("form").action = '/api/new/admin/addAdmin/' + v1;
         }
     </script>
 </div>

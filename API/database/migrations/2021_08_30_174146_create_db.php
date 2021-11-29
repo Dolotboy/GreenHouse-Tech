@@ -142,3 +142,5 @@ class CreateDb extends Migration
         Schema::dropIfExists('tblRangeFavorableConditionNb');
     }
 }
+
+// API By Maxime Lepage

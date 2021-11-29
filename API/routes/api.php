@@ -134,3 +134,5 @@ Route::middleware('tokenConverter')->group(function () {
     Route::put('/edit/profile/editProfile/token/{token}', [ControllerEdit::class, 'editProfileSentToken'],function ($idProfile){})->name('editProfileSentToken');
     Route::delete("/delete/favorite/token/{idPlant}/{token}", [ControllerDelete::class, 'deleteFavoriteToken'],function ($idPlant, $idProfile){})->name('deleteFavoriteToken');
 });
+
+// API By Maxime Lepage

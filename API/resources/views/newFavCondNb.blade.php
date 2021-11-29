@@ -16,7 +16,7 @@
                             <div class="border-bottom pb-3 mb-3">
                                 <h3 class="mb-3"> {{__('interface.labelCondNumberType')}} 
                                     <select id="type" name='type' required>
-                                        <option value="temperat{{__('interface.labelCondNumberMin')}}ure">{{__('interface.labelCondNumberTemperature')}} </option>
+                                        <option value="temperature">{{__('interface.labelCondNumberTemperature')}} </option>
                                         <option value="humidity">{{__('interface.labelCondNumberHumidity')}} </option>
                                         <option value="ph">{{__('interface.labelCondNumberPh')}} </option>
                                         <option value="plantSpacing">{{__('interface.labelCondNumberPlantSpacing')}} </option>
