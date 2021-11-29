@@ -7,12 +7,24 @@ const messages = {
   
     fr: {
       message: {
-        leg: 'légume'
+        filtreFruit: 'Fruits',
+        filtreLeg: 'Légumes',
+        filtreAll: 'Tous',
+        accueil: 'Accueil',
+        apropos: 'À Propos',
+        inscription: "S'inscrire",
+        connexion: 'Connexion',
       }
     },
     en: {
       message: {
-        leg: 'vegetable'
+        filtreFruit: 'Fruits',
+        filtreLeg: 'Vegetables',
+        filtreAll: 'All',
+        accueil: 'Home',
+        apropos: 'About',
+        inscription: 'Sign In',
+        connexion: 'Sign Up',
       }
     }
   }

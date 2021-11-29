@@ -3,12 +3,12 @@
     <nav id="navDesktop">
       <ul>
         <div id="BasicNav">
-          <li><router-link to="/">Accueil</router-link></li> 
-          <li><router-link to="/about">À propos</router-link></li>
+          <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
+          <li><router-link to="/about">{{ $t("message.apropos") }}</router-link></li>
         </div>
         <div id="LoginRegister">
-          <li @click="toggleRegister">S'inscrire</li>
-          <li @click="toggleLogin">Se connecter</li>         
+          <li @click="toggleRegister">{{ $t("message.inscription") }}</li>
+          <li @click="toggleLogin">{{ $t("message.connexion") }}</li>         
         </div>
       </ul>
     </nav>
@@ -21,10 +21,10 @@
         </div>
       </div>
       <ul class="links">
-          <li><router-link to="/">Accueil</router-link></li> 
-          <li><router-link to="/about">À propos</router-link></li>
-          <li @click="toggleRegister">S'inscrire</li>
-          <li @click="toggleLogin">Se connecter</li> 
+          <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
+          <li><router-link to="/about">{{ $t("message.apropos") }}</router-link></li>
+          <li @click="toggleRegister">{{ $t("message.inscription") }}</li>
+          <li @click="toggleLogin">{{ $t("message.connexion") }}</li> 
       </ul>
     </nav>
     <router-view/>  

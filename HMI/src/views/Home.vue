@@ -10,15 +10,15 @@
     </form>
     <div class="rdPlantTypeWrapper">
       <div>
-        <label>Fruits</label>
+        <label>{{ $t("message.filtreFruit") }}</label>
         <input type="radio" name="rdPlantType" value="fruit" @click="radioValueChanged('Fruit')">
       </div>
       <div>
-        <label>{{ $t("message.leg") }}</label>
+        <label>{{ $t("message.filtreLeg") }}</label>
         <input type="radio" name="rdPlantType" value="vegetable" @click="radioValueChanged('Vegetable')">
       </div>
       <div>
-        <label>Tous</label>
+        <label>{{ $t("message.filtreAll") }}</label>
         <input type="radio" name="rdPlantType" value="vegetable" checked @click="radioValueChanged('All')">
       </div>
       <div>
