@@ -221,7 +221,7 @@ class ControllerAdd extends Controller
         return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => "Plant: $idPlant / Profile: $idProfile"], 200);
     }
 
-    public function addFavoriteToken($idPlant,$request, $idProfile)
+    public function addFavoriteToken($idPlant, $request, $idProfile)
     {
         $favorite = new Favorite();
         //return response()->json(['1' => $idPlant, '2' => $request, '3' => $idProfile]);

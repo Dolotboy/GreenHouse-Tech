@@ -14,11 +14,11 @@ class AddDefaultAdmin extends Migration
      */
     public function up()
     {
-        $password = password_hash("frank" . "salt", PASSWORD_DEFAULT);
+        $password = password_hash("PcstAdmin2021" . "salt", PASSWORD_DEFAULT);
         $profile = new Profile();
-        $profile->email = "frank";
-        $profile->lastName = "frank";
-        $profile->firstName = "frank";
+        $profile->email = "admin@pcst.xyz";
+        $profile->lastName = "Dolotboy";
+        $profile->firstName = "Max";
         $profile->salt = "salt";
         $profile->password = $password;
         $profile->access = "admin";
