@@ -63,4 +63,6 @@ class Controller extends BaseController
     public function generateToken(){
         return Str::random(40);
     }
-} 
+}
+
+// API By Maxime Lepage

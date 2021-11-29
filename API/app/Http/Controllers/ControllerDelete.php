@@ -426,3 +426,5 @@ class ControllerDelete extends Controller
         }  
     }
 }
+
+// API By Maxime Lepage

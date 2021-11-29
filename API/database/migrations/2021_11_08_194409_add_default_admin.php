@@ -35,3 +35,5 @@ class AddDefaultAdmin extends Migration
         //
     }
 }
+
+// API By Maxime Lepage
