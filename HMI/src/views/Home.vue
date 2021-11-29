@@ -5,7 +5,7 @@
   </div>
     <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
       <div class="autocomplete" style="width:300px;">
-        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
+        <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" v-bind:placeholder="$t('message.search')">
       </div>
     </form>
     <div class="rdPlantTypeWrapper">

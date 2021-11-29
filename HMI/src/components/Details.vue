@@ -2,18 +2,18 @@
     <div class="details">
         <h1>{{ plant.plantName }}</h1>
         <div class="detailsPlant">
-            <p>Type de plante : {{ plant.plantType }}</p>
-            <p>Saison : {{plant.plantSeason}}</p>            
-            <p>Date de semance : </p>
-            <p>Date de récolte :</p>
-            <p>Temps de conservation : {{plant.daysConservation}} jour(s)</p>
-            <p>Distance de plants : </p>
-            <p>Type de sol : {{plant.groundType}}</p>
-            <p>Fonctionnement : {{plant.description}}</p>
+            <p>{{ $t("message.plantType") }}{{ plant.plantType }}</p>
+            <p>{{ $t("message.plantSeason") }}{{plant.plantSeason}}</p>            
+            <p>{{ $t("message.sowDate") }}</p>
+            <p>{{ $t("message.harvestDate") }}</p>
+            <p>{{ $t("message.daysConservation") }}{{plant.daysConservation}} jour(s)</p>
+            <p>{{ $t("message.plantDistance") }}</p>
+            <p>{{ $t("message.groundType") }}{{plant.groundType}}</p>
+            <p>{{ $t("message.description") }}{{plant.description}}</p>
         </div>
         <div>
-                <button class="buttonDetails" @click="toggleCondFav">Conditions Favorables</button>
-                <button class="buttonDetails" @click="toggleProblem">Problèmes</button>
+                <button class="buttonDetails" @click="toggleCondFav">{{ $t("message.favCond") }}</button>
+                <button class="buttonDetails" @click="toggleProblem">{{ $t("message.problems") }}</button>
         </div>
         <div class="close-button" @click="$emit('close')" >X</div>   
         <FavCondition :plant="plant" v-if="showCondFav" @close="toggleCondFav"/>

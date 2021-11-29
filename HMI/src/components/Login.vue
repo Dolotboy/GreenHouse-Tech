@@ -1,20 +1,20 @@
 <template>
     <div class="login">
-        <h1>Se connecter</h1>
+        <h1>{{ $t("message.connect") }}</h1>
         <div class="loginForm">
           <form>
 
-          <label for="uname"><b>Adresse Courriel : </b></label>
-            <input type="text" placeholder="Entrez votre email" name="uname" required  v-model="email">
-            <label for="psw"><b>Mot de passe : </b></label>
-            <input v-model="password" type="password" placeholder="Entrez le mot de passe" name="psw" required>
+          <label for="uname"><b>{{ $t("message.mail") }}: </b></label>
+            <input type="text"  v-bind:placeholder="$t('message.mail')" name="uname" required  v-model="email">
+            <label for="psw"><b>{{ $t("message.password") }}: </b></label>
+            <input v-model="password" type="password"  v-bind:placeholder="$t('message.password')" name="psw" required>
           </form>
-            <button type="submit" @click="postCheckLogin()">Se connecter</button>
+            <button type="submit" @click="postCheckLogin()">{{ $t("message.connect") }}</button>
             <label>
-              <input type="checkbox" name="remember"> Se rappeler de moi
+              <input type="checkbox" name="remember">{{ $t("message.rememberMe") }}
           </label>
           <div class="container">
-            <span class="psw"><a href="#">Mot de passe oublié?</a></span>
+            <span class="psw"><a href="#">{{ $t("message.passwordForgot") }}</a></span>
           </div>
         </div>
         <div class="close-button" @click="$emit('close')" >X</div>        

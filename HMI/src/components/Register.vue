@@ -1,25 +1,25 @@
 <template>
   <div class="register">
-    <h1>S'inscrire</h1>
+    <h1>{{ $t("message.inscription") }}</h1>
     <div class="form">
     <form @submit.prevent="login">
       <div class="lblInp-div" id="firstName">
-        <label for="firstName">Prénom</label>
-        <input name="firstName" v-model="firstName" placeholder="Prénom" required>
+        <label for="firstName">{{ $t("message.firstName") }}</label>
+        <input name="firstName" v-model="firstName"  v-bind:placeholder="$t('message.firstName')" required>
       </div>
       <div class="lblInp-div" id="lastName">
-        <label for="lastName">Nom de famille</label>
-        <input name="lastName" v-model="lastName" placeholder="Nom de famille" required>
+        <label for="lastName">{{ $t("message.lastName") }}</label>
+        <input name="lastName" v-model="lastName"  v-bind:placeholder="$t('message.lastName')" required>
       </div>
       <div class="lblInp-div" id="email">
-        <label for="email">Adresse courriel</label>
-        <input name="email" v-model="email" placeholder="Adresse Courriel" type="email" required>
+        <label for="email">{{ $t("message.mail") }}</label>
+        <input name="email" v-model="email"  v-bind:placeholder="$t('message.mail')" type="email" required>
       </div>
       <div class="lblInp-div" id="password">
-        <label for="password">Mot de passe</label>
-        <input name="password" v-model="password" placeholder="Mot de passe" type="password" required>
+        <label for="password">{{ $t("message.password") }}</label>
+        <input name="password" v-model="password" v-bind:placeholder="$t('message.password')" type="password" required>
       </div>
-      <button type="submit" @click="postCreateUser()">S'inscrire</button>      
+      <button type="submit" @click="postCreateUser()">{{ $t("message.inscription") }}</button>      
     </form>
     </div>    
     <div class="close-button" @click="$emit('close')" >X</div> 

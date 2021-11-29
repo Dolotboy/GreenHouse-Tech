@@ -1,11 +1,11 @@
 <template>
     <div class="Problems">
         <div class="ProblemPlant">
-            <p>Problèmes </p>  
+            <p>{{ $t("message.problems") }}</p>  
             <div v-for='prob in plant.problems' class="ProblemInfo">
-                <p>Problème: {{prob.problemName}} </p>
-                <p>Type de problème: {{prob.problemType}} </p>
-                <p>Solution: {{prob.problemSolution}}</p>
+                <p>{{ $t("message.problem") }}{{prob.problemName}} </p>
+                <p>{{ $t("message.problemType") }}{{prob.problemType}} </p>
+                <p>{{ $t("message.solution") }}{{prob.problemSolution}}</p>
             </div> 
             
         </div>

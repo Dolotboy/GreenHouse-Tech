@@ -1,9 +1,9 @@
 <template>
     <div class="FavConds">
         <div class="FavCondPlant">
-            <p>Conditions favorables </p>  
+            <p>{{ $t("message.favCond") }}</p>  
             <div v-for='fav in plant.favorableConditions' class="FavCondPlantInfo">
-                <p>{{fav.type}} optimale: {{fav.min}} - {{fav.max}} {{fav.unit}}</p>
+                <p>{{fav.type}} {{ $t("message.optimal") }} {{fav.min}} - {{fav.max}} {{fav.unit}}</p>
             </div> 
             
         </div>
