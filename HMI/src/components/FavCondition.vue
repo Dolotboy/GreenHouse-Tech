@@ -24,10 +24,10 @@ export default {
     left : 50%;
     overflow-y: auto;
     transform: translate(-50%, -50%);
-    background: rgb(206, 205, 205);
+    background: rgb(100, 100, 100);
     border: solid;
     border-color: black;
-    width : 50vw;
+    width : 80vw;
     padding-left: 5%;
     padding-right: 5%;
 }

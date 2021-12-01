@@ -7,10 +7,11 @@
   <h1>{{ plant.plantName }}</h1>
   <p>{{ plant.idPlant }}</p>
 
-  <input class="star" type="checkbox" title="Favoris" :checked="isFavorite" @click="toggleFavorite"> 
+  
 
   </div>
   <div class="end">
+    <input class="star" type="checkbox" title="Favoris" :checked="isFavorite" @click="toggleFavorite"> 
   <p v-if="isFavorite">Favoris</p>
   <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
   </div>
@@ -113,9 +114,11 @@ export default {
     position: relative;
     border : solid 1px black;
     border-radius: 40px;
-    margin-bottom: 20px;
-    max-width: 95vw;
+    margin-bottom: 10px;
+    height: 80px;
     display:flex;
+    width: 95%;
+    max-width: 380px;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly; 
@@ -131,6 +134,7 @@ export default {
 }
 .nom h1{
   max-width: 100%;
+  font-size: 16px;
   text-align: center;
 }
 .nom{
@@ -140,7 +144,7 @@ export default {
 }
 .end{
   width: 20%;
-  height:5%
+  height:100%
 }
 }
 .image{
@@ -163,9 +167,16 @@ export default {
   border-radius: 40px;
   margin-bottom: 20px;
   display: flex;
+  max-width: 500px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;   
+}
+.end{
+  width: 20%;
+  height:5%;
+  position: relative;
+
 }
 }
 .star {
@@ -175,11 +186,13 @@ export default {
     font-size:40px;
     cursor:pointer;
     color: white;
+    
 }
 .star:before {
    content: "\2606";
    position: absolute;
    visibility:visible;
+
 }
 .star:hover{
   color: gold;
