@@ -1,15 +1,15 @@
 <template>
   <div>
     <nav id="navDesktop">
+      <div class="logo">
+        <img src="./assets/LogoV2.png" alt="Logo">
+      </div>
       <ul>
-        <div id="BasicNav">
           <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
-          <li><router-link to="/about">{{ $t("message.apropos") }}</router-link></li>
-        </div>
-        <div id="LoginRegister">
-          <li @click="toggleRegister">{{ $t("message.inscription") }}</li>
-          <li @click="toggleLogin">{{ $t("message.connexion") }}</li>         
-        </div>
+          <li><a href="http://apipcst.xyz" target="_blank">{{ $t("message.APIInterface") }}</a></li>
+          <li v-if="!isLoggedIn" @click="toggleRegister">{{ $t("message.signUp") }}</li>
+          <li v-if="!isLoggedIn" @click="toggleLogin">{{ $t("message.signIn") }}</li>   
+          <li v-if="isLoggedIn">{{ $t("message.hi") }}{{ profile.firstName }} !</li>       
       </ul>
     </nav>
     <nav id="navMobile">
@@ -20,41 +20,54 @@
           <div></div>
         </div>
       </div>
-      <ul class="links">
-          <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
-          <li><router-link to="/about">{{ $t("message.apropos") }}</router-link></li>
-          <li @click="toggleRegister">{{ $t("message.inscription") }}</li>
-          <li @click="toggleLogin">{{ $t("message.connexion") }}</li> 
+      
+     <ul class="links">
+          <li @click="toggleNavMobile"><img  src=".\assets\outline_home_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;"  to="/">{{ $t("message.accueil") }}</router-link></p></li> 
+          <li @click="toggleNavMobile"><img  src=".\assets\outline_info_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;" to="/about">{{ $t("message.apropos") }}</router-link></p></li>
+          <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>{{ $t("message.signUp") }}</p></li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>{{ $t("message.signIn") }}</p></li> 
+          <li v-if="isLoggedIn">{{ $t("message.profileNumber") }} : {{ profile.idProfile }}</li> 
+          <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>{{ $t("message.disconnect") }}</p></li> 
       </ul>
+     
     </nav>
-    <router-view/>  
-    <Login v-if="showLogin" @close="toggleLogin"/>
+    <router-view @popLogin="toggleLogin"/>  
+    <!--<div @click="login(1)">{{ $t("message.login") }}</div>
+    <div @click="logout">{{ $t("message.logout") }}</div>-->
+    <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
     <Register v-if="showRegister" @close="toggleRegister"/>
+    <Loading v-if="showLoading"/>  
   </div>
 </template>
 
 <script>
-import toolbox from './toolbox.js'
-import Login from './components/Login.vue'
-import Register from './components/Register.vue'
-import FavCondition from './components/FavCondition.vue'
-import $ from '../node_modules/jquery/dist/jquery.js'
+import toolbox from './toolbox.js';
+import Login from './components/Login.vue';
+import Register from './components/Register.vue';
+import Loading from './components/Loading.vue';
+import FavCondition from './components/FavCondition.vue';
+import $ from '../node_modules/jquery/dist/jquery.js';
 
 export default {
   components :{
     Login,
     Register,
-    FavCondition
+    FavCondition,
+    Loading
   },
   data(){
       return{
-          envBack : "http://localhost:8000/",
-          env : "http://testenv.apipcst.xyz/",
+          //env : "http://localhost:8000/",
+          //envBack : "http://testenv.apipcst.xyz/",
           plants : [],
+          favorites : [],
           showLogin : false,
           showRegister : false,
+          showLoading : false,
+          isLoggedIn : false,
           apiVersion : 0.0,
-          mobileNavIsOpened : false
+          mobileNavIsOpened : false,
+          profile : Object
       }
   },
   
@@ -71,40 +84,40 @@ export default {
   });
 }
     
-      this.Initialisation()
+      this.Initialisation();
   },
   methods :{
     toggleRegister(){
-      this.showRegister = !this.showRegister;
+      this.showRegister = !this.showRegister;   
     },
     toggleLogin(){
       this.showLogin = !this.showLogin;
     },
     toggleNavMobile(){
-      console.log("clicked");
       let links = document.querySelector(".links");
       let navMobile = document.querySelector("#navMobile");
       let hamburger = document.querySelector(".hamburger-wrapper");
-      console.log(this.mobileNavIsOpened);
       if(!this.mobileNavIsOpened){
-        links.style.display = "flex";
-        navMobile.style.height = "75vh";
+      links.style.display = "flex";
+      navMobile.style.height = "100vh"; 
+      navMobile.style.width="40vw";
       }
       else{
-        console.log("else");
         links.style.display = "none";
         navMobile.style.height = "7.5vh";
-        // hamburger.style.top = posY + "px";
-        // hamburger.style.left = posX + "px";
+        navMobile.style.width="0vw"
       }
-      
       this.mobileNavIsOpened = !this.mobileNavIsOpened;
-      console.log(this.mobileNavIsOpened);
+    },
+    async checkToken(){
+      if(localStorage.getItem('loggedInToken') != null && localStorage.getItem('loggedInToken') != "")
+        this.login(localStorage.getItem('loggedInToken'));
     },
     async Initialisation(){
+      this.showLoading = true;
+
       let version = localStorage.getItem('apiVersion');
-      let apiVersion = await this.GetApiVersion(this.env + "api/search/last/version");
-      this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
+      let apiVersion = await this.GetApiVersion(toolbox.getApiUrl() + "search/last/version");
       if(version == undefined || version != apiVersion){
         await this.ClearDb();
         localStorage.setItem('apiVersion', apiVersion);
@@ -113,21 +126,23 @@ export default {
       this.plants = await toolbox.fetchData(await toolbox.setDb());
       if(this.plants.length == 0)
         await this.DownloadContent();   
+      await this.checkToken();
+
+      this.showLoading = false;
     },
     async ClearDb(){
       let db = await toolbox.setDb();
       toolbox.ClearDb(db);
     },
     async DownloadContent(){
-      this.plants = await this.GetAllPlants(this.env + "api/searchAll/package");
+      this.plants = await this.GetAllPlants(toolbox.getApiUrl() + "searchAll/package");
       let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
-      console.log(this.plants);
-      for(let i = 0; i < this.plants.length; i++){
-        
+      for(let i = 0; i < this.plants.length; i++){   
         entrepot.add(toolbox.GenerateObject(this.plants[i]));
       }
+      location.reload();
     },
     GetApiVersion(url){
       return new Promise(resolve =>{
@@ -138,16 +153,55 @@ export default {
       })
     },
     GetAllPlants(url){
-    return new Promise(resolve => {
-      $.get(url, function(donnees, status){
-        let json = JSON.parse(donnees);
-        let plants = [];
-        for(let i = 0; i< json.length; i++){
-          plants.push(json[i]);
-        }
-        resolve(plants);
+      return new Promise(resolve => {
+        $.get(url, function(donnees, status){
+          let json = JSON.parse(donnees);
+          let plants = [];
+          for(let i = 0; i< json.length; i++){
+            plants.push(json[i]);
+          }
+          resolve(plants);
+        })
       })
-    })
+    },
+    async login(profileToken){
+      this.downloadFavorites(profileToken);
+      this.isLoggedIn = true;
+      this.showLogin = false;
+      this.plants = this.plants;
+    },
+    async logout(){
+      localStorage.setItem('loggedInToken', "");
+      this.profile = null;
+      this.isLoggedIn = false; 
+      this.favorites = [];
+      localStorage.setItem('favorites', "[]");
+      this.plants = this.plants;
+    },
+    async getObject(url){
+      return new Promise(resolve => {
+        $.get(url, function(donnees, status){
+          let object = JSON.parse(donnees);
+          if(object.length != null && object.length != undefined && object.length >= 0)
+            object = object[0];
+          resolve(object);
+        })
+      })  
+    },
+    async downloadFavorites(profileId){
+      localStorage.setItem('favorites', JSON.stringify(this.favorites));
+    },
+    getFavorites(url){
+      return new Promise(resolve => {
+        $.get(url, function(donnees, status){
+          let json = JSON.parse(donnees);
+          let favorites = [];
+          for(let i = 0; i< json.length; i++){
+            favorites.push(json[i]);
+          }
+          resolve(favorites);
+        })
+      })  
     }
   }   
 }
@@ -155,7 +209,7 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -164,13 +218,11 @@ export default {
 *{
   box-sizing: border-box;
 }
-
 html, body{
   font-size : 10pt;
   margin : 0;
   padding : 0;
 }
-
 button{
   background-color: black;
   color : white;
@@ -178,207 +230,206 @@ button{
   padding : 10px;
   font-size : 1.2rem;
 
-
   &:hover{
     opacity : .8;
     cursor : pointer;
   }
 }
 
-
 #navDesktop{
-  position : relative;
+  top : 0;
+  position : fixed;
+  padding : 0 20%;
+  caret-color: transparent;
 
-  &> ul{
-    position : relative;
-  }
+  display : flex;
+  justify-content: space-between;
+  width : 100vw;
+  align-items: center;
+  text-transform: uppercase;
+  font-size: 1.2rem;   
+  z-index: 1000; 
+  background-color: rgba(0,0,0,0.9);
 
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #616161 ;
-    display: flex;
-    justify-content: center;
 
-    li {
-      float: left;
-      border-right: 1px solid darkgrey;
-      border-left: 1px solid darkgrey; 
-
-      a {
-        display: block;
-        color: white;
-        text-decoration: none;
-        text-align: center;
-        padding: 10px 15px;
-
-        &:hover{
-          color: black;
-          background-color: #e6a800;
-        }
-      }
+  .logo{
+    width: 60px;
+    height: 60px;
+    img{
+      max-height: 100%;
+      max-width: 100%;
     }
-  }
-}
-#LoginRegister :hover{
-  color: #D2CCB1;
-  background-color: #8d4705;
-  cursor: pointer;
-}
-#LoginRegister {
-  position: absolute;
-  right: 0%;
-  top: 0%;
-}
-#LoginRegister li{
+  } 
+
+ul {
   list-style-type: none;
   overflow: hidden;
-  color: #d8d5ca;
-  height: 100%;
-  padding: 10px 15px;
+  background-color: transparent;
+  display: flex;
+  justify-content: start;
+  color: white;
+  text-decoration: none;  
 }
 li {
-  float: left;
-  border-right: 1px solid darkgrey;
-  border-left: 1px solid darkgrey; 
-}
-li a {
+  opacity: 0.7;
+  a{
+    text-decoration: none;  
+    color : #fff;  
+  }
+  &:hover{
+    color: #fff;
+    cursor: pointer;
+    opacity: 1;
+  }
+}  
+ul li {
   display: block;
-  color: #d8d5ca;
+  color: #fff;
   text-decoration: none;
   text-align: center;
   padding: 10px 15px;
 }
-li a:hover{
-  color: black;
-  background-color: #e6a800;
 }
-.active {
-  background-color : #01B0D3;
-}
+
 .lblInp-div{
   display : flex;
   justify-content : end;
   height : 2rem;
   margin : 20px 0;
-
   label{
     font-size : 2rem;
-
     &:after{
       content : " :";
     }
   }
-
   input{
     width : 50%;
     height : 100%;
     margin-left : 1vw;
   }
 }
-
 #navMobile{
   display : none;
-  position : relative;
+  position : fixed;
   top : 0;
   left : 0;
-  background: black;
-  color : white;
-  width : 100vw;
+  background: rgb(68, 68, 68);
+  color : rgb(255, 255, 255);
   height : 7.5vh;
+  caret-color: transparent;
+  z-index:50;
 
   .top-wrapper{
     position : relative;
     top : 0;
     left : 0;
     height : 7.5vh;
+    background-color: rgb(0, 78, 42);
+    z-index:60;
+    display: flex;
   }
-
   .hamburger-wrapper{
       position : absolute;
       top : 50%;
+      min-width: 45px;
+      min-height: 45px;
       left : 0;
       display : flex;
+      flex:1;
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
       width : 10vw;
       height : 10vw;
       transform : translate(0,-50%);
-
       &:hover{
         cursor : pointer;
         opacity : 0.8;
       }
-
       div{
         width : 80%;
-        height : 15%;
+        height : 13%;
         background: white;
       }
   }
-
+ .profilNum
+ {
+   flex:1;
+  p{
+    display:none;
+  }
+ }
   .links{
     display : none;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height : 75%;
-    position : absolute;
+    height: 90vh;
+    position : relative;
     bottom : 0;
     left: 0;
     list-style-type: none;
     width: 100%;
     padding: 0;
-    pointer-events: none;
 
+    #logout{
+         position: fixed;
+         width: 40vw;
+         bottom: 0;
+        }
     li{
-      font-size: 3rem;
+      display:flex;
+      align-items:center;
+      font-size: 2.5rem;
       text-decoration: none;
-      border : none;
-      padding: 10px 15px;
-      color : white;
-
+      margin: 1%;
+      padding: 10px 5px;
+      width: 99%;
+      height: 7vh;    
+      text-align: center;
+       img
+       {
+         flex:1;
+         max-height: 24px;
+          max-width: 24px;
+       }
+       p{
+         flex:1;
+       }
       &:hover{
-        background-color: #e6a800;
+        background-color: gray;
         cursor : pointer;
       }
-
       a{
         color : white;
       }
     }
   }
 }
-
 @media screen and (max-width : 1200px) {
   html{
     font-size : 7.5pt;
   }
-  
   .lblInp-div{
     flex-direction: column;
     align-items: start;
     height : 7rem;
-
     input{
       width : 100% !important;
       margin : 0 !important;
     }
   }
 }
-
+@media screen and (min-width : 601px) {
+  .hamburger-wrapper{
+    display: none;
+  } 
+}
 @media screen and (max-width : 600px) {
   html{
     font-size : 5pt;
   }
-    
   #navDesktop{
     display : none;
   }
-
   #navMobile{
     display : block;
   }

@@ -8,17 +8,22 @@ use App\Models\FavorableConditionDate;
 use App\Models\FavorableConditionNb;
 use App\Models\Favorite;
 use App\Models\Profile;
+use App\Models\Family;
 use App\Models\AssignProblem;
 use App\Models\Version;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Http\Response;
+//use App\Mail\AccountCreated;
 
 class ControllerDetail extends Controller
 {
     public function indexPlant(Request $request)
     {
-        return view('newPlant');
+        $data = Plant::all();
+        
+        //return view('searchPlantTest',["plant" =­­­> $data]);
+        return view('searchPlantTest',["plant" => $data]);
     }
 
     public function searchPlant($idPlant)
@@ -152,10 +157,84 @@ class ControllerDetail extends Controller
         $updatedAt = $profile->updated_at;
 
         
-        $array = array('idProfile' => $idProfile, 'email' => $email, 'username' => $username, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        $array = array('email' => $email, 'username' => $username, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
         $json = json_encode($array);
     
         return ("$json");
+    }
+
+    public function searchProfileToken($request, $idProfile)
+    {
+        if (is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        try
+        {
+            $profile = Profile::find($idProfile);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        if (is_null($profile))
+        {
+            return response()->json(['message'=> "Error, profile not found", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 404);
+        }
+
+        $idProfile = $profile->idProfile;
+        $email = $profile->email;
+        $username = $profile->username;
+        $firstName = $profile->firstName;
+        $lastName = $profile->lastName;
+        $createdAt = $profile->created_at;
+        $updatedAt = $profile->updated_at;
+
+        
+        $array = array('token' => $profile->api_token, 'email' => $email, 'username' => $username, 'firstName' => $firstName, 'lastName' => $lastName, 'created_at' => $createdAt, 'updated_at' => $updatedAt);
+        $json = json_encode($array);
+    
+        return ("$json");
+    } 
+
+    public function searchAllFavorites($idProfile)
+    {
+        if (is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        try
+        {
+            $favorites = Favorite::where("tblProfile_idProfile",$idProfile)->get();
+            $json = json_encode($favorites);
+            return ("$json");
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+    } 
+
+    public function searchAllFavoritesToken($request, $idProfile)
+    {
+        if (is_null($idProfile))
+        {
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
+
+        try
+        {
+            $favorites = Favorite::where("tblProfile_idProfile",$idProfile)->get();
+            $json = json_encode($favorites);
+            return ("$json");
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "The profile doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idProfile], 400);
+        }
     } 
 
     public function searchAllProfile()
@@ -179,31 +258,21 @@ class ControllerDetail extends Controller
         return ("$json");
     }
 
-    public function indexFavCondition(Request $request)
+    public function indexFavCondDate(Request $request)
     {
-        return view('');
+        return view('searchFavCondDate');
     }
 
-    public function searchFavCondition($type, $idCondition)
+    public function searchFavConditionDate($idCondition)
     {
-        if (is_null($type) ||
-            is_null($idCondition))
+        if (is_null($idCondition))
         {
             return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
         }
 
         try
         {
-        if ($type == 1)
-        {
             $favorableCondition = FavorableConditionDate::find($idCondition);
-            $json = json_encode($favorableCondition);
-        }
-        else if($type == 2)
-        {
-            $favorableCondition = FavorableConditionNb::find($idCondition);
-            $json = json_encode($favorableCondition);
-        }
         }
         catch (Exception $e)
         { 
@@ -215,30 +284,47 @@ class ControllerDetail extends Controller
             return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
         }
 
+        $json = json_encode($favorableCondition);
+
         return $json;
     }
 
-    public function searchAllFavCondition($type)
+    public function indexFavCondNb(Request $request)
     {
-        if (is_null($type))
+        return view('searchFavCondNb');
+    }
+
+    public function searchFavConditionNb($idCondition)
+    {
+        if (is_null($idCondition))
         {
-            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+            return response()->json(['message'=> "One of the field is empty, you must fill them all or the field's name aren't right", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
         }
 
         try
         {
-        if ($type == 1)
+            $favorableCondition = FavorableConditionNb::find($idCondition);
+        }
+        catch (Exception $e)
+        { 
+            return response()->json(['message'=> "The condition doesn't exist or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 400);
+        }
+
+        if (is_null($favorableCondition))
+        {
+            return response()->json(['message'=> "Error, condition not found", 'success' => false, 'status' => "Request Failed", 'id' => $idCondition], 404);
+        }
+        
+        $json = json_encode($favorableCondition);
+
+        return $json;
+    }
+
+    public function searchAllFavConditionDate()
+    {
+        try
         {
             $favCondition = FavorableConditionDate::All();
-
-            $json = json_encode($favCondition);
-        }
-        else if ($type ==2)
-        {
-            $favCondition = FavorableConditionNb::All();
-
-            $json = json_encode($favCondition);
-        }
         }
         catch (Exception $e)
         {
@@ -248,8 +334,28 @@ class ControllerDetail extends Controller
         {
             return response()->json(['message'=> "Error, conditions not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
         }
+        $json = json_encode($favCondition);
 
-        return ("$json");
+        return $json;
+    }
+
+    public function searchAllFavConditionNb()
+    {
+        try
+        {
+            $favCondition = FavorableConditionNb::All();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "There is no condition or there is no connection with the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 400);
+        }
+        if (is_null($favCondition))
+        {
+            return response()->json(['message'=> "Error, conditions not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
+        }
+        $json = json_encode($favCondition);
+
+        return $json;
     }
 
     public function indexPackage()
@@ -336,6 +442,26 @@ class ControllerDetail extends Controller
     {
         try
         {
+            $families = Family::All();
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['message'=> "Error while retrieving families or there is no family in the database", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
+        }
+        if (is_null($families))
+        {
+            return response()->json(['message'=> "Error, families not found", 'success' => false, 'status' => "Request Failed", 'id' => null], 404);
+        }
+
+        $json = json_encode($families);
+
+        return $json;
+    }
+
+    /*public function searchAllPlantFamilies()
+    {
+        try
+        {
         $families = Plant::select('plantFamily')->groupBy('plantFamily')->get();
         }
         catch (Exception $e)
@@ -350,7 +476,7 @@ class ControllerDetail extends Controller
         $json = json_encode($families);
 
         return $json;
-    }
+    }*/
 
     public function searchAllPlantDifficulties()
     {
@@ -409,3 +535,5 @@ class ControllerDetail extends Controller
         </html>";
     }
 }
+
+// API By Maxime Lepage

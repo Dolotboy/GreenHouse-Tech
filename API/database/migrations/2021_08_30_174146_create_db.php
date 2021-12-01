@@ -11,6 +11,7 @@ class CreateDb extends Migration
      *
      * @return void
      */ 
+        
     public function up()
     {
         Schema::create('tblPlant', function (Blueprint $table) {
@@ -141,3 +142,5 @@ class CreateDb extends Migration
         Schema::dropIfExists('tblRangeFavorableConditionNb');
     }
 }
+
+// API By Maxime Lepage

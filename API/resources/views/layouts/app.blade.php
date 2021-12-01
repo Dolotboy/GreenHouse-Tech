@@ -13,9 +13,17 @@
     <link href="{{ URL::asset('vendor/fonts/circular-std/style.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('vendor/fonts/fontawesome/css/fontawesome-all.css') }}" rel="stylesheet">
 
+    
+
 </head>
 
 <body>
+    <div id='topBanner'>
+        <a href='{{route('home',[app()->getLocale()])}}'>
+            <img src="{{URL::asset('/thumbs/logo.png')}}"/>
+            <h1>Projet Cegep Serre Tech</h2>
+        </a>
+    </div>
 @section('pageContent')
 @show <!-- Section's end -->
 </body>

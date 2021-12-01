@@ -91,8 +91,10 @@ return [
     |
     */
 
-    'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+    'from' => ['address' => 'admin@pcst.xyz', 'name' => 'PCST Support'],
+
+    'reply_to' => [
+        'address' => env('MAIL_FROM_ADDRESS', 'exemple@pcst.xyz'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 

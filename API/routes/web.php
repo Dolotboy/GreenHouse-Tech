@@ -1,76 +1,103 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ControllerAdd;
 use App\Http\Controllers\ControllerEdit;
 use App\Http\Controllers\ControllerDetail;
 use App\Http\Controllers\ControllerDelete;
+use App\Http\Controllers\ControllerAssign;
+use App\Http\Controllers\ControllerUnassign;
+use Illuminate\Support\Facades\App;
 
-Route::get('/', function () {
+// ***************** HOME *******************
+
+Route::get('/{lang}', function ($lang) {
+    App::setLocale($lang);
     return view('home');
-});
+})->name('home');
+
+// ***************** HOME *******************
 
 // ***************** PLANT *******************
 
-Route::get('/new/plant', [ControllerAdd::class, 'indexPlant'])->name('newPlant');
+Route::get('/{lang}/new/plant/', [ControllerAdd::class, 'indexPlant'],function ($lang){})->name('newPlant'); // Display the page with form to add plant
 
-Route::post('/edit/plant', [ControllerEdit::class, 'indexPlant'])->name('editSearchPlant');
+Route::get('/{lang}/search/plant/', [ControllerEdit::class, 'indexPlant'],function ($lang){})->name('editSearchPlant'); // Display the page with search a plant form
 
-Route::post('/search/plant', [ControllerDetail::class, 'indexPlant'])->name('searchPlant');
-
-Route::post('/delete/plant', [ControllerDelete::class, 'indexPlant'])->name('deleteSearchPlant');
+Route::get('/{lang}/edit/plant/{idPlant}', [ControllerEdit::class, 'editPlant'],function ($lang, $idPlant){})->name('editPlant'); // Display the page with edit plant form
 
 // ***************** PLANT *******************
+
+// ***************** FAMILY ******************
+
+Route::get('/{lang}/new/family/', [ControllerAdd::class, 'indexFamily'],function ($lang){})->name('newFamily'); // Display the page with form to add family
+
+Route::get('/{lang}/search/family/', [ControllerEdit::class, 'indexFamily'],function ($lang){})->name('editSearchFamily'); // Display the page with search a family form
+
+Route::get('/{lang}/edit/family/{idFamily}', [ControllerEdit::class, 'editFamily'],function ($lang, $idFamily){})->name('editFamily'); // Display the page with edit family form
+
+// ***************** FAMILY ******************
 
 // ***************** PROBLEM *******************
 
-Route::post('/new/problem', [ControllerAdd::class, 'indexProblem'])->name('newProblem');
+Route::get('/{lang}/new/problem', [ControllerAdd::class, 'indexProblem'],function ($lang){})->name('newProblem'); // Display new problem form
 
-Route::post('/edit/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem');
+Route::get('/{lang}/search/problem', [ControllerEdit::class, 'indexProblem'])->name('editSearchProblem'); // Display the page with search a problem form
 
-Route::post('/search/problem', [ControllerDetail::class, 'indexProblem'])->name('searchProblem');
+Route::get('/{lang}/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('newAssignProblem'); // Display the page with search an association of plant and problem
 
-Route::post('/delete/problem', [ControllerDelete::class, 'indexProblem'])->name('deleteSearchProblem');
+Route::get('/{lang}/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('searchUnassignProblem'); // Display the page with search an association of plant and problem
 
-Route::post('/assign/problem', [ControllerAssign::class, 'indexProblem'])->name('newAssignProblem');
-
-Route::post('/unassign/problem', [ControllerUnassign::class, 'indexProblem'])->name('deleteUnassignProblem');
+Route::get('/{lang}/edit/problem/{idProblem}', [ControllerEdit::class, 'editProblem'],function ($lang, $idProblem){})->name('editProblem'); // Display the page with edit problem form
 
 // ***************** PROBLEM *******************
 
 // ***************** FAVORITE *******************
 
-Route::post('/new/favorite', [ControllerAdd::class, 'indexFavorite'])->name('newFavorite');
+Route::get('/{lang}/new/favorite', [ControllerAdd::class, 'indexFavorite'],function ($lang){})->name('newFavorite'); // Display the page with favorite form
 
-Route::post('/delete/favorite', [ControllerDelete::class, 'indexFavorite'])->name('deleteSearchFavorite');
+Route::get('/{lang}/delete/favorite', [ControllerDelete::class, 'indexFavorite'],function ($lang){})->name('deleteSearchFavorite'); // Display the page with favorite form
 
 // ***************** FAVORITE *******************
 
 // ***************** PROFILE *******************
 
-Route::post('/new/profile', [ControllerAdd::class, 'indexProfile'])->name('newProfile');
+Route::get('/{lang}/new/profile', [ControllerAdd::class, 'indexProfile'],function ($lang){})->name('newProfile'); // Display the page with the profile form
 
-Route::post('/edit/profile', [ControllerEdit::class, 'indexProfile'])->name('editSearchProfile');
+Route::get('/{lang}/search/profile', [ControllerEdit::class, 'indexProfile'],function ($lang){})->name('editSearchProfile'); // Display the form with search a profile
 
-Route::post('/search/profile', [ControllerDetail::class, 'indexProfile'])->name('searchProfile');
-
-Route::post('/delete/profile', [ControllerDelete::class, 'indexProfile'])->name('deleteSearchProfile');
+Route::get('/{lang}/edit/profile/{idProfile}', [ControllerEdit::class, 'editProfile'],function ($lang, $idProfile){})->name('editProfile'); // Display the page with edit profile form
 
 // ***************** PROFILE *******************
 
-// ***************** FAVORABLE CONDITION *******************
+// ***************** FAVORABLE CONDITION DATE *******************
 
-Route::post('/new/condition', [ControllerAdd::class, 'indexFavCondition'])->name('newFavCondition');
+Route::get('/{lang}/new/conditionDate', [ControllerAdd::class, 'indexFavCondDate'],function ($lang){})->name('newFavCondDate'); // Display the page with new condition date form
 
-Route::post('/edit/condition', [ControllerEdit::class, 'indexFavCondition'])->name('editSearchFavCondition');
+Route::get('/{lang}/search/conditionDate', [ControllerEdit::class, 'indexFavCondDate'],function ($lang){})->name('editSearchFavCondDate'); // Display the page with search condition date form
 
-Route::post('/search/condition', [ControllerDetail::class, 'indexFavCondition'])->name('searchFavCondition');
+Route::get('/{lang}/edit/conditionDate/{idCondition}', [ControllerEdit::class, 'editFavCondDate'],function ($lang, $idCondition){})->name('editFavCondDate'); // Display the page with condition date form
 
-Route::post('/delete/condition', [ControllerDelete::class, 'indexFavCondition'])->name('deleteSearchFavCondition');
+Route::get('/{lang}/assign/conditionDate', [ControllerAssign::class, 'indexFavCondDate'],function ($lang){})->name('newAssignFavCondDate'); // Display the page with association form
 
-Route::post('/assign/condition', [ControllerAssign::class, 'indexFavCondition'])->name('newAssignFavCondition');
-
-Route::post('/unassign/condition', [ControllerUnassign::class, 'indexFavCondition'])->name('deleteUnassignFavCondition');
+Route::get('/{lang}/unassign/conditionDate', [ControllerUnassign::class, 'indexFavCondDate'],function ($lang){})->name('deleteUnassignFavCondDate'); // Display the page with association form
 
 // ***************** FAVORABLE CONDITION *******************
+
+// ***************** FAVORABLE CONDITION NB *******************
+
+Route::get('/{lang}/new/conditionNb', [ControllerAdd::class, 'indexFavCondNb'],function ($lang){})->name('newFavCondNb'); // Display the page with new condition nb form
+
+Route::get('/{lang}/search/conditionNb', [ControllerEdit::class, 'indexFavCondNb'],function ($lang){})->name('editSearchFavCondNb'); // Display the page with search condition nb form
+
+Route::get('/{lang}/edit/conditionNb/{idCondition}', [ControllerEdit::class, 'editFavCondNb'],function ($lang, $idProfile){})->name('editFavCondNb'); // Display the page with condition nb form
+
+Route::get('/{lang}/assign/conditionNb', [ControllerAssign::class, 'indexFavCondNb'],function ($lang){})->name('newAssignFavCondNb'); // Display the page with association form
+
+Route::get('/{lang}/unassign/conditionNb', [ControllerUnassign::class, 'indexFavCondNb'],function ($lang){})->name('deleteUnassignFavCondNb'); // Display the page with association form
+
+// ***************** FAVORABLE CONDITION *******************
+
+Route::get('/{lang}/assign/admin', [ControllerEdit::class, 'indexAddAdmin'],function ($lang){})->name('newAssignAdmin'); // Display the page with admin form
+
+Route::get('/{lang}/unassign/admin', [ControllerEdit::class, 'indexRemoveAdmin'],function ($lang){})->name('deleteUnassignAdmin'); // Display the page with admin form

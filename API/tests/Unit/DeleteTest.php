@@ -15,10 +15,10 @@ use App\Models\Profile;
 
 class DeleteTest extends TestCase
 {
-    public function test_example()
+    /*public function test_example()
     {
         $this->assertTrue(true);
-    }
+    }*/
 
     public function test_deletePlant()
 
@@ -137,7 +137,7 @@ class DeleteTest extends TestCase
 
         $profile = new Profile();
 
-        $profile->email = "pogo";
+        $profile->email = "pogo6";
         $profile->password = "pogo";
         $profile->salt = "pogo";
         $profile->firstName = "pogo";
@@ -181,7 +181,7 @@ class DeleteTest extends TestCase
     {
         $profile = new Profile();
 
-        $profile->email = "pogo";
+        $profile->email = "pogo7";
         $profile->password = "pogo";
         $profile->salt = "pogo";
         $profile->firstName = "pogo";
@@ -194,8 +194,11 @@ class DeleteTest extends TestCase
 
         $id=$profile->idProfile;
         
+        //dd($id);
 
         $this->delete("/api/delete/profile/".$id);
+
+        //dd($id);
 
         $this->get('/api/search/profile/'.$id)->assertStatus(404);
 

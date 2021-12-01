@@ -1,28 +1,41 @@
 <template>
     <div class="login">
-        <h1>{{ $t("message.connect") }}</h1>
+        <div class="loginImage">
+           <img class="imageIcon" src="https://www.wingsforkids.org/wp-content/uploads/cropped-placeholder.jpg">
+       </div>
+        <h1>{{ $t("message.login") }}</h1>
         <div class="loginForm">
-          <form>
-
-          <label for="uname"><b>{{ $t("message.mail") }}: </b></label>
-            <input type="text"  v-bind:placeholder="$t('message.mail')" name="uname" required  v-model="email">
-            <label for="psw"><b>{{ $t("message.password") }}: </b></label>
-            <input v-model="password" type="password"  v-bind:placeholder="$t('message.password')" name="psw" required>
-          </form>
-            <button type="submit" @click="postCheckLogin()">{{ $t("message.connect") }}</button>
-            <label>
-              <input type="checkbox" name="remember">{{ $t("message.rememberMe") }}
-          </label>
-          <div class="container">
-            <span class="psw"><a href="#">{{ $t("message.passwordForgot") }}</a></span>
+          <form >
+          <div>
+         <!-- <label for="uname"><b>{{ $t("message.mail") }}: </b></label> -->
+            <input class="inputBox" type="text" v-bind:placeholder="$t('message.mail')" name="uname" required  v-model="email">
           </div>
+          <div>
+            <!-- <label for="psw"><b>{{ $t("message.password") }}: </b></label> -->
+            <input v-model="password" class="inputBox" type="password" v-bind:placeholder="$t('message.password')" name="psw" required>
+            </div>
+          </form>
+            <div class="checks">
+              <div>
+                <label>
+                <input type="checkbox" name="remember">{{ $t("message.rememberMe") }}
+              </label>
+              </div>
+            <div class="container">
+              <span class="psw"><a href="#">>{{ $t("message.passwordForgot") }}</a></span>
+            </div>
+          </div>
+          <button type="submit" class="BtnConnexion" @click="postCheckLogin()">{{ $t("message.login") }}</button>
         </div>
+        
         <div class="close-button" @click="$emit('close')" >X</div>        
     </div>
 </template>
 
 <script>
+import toolbox from '../toolbox.js';
 import $ from '../../node_modules/jquery/dist/jquery.js'
+
 export default {
   name: "App",
     data() {
@@ -41,16 +54,18 @@ export default {
       },
       postCheckLogin(){
         let user = this.createUser();
-        console.log(JSON.stringify(user));
+        let that = this;
+
         $.ajax({
-          url : 'http://testenv.apipcst.xyz/api/login/checkLogin/',
+          url : toolbox.getApiUrl() + 'login/checkLogin/',
           datatype: 'json',
           contentType : 'application/json',
           type: 'post',
           data: JSON.stringify(user),
           success: function(status)
           {
-            alert(status); 
+            localStorage.setItem("loggedInToken", status.id);
+            that.$emit("loggedIn", status.id); 
           }
         });
       }
@@ -66,18 +81,26 @@ export default {
     top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
-    background: rgb(206, 205, 205);
+    background: rgb(151, 151, 151);
     border: solid;
     border-color: black;
-    width : 50vw;
-    max-width : 50vw;
+    width : 100%;
+    height:100%;
+    max-width : 100%;
     padding : 7.5%;
+    align-items: center;
 
     h1{
       font-size: 4rem;
-      margin-top : 0;
+      margin-top : 3%;
     }
-
+    .loginImage
+    {
+      width: 90%;
+      height: 40%;
+      background-color: blue;
+      max-width: 350px;
+    }
     .close-button {
       position: absolute;
       top: 1%;
@@ -93,7 +116,100 @@ export default {
     }
     .loginForm{
       font-size: 1.6rem;
+      flex-direction: column;
+       width: 70vw;
     }
+   
+    .inputBox
+    {
+      height:6vh;
+      margin-top:3%;
+      margin-bottom: 3%;
+      width: 85%;
+    
+      
+    }
+}
+@media screen and (max-width : 600px) 
+{
+  .login{
+    position : absolute;
+    display : flex;
+    overflow-y: auto;
+    flex-direction : column;
+    justify-content: center;
+    caret-color: transparent;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(151, 151, 151);
+    border: solid;
+    border-color: black;
+    width : 100%;
+    height:100%;
+    max-width : 100%;
+    padding : 7.5%;
+    align-items: center;
+    h1{
+      font-size: 4rem;
+      margin-top : 18px;
+    }
+    .loginImage
+    {
+      width: 90%;
+      height: 40%;
+      background-color: blue;
+      max-width: 350px;
+    }
+    .imageIcon{
+  width: 100%;
+  height:100%;
+}
+    .close-button {
+      position: absolute;
+      top: 1%;
+      right: 1%;
+      font-size: 3rem;
+
+      &:hover{
+        cursor: pointer;
+        border:solid;
+        border-width: 1px;
+        border-color: grey;
+      } 
+    }
+    .loginForm{
+      font-size: 1.6rem;
+      flex-direction: column;
+       width: 70vw;
+    }
+   
+    .inputBox
+    {
+      height:6vh;
+      margin-top:10px;
+      margin-bottom: 10px;
+      width: 80%;    
+    }
+    .checks{
+      display: flex;
+     flex-wrap: wrap;
+      height: 35px;
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 10px;
+    }   
+    .BtnConnexion{
+      margin-top:5px;
+      width: 70%;
+      height:20%;
+      font-size: 15px;
+      border-radius: 30px;
+      background-color: rgb(18, 15, 194);
+      
+    }
+}
 }
 
 @media screen and (max-width : 1000px) {

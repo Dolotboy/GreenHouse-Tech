@@ -1,6 +1,13 @@
 <template>
+  
+
   <div class="register">
-    <h1>{{ $t("message.inscription") }}</h1>
+ <!--   <div class="registerImage">
+           <img class="imageIcon" src="https://www.wingsforkids.org/wp-content/uploads/cropped-placeholder.jpg">
+    </div> -->
+    
+    <h1>{{ $t("message.signUp") }}</h1>
+    <div class="problem"></div>
     <div class="form">
     <form @submit.prevent="login">
       <div class="lblInp-div" id="firstName">
@@ -15,11 +22,15 @@
         <label for="email">{{ $t("message.mail") }}</label>
         <input name="email" v-model="email"  v-bind:placeholder="$t('message.mail')" type="email" required>
       </div>
-      <div class="lblInp-div" id="password">
+      <div class="lblInp-div " id="password">
         <label for="password">{{ $t("message.password") }}</label>
-        <input name="password" v-model="password" v-bind:placeholder="$t('message.password')" type="password" required>
+        <input  class="passDiv" name="password" v-model="password" v-bind:placeholder="$t('message.password')" type="password" required>
       </div>
-      <button type="submit" @click="postCreateUser()">{{ $t("message.inscription") }}</button>      
+      <div class="lblInp-div" id="confirmPassword">
+        <label for="confirmPassword">{{ $t("message.passwordConfirm") }}</label>
+        <input  class="passDiv" name="confpassword" v-model="confirmPassword" v-bind:placeholder="$t('message.passwordConfirm')" type="password" required>
+      </div>
+      <button type="submit" class="BtnIncription" @click="postCreateUser()">{{ $t("message.signUp") }}</button>      
     </form>
     </div>    
     <div class="close-button" @click="$emit('close')" >X</div> 
@@ -52,6 +63,8 @@ export default {
         return user;
       },
       postCreateUser(){
+      if(this.password == this.confirmPassword)
+      {
         let user = this.createUser();
         console.log(JSON.stringify(user));
         //$.post("https://apitestenv.pcst.xyz/api/new/profile/addProfile", JSON.stringify(user));
@@ -67,6 +80,14 @@ export default {
           }
         });
       }
+      else
+      {
+        var element = document.querySelector(".passDiv");
+        var text= document.querySelector(".problem");
+        text.innerHTML="les mot de passe ne correspondent pas";
+        element.style.border="solid red"; 
+      }
+      }
     }
 }
 </script>
@@ -74,25 +95,33 @@ export default {
 <style lang="scss">
 .register{
     position : absolute;
+    caret-color: transparent;
     top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
     background: rgb(206, 205, 205);
     border: solid;
     border-color: black;
-    width : 50vw;
+    width : 70vw;
     padding : 7.5% 7.5%;
 
     h1{
       font-size: 4rem;
   }
 }
+.passDiv
+{
+
+}
+.problem{
+  color: red;
+  height: 5%;
+}
 .close-button {
     position: absolute;
     top: 1%;
     right: 1%;
     font-size: 3rem;
-
     &:hover{
       cursor: pointer;
       border:solid;
@@ -115,4 +144,67 @@ export default {
       }
     }
 }
+    @media screen and (max-width : 600px) 
+{
+  .register{
+    position : absolute;
+    height: 100%;
+    overflow-y: auto;
+    width : 100%;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(206, 205, 205);
+    border: solid;
+    border-color: black;
+    padding : 5% 5%;
+    h1{
+      margin-top:20%;
+      font-size: 4rem;
+  }
+  
+}
+.close-button {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    font-size: 3rem;
+
+    &:hover{
+      cursor: pointer;
+      border:solid;
+      border-width: 1px;
+      border-color: grey;
+  }
+}
+
+     
+.form{
+  display: flex;
+  justify-content: center;
+
+    font-size: 2rem;
+    margin: 5% 0;
+    form{
+      input {
+        height: 100%;
+        margin: 0 0 0 30px;
+  }
+      
+      }
+      input[type-submit]{
+        height: 100px;
+  }
+}
+.BtnIncription{
+      margin-top:5px;
+      width: 70vw;
+      height:15%;
+      font-size: 15px;
+      border-radius: 30px;
+      background-color: rgb(18, 15, 194);
+      
+    }
+}
+
 </style>

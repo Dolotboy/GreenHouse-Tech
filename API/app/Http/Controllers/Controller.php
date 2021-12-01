@@ -7,7 +7,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Models\Version;
 use Exception;
+use Illuminate\Support\Str;
 use Illuminate\Routing\Controller as BaseController;
+use App\Models\Profile;
 
 class Controller extends BaseController
 {
@@ -57,4 +59,10 @@ class Controller extends BaseController
             return 1;
         return 0;
     }
-} 
+
+    public function generateToken(){
+        return Str::random(40);
+    }
+}
+
+// API By Maxime Lepage

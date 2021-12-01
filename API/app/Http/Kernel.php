@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'passkey' => \App\Http\Middleware\AuthenticationMiddleware::class,
         'passkeyAdmin' => \App\Http\Middleware\AuthenticationAdminMiddleware::class,
+        'tokenConverter' => \App\Http\Middleware\TokenConversionMiddleware::class,
     ];
 }
