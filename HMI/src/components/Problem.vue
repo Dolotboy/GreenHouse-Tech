@@ -13,7 +13,7 @@
     </div>
 </template>
 
-<script>
+<script scoped>
 export default {
   props : ['plant']
 }
@@ -22,14 +22,14 @@ export default {
 <style>
 .Problems{
     position :absolute;
+    background-color:rgb(82, 82, 82);
     top : 50%;
     left : 50%;
     overflow-y: auto;
     transform: translate(-50%, -50%);
-    background: rgb(206, 205, 205);
     border: solid;
     border-color: black;
-    width : 50vw;
+    width : 70vw;
     padding-left: 5%;
     padding-right: 5%;
 }

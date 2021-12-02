@@ -4,30 +4,30 @@
         <div class="loginImage">
            <img class="imageIcon" src="../assets/LogoV2.png">
        </div>
-        <h1>{{ $t("message.login") }}</h1>
         <div class="loginForm">
           <form >
           <div>
-         <!-- <label for="uname"><b>{{ $t("message.mail") }}: </b></label> -->
-            <input class="inputBox" type="text" v-bind:placeholder="$t('message.mail')" name="uname" required  v-model="email">
+         <!-- <label for="uname"><b>Adresse Courriel : </b></label> -->
+            <input class="inputBox" type="text" placeholder="Entrez votre email" name="uname" required  v-model="email">
           </div>
           <div>
-            <!-- <label for="psw"><b>{{ $t("message.password") }}: </b></label> -->
-            <input v-model="password" class="inputBox" type="password" v-bind:placeholder="$t('message.password')" name="psw" required>
+            <!-- <label for="psw"><b>Mot de passe : </b></label> -->
+            <input v-model="password" class="inputBox" type="password" placeholder="Entrez le mot de passe" name="psw" required>
             </div>
           </form>
-
+<!--
             <div class="checks">
               <div>
                 <label>
-                <input type="checkbox" name="remember">{{ $t("message.rememberMe") }}
+                <input type="checkbox" name="remember"> Se rappeler de moi
               </label>
               </div>
             <div class="container">
-              <span class="psw"><a href="#">>{{ $t("message.passwordForgot") }}</a></span>
+              <span class="psw"><a href="#">Mot de passe oublié?</a></span>
             </div>
           </div>
-          <button type="submit" class="BtnConnexion" @click="postCheckLogin()">{{ $t("message.login") }}</button>
+          -->
+          <button type="submit" class="BtnConnexion" @click="postCheckLogin()">Se connecter</button>
         </div>
         
         <div class="close-button" @click="$emit('close')" >X</div>        
@@ -59,7 +59,7 @@ export default {
         let that = this;
 
         $.ajax({
-          url : toolbox.getApiUrl() + 'login/checkLogin/',
+          url : toolbox.env + 'login/checkLogin/',
           datatype: 'json',
           contentType : 'application/json',
           type: 'post',

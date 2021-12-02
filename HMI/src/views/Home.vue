@@ -1,14 +1,16 @@
 
 <template>
-  <div>
-    <div class="main">
+ 
+  <div class="main">
       <div class="bg-image"></div>
-      <div>
+      <div >
         <div class="bg-text">
           <p>{{ $t("message.decisionHelping") }}</p>
           <h1>{{ $t("message.serreTech") }}</h1>
         </div>  
-      </div>      
+      <div class="logoMobile">
+      <img  src="../assets/LogoV2.png" alt="Logo">
+    </div>
   </div>
       <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
         <div class="autocomplete" style="width:300px;">
@@ -23,7 +25,7 @@
         </div>
         <div class="filters" @click="filterData($event)">
           <ul>
-          <li><a href="#" class="item">{{ $t("message.type") }}<i class="fas fa-chevron-down"></i></a>
+          <li><a  class="item">{{ $t("message.type") }}<i class="fas fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
               <li><a><input type="radio" name="rdPlantType" value="fruit" class="typeFilter">{{ $t("message.filtreFruit") }}</a></li>
@@ -31,7 +33,7 @@
               <li><a><input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>{{ $t("message.filtreAll") }}</a></li>
             </ul>
           </li>
-          <li><a href="#" class="item">{{ $t("message.family") }}<i class="fa fa-chevron-down"></i></a>
+          <li><a  class="item">{{$t("message.famille") }}<i class="fa fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
               <li><a href="#"><input type="checkbox" class="chkPlantFamily">Blue</a></li>
@@ -42,7 +44,7 @@
               <li><a href="#"><input type="checkbox" class="chkPlantFamily" value="ALL" checked>{{ $t("message.filtreAll") }}</a></li>
             </ul>
           </li>
-          <li><a href="#" class="item">{{ $t("message.difficulty") }}<i class="fa fa-chevron-down"></i></a>
+          <li><a class="item">{{ $t("message.difficulty") }}<i class="fa fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
               <li><a><input type="checkbox" value="1" class="chkPlantDifficulty">{{ $t("message.easy") }}</a></li>
@@ -54,6 +56,8 @@
           <li class="filterAlphaWrapper">
             <div>
               <label>{{ $t("message.alphabetical") }}</label>
+            <div style="color:white; background-color:black ; border:solid 1px white; height:35px;">
+              <label>Alphabétique</label>
               <input type="checkbox" checked id="chkAlphabetical">
             </div>
           </li>
@@ -86,6 +90,7 @@ export default {
     Details,
     Plant
   }, 
+  
   data(){
     return {
       plants : [],
@@ -98,6 +103,7 @@ export default {
     }
   },
   mounted(){
+    
     this.initialisation();
     this.favorites = JSON.parse(localStorage.getItem('favorites'));
     //animations for filters
@@ -265,56 +271,20 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style  lang="scss">
 @media screen and (min-width : 601px){
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 
-body, html{
-  height: 100%;
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/PlantBackground.png');
-  background-position: center;
-  background-size: auto, cover;
-  background-attachment: fixed;
+.productsGrid{
+  color: #FFFFFF;
+  text-shadow:  0 -2px 10px #f0e567;
+  display : grid;
+  grid-template-columns : repeat(auto-fit, minmax(500px, 1fr));
+  width : 100%;
+  padding : 2vh 5vw 0 5vw;
+  column-gap: 30px;
+  row-gap: 30px;
 }
-* {    
-box-sizing: border-box;
-}
-html{
-  scroll-behavior: smooth;
-}
-.bg-image{
-  height: 100vh;
-}
-.bg-text{
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
-  position: absolute;
-  font-weight: 800;
-  top: 50%;
-  left: 50%;
-  text-transform: uppercase;
-  transform: translate(-50%, -50%);
-
-    p{
-      font-size: 20px;
-      font-weight: 200;
-    }   
-    h1{
-      font-size: 90px;
-      font-weight: 600;
-    }
-}
-}
-.logo{
-  margin-top: 1%;
-  height: 10vh;
-
-  img{
-    max-height: 100%;
-    max-width: 100%;
-  }
-}
-
 .autoCompleteForm{
   display : inline-block;
   float: right;
@@ -347,6 +317,132 @@ html{
     cursor : pointer;
   }
 }
+
+.filters {
+  height: 30px;
+  ul {
+width:  70vw;
+margin: 0;
+
+  li {
+    float: left;
+    list-style: none;
+    margin-right: 10px;
+    position: relative;
+    z-index : 10;
+       
+    a {
+      text-transform: uppercase;
+      position: relative;
+      text-decoration: none;
+      color: white;
+      background-color: black;
+      border: 1px solid #fff;
+      letter-spacing: 1px;
+      padding: 10px 15px 10px 25px;
+      display: block;
+      width: 150px;
+      z-index: 500;
+
+      i {
+        font-size: 12px ;
+        position: absolute;
+        right: 10px;
+        top: 14px;
+        color: red;
+      }
+    }
+    
+    .drop-down {
+      position: absolute;
+      padding: 0;
+      display: none;
+      margin: 0;
+      left: 0;
+      z-index: 0;
+      
+      input {
+        display: inline-block;
+        float: left;
+      }  
+      li {
+        position: relative;
+        float: none;
+        z-index : 10;
+        
+        a {
+          border-top: none;
+          width: 150px;
+          
+          &:hover {
+            background: #000000;
+            color: #ffffff;
+          }
+        }
+      }
+      
+      li:nth-of-type(1) a {
+        border-top: none;
+      }
+    }
+  }
+  }
+}
+
+.bg-image{
+  height: 100vh;
+}
+.bg-text{
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+  font-weight: 800;
+  top: 50%;
+  left: 50%;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+
+    p{
+      font-size: 20px;
+      font-weight: 200;
+    }   
+    h1{
+      font-size: 90px;
+      font-weight: 600;
+    }
+}
+
+.logo{
+  margin-top: 1%;
+  height: 10vh;
+
+  img{
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+}
+
+.logoMobile{
+  display:none;
+}
+body, html{
+  height: 100vw;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/PlantBackground.png');
+  background-position: center;
+  background-size: auto, cover;
+  background-attachment: fixed;
+}
+* {    
+box-sizing: border-box;
+}
+html{
+  scroll-behavior: smooth;
+}
+
+
+
+
 .indicator{
   position:absolute;
   width:50px;
@@ -408,16 +504,154 @@ html{
 }
 
 
-.filters ul {
-width: 620px;
-margin: 0 auto;
+
+.accent {
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: blue;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+.animate {
+  width: 20%;
+  transition: 0.3s ease;
+}
+.item{
+  background-color: rgba(0,0,0,0.9);
+  color: white;
+    
+    &:hover{
+      color:black;
+      background: white;
+    }
+    
+}
+
+
+.plant{
+  background: rgba(255, 255, 255, .1);
+  box-shadow: 10px 10px 5px rgba(255, 255, 255, .2);
+  height: 15vh;
+  
+  &:hover{
+    cursor : pointer;
+    background: rgba(255, 255, 255, .05);
+    box-shadow: 10px 10px 5px rgba(255, 255, 255, .15);
+  }
+  
+}
+
+/* sépraratiom */
+
+@media screen and (max-width : 600px) 
+{
+  .productsGrid
+  {
+  overflow-y: auto;
+  color: #FFFFFF;
+  text-shadow:  0 -2px 10px #f0e567;
+  display : grid;
+  grid-template-columns : repeat(auto-fit, minmax(50%, 1fr));
+  justify-content: center;
+  justify-items: center;
+  width : 100vw;
+  column-gap: 30px;
+  }
+  .bg-text{
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 800;
+  width: 100vw;
+  text-align: center;
+  text-transform: uppercase;
+
+    p{
+      font-size: 20px;
+      font-weight: 200;
+    }   
+    h1{
+      font-size: 45px;
+      font-weight: 600;
+    }
+}
+.bg-image{
+
+
+}
+
+ .autoCompleteForm{
+  display : inline-block;
+  padding: 1vh 5vw 1vh 5vw;
+
+  .autocomplete{
+    display : block;
+    position : relative;
+  }
+
+  .autocomplete-active{
+    background : blue;
+  }
+
+  .autocomplete > *{
+    width : 100%
+  }
+
+  #searchBar{
+    height:5vh;
+    margin-top: 3%;
+    margin-bottom: 4%;
+    min-height: 40px;
+    z-index: 10;
+
+  }
+  #searchBarautocomplete-list{
+    position : absolute;
+    top : 100%;
+    background : white;
+    z-index: 8;
+    font-size: 20px;
+  }
+
+  #searchBarautocomplete-list:hover{
+    cursor : pointer;
+  }
+}
+
+  .logoMobile{
+    display: flex;
+    width: 100%;
+    margin-bottom: 5%;
+    max-height: 35vh;
+    justify-content: center;
+    img{
+        width:50vw;
+        min-width: 200px;
+        min-width: 200px;
+        max-width: 250px;
+        max-height: 250px;
+    }
+}
+  .indicator{
+    display:none;
+  }
+  .filters {
+  height:30px;
+  
+  ul {
+    width: 100vw;
+    padding-left:5vw;
+    padding-right: 5vw;
 
   li {
     float: left;
+    font-size: 9px;
     list-style: none;
-    margin-right: 10px;
     position: relative;
-    z-index : 10;
+    z-index : 5;
+    width: 22vw;
        
     a {
       text-transform: uppercase;
@@ -426,14 +660,14 @@ margin: 0 auto;
       color: white;
       background-color: black;
       border: 1px solid #fff;
+      height: 35px;
       letter-spacing: 1px;
-      padding: 10px 15px 10px 25px;
+      padding: 12px 10px 12px 10px;
       display: block;
-      width: 150px;
-      z-index: 5000;
+      z-index: 5;
 
       i {
-        font-size: 12px !important;
+        font-size: 8px !important;
         position: absolute;
         right: 10px;
         top: 14px;
@@ -444,23 +678,27 @@ margin: 0 auto;
     .drop-down {
       position: absolute;
       padding: 0;
+      width: 100%;
       display: none;
       margin: 0;
       left: 0;
       z-index: 0;
+      text-align: left;
       
       input {
         display: inline-block;
-        float: left;
       }  
       li {
         position: relative;
         float: none;
         z-index : 10;
+        width: 100%;
         
         a {
           border-top: none;
-          width: 150px;
+          width: 100%;
+          padding: 3px 2px 3px 2px;
+          
           
           &:hover {
             background: #000000;
@@ -475,50 +713,6 @@ margin: 0 auto;
     }
   }
 }
-
-.accent {
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background: blue;
-  position: absolute;
-  transition: 0.3s ease;
-}
-
-.animate {
-  width: 100%;
-  transition: 0.3s ease;
-}
-.item{
-  background-color: rgba(0,0,0,0.9);
-  color: white;
-    
-    &:hover{
-      color:black;
-      background: white;
-    }
-}
-
-.productsGrid{
-  color: #FFFFFF;
-  text-shadow:  0 -2px 10px #f0e567;
-  display : grid;
-  grid-template-columns : repeat(auto-fit, minmax(500px, 1fr));
-  width : 100%;
-  padding : 2vh 5vw 0 5vw;
-  column-gap: 30px;
-  row-gap: 30px;
-}
-.plant{
-  background: rgba(255, 255, 255, .1);
-  box-shadow: 10px 10px 5px rgba(255, 255, 255, .2);
-  height: 15vh;
-  
-  &:hover{
-    cursor : pointer;
-    background: rgba(255, 255, 255, .05);
-    box-shadow: 10px 10px 5px rgba(255, 255, 255, .15);
   }
 }
 </style>

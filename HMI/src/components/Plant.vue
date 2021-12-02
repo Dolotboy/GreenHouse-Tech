@@ -7,13 +7,13 @@
   <h1>{{ plant.plantName }}</h1>
   <p>{{ plant.idPlant }}</p>
 
-  <!-- <input class="star" type="checkbox" title="Favoris" :checked="isFavorite" @click="toggleFavorite">  -->
+  
 
   </div>
-  <!--<div class="end">
+  <div class="end">
   <p v-if="isFavorite">{{ $t("message.favoris") }}</p>
   <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
-  </div>-->
+  </div>
 </div>
 </template>
 
@@ -103,62 +103,80 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 @media screen and (max-width : 600px) {
   html{
     font-size : 5pt;
     
   }
+  .wrapper{
+    position: relative;
+    border : solid 1px black;
+    border-radius: 40px;
+    margin-bottom: 10px;
+    height: 80px;
+    display:flex;
+    width: 95%;
+    max-width: 380px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly; 
+}
+.image{
+  width: 20vw;
+  height: 60vh;
+}
+.imageIcon{
+  max-width: 100%;
+  max-height:100%;
+ 
+}
+.nom h1{
+  max-width: 100%;
+  font-size: 16px;
+  text-align: center;
+}
+.nom{
+  display:block;
+ width:50%;
+ 
+}
+.end{
+  width: 20%;
+  height:100%
+}
+}
+.image{
+  width: 20%;
+  height: 60%;
+  align-items: center;
+  align-content: center;
+}
+.imageIcon{
+  width: 100%;
+  height:100%;
+  max-height: 60px;
+  max-width: 50px;
+}
+@media screen and (min-width : 601px) 
+{
 .wrapper{
   position: relative;
   border : solid 1px #f0e567;
   border-radius: 40px;
   margin-bottom: 20px;
   display: flex;
+  max-width: 500px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;   
 }
-.image{
-  width: 20%;
-  height: 60%;
-  position : absolute;
-  top : 50%;
-  left : 5%;
-  transform: translateY(-50%);
-}
-.imageIcon{
-  max-width: 100%;
-  max-height:100%;
-}
-.nom h1{
-  max-width: 100%;
-  text-align: center;
-}
-.nom{
- width:50%;
- 
-}
 .end{
   width: 20%;
-  height:5%
-}
-}
-.image{
-  width: 20%;
-  height: 60%;
-  position : absolute;
-  top : 50%;
-  left : 5%;
-  transform : translateY(-50%);
-}
-.imageIcon{
-  width: 100%;
-  height:100%;
-}
-.wrapper{
+  height:5%;
   position: relative;
-  border-radius: 15px 50px 30px;
+
+}
 }
 .star {
     top: 5px;
@@ -167,11 +185,13 @@ export default {
     font-size:40px;
     cursor:pointer;
     color: white;
+    
 }
 .star:before {
    content: "\2606";
    position: absolute;
    visibility:visible;
+
 }
 .star:hover{
   color: gold;
