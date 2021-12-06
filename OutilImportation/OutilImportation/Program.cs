@@ -14,13 +14,14 @@ namespace OutilImportation
     {
         static string baseDir = Directory.GetCurrentDirectory().Split(new string[] { "bin" }, StringSplitOptions.None)[0];
         static DateTime lastApiCall = default(DateTime);
-        static double apiCallInterval = 2;
+        static double apiCallInterval = 1;
 
         static void Main(string[] args)
         {
-            string env = "http://localhost:8000/api/";
+            //string env = "http://localhost:8000/api/";
             //string env = "https://testenv.apipcst.xyz/api/";
             //string env = "http://apipcst.xyz/api/";
+            string env = "http://10.10.177.18/Aide_Decision/public/api/";
             if (args.Length > 0)
                 env = args[0];
 
@@ -34,7 +35,7 @@ namespace OutilImportation
         static void LoadVeggies(List<Plant> veggies)
         {
             Excel.Application app = new Excel.Application();
-            Excel.Workbook wb = app.Workbooks.Open(baseDir + "veggies_2.xlsx");
+            Excel.Workbook wb = app.Workbooks.Open(baseDir + "veggies_3.xlsx");
             Excel.Worksheet ws = (Excel.Worksheet)wb.Sheets[1];
             Excel.Range range = ws.UsedRange;
             int i = 2;
