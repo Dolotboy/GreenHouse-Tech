@@ -1,17 +1,12 @@
 <template>
     <div class="login">
-        <div class="loginImage">
-           <img class="imageIcon" src="https://www.wingsforkids.org/wp-content/uploads/cropped-placeholder.jpg">
-       </div>
         <h1>Connexion</h1>
         <div class="loginForm">
           <form >
           <div>
-         <!-- <label for="uname"><b>Adresse Courriel : </b></label> -->
             <input class="inputBox" type="text" placeholder="Entrez votre email" name="uname" required  v-model="email">
           </div>
           <div>
-            <!-- <label for="psw"><b>Mot de passe : </b></label> -->
             <input v-model="password" class="inputBox" type="password" placeholder="Entrez le mot de passe" name="psw" required>
             </div>
           </form>
@@ -21,14 +16,9 @@
                 <input type="checkbox" name="remember"> Se rappeler de moi
               </label>
               </div>
-            <div class="container">
-              <span class="psw"><a href="#">Mot de passe oublié?</a></span>
-            </div>
           </div>
           <button type="submit" class="BtnConnexion" @click="postCheckLogin()">Se connecter</button>
-        </div>
-        
-        <div class="close-button" @click="$emit('close')" >X</div>        
+        </div>      
     </div>
 </template>
 
@@ -117,7 +107,7 @@ export default {
     .loginForm{
       font-size: 1.6rem;
       flex-direction: column;
-       width: 70vw;
+      width: 70vw;
     }
    
     .inputBox
@@ -125,9 +115,7 @@ export default {
       height:6vh;
       margin-top:3%;
       margin-bottom: 3%;
-      width: 85%;
-    
-      
+      width: 85%;   
     }
 }
 @media screen and (max-width : 600px) 

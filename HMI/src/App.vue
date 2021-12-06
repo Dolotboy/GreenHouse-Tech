@@ -7,9 +7,11 @@
       <ul>
           <li><router-link to="/">Accueil</router-link></li> 
           <li><a href="http://apipcst.xyz" target="_blank">API Interface</a></li>
-          <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
+          <li><router-link to="/login">Se connecter</router-link></li> 
+          <li><router-link to="/register">S'inscrire</router-link></li>
+          <!--<li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
           <li v-if="!isLoggedIn" @click="toggleLogin">Se connecter</li>   
-          <li v-if="isLoggedIn">Bonjour, {{ profile.firstName }} !</li>       
+          <li v-if="isLoggedIn">Bonjour, {{ profile.firstName }} !</li>   -->    
       </ul>
     </nav>
     <nav id="navMobile">
@@ -22,7 +24,6 @@
       </div>
      <ul class="links">
           <li @click="toggleNavMobile"><img  src=".\assets\outline_home_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;"  to="/">Accueil</router-link></p></li> 
-          <li @click="toggleNavMobile"><img  src=".\assets\outline_info_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;" to="/about">À propos</router-link></p></li>
           <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>S'inscrire</p></li>
           <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>Se connecter</p></li> 
           <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
@@ -227,7 +228,6 @@ button{
   position : fixed;
   padding : 0 20%;
   caret-color: transparent;
-
   display : flex;
   justify-content: space-between;
   width : 100vw;
@@ -236,7 +236,7 @@ button{
   font-size: 1.2rem;   
   z-index: 1000; 
   background-color: rgba(0,0,0,0.9);
-
+  height: 9vh;
 
   .logo{
     width: 60px;

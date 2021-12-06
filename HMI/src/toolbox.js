@@ -1,5 +1,5 @@
+exports.env = "http://testenv.apipcst.xyz/api/";
 exports.envBack = "http://localhost:8000/api/";
-exports.env = "http://testenv.apipcst.xyz/api/"
 
 exports.fetchData = async (db) => {
     return new Promise(resolve => {

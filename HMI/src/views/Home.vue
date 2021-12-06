@@ -22,7 +22,7 @@
         </div>
         <div class="filters" @click="filterData($event)">
           <ul>
-          <li><a href="#" class="item">Type<i class="fas fa-chevron-down"></i></a>
+          <li><a class="item">Type<i class="fas fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
               <li><a><input type="radio" name="rdPlantType" value="fruit" class="typeFilter">Fruits</a></li>
@@ -30,7 +30,7 @@
               <li><a><input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>Tous</a></li>
             </ul>
           </li>
-          <li><a href="#" class="item">Famille<i class="fa fa-chevron-down"></i></a>
+          <li><a class="item">Famille<i class="fa fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
               <li><a href="#"><input type="checkbox" class="chkPlantFamily">Blue</a></li>
@@ -41,7 +41,7 @@
               <li><a href="#"><input type="checkbox" class="chkPlantFamily" value="ALL" checked>All</a></li>
             </ul>
           </li>
-          <li><a href="#" class="item">Difficulté<i class="fa fa-chevron-down"></i></a>
+          <li><a class="item">Difficulté<i class="fa fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
               <li><a><input type="checkbox" value="1" class="chkPlantDifficulty">Facile</a></li>
@@ -50,18 +50,13 @@
               <li><a><input type="checkbox" value="ALL" class="chkPlantDifficulty" checked>Tous</a></li>
             </ul>
           </li>
-          <li class="filterAlphaWrapper">
-            <div>
-              <label>Alphabétique</label>
-              <input type="checkbox" checked id="chkAlphabetical">
-            </div>
-          </li>
+          <li class="item"><a><input type="checkbox" id="chkAlphabetical">Alphabétique</a></li>          
         </ul>
       </div>
       <div class="productsGrid">
         <Plant class="plant" style="margin-top: 6vh;" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
       </div>
-        <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>  
+        <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
       </div>
 </template>
 
@@ -404,8 +399,9 @@ html{
 
 
 .filters ul {
-width: 620px;
-margin: 0 auto;
+width: 1200px;
+padding: 0 0 0 5vw;
+float: left;
 
   li {
     float: left;
@@ -424,7 +420,7 @@ margin: 0 auto;
       letter-spacing: 1px;
       padding: 10px 15px 10px 25px;
       display: block;
-      width: 150px;
+      width: 200px;
       z-index: 5000;
 
       i {
@@ -443,6 +439,7 @@ margin: 0 auto;
       margin: 0;
       left: 0;
       z-index: 0;
+      width: 200px;
       
       input {
         display: inline-block;
@@ -453,9 +450,10 @@ margin: 0 auto;
         float: none;
         z-index : 10;
         
+        
         a {
           border-top: none;
-          width: 150px;
+          width: 200px;
           
           &:hover {
             background: #000000;
