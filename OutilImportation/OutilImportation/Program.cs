@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Linq;
 
 namespace OutilImportation
 {
@@ -15,6 +16,8 @@ namespace OutilImportation
         static string baseDir = Directory.GetCurrentDirectory().Split(new string[] { "bin" }, StringSplitOptions.None)[0];
         static DateTime lastApiCall = default(DateTime);
         static double apiCallInterval = 1;
+        static List<Plant> veggies = new List<Plant>();
+        static List<Problem> problems = new List<Problem>();
 
         static void Main(string[] args)
         {
@@ -25,14 +28,13 @@ namespace OutilImportation
             if (args.Length > 0)
                 env = args[0];
 
-            List<Plant> veggies = new List<Plant>();
-            LoadVeggies(veggies);
-            PushData(env, veggies);
+            LoadVeggies();
+            PushData(env);
 
             Interface.ReadKey();
         }
 
-        static void LoadVeggies(List<Plant> veggies)
+        static void LoadVeggies()
         {
             Excel.Application app = new Excel.Application();
             Excel.Workbook wb = app.Workbooks.Open(baseDir + "veggies_3.xlsx");
@@ -51,6 +53,7 @@ namespace OutilImportation
                     new ConditionNb(){type = "plantSpacing", min = ConvertCellToString(range.Cells[i, 16], true), max = ConvertCellToString(range.Cells[i, 17], true), unit = "cm", create_at = now, updated_at = now},
                     new ConditionNb(){type = "exposureTime", min = ConvertCellToString(range.Cells[i, 21], true), max = ConvertCellToString(range.Cells[i, 22], true), unit = "°H", create_at = now, updated_at = now},
                 };
+                int plantLocalId = Convert.ToInt32(ConvertCellToString(range.Cells[i, 1]));
                 Plant veg = new Plant()
                 {
                     plantImg = ConvertCellToString(range.Cells[i, 1]),
@@ -63,9 +66,43 @@ namespace OutilImportation
                     plantDescription = ConvertCellToString(range.Cells[i, 8]),
                     plantDifficulty = ConvertCellToString(range.Cells[i, 9]),
                     plantBestNeighbor = ConvertCellToString(range.Cells[i, 10]),
-                    conditionsNbs = conds
+                    plantLocalId = plantLocalId,
+                    updated_at = now,
+                    create_at = now,
+                    conditionsNbs = conds,
+                    problems = problems.Where(x => x.Plants.Contains(plantLocalId)).ToList()
                 };
                 veggies.Add(veg);
+                if (i % 5 == 0)
+                    Interface.WriteLine($"Loaded {i} vegetals");
+                i++;
+            }
+            wb.Close();
+            app.Quit();
+        }
+
+        static void LoadProblems()
+        {
+            Excel.Application app = new Excel.Application();
+            Excel.Workbook wb = app.Workbooks.Open(baseDir + "veggies_3.xlsx");
+            Excel.Worksheet ws = (Excel.Worksheet)wb.Sheets[1];
+            Excel.Range range = ws.UsedRange;
+            int i = 2;
+
+            while (ConvertCellToString(range.Cells[i, 1]) != "empty")
+            {
+                string now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                Problem problem = new Problem()
+                {
+                    Name = ConvertCellToString(range.Cells[i, 1]),
+                    Type = ConvertCellToString(range.Cells[i, 2]),
+                    Solution = ConvertCellToString(range.Cells[i, 3]),
+                    Plants = ParsePlants(ConvertCellToString(range.Cells[i, 4])),
+                    Created_at = now,
+                    Updated_at = now
+                };
+                problems.Add(problem);
+
                 if (i % 5 == 0)
                     Interface.WriteLine($"Loaded {i} vegetals");
                 i++;
@@ -82,7 +119,7 @@ namespace OutilImportation
             return client;
         }
 
-        static async void PushData(string baseUrl, List<Plant> veggies)
+        static async void PushData(string baseUrl)
         {
             try
             {
@@ -122,6 +159,21 @@ namespace OutilImportation
                 Interface.WriteLine("\n" + plantResponse.ToString());
         }
 
+        static async Task<Response> PushProblem(string baseurl, Problem problem, HttpClient client)
+        {
+            try
+            {
+                Response response = await PostContent(baseurl, new StringContent(problem.ToString(), Encoding.UTF8, "application/json"), client);
+                if (!response.success)
+                    throw new Exception(response.message);
+                return response;
+            }
+            catch(Exception e)
+            {
+                return new Response() { id = "-1", success = false, message = e.Message };
+            }
+        }
+
         static async Task<Response> PostContent(string url, StringContent content, HttpClient client)
         {
             string responseString;
@@ -156,6 +208,22 @@ namespace OutilImportation
         static string RemoveComas(string str)
         {
             return str.Replace(",", ".");
+        }
+
+        static List<int> ParsePlants(string cellContent)
+        {
+            List<int> plantIds = new List<int>();
+            try
+            {
+                string[] ids = cellContent.Split(',');
+                foreach (string id in ids)
+                    plantIds.Add(Convert.ToInt32(id));
+            }
+            catch(Exception e)
+            {
+                Interface.WriteLine(e.Message);
+            }
+            return plantIds;
         }
     }
 }
