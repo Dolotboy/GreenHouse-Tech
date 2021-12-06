@@ -5,14 +5,14 @@
         <img src="./assets/LogoV2.png" alt="Logo">
       </div>
       <ul>
-          <li><router-link to="/">Accueil</router-link></li> 
-          <li><a href="http://apipcst.xyz" target="_blank">API Interface</a></li>
-          <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
-          <li v-if="!isLoggedIn" @click="toggleLogin">Se connecter</li>   
-          <li v-if="isLoggedIn">Bonjour, {{ profile.firstName }} !</li>       
+          <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
+          <li><a href="http://apipcst.xyz" target="_blank">{{ $t("message.APIInterface") }}</a></li>
+          <li v-if="!isLoggedIn" @click="toggleRegister">{{ $t("message.signUp") }}</li>
+          <li v-if="!isLoggedIn" @click="toggleLogin">{{ $t("message.signIn") }}</li>   
+          <li v-if="isLoggedIn">{{ $t("message.hi") }}{{ profile.firstName }} !</li>       
       </ul>
     </nav>
-    <nav id="navMobile">
+    <nav id="navMobile" style="transition: width 0.1s ease-in;">
       <div class="top-wrapper">
         <div @click="toggleNavMobile" class="hamburger-wrapper">
           <div></div>
@@ -20,19 +20,21 @@
           <div></div>
         </div>
       </div>
+      
      <ul class="links">
-          <li @click="toggleNavMobile"><img  src=".\assets\outline_home_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;"  to="/">Accueil</router-link></p></li> 
-          <li @click="toggleNavMobile"><img  src=".\assets\outline_info_white_24dp.png"><p><router-link style="text-decoration: none; color: inherit;" to="/about">À propos</router-link></p></li>
-          <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>S'inscrire</p></li>
-          <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>Se connecter</p></li> 
-          <li v-if="isLoggedIn">Profile number{{ profile.idProfile }}</li> 
-          <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>Déconnexion</p></li> 
+          <li v-if="isLoggedIn">{{ $t("message.profileNumber") }} :{{ profile.idProfile }}</li> 
+          <li @click="toggleNavMobile"><a  href="/"><img  src=".\assets\outline_home_white_24dp.png"><p>{{ $t("message.accueil") }}</p></a></li> 
+          <li @click="toggleNavMobile"><a href="http://apipcst.xyz/fr"><img  src=".\assets\outline_info_white_24dp.png"><p>{{ $t("message.apropos") }}</p></a></li>
+          <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>{{ $t("message.signUp") }}</p></li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>{{ $t("message.signIn") }}</p></li> 
+          
+          <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>{{ $t("message.disconnect") }}</p></li> 
       </ul>
      
     </nav>
     <router-view @popLogin="toggleLogin"/>  
-    <!--<div @click="login(1)">login</div>
-    <div @click="logout">logout</div>-->
+    <div @click="login(1)">{{ $t("message.login") }}</div>
+    <div @click="logout">{{ $t("message.logout") }}</div>
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
     <Register v-if="showRegister" @close="toggleRegister"/>
     <Loading v-if="showLoading"/>  
@@ -69,7 +71,20 @@ export default {
           profile : Object
       }
   },
+  
   mounted(){
+    window.onload=function(){
+    document.getElementById("BtnFr").addEventListener("click", function() {
+    localStorage.setItem("locale","fr");
+    location.reload();
+  });
+  
+  document.getElementById("BtnEn").addEventListener("click", function() {
+    localStorage.setItem("locale","en");
+    location.reload();
+  });
+}
+    
       this.Initialisation();
   },
   methods :{
@@ -85,11 +100,13 @@ export default {
       let hamburger = document.querySelector(".hamburger-wrapper");
       if(!this.mobileNavIsOpened){
       links.style.display = "flex";
+      navMobile.style.transition=" width 0.15s ease-in";
       navMobile.style.height = "100vh"; 
       navMobile.style.width="40vw";
       }
       else{
         links.style.display = "none";
+        navMobile.style.transition="none";
         navMobile.style.height = "7.5vh";
         navMobile.style.width="0vw"
       }
@@ -296,6 +313,7 @@ ul li {
 }
 #navMobile{
   display : none;
+ 
   position : fixed;
   top : 0;
   left : 0;
@@ -303,7 +321,7 @@ ul li {
   color : rgb(255, 255, 255);
   height : 7.5vh;
   caret-color: transparent;
-  z-index:50;
+  z-index:120;
 
   .top-wrapper{
     position : relative;
@@ -311,7 +329,7 @@ ul li {
     left : 0;
     height : 7.5vh;
     background-color: rgb(0, 78, 42);
-    z-index:60;
+    z-index:50;
     display: flex;
   }
   .hamburger-wrapper{
@@ -346,9 +364,11 @@ ul li {
   }
  }
   .links{
+    
     display : none;
     flex-direction: column;
     height: 90vh;
+    gap:1%;
     position : relative;
     bottom : 0;
     left: 0;
@@ -379,6 +399,17 @@ ul li {
        }
        p{
          flex:1;
+       }
+       a{
+      display:flex;
+      align-items:center;
+      font-size: 2.5rem;
+      text-decoration: none;
+      margin: 1%;
+      width :100%;
+      height: 7vh;    
+      text-align: center;
+        
        }
       &:hover{
         background-color: gray;

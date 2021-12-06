@@ -1,9 +1,9 @@
 <template>
     <div class="FavConds">
         <div class="FavCondPlant">
-            <p>Conditions favorables </p>  
+            <p>{{ $t("message.favCond") }}</p>  
             <div v-for='fav in plant.favorableConditions' class="FavCondPlantInfo">
-                <p>{{fav.type}} optimale: {{fav.min}} - {{fav.max}} {{fav.unit}}</p>
+                <p>{{fav.type}} {{ $t("message.optimal") }} {{fav.min}} - {{fav.max}} {{fav.unit}}</p>
             </div> 
             
         </div>
@@ -17,17 +17,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .FavConds{
     position :absolute;
     top : 50%;
     left : 50%;
     overflow-y: auto;
     transform: translate(-50%, -50%);
-    background: rgb(206, 205, 205);
+    background: rgb(100, 100, 100);
     border: solid;
     border-color: black;
-    width : 50vw;
+    width : 80vw;
     padding-left: 5%;
     padding-right: 5%;
 }
@@ -59,6 +59,7 @@ export default {
 .FavCondPlant{
     display: flex;
     flex-direction: column;
+    overflow-y:auto;
 }
 
 </style>

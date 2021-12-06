@@ -1,4 +1,4 @@
-exports.isProd = true;
+exports.isProd = false;
 
 //exports.envBack = "http://localhost:8000/api/";
 //exports.env = "http://testenv.apipcst.xyz/api/"
