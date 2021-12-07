@@ -13,21 +13,23 @@ namespace OutilImportation
 {
     class Program
     {
-        static string baseDir = Directory.GetCurrentDirectory().Split(new string[] { "bin" }, StringSplitOptions.None)[0];
+        static string baseDir = Directory.GetCurrentDirectory();
         static DateTime lastApiCall = default(DateTime);
-        static double apiCallInterval = 1;
+        static double apiCallInterval = 0.5;
+        static int dataVersion = 3;
         static List<Plant> veggies = new List<Plant>();
         static List<Problem> problems = new List<Problem>();
 
         static void Main(string[] args)
         {
-            //string env = "http://localhost:8000/api/";
+            string env = "http://localhost:8000/api/";
             //string env = "https://testenv.apipcst.xyz/api/";
             //string env = "http://apipcst.xyz/api/";
-            string env = "http://10.10.177.18/Aide_Decision/public/api/";
+            //string env = "http://10.10.177.18/Aide_Decision/public/api/";
             if (args.Length > 0)
                 env = args[0];
 
+            LoadProblems();
             LoadVeggies();
             PushData(env);
 
@@ -37,7 +39,7 @@ namespace OutilImportation
         static void LoadVeggies()
         {
             Excel.Application app = new Excel.Application();
-            Excel.Workbook wb = app.Workbooks.Open(baseDir + "veggies_3.xlsx");
+            Excel.Workbook wb = app.Workbooks.Open(baseDir + $"\\Data\\veggies_{dataVersion}.xlsx");
             Excel.Worksheet ws = (Excel.Worksheet)wb.Sheets[1];
             Excel.Range range = ws.UsedRange;
             int i = 2;
@@ -53,7 +55,7 @@ namespace OutilImportation
                     new ConditionNb(){type = "plantSpacing", min = ConvertCellToString(range.Cells[i, 16], true), max = ConvertCellToString(range.Cells[i, 17], true), unit = "cm", create_at = now, updated_at = now},
                     new ConditionNb(){type = "exposureTime", min = ConvertCellToString(range.Cells[i, 21], true), max = ConvertCellToString(range.Cells[i, 22], true), unit = "°H", create_at = now, updated_at = now},
                 };
-                int plantLocalId = Convert.ToInt32(ConvertCellToString(range.Cells[i, 1]));
+                int plantLocalId = Convert.ToInt32(ConvertCellToString(range.Cells[i, 23]));
                 Plant veg = new Plant()
                 {
                     plantImg = ConvertCellToString(range.Cells[i, 1]),
@@ -84,7 +86,7 @@ namespace OutilImportation
         static void LoadProblems()
         {
             Excel.Application app = new Excel.Application();
-            Excel.Workbook wb = app.Workbooks.Open(baseDir + "veggies_3.xlsx");
+            Excel.Workbook wb = app.Workbooks.Open(baseDir + $"\\Data\\problems_{dataVersion}.xlsx");
             Excel.Worksheet ws = (Excel.Worksheet)wb.Sheets[1];
             Excel.Range range = ws.UsedRange;
             int i = 2;
@@ -94,9 +96,9 @@ namespace OutilImportation
                 string now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 Problem problem = new Problem()
                 {
-                    Name = ConvertCellToString(range.Cells[i, 1]),
-                    Type = ConvertCellToString(range.Cells[i, 2]),
-                    Solution = ConvertCellToString(range.Cells[i, 3]),
+                    problemName = ConvertCellToString(range.Cells[i, 1]),
+                    problemType = ConvertCellToString(range.Cells[i, 2]),
+                    problemSolution = ConvertCellToString(range.Cells[i, 3]),
                     Plants = ParsePlants(ConvertCellToString(range.Cells[i, 4])),
                     Created_at = now,
                     Updated_at = now
@@ -104,7 +106,7 @@ namespace OutilImportation
                 problems.Add(problem);
 
                 if (i % 5 == 0)
-                    Interface.WriteLine($"Loaded {i} vegetals");
+                    Interface.WriteLine($"Loaded {i} problems");
                 i++;
             }
             wb.Close();
@@ -123,8 +125,17 @@ namespace OutilImportation
         {
             try
             {
+                foreach (Problem problem in problems)
+                {
+                    Response response = await PushProblem(baseUrl, problem, GenerateClient());
+                    Interface.WriteLine(response.ToString());
+                }
+                Interface.WriteLine("Problems where pushed.");
+
                 foreach (Plant veg in veggies)
                     await PushPlant(baseUrl, veg, GenerateClient());
+                Interface.WriteLine("Problems where pushed.");
+
                 Interface.WriteLine("Everything was pushed.");
             }
             catch (Exception e)
@@ -154,6 +165,14 @@ namespace OutilImportation
                     else
                         Interface.WriteLine(condResponse.ToString());
                 }
+                foreach(Problem problem in plant.problems)
+                {
+                    Response probResponse = await PostContent($"{baseUrl}assign/problem/{plantResponse.id}/{problem.DatabaseId}", new StringContent("", Encoding.UTF8, "application/json"), client);
+                    if (probResponse.success)
+                        Interface.WriteLine($"Problem #{problem.DatabaseId} assigned successfully to plant #{plantResponse.id}");
+                    else
+                        Interface.WriteLine(probResponse.ToString());
+                }
             }
             else
                 Interface.WriteLine("\n" + plantResponse.ToString());
@@ -163,9 +182,10 @@ namespace OutilImportation
         {
             try
             {
-                Response response = await PostContent(baseurl, new StringContent(problem.ToString(), Encoding.UTF8, "application/json"), client);
+                Response response = await PostContent($"{ baseurl}new/problem/addProblem", new StringContent(problem.ToString(), Encoding.UTF8, "application/json"), client);
                 if (!response.success)
                     throw new Exception(response.message);
+                problem.DatabaseId = response.id;
                 return response;
             }
             catch(Exception e)
