@@ -1,5 +1,5 @@
 <template>
-    <div class="Problems">
+    <div class="ProblemsWrapper">
         <div class="ProblemPlant">
             <p>Problèmes </p>  
             <div v-for='prob in plant.problems' class="ProblemInfo">
@@ -7,9 +7,8 @@
                 <p>Type de problème: {{prob.problemType}} </p>
                 <p>Solution: {{prob.problemSolution}}</p>
             </div> 
-            
-        </div>
-        <div class="close-button" @click="$emit('close')" >X</div>        
+            <div class="close-button" @click="$emit('close')" >X</div> 
+        </div>               
     </div>
 </template>
 
@@ -19,13 +18,24 @@ export default {
 }
 </script>
 
-<style>
-.Problems{
+<style lang="scss">
+.ProblemsWrapper{
+    height: 50vh;
+    width: 45%;
+    position: absolute;
+    top : 19%;
+    left : 0%;
+    background: white;
+    border: solid;
+    border-color: black;
+}
+
+/*.ProblemsWrapper{
     position :absolute;
     top : 50%;
     overflow-y: auto;
     transform: translate(-50%, -50%);
-    background: rgb(206, 205, 205);
+    background: white;
     border: solid;
     border-color: black;
     width : 50vw;
@@ -60,6 +70,6 @@ export default {
 .ProblemPlant{
     display: flex;
     flex-direction: column;
-}
+}*/
 
 </style>

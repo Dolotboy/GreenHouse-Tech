@@ -6,7 +6,7 @@
       </div>
       <ul>
           <li><router-link to="/">Accueil</router-link></li> 
-          <li><a href="http://apipcst.xyz" target="_blank">API Interface</a></li>
+          <li><a href="http://apipcst.xyz/fr" target="_blank">API Interface</a></li>
           <li><router-link to="/login">Se connecter</router-link></li> 
           <li><router-link to="/register">S'inscrire</router-link></li>
           <!--<li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
@@ -33,25 +33,21 @@
     </nav>
     <router-view @popLogin="toggleLogin"/>  
     <!--<div @click="login(1)">login</div>
-    <div @click="logout">logout</div>-->
+    <div @click="logout">logout</div>
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
-    <Register v-if="showRegister" @close="toggleRegister"/>
+    <Register v-if="showRegister" @close="toggleRegister"/>-->
     <Loading v-if="showLoading"/>  
   </div>
 </template>
 
 <script>
 import toolbox from './toolbox.js';
-import Login from './components/Login.vue';
-import Register from './components/Register.vue';
 import Loading from './components/Loading.vue';
 import FavCondition from './components/FavCondition.vue';
 import $ from '../node_modules/jquery/dist/jquery.js';
 
 export default {
   components :{
-    Login,
-    Register,
     FavCondition,
     Loading
   },
@@ -61,8 +57,6 @@ export default {
           //envBack : "http://testenv.apipcst.xyz/",
           plants : [],
           favorites : [],
-          showLogin : false,
-          showRegister : false,
           showLoading : false,
           isLoggedIn : false,
           apiVersion : 0.0,
@@ -74,12 +68,6 @@ export default {
       this.Initialisation();
   },
   methods :{
-    toggleRegister(){
-      this.showRegister = !this.showRegister;   
-    },
-    toggleLogin(){
-      this.showLogin = !this.showLogin;
-    },
     toggleNavMobile(){
       let links = document.querySelector(".links");
       let navMobile = document.querySelector("#navMobile");
