@@ -120,7 +120,7 @@ export default {
     .loginForm{
       font-size: 1.6rem;
       flex-direction: column;
-       width: 70%;
+      width: 70%;
     }
    
     .inputBox
@@ -128,7 +128,7 @@ export default {
       height:6vh;
       margin-top:3%;
       margin-bottom: 3%;
-      width: 70vw;
+      width: 85%;   
     }
 }
 }

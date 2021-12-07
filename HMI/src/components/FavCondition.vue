@@ -21,7 +21,6 @@ export default {
 .FavConds{
     position :absolute;
     top : 50%;
-    left : 50%;
     overflow-y: auto;
     transform: translate(-50%, -50%);
     background: rgb(100, 100, 100);

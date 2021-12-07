@@ -4,12 +4,11 @@
       <div class="logo">
         <img src="./assets/LogoV2.png" alt="Logo">
       </div>
-      <ul>
+      <ul>      
           <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
           <li><a href="http://apipcst.xyz" target="_blank">{{ $t("message.APIInterface") }}</a></li>
-          <li v-if="!isLoggedIn" @click="toggleRegister">{{ $t("message.signUp") }}</li>
-          <li v-if="!isLoggedIn" @click="toggleLogin">{{ $t("message.signIn") }}</li>   
-          <li v-if="isLoggedIn">{{ $t("message.hi") }}{{ profile.firstName }} !</li>       
+          <li><router-link to="/login">{{ $t("message.signIn") }}</router-link></li> 
+          <li><router-link to="/register">{{ $t("message.signUp") }</router-link></li>
       </ul>
     </nav>
     <nav id="navMobile" style="transition: width 0.1s ease-in;">
@@ -27,7 +26,6 @@
           <li @click="toggleNavMobile"><a href="http://apipcst.xyz/fr"><img  src=".\assets\outline_info_white_24dp.png"><p>{{ $t("message.apropos") }}</p></a></li>
           <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>{{ $t("message.signUp") }}</p></li>
           <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>{{ $t("message.signIn") }}</p></li> 
-          
           <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>{{ $t("message.disconnect") }}</p></li> 
       </ul>
      
@@ -244,7 +242,6 @@ button{
   position : fixed;
   padding : 0 20%;
   caret-color: transparent;
-
   display : flex;
   justify-content: space-between;
   width : 100vw;
@@ -253,7 +250,7 @@ button{
   font-size: 1.2rem;   
   z-index: 1000; 
   background-color: rgba(0,0,0,0.9);
-
+  height: 9vh;
 
   .logo{
     width: 60px;
