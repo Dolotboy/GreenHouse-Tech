@@ -1,4 +1,4 @@
-<template>
+<!--<template>
     <div class="login">
         <h1>Connexion</h1>
         <div class="loginForm">
@@ -61,10 +61,10 @@ export default {
       }
     }
 }
-</script>
+</script>-->
 
 <style lang="scss">
-.login{
+/*.login{
     position : absolute;
     display : flex;
     flex-direction : column;
@@ -204,5 +204,5 @@ export default {
   body{
     font-size : 6pt;
   }
-}
+}*/
 </style>

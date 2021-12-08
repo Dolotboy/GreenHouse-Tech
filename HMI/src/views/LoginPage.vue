@@ -17,9 +17,7 @@
           />
         </div>
         <div>
-          <div class="control is-expanded">
            <input type="password" class="inputBox" v-model="password" placeholder="Entrez votre mot de passe">
-          </div>
           <button type="submit" class="btn from-left" @click="postCheckLogin()">Se connecter
           </button>
         </div>
@@ -76,7 +74,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
 body {
@@ -85,8 +83,10 @@ body {
 }
 
 .login {
-  width: 814px;
-  height: 814px;
+  position: absolute;
+  width: 45vw;
+  height: 81vh;
+  transform: translate(55%,12%);
   background-color: rgba(0, 0, 0, 0.7);
   margin: 3vh 0 0 0;
   color: #fff;
@@ -97,6 +97,7 @@ body {
   h1 {
     font-family: "Roboto", sans-serif;
     font-weight: 900;
+    font-size: 3rem;
   }
 
   .logo {
@@ -104,7 +105,7 @@ body {
   }
 }
 .formLogin {
-  width: 125%;
+  width: 35vw;
 
   .inputBox {
     width: 100%;

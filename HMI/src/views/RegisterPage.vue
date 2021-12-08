@@ -76,7 +76,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
 body {
@@ -85,8 +85,10 @@ body {
 }
 
 .register {
+  position: absolute;
   width: 45vw;
-  height: 91vh;
+  height: 85vh;
+  transform: translate(55%,12%);
   background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
   display : flex;
@@ -96,6 +98,7 @@ body {
   h1 {
     font-family: "Roboto", sans-serif;
     font-weight: 900;
+    font-size: 3rem;
   }
 
   .logo {
@@ -115,7 +118,7 @@ body {
   }
 }
 .formLogin {
-  width: 110%;
+  width: 40vw;
 
   .inputBox {
     width: 100%;

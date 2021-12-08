@@ -1,7 +1,7 @@
 <template>
     <div class="FavConds">
         <div class="FavCondPlant">
-            <p>Conditions favorables </p>  
+            <h1>Conditions favorables </h1>  
             <div v-for='fav in plant.favorableConditions' class="FavCondPlantInfo">
                 <p>{{fav.type}} optimale: {{fav.min}} - {{fav.max}} {{fav.unit}}</p>
             </div> 
@@ -17,18 +17,19 @@ export default {
 }
 </script>
 
-<style>
+<style lan="scss" scoped>
 .FavConds{
     position :absolute;
-    top : 50%;
+    top : -10%;
+    left: -75%;
     overflow-y: auto;
-    transform: translate(-50%, -50%);
-    background: rgb(206, 205, 205);
+    background: white;
     border: solid;
     border-color: black;
-    width : 50vw;
+    width : 28vw;
     padding-left: 5%;
     padding-right: 5%;
+    overflow-y: auto;
 }
 .close-button {
     position: absolute;
@@ -40,20 +41,17 @@ export default {
     cursor: pointer;
     border:solid;
     border-width: 1px;
-    border-color: grey;
+    border-color: transparent;
 }
-.details h1{
-    font-size: 35px;
+.FavCondPlant h1{
+    font-size: 1.2rem;
+    text-decoration: underline;
 }
-.FavCondPlant > p{
-    font-size: 30px;
-    margin:10px 0;
-}   
 .FavCondPlantInfo > p{
-    font-size: 15px;
+    font-size: 1.2rem;
     text-align: left;
     margin:10px 0;
-
+    font-weight: bold;
 }     
 .FavCondPlant{
     display: flex;
