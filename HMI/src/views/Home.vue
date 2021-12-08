@@ -1,15 +1,72 @@
 
 <template>
+<<<<<<< HEAD
   <div class="main">
     <div class="bg-image"></div>
     <div>
       <div class="bg-text">
         <p>{{ $t("message.decisionHelping") }}</p>
         <h1>{{ $t("message.serreTech") }}</h1>
+=======
+  <div>
+    <div class="main">
+      <div class="bg-image"></div>
+      <div>
+        <div class="bg-text">
+          <p>Aide à la décision</p>
+          <h1>Serre-Tech</h1>
+        </div>  
+      </div>      
+  </div>
+      <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
+        <div class="autocomplete" style="width:300px;">
+          <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
+        </div>
+      </form>
+        <div class="indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="filters" @click="filterData($event)">
+          <ul>
+          <li><a class="item">Type<i class="fas fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a><input type="radio" name="rdPlantType" value="fruit" class="typeFilter">Fruits</a></li>
+              <li><a><input type="radio" name="rdPlantType" value="légume" class="typeFilter">Légumes</a></li>
+              <li><a><input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>Tous</a></li>
+            </ul>
+          </li>
+          <li><a class="item">Famille<i class="fa fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Blue</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Black</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Orange</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Green</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Red</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily" value="ALL" checked>All</a></li>
+            </ul>
+          </li>
+          <li><a class="item">Difficulté<i class="fa fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a><input type="checkbox" value="1" class="chkPlantDifficulty">Facile</a></li>
+              <li><a><input type="checkbox" value="2" class="chkPlantDifficulty">Intermédiaire</a></li>
+              <li><a><input type="checkbox" value="3" class="chkPlantDifficulty">Difficile</a></li>
+              <li><a><input type="checkbox" value="ALL" class="chkPlantDifficulty" checked>Tous</a></li>
+            </ul>
+          </li>
+          <li class="item"><a><input type="checkbox" id="chkAlphabetical">Alphabétique</a></li>          
+        </ul>
+>>>>>>> request#121
       </div>
       <div class="logoMobile">
         <img src="../assets/LogoV2.png" alt="Logo" />
       </div>
+<<<<<<< HEAD
     </div>
     <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
       <div class="autocomplete" style="width: 300px">
@@ -21,6 +78,9 @@
           v-model="searchBarValue"
           v-bind:placeholder="$t('message.search')"
         />
+=======
+        <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
+>>>>>>> request#121
       </div>
     </form>
     <div class="indicator">
@@ -619,9 +679,83 @@ html {
     border-color: #fff;
     transform: translate(15px, 15px);
   }
+<<<<<<< HEAD
   20.1%,
   100% {
     border-color: #007200;
+=======
+}
+
+
+.filters ul {
+width: 1200px;
+padding: 0 0 0 5vw;
+float: left;
+
+  li {
+    float: left;
+    list-style: none;
+    margin-right: 10px;
+    position: relative;
+    z-index : 10;
+       
+    a {
+      text-transform: uppercase;
+      position: relative;
+      text-decoration: none;
+      color: white;
+      background-color: black;
+      border: 1px solid #fff;
+      letter-spacing: 1px;
+      padding: 10px 15px 10px 25px;
+      display: block;
+      width: 200px;
+      z-index: 5000;
+
+      i {
+        font-size: 12px !important;
+        position: absolute;
+        right: 10px;
+        top: 14px;
+        color: red;
+      }
+    }
+    
+    .drop-down {
+      position: absolute;
+      padding: 0;
+      display: none;
+      margin: 0;
+      left: 0;
+      z-index: 0;
+      width: 200px;
+      
+      input {
+        display: inline-block;
+        float: left;
+      }  
+      li {
+        position: relative;
+        float: none;
+        z-index : 10;
+        
+        
+        a {
+          border-top: none;
+          width: 200px;
+          
+          &:hover {
+            background: #000000;
+            color: #ffffff;
+          }
+        }
+      }
+      
+      li:nth-of-type(1) a {
+        border-top: none;
+      }
+    }
+>>>>>>> request#121
   }
 }
 

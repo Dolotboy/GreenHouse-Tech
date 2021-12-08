@@ -1,19 +1,5 @@
-exports.isProd = false;
-
-//exports.envBack = "http://localhost:8000/api/";
-//exports.env = "http://testenv.apipcst.xyz/api/"
-
-exports.getApiUrl = () =>{
-    if(this.isProd)
-        return "http://testenv.apipcst.xyz/api/";
-    return "http://localhost:8000/api/"; 
-}
-
-exports.getScriptUrl = () =>{
-    if(this.isProd)
-        return "http://wiki.pcst.xyz/";
-    return "../";
-}
+exports.env = "http://testenv.apipcst.xyz/api/";
+exports.envBack = "http://localhost:8000/api/";
 
 exports.fetchData = async (db) => {
     return new Promise(resolve => {

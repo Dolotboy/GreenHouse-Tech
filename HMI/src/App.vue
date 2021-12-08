@@ -9,7 +9,7 @@
           <li><a href="http://apipcst.xyz" target="_blank">{{ $t("message.APIInterface") }}</a></li>
           <li v-if="!isLoggedIn" @click="toggleRegister">{{ $t("message.signUp") }}</li>
           <li v-if="!isLoggedIn" @click="toggleLogin">{{ $t("message.signIn") }}</li>   
-          <li v-if="isLoggedIn">{{ $t("message.hi") }}{{ profile.firstName }} !</li>       
+          <li v-if="isLoggedIn">{{ $t("message.hi") }}{{ profile.firstName }} !</li>
       </ul>
     </nav>
     <nav id="navMobile" style="transition: width 0.1s ease-in;">
@@ -29,30 +29,25 @@
           <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>{{ $t("message.signIn") }}</p></li> 
           
           <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>{{ $t("message.disconnect") }}</p></li> 
-      </ul>
-     
+      </ul>    
     </nav>
     <router-view @popLogin="toggleLogin"/>  
     <div @click="login(1)">{{ $t("message.login") }}</div>
     <div @click="logout">{{ $t("message.logout") }}</div>
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
-    <Register v-if="showRegister" @close="toggleRegister"/>
+    <Register v-if="showRegister" @close="toggleRegister"/>-->
     <Loading v-if="showLoading"/>  
   </div>
 </template>
 
 <script>
 import toolbox from './toolbox.js';
-import Login from './components/Login.vue';
-import Register from './components/Register.vue';
 import Loading from './components/Loading.vue';
 import FavCondition from './components/FavCondition.vue';
 import $ from '../node_modules/jquery/dist/jquery.js';
 
 export default {
   components :{
-    Login,
-    Register,
     FavCondition,
     Loading
   },
@@ -62,8 +57,6 @@ export default {
           //envBack : "http://testenv.apipcst.xyz/",
           plants : [],
           favorites : [],
-          showLogin : false,
-          showRegister : false,
           showLoading : false,
           isLoggedIn : false,
           apiVersion : 0.0,
@@ -88,12 +81,6 @@ export default {
       this.Initialisation();
   },
   methods :{
-    toggleRegister(){
-      this.showRegister = !this.showRegister;   
-    },
-    toggleLogin(){
-      this.showLogin = !this.showLogin;
-    },
     toggleNavMobile(){
       let links = document.querySelector(".links");
       let navMobile = document.querySelector("#navMobile");
@@ -244,7 +231,6 @@ button{
   position : fixed;
   padding : 0 20%;
   caret-color: transparent;
-
   display : flex;
   justify-content: space-between;
   width : 100vw;
@@ -253,7 +239,7 @@ button{
   font-size: 1.2rem;   
   z-index: 1000; 
   background-color: rgba(0,0,0,0.9);
-
+  height: 9vh;
 
   .logo{
     width: 60px;

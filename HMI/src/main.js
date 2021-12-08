@@ -1,9 +1,12 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+<<<<<<< HEAD
 import { createI18n } from 'vue-i18n'
 import Vue from 'vue'
 
+=======
+>>>>>>> request#121
 
 const messages = {
   
