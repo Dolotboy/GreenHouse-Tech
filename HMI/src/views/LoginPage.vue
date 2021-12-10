@@ -18,8 +18,7 @@
         </div>
         <div>
            <input type="password" class="inputBox" v-model="password" placeholder="Entrez votre mot de passe">
-          <button type="submit" class="btn from-left" @click="postCheckLogin()">Se connecter
-          </button>
+          <button type="submit" class="btn from-left" @click="postCheckLogin()">Se connecter</button>
         </div>
       </form>
     </div>
@@ -85,7 +84,8 @@ body {
 .login {
   position: absolute;
   width: 45vw;
-  height: 81vh;
+  height: auto;
+  padding-bottom: 10%;
   transform: translate(55%,12%);
   background-color: rgba(0, 0, 0, 0.7);
   margin: 3vh 0 0 0;

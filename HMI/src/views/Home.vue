@@ -1,74 +1,16 @@
 
 <template>
-<<<<<<< HEAD
-  <div class="main">
-    <div class="bg-image"></div>
-    <div>
-      <div class="bg-text">
-        <p>{{ $t("message.decisionHelping") }}</p>
-        <h1>{{ $t("message.serreTech") }}</h1>
-=======
   <div>
     <div class="main">
       <div class="bg-image"></div>
       <div>
         <div class="bg-text">
-          <p>Aide à la décision</p>
-          <h1>Serre-Tech</h1>
+          <p>{{ $t("message.decisionHelping") }}</p>
+          <h1>{{ $t("message.serreTech") }}</h1>
         </div>  
       </div>      
   </div>
       <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
-        <div class="autocomplete" style="width:300px;">
-          <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
-        </div>
-      </form>
-        <div class="indicator">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="filters" @click="filterData($event)">
-          <ul>
-          <li><a class="item">Type<i class="fas fa-chevron-down"></i></a>
-            <span class="accent"></span>
-            <ul class="drop-down">
-              <li><a><input type="radio" name="rdPlantType" value="fruit" class="typeFilter">Fruits</a></li>
-              <li><a><input type="radio" name="rdPlantType" value="légume" class="typeFilter">Légumes</a></li>
-              <li><a><input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>Tous</a></li>
-            </ul>
-          </li>
-          <li><a class="item">Famille<i class="fa fa-chevron-down"></i></a>
-            <span class="accent"></span>
-            <ul class="drop-down">
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Blue</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Black</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Orange</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Green</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Red</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily" value="ALL" checked>All</a></li>
-            </ul>
-          </li>
-          <li><a class="item">Difficulté<i class="fa fa-chevron-down"></i></a>
-            <span class="accent"></span>
-            <ul class="drop-down">
-              <li><a><input type="checkbox" value="1" class="chkPlantDifficulty">Facile</a></li>
-              <li><a><input type="checkbox" value="2" class="chkPlantDifficulty">Intermédiaire</a></li>
-              <li><a><input type="checkbox" value="3" class="chkPlantDifficulty">Difficile</a></li>
-              <li><a><input type="checkbox" value="ALL" class="chkPlantDifficulty" checked>Tous</a></li>
-            </ul>
-          </li>
-          <li class="item"><a><input type="checkbox" id="chkAlphabetical">Alphabétique</a></li>          
-        </ul>
->>>>>>> request#121
-      </div>
-      <div class="logoMobile">
-        <img src="../assets/LogoV2.png" alt="Logo" />
-      </div>
-<<<<<<< HEAD
-    </div>
-    <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
       <div class="autocomplete" style="width: 300px">
         <input
           id="searchBar"
@@ -78,9 +20,9 @@
           v-model="searchBarValue"
           v-bind:placeholder="$t('message.search')"
         />
-=======
-        <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
->>>>>>> request#121
+      <div class="logoMobile">
+        <img src="../assets/LogoV2.png" alt="Logo" />
+      </div>
       </div>
     </form>
     <div class="indicator">
@@ -220,13 +162,13 @@
         </li>
         <li class="filterAlphaWrapper">
           <div>
-            <label>{{ $t("message.alphabetical") }}</label>
+            
             <div
               style="
                 color: white;
                 background-color: black;
                 border: solid 1px white;
-                height: 35px;
+                height: 35px; font-size: 20px; 
               "
             >
               <label>Alphabétique</label>
@@ -245,7 +187,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 </style>
 <script>
 import Details from "../components/Details.vue";
@@ -529,6 +471,7 @@ export default {
             top: 14px;
             color: red;
           }
+          
         }
 
         .drop-down {
@@ -640,8 +583,8 @@ html {
     height: 100%;
     box-sizing: border-box;
     border: none;
-    border-bottom: 3px solid #fff;
-    border-right: 3px solid #fff;
+    border-bottom: 3px solid white;
+    border-right: 3px solid white;
     animation: animate 1s linear infinite;
     &:nth-child(1) {
       top: -30px;
@@ -676,14 +619,9 @@ html {
     transform: translate(0, 0);
   }
   20% {
-    border-color: #fff;
+    border-color: green;
     transform: translate(15px, 15px);
   }
-<<<<<<< HEAD
-  20.1%,
-  100% {
-    border-color: #007200;
-=======
 }
 
 
@@ -755,7 +693,6 @@ float: left;
         border-top: none;
       }
     }
->>>>>>> request#121
   }
 }
 
@@ -825,8 +762,6 @@ float: left;
       font-size: 45px;
       font-weight: 600;
     }
-  }
-  .bg-image {
   }
 
   .autoCompleteForm {

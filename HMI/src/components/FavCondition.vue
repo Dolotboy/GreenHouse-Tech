@@ -1,11 +1,7 @@
 <template>
     <div class="FavConds">
         <div class="FavCondPlant">
-<<<<<<< HEAD
-            <p>{{ $t("message.favCond") }}</p>  
-=======
-            <h1>Conditions favorables </h1>  
->>>>>>> request#121
+            <h1>{{ $t("message.favCond") }}</h1>  
             <div v-for='fav in plant.favorableConditions' class="FavCondPlantInfo">
                 <p>{{fav.type}} {{ $t("message.optimal") }} {{fav.min}} - {{fav.max}} {{fav.unit}}</p>
             </div> 
@@ -21,28 +17,17 @@ export default {
 }
 </script>
 
-<<<<<<< HEAD
-<style scoped>
-=======
-<style lan="scss" scoped>
->>>>>>> request#121
+
+<style lang="scss" scoped>
 .FavConds{
     position :absolute;
     top : -10%;
     left: -75%;
     overflow-y: auto;
-<<<<<<< HEAD
-    transform: translate(-50%, -50%);
-    background: rgb(100, 100, 100);
-    border: solid;
-    border-color: black;
-    width : 80vw;
-=======
     background: white;
     border: solid;
     border-color: black;
     width : 28vw;
->>>>>>> request#121
     padding-left: 5%;
     padding-right: 5%;
     overflow-y: auto;

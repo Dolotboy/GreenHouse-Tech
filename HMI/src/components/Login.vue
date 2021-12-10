@@ -1,21 +1,5 @@
 <!--<template>
     <div class="login">
-<<<<<<< HEAD
-       <h1>Connexion</h1>
-        <div class="loginImage">
-           <img class="imageIcon" src="../assets/LogoV2.png">
-       </div>
-        <h1>{{ $t("message.login") }}</h1>
-        <div class="loginForm">
-          <form >
-          <div>
-         <!-- <label for="uname"><b>{{ $t("message.mail") }}: </b></label> -->
-            <input class="inputBox" type="text" v-bind:placeholder="$t('message.mail')" name="uname" required  v-model="email">
-          </div>
-          <div>
-            <!-- <label for="psw"><b>{{ $t("message.password") }}: </b></label> -->
-            <input v-model="password" class="inputBox" type="password" v-bind:placeholder="$t('message.password')" name="psw" required>
-=======
         <h1>Connexion</h1>
         <div class="loginForm">
           <form >
@@ -24,7 +8,6 @@
           </div>
           <div>
             <input v-model="password" class="inputBox" type="password" placeholder="Entrez le mot de passe" name="psw" required>
->>>>>>> request#121
             </div>
           </form>
 
@@ -34,20 +17,9 @@
                 <input type="checkbox" name="remember">{{ $t("message.rememberMe") }}
               </label>
               </div>
-<<<<<<< HEAD
-            <div class="container">
-              <span class="psw"><a href="#">>{{ $t("message.passwordForgot") }}</a></span>
-            </div>
-          </div>
-          <button type="submit" class="BtnConnexion" @click="postCheckLogin()">{{ $t("message.login") }}</button>
-        </div>
-        
-        <div class="close-button" @click="$emit('close')" >X</div>        
-=======
           </div>
           <button type="submit" class="BtnConnexion" @click="postCheckLogin()">Se connecter</button>
         </div>      
->>>>>>> request#121
     </div>
 </template>
 
@@ -92,15 +64,8 @@ export default {
 }
 </script>-->
 
-<<<<<<< HEAD
-<style scoped lang="scss">
-@media screen and (min-width : 601px) 
-{
-.login{
-=======
 <style lang="scss">
 /*.login{
->>>>>>> request#121
     position : absolute;
     display : flex;
     flex-direction : column;
