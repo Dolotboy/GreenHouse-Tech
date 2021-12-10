@@ -14,7 +14,7 @@
           <input class="inputBox" type="email" placeholder="Entrez votre adresse email" name="uname" required v-model="email"/>
           <input class="inputBox" v-model="password" type="password" placeholder="Entrez votre mot de passe" name="password" required/>
           <input class="inputBox" v-model="confirmPassword" type="password" placeholder="Confirmez votre mot de passe" name="password" required/>
-          <button type="submit" class="btn from-left" @click="postCreateUser()">S'inscrire</button>    
+          <button type="button" class="btn from-left" @click="postCreateUser()">S'inscrire</button>    
         </div>
       </form>
     </div>
@@ -23,6 +23,7 @@
 
 <script>
 import $ from '../../node_modules/jquery/dist/jquery.js'
+import toolbox from "../toolbox.js";
 
 export default {
     name: "App",
@@ -55,10 +56,10 @@ export default {
         console.log(JSON.stringify(user));
         //$.post("https://apitestenv.pcst.xyz/api/new/profile/addProfile", JSON.stringify(user));
         $.ajax({
-          url : "http://testenv.apipcst.xyz/api/new/profile/addProfile",
+          type: "post",
+          url : toolbox.getApiUrl() + "new/profile/addProfile",
           datatype: "json",
           contentType : "application/json",
-          type: "post",
           data: JSON.stringify(user),
           success: function(status)
           {
@@ -81,7 +82,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
 body {
@@ -90,8 +91,10 @@ body {
 }
 
 .register {
+  position: absolute;
   width: 45vw;
-  height: 91vh;
+  height: 85vh;
+  transform: translate(55%,12%);
   background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
   display : flex;
@@ -101,6 +104,7 @@ body {
   h1 {
     font-family: "Roboto", sans-serif;
     font-weight: 900;
+    font-size: 3rem;
   }
 
   .logo {
@@ -120,7 +124,7 @@ body {
   }
 }
 .formLogin {
-  width: 110%;
+  width: 40vw;
 
   .inputBox {
     width: 100%;

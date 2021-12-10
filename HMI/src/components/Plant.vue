@@ -3,12 +3,8 @@
   <div class="image">
     <img class="imageIcon" :src="plant.plantImg" alt="Image vegetable">
   </div>
-  <div class="nom">
-  <h1>{{ plant.plantName }}</h1>
-  <p>{{ plant.idPlant }}</p>
-
-  
-
+    <div class="nom">
+    <h1>{{ plant.plantName }}</h1>
   </div>
   <div class="end">
   <p v-if="isFavorite">{{ $t("message.favoris") }}</p>
@@ -104,9 +100,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@media screen and (max-width : 600px) {
+@media screen and (min-width : 601px) {
   html{
-    font-size : 5pt;
+    font-size : 1.5rem;
     
   }
   .wrapper{
@@ -114,10 +110,9 @@ export default {
     border : solid 1px black;
     border-radius: 40px;
     margin-bottom: 10px;
-    height: 80px;
+    height: 12vh;
     display:flex;
-    width: 95%;
-    max-width: 380px;
+    width: 27vw;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly; 
@@ -133,7 +128,7 @@ export default {
 }
 .nom h1{
   max-width: 100%;
-  font-size: 16px;
+  font-size: 2rem;
   text-align: center;
 }
 .nom{
@@ -147,18 +142,16 @@ export default {
 }
 }
 .image{
-  width: 20%;
-  height: 60%;
+  width: 25%;
+  height: 80%;
   align-items: center;
   align-content: center;
 }
 .imageIcon{
-  width: 100%;
-  height:100%;
-  max-height: 60px;
-  max-width: 50px;
+  max-height: 100%;
+  max-width: 100%;
 }
-@media screen and (min-width : 601px) 
+@media screen and (max-width : 600px) 
 {
 .wrapper{
   position: relative;

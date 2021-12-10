@@ -1,15 +1,14 @@
 <template>
-    <div class="Problems">
+    <div class="ProblemsWrapper">
         <div class="ProblemPlant">
-            <p>{{ $t("message.problems") }}</p>  
+            <h1>{{ $t("message.problems") }}</h1>  
             <div v-for='prob in plant.problems' class="ProblemInfo">
                 <p>{{ $t("message.problem") }}{{prob.problemName}} </p>
                 <p>{{ $t("message.problemType") }}{{prob.problemType}} </p>
                 <p>{{ $t("message.solution") }}{{prob.problemSolution}}</p>
             </div> 
-            
-        </div>
-        <div class="close-button" @click="$emit('close')" >X</div>        
+            <div class="close-button" @click="$emit('close')" >X</div> 
+        </div>               
     </div>
 </template>
 
@@ -19,18 +18,20 @@ export default {
 }
 </script>
 
-<style>
-.Problems{
-    position :absolute;
-    background-color:rgb(82, 82, 82);
-    top : 50%;
-    overflow-y: auto;
-    transform: translate(-50%, -50%);
+<style lang="scss" scoped>
+.ProblemsWrapper{
+    height: auto;
+    max-height: 80vh;
+    position: absolute;
+    top : -10%;
+    left :10%;
+    background: white;
     border: solid;
     border-color: black;
-    width : 70vw;
+    width : 32vw;
     padding-left: 5%;
     padding-right: 5%;
+    overflow-y: auto;
 }
 .close-button {
     position: absolute;
@@ -42,25 +43,20 @@ export default {
     cursor: pointer;
     border:solid;
     border-width: 1px;
-    border-color: grey;
+    border-color: transparent;
 }
-.details h1{
-    font-size: 35px;
+.ProblemPlant h1{
+    font-size: 1.2rem;
+    text-decoration: underline;
 }
-.ProblemPlant > p{
-    font-size: 30px;
-    margin:10px 0;
-}   
 .ProblemInfo > p{
+    font-size: 1.2rem;
     text-align: left;
-    font-size: 15px;
     margin:10px 0;
-
+    font-weight: bold;
 }     
 .ProblemPlant{
     display: flex;
     flex-direction: column;
-    overflow-y:auto;
 }
-
 </style>

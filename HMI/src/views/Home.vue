@@ -1,11 +1,13 @@
 
 <template>
-  <div class="main">
-    <div class="bg-image"></div>
-    <div>
-      <div class="bg-text">
-        <p>{{ $t("message.decisionHelping") }}</p>
-        <h1>{{ $t("message.serreTech") }}</h1> 
+  <div>
+    <div class="main">
+      <div class="bg-image"></div>
+      <div>
+        <div class="bg-text">
+          <p>{{ $t("message.decisionHelping") }}</p>
+          <h1>{{ $t("message.serreTech") }}</h1>
+        </div>  
       </div>      
       <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
         <div class="autocomplete" style="width:300px;">
@@ -66,6 +68,9 @@
           v-bind:placeholder="$t('message.search')"
         />
         <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
+      <div class="logoMobile">
+        <img src="../assets/LogoV2.png" alt="Logo" />
+      </div>
       </div>
     </form>
     <div class="indicator">
@@ -205,13 +210,13 @@
         </li>
         <li class="filterAlphaWrapper">
           <div>
-            <label>{{ $t("message.alphabetical") }}</label>
+            
             <div
               style="
                 color: white;
                 background-color: black;
                 border: solid 1px white;
-                height: 35px;
+                height: 35px; font-size: 20px; 
               "
             >
               <label>Alphabétique</label>
@@ -230,7 +235,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 </style>
 <script>
 import Details from "../components/Details.vue";
@@ -514,6 +519,7 @@ export default {
             top: 14px;
             color: red;
           }
+          
         }
 
         .drop-down {
@@ -625,8 +631,8 @@ html {
     height: 100%;
     box-sizing: border-box;
     border: none;
-    border-bottom: 3px solid #fff;
-    border-right: 3px solid #fff;
+    border-bottom: 3px solid white;
+    border-right: 3px solid white;
     animation: animate 1s linear infinite;
     &:nth-child(1) {
       top: -30px;
@@ -661,7 +667,7 @@ html {
     transform: translate(0, 0);
   }
   20% {
-    border-color: #fff;
+    border-color: green;
     transform: translate(15px, 15px);
   }
   100% {
@@ -807,8 +813,6 @@ float: left;
       font-size: 45px;
       font-weight: 600;
     }
-  }
-  .bg-image {
   }
 
   .autoCompleteForm {

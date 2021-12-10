@@ -1,10 +1,9 @@
 <template>
-  
+  <!--
 
-  <div class="register">
- <!--   <div class="registerImage">
+  <div class="register">   <div class="registerImage">
            <img class="imageIcon" src="https://www.wingsforkids.org/wp-content/uploads/cropped-placeholder.jpg">
-    </div> -->
+    </div> 
     
     <h1>{{ $t("message.signUp") }}</h1>
     <div class="problem"></div>

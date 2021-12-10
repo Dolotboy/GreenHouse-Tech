@@ -4,12 +4,12 @@
       <div class="logo">
         <img src="./assets/LogoV2.png" alt="Logo">
       </div>
-      <ul>      
+      <ul>
           <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
-          <li><a href="http://apipcst.xyz" target="_blank">{{ $t("message.APIInterface") }}</a></li>
-          <li v-if="!isLoggedIn"><router-link to="/login">{{ $t("message.signIn") }}</router-link></li> 
-          <li v-if="!isLoggedIn"><router-link to="/register">{{ $t("message.signUp") }}</router-link></li>
-          <li v-if="isLoggedIn">{{ $t("message.hi") }} {{ profile.firstName }}</li> 
+          <li><a href="http://apipcst.xyz/fr" target="_blank">{{ $t("message.APIInterface") }}</a></li>
+          <li v-if="!isLoggedIn" @click="toggleRegister"><router-link to="/register">{{ $t("message.signUp") }}</router-link></li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"><router-link to="/login">{{ $t("message.signIn") }}</router-link></li>   
+          <li v-if="isLoggedIn">{{ $t("message.hi") }}{{ profile.firstName }} !</li>
           <li v-if="isLoggedIn" @click="logout()">{{ $t("message.disconnect") }}</li> 
       </ul>
     </nav>
@@ -30,7 +30,6 @@
           <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>{{ $t("message.signIn") }}</p></li> 
           <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>{{ $t("message.disconnect") }}</p></li> 
       </ul>
-     
     </nav>
     <router-view @loggedIn="Initialisation()"/>
     <!--<Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>

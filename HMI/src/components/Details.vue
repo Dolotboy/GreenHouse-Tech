@@ -2,14 +2,15 @@
     <div class="details">
         <div class="left">    
             <div>
-                <img class="imageIcon" :src="plant.plantImg" alt="Image vegetable">
+                <div class="image">
+                    <img class="imageIcon" :src="plant.plantImg" alt="Image vegetable">
+                </div>
             </div>        
         </div>
         <div class="right">
             <div class="rightHeader">
                 <h1>{{ plant.plantName }}</h1>
                 <p>{{ plant.plantFamily }}</p>
-                <!-- <h2>DIFFICULTÉ: {{ plant.plantDifficulty }}</h2> -->
                 <Rating :difficulty="plant.plantDifficulty"/>
                 <div class="rightDescription">
                     <h2>Description:</h2>
@@ -23,6 +24,7 @@
                 </div>
                     <FavCondition :plant="plant" v-if="showCondFav" @close="toggleCondFav"/>
                     <Problem :plant="plant" v-if="showProblem" @close="toggleProblem"/>
+                <div class="close-button" @click="$emit('close')" >X</div> 
             </div>         
         </div>
     </div>
@@ -58,11 +60,11 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
 .details{
-    position: absolute;
+    position: fixed;
     top : 54%;
     left : 50%;
     transform: translate(-50%, -50%);
@@ -72,6 +74,7 @@ export default {
     display : flex; 
     font-family: 'Roboto', sans-serif;
     padding: 5% 0 5% 0; 
+    z-index: 1000;
 }
 
 .left{
@@ -88,9 +91,14 @@ export default {
         align-items: center;
     }
 
+    .image{
+        height: 70%;
+        width: 70%;
+    }
+
     .imageIcon{
-        max-width : 75%;
-        max-height: 75%;
+        width : 100%;
+        height: 100%;
     }
 }
 
@@ -156,5 +164,18 @@ h2{
         width: 100%;
         
     }
+}
+.close-button {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    font-size: 30pt;
+    margin-right: 2%;
+}
+.close-button:hover{
+    cursor: pointer;
+    border:solid;
+    border-width: 1px;
+    border-color: transparent;
 }
 </style>
