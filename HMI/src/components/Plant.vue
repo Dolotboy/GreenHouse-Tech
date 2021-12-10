@@ -12,7 +12,7 @@
   </div>
   <div class="end">
   <p v-if="isFavorite">{{ $t("message.favoris") }}</p>
-  <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
+  <input class="star" type="checkbox" title="Favoris" @click="addFavorite()"> 
   </div>
 </div>
 </template>

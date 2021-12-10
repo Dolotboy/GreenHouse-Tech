@@ -7,7 +7,6 @@
         <p>{{ $t("message.decisionHelping") }}</p>
         <h1>{{ $t("message.serreTech") }}</h1> 
       </div>      
-  </div>
       <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
         <div class="autocomplete" style="width:300px;">
           <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">

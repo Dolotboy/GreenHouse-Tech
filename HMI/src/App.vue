@@ -7,8 +7,10 @@
       <ul>      
           <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
           <li><a href="http://apipcst.xyz" target="_blank">{{ $t("message.APIInterface") }}</a></li>
-          <li><router-link to="/login">{{ $t("message.signIn") }}</router-link></li> 
-          <li><router-link to="/register">{{ $t("message.signUp") }</router-link></li>
+          <li v-if="!isLoggedIn"><router-link to="/login">{{ $t("message.signIn") }}</router-link></li> 
+          <li v-if="!isLoggedIn"><router-link to="/register">{{ $t("message.signUp") }}</router-link></li>
+          <li v-if="isLoggedIn">{{ $t("message.hi") }} {{ profile.firstName }}</li> 
+          <li v-if="isLoggedIn" @click="logout()">{{ $t("message.disconnect") }}</li> 
       </ul>
     </nav>
     <nav id="navMobile" style="transition: width 0.1s ease-in;">
@@ -30,27 +32,21 @@
       </ul>
      
     </nav>
-    <router-view @popLogin="toggleLogin"/>  
-    <div @click="login(1)">{{ $t("message.login") }}</div>
-    <div @click="logout">{{ $t("message.logout") }}</div>
-    <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
-    <Register v-if="showRegister" @close="toggleRegister"/>
+    <router-view @loggedIn="Initialisation()"/>
+    <!--<Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
+    <Register v-if="showRegister" @close="toggleRegister"/>-->
     <Loading v-if="showLoading"/>  
   </div>
 </template>
 
 <script>
 import toolbox from './toolbox.js';
-import Login from './components/Login.vue';
-import Register from './components/Register.vue';
 import Loading from './components/Loading.vue';
 import FavCondition from './components/FavCondition.vue';
 import $ from '../node_modules/jquery/dist/jquery.js';
 
 export default {
   components :{
-    Login,
-    Register,
     FavCondition,
     Loading
   },
@@ -60,8 +56,6 @@ export default {
           //envBack : "http://testenv.apipcst.xyz/",
           plants : [],
           favorites : [],
-          showLogin : false,
-          showRegister : false,
           showLoading : false,
           isLoggedIn : false,
           apiVersion : 0.0,
@@ -86,12 +80,6 @@ export default {
       this.Initialisation();
   },
   methods :{
-    toggleRegister(){
-      this.showRegister = !this.showRegister;   
-    },
-    toggleLogin(){
-      this.showLogin = !this.showLogin;
-    },
     toggleNavMobile(){
       let links = document.querySelector(".links");
       let navMobile = document.querySelector("#navMobile");
@@ -130,6 +118,7 @@ export default {
       await this.checkToken();
 
       this.showLoading = false;
+      console.log(this.isLoggedIn);
     },
     async ClearDb(){
       let db = await toolbox.setDb();
@@ -166,9 +155,10 @@ export default {
       })
     },
     async login(profileToken){
+      this.profile = await this.getObject(toolbox.getApiUrl() + "search/profile/token/" + profileToken);
+      console.log(this.profile);
       this.downloadFavorites(profileToken);
       this.isLoggedIn = true;
-      this.showLogin = false;
       this.plants = this.plants;
     },
     async logout(){
@@ -178,6 +168,7 @@ export default {
       this.favorites = [];
       localStorage.setItem('favorites', "[]");
       this.plants = this.plants;
+      console.log(this.isLoggedIn);
     },
     async getObject(url){
       return new Promise(resolve => {
