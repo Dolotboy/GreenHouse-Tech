@@ -5,11 +5,11 @@
         <img src="./assets/LogoV2.png" alt="Logo">
       </div>
       <ul>
-          <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
-          <li><a href="http://apipcst.xyz" target="_blank">{{ $t("message.APIInterface") }}</a></li>
-          <li v-if="!isLoggedIn" @click="toggleRegister">{{ $t("message.signUp") }}</li>
-          <li v-if="!isLoggedIn" @click="toggleLogin">{{ $t("message.signIn") }}</li>   
-          <li v-if="isLoggedIn">{{ $t("message.hi") }}{{ profile.firstName }} !</li>       
+          <li><router-link to="/">Accueil</router-link></li> 
+          <li><a href="http://apipcst.xyz" target="_blank">API Interface</a></li>
+          <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
+          <li v-if="!isLoggedIn" @click="toggleLogin">Se connecter</li>   
+          <li v-if="isLoggedIn">Bonjour, {{ profile.firstName }} !</li>       
       </ul>
     </nav>
     <nav id="navMobile" style="transition: width 0.1s ease-in;">
@@ -20,22 +20,20 @@
           <div></div>
         </div>
       </div>
-      
      <ul class="links">
-          <li v-if="isLoggedIn">{{ $t("message.profileNumber") }} :{{ profile.idProfile }}</li> 
-          <li @click="toggleNavMobile"><a  href="/"><img  src=".\assets\outline_home_white_24dp.png"><p>{{ $t("message.accueil") }}</p></a></li> 
-          <li @click="toggleNavMobile"><a href="http://apipcst.xyz/fr"><img  src=".\assets\outline_info_white_24dp.png"><p>{{ $t("message.apropos") }}</p></a></li>
-          <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>{{ $t("message.signUp") }}</p></li>
-          <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>{{ $t("message.signIn") }}</p></li> 
-          <li><a id="BtnFr"><img src=".\assets\outline_language_white_24dp.png"><p>Francais</p></a></li>
-          <li><a id="BtnEn"><img src=".\assets\outline_language_white_24dp.png"><p>English</p></a></li>
-          <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>{{ $t("message.disconnect") }}</p></li> 
+          <li v-if="isLoggedIn">Profile number :{{ profile.idProfile }}</li> 
+          <li @click="toggleNavMobile"><a  href="/"><img  src=".\assets\outline_home_white_24dp.png"><p>Accueil</p></a></li> 
+          <li @click="toggleNavMobile"><a href="http://apipcst.xyz/fr"><img  src=".\assets\outline_info_white_24dp.png"><p>À propos</p></a></li>
+          <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>Inscription</p></li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>Connexion</p></li> 
+          
+          <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>Déconnexion</p></li> 
       </ul>
      
     </nav>
     <router-view @popLogin="toggleLogin"/>  
-    <div @click="login(1)">{{ $t("message.login") }}</div>
-    <div @click="logout">{{ $t("message.logout") }}</div>
+    <div @click="login(1)">login</div>
+    <div @click="logout">logout</div>
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
     <Register v-if="showRegister" @close="toggleRegister"/>
     <Loading v-if="showLoading"/>  
@@ -49,7 +47,6 @@ import Register from './components/Register.vue';
 import Loading from './components/Loading.vue';
 import FavCondition from './components/FavCondition.vue';
 import $ from '../node_modules/jquery/dist/jquery.js';
-
 export default {
   components :{
     Login,
@@ -72,20 +69,7 @@ export default {
           profile : Object
       }
   },
-  
   mounted(){
-    window.onload=function(){
-    document.getElementById("BtnFr").addEventListener("click", function() {
-    localStorage.setItem("locale","fr");
-    location.reload();
-  });
-  
-  document.getElementById("BtnEn").addEventListener("click", function() {
-    localStorage.setItem("locale","en");
-    location.reload();
-  });
-}
-    
       this.Initialisation();
   },
   methods :{
@@ -119,9 +103,8 @@ export default {
     },
     async Initialisation(){
       this.showLoading = true;
-
       let version = localStorage.getItem('apiVersion');
-      let apiVersion = await this.GetApiVersion(toolbox.getApiUrl() + "search/last/version");
+      let apiVersion = await this.GetApiVersion(toolbox.env + "search/last/version");
       if(version == undefined || version != apiVersion){
         await this.ClearDb();
         localStorage.setItem('apiVersion', apiVersion);
@@ -131,7 +114,6 @@ export default {
       if(this.plants.length == 0)
         await this.DownloadContent();   
       await this.checkToken();
-
       this.showLoading = false;
     },
     async ClearDb(){
@@ -139,7 +121,7 @@ export default {
       toolbox.ClearDb(db);
     },
     async DownloadContent(){
-      this.plants = await this.GetAllPlants(toolbox.getApiUrl() + "searchAll/package");
+      this.plants = await this.GetAllPlants(toolbox.env + "searchAll/package");
       let db = await toolbox.setDb();
       let transaction = db.transaction(["GreenHouseTech_Entrepot2"], "readwrite");
       let entrepot = transaction.objectStore("GreenHouseTech_Entrepot2");;
@@ -233,19 +215,16 @@ button{
   border : none;
   padding : 10px;
   font-size : 1.2rem;
-
   &:hover{
     opacity : .8;
     cursor : pointer;
   }
 }
-
 #navDesktop{
   top : 0;
   position : fixed;
   padding : 0 20%;
   caret-color: transparent;
-
   display : flex;
   justify-content: space-between;
   width : 100vw;
@@ -254,8 +233,6 @@ button{
   font-size: 1.2rem;   
   z-index: 1000; 
   background-color: rgba(0,0,0,0.9);
-
-
   .logo{
     width: 60px;
     height: 60px;
@@ -264,7 +241,6 @@ button{
       max-width: 100%;
     }
   } 
-
 ul {
   list-style-type: none;
   overflow: hidden;
@@ -294,7 +270,6 @@ ul li {
   padding: 10px 15px;
 }
 }
-
 .lblInp-div{
   display : flex;
   justify-content : end;
@@ -320,37 +295,32 @@ ul li {
   left : 0;
   background: rgb(68, 68, 68);
   color : rgb(255, 255, 255);
-  height : 7.5%;
-
+  height : 7.5vh;
   caret-color: transparent;
   z-index:120;
-  
-
   .top-wrapper{
     position : relative;
     top : 0;
     left : 0;
-    
     height : 7.5vh;
-    min-height: 50px;
     background-color: rgb(0, 78, 42);
     z-index:50;
     display: flex;
   }
   .hamburger-wrapper{
       position : absolute;
+      top : 50%;
       min-width: 45px;
       min-height: 45px;
-      max-height: 50px;
-      max-width: 50px;
       left : 0;
-      display : inline-flex;
+      display : flex;
       flex:1;
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
-      width : 12vw;
-      height : 7vh;
+      width : 10vw;
+      height : 10vw;
+      transform : translate(0,-50%);
       &:hover{
         cursor : pointer;
         opacity : 0.8;
@@ -369,7 +339,7 @@ ul li {
   }
  }
   .links{
-    overflow-y: auto;
+    
     display : none;
     flex-direction: column;
     height: 90vh;
@@ -377,11 +347,9 @@ ul li {
     position : relative;
     bottom : 0;
     left: 0;
-    
     list-style-type: none;
     width: 100%;
     padding: 0;
-
     #logout{
          position: fixed;
          width: 40vw;
@@ -394,7 +362,6 @@ ul li {
       text-decoration: none;
       margin: 1%;
       padding: 10px 5px;
-     min-height: 50px;
       width: 99%;
       height: 7vh;    
       text-align: center;
@@ -416,7 +383,6 @@ ul li {
       width :100%;
       height: 7vh;    
       text-align: center;
-      
         
        }
       &:hover{

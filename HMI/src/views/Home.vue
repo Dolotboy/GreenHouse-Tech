@@ -5,17 +5,16 @@
       <div class="bg-image"></div>
       <div >
         <div class="bg-text">
-          <p>{{ $t("message.decisionHelping") }}</p>
-          <h1>{{ $t("message.serreTech") }}</h1>
-        </div>  
-      <div style="margin-top:5px;" class="logoMobile">
+          <p>Aide à la décision</p>
+          <h1>Serre-Tech</h1>
+        </div>
+      <div class="logoMobile">
       <img  src="../assets/LogoV2.png" alt="Logo">
     </div>
   </div>
-    
       <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
         <div class="autocomplete" style="width:300px;">
-          <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" v-bind:placeholder="$t('message.search')">
+          <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
         </div>
       </form>
         <div class="indicator">
@@ -26,15 +25,15 @@
         </div>
         <div class="filters" @click="filterData($event)">
           <ul>
-          <li><a  class="item">{{ $t("message.type") }}<i class="fas fa-chevron-down"></i></a>
+          <li><a  class="item">Type<i class="fas fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
-              <li><a><input type="radio" name="rdPlantType" value="fruit" id="difF" class="typeFilter"><label for="difF">{{ $t("message.filtreFruit") }}</label></a></li>
-              <li><a><input type="radio" name="rdPlantType" value="légume" id="difL" class="typeFilter"><label for="difL">{{ $t("message.filtreLeg") }}</label></a></li>
-              <li><a><input type="radio" name="rdPlantType" value="all" id="difA" class="typeFilter" checked><label for="difA">{{ $t("message.filtreAll") }}</label></a></li>
+              <li><a><input type="radio" name="rdPlantType" value="fruit" class="typeFilter">Fruits</a></li>
+              <li><a><input type="radio" name="rdPlantType" value="légume" class="typeFilter">Légumes</a></li>
+              <li><a><input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>Tous</a></li>
             </ul>
           </li>
-          <li><a  class="item">{{$t("message.family") }}<i class="fa fa-chevron-down"></i></a>
+          <li><a  class="item">Famille<i class="fa fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
               <li><a href="#"><input type="checkbox" class="chkPlantFamily">Blue</a></li>
@@ -42,25 +41,24 @@
               <li><a href="#"><input type="checkbox" class="chkPlantFamily">Orange</a></li>
               <li><a href="#"><input type="checkbox" class="chkPlantFamily">Green</a></li>
               <li><a href="#"><input type="checkbox" class="chkPlantFamily">Red</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily" value="ALL" checked>{{ $t("message.filtreAll") }}</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily" value="ALL" checked>All</a></li>
             </ul>
           </li>
-          <li><a class="item" onclick="" >{{ $t("message.difficulty") }}<i class="fa fa-chevron-down"></i></a>
+          <li><a  class="item" onClick="" >Difficulté<i class="fa fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
-              <li><a><input type="checkbox" value="1" id="dif1" class="chkPlantDifficulty"><label for="dif1">{{ $t("message.easy") }}</label></a></li>
-              <li><a><input type="checkbox" value="2" id="dif2" class="chkPlantDifficulty"><label for="dif2">{{ $t("message.medium") }}</label></a></li>
-              <li><a><input type="checkbox" value="3" id="dif3" class="chkPlantDifficulty"><label for="dif3">{{ $t("message.hard") }}</label></a></li>
-              <li><a><input type="checkbox" value="ALL" class="chkPlantDifficulty" checked>{{ $t("message.filtreAll") }}</a></li>
+              <li><a><input type="checkbox" value="1" class="chkPlantDifficulty">Facile</a></li>
+              <li><a><input type="checkbox" value="2" class="chkPlantDifficulty">Intermédiaire</a></li>
+              <li><a><input type="checkbox" value="3" class="chkPlantDifficulty">Difficile</a></li>
+              <li><a><input type="checkbox" value="ALL" class="chkPlantDifficulty" checked>Tous</a></li>
             </ul>
           </li>
           <li class="filterAlphaWrapper">
             <div style="color:white; background-color:black ; border:solid 1px white; height:35px;">
-              <label>{{ $t("message.alphabetical") }}</label>
+              <label>Alphabétique</label>
               <input type="checkbox" checked id="chkAlphabetical">
             </div>
           </li>
-      
         </ul>
       </div>
       <div class="productsGrid">
@@ -71,17 +69,13 @@
 </template>
 
 <style lang="scss">
-
 </style>
 <script>
-
 import Details from '../components/Details.vue'
 import Plant from '../components/Plant.vue'
 import $ from '../../node_modules/jquery/dist/jquery.js'
 import toolbox from '../toolbox.js'
-//import autoComplete, { autocomplete } from 'https://wiki.pcst.xyz/autocomplete.js'
 import autoComplete, { autocomplete } from '../autocomplete.js'
-
 export default {
   name: 'Home',
   components:{
@@ -122,59 +116,47 @@ export default {
       let typeRadios = document.querySelectorAll(".typeFilter");
       let dataType = [];
       let tempPlants = [];
-
       for(let i=0; i<typeRadios.length; i++)
         if(typeRadios[i].checked)
           dataType.push(typeRadios[i].value.toUpperCase());
-
       //if all is checked, do not filter
       if(dataType.includes("ALL"))
         return;
-
       for(let i= 0; i < this.visiblePlants.length; i++)
         if(dataType.includes(this.visiblePlants[i].plantType.toUpperCase()))
           tempPlants.push(this.visiblePlants[i]);
-
       this.visiblePlants = tempPlants;
     },
     filterFamily(){
       let familyCheckboxes = document.querySelectorAll(".chkPlantFamily");
       let dataFamily = [];
       let tempPlants = [];
-
       this.toggleCheckboxAll(".chkPlantFamily");
       for(let i=0; i<familyCheckboxes.length; i++)
         if(familyCheckboxes[i].checked)
           dataFamily.push(familyCheckboxes[i].value.toUpperCase());
-
       //if all is checked, do not filter
       if(dataFamily.includes("ALL"))
         return;
-
       for(let i = 0; i < this.visiblePlants.length; i++)
         if(dataFamily.includes(this.visiblePlants[i].plantFamily.toUpperCase()))
           tempPlants.push(this.visiblePlants[i]);
-
       this.visiblePlants = tempPlants;
     },
     filterDifficulty(){
       let difficultyCheckboxes = document.querySelectorAll(".chkPlantDifficulty");
       let dataDifficulty = [];
       let tempPlants = [];
-
       this.toggleCheckboxAll(".chkPlantDifficulty");  
       for(let i=0; i<difficultyCheckboxes.length; i++)
         if(difficultyCheckboxes[i].checked)
           dataDifficulty.push(difficultyCheckboxes[i].value);
-
       //if all is checked, do not filter
       if(dataDifficulty.includes("ALL"))
         return;
-
       for(let i = 0; i < this.visiblePlants.length; i++)
         if(dataDifficulty.includes(this.visiblePlants[i].plantDifficulty.toString()))
           tempPlants.push(this.visiblePlants[i]);
-
       this.visiblePlants = tempPlants;
     },
     async filterData(event){
@@ -184,7 +166,6 @@ export default {
           this.setFilterToDefault(el.className);
       }
       this.visiblePlants = this.plants;
-
       if(this.searchBarValue != null && this.searchBarValue != ""){
         console.log(this.visiblePlants);
         let tempPlants = [];
@@ -205,7 +186,6 @@ export default {
       let checkboxes = document.querySelectorAll(selector);
       let cpt = 0; 
       let chkAll = null;
-
       for(let i = 0; i < checkboxes.length; i++){
         if(checkboxes[i].checked){
           cpt++;
@@ -213,7 +193,6 @@ export default {
         if(checkboxes[i].value.toUpperCase() == "ALL")
           chkAll = checkboxes[i];
       }
-
       if(chkAll == null)
         return;
       if(cpt == 0)
@@ -272,7 +251,6 @@ export default {
 <style  lang="scss">
 @media screen and (min-width : 601px){
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-
 .productsGrid{
   color: #FFFFFF;
   text-shadow:  0 -2px 10px #f0e567;
@@ -287,41 +265,33 @@ export default {
   display : inline-block;
   float: right;
   padding: 1vh 5vw 1vh 5vw;
-
   .autocomplete{
     display : block;
     position : relative;
   }
-
   .autocomplete-active{
     background : blue;
   }
-
   .autocomplete > *{
     width : 100%
   }
-
   #searchBar{
     height:4vh;
-
   }
   #searchBarautocomplete-list{
     position : absolute;
     top : 100%;
     background : white;
   }
-
   #searchBarautocomplete-list:hover{
     cursor : pointer;
   }
 }
-
 .filters {
   height: 30px;
   ul {
 width:  70vw;
 margin: 0;
-
   li {
     float: left;
     list-style: none;
@@ -341,7 +311,6 @@ margin: 0;
       display: block;
       width: 150px;
       z-index: 500;
-
       i {
         font-size: 12px ;
         position: absolute;
@@ -386,7 +355,6 @@ margin: 0;
   }
   }
 }
-
 .bg-image{
   height: 100vh;
 }
@@ -399,7 +367,6 @@ margin: 0;
   left: 50%;
   text-transform: uppercase;
   transform: translate(-50%, -50%);
-
     p{
       font-size: 20px;
       font-weight: 200;
@@ -409,18 +376,15 @@ margin: 0;
       font-weight: 600;
     }
 }
-
 .logo{
   margin-top: 1%;
   height: 10vh;
-
   img{
     max-height: 100%;
     max-width: 100%;
   }
 }
 }
-
 .logoMobile{
   display:none;
 }
@@ -437,10 +401,6 @@ box-sizing: border-box;
 html{
   scroll-behavior: smooth;
 }
-
-
-
-
 .indicator{
   position:absolute;
   width:50px;
@@ -448,7 +408,6 @@ html{
   transform:rotate(45deg) translate(-50%, -50%);
   left : 50%; 
   top : 80%;
-
   span{
     position:absolute;
     left:0;
@@ -500,9 +459,6 @@ html{
     border-color:#007200;
   }
 }
-
-
-
 .accent {
   top: 0;
   left: 0;
@@ -512,7 +468,6 @@ html{
   position: relative;
   transition: 0.3s ease;
 }
-
 .animate {
   width: 20%;
   transition: 0.3s ease;
@@ -527,8 +482,6 @@ html{
     }
     
 }
-
-
 .plant{
   background: rgba(255, 255, 255, .1);
   box-shadow: 10px 10px 5px rgba(255, 255, 255, .2);
@@ -541,9 +494,7 @@ html{
   }
   
 }
-
 /* sépraratiom */
-
 @media screen and (max-width : 600px) 
 {
   .productsGrid
@@ -565,7 +516,6 @@ html{
   width: 100vw;
   text-align: center;
   text-transform: uppercase;
-
     p{
       font-size: 20px;
       font-weight: 200;
@@ -576,61 +526,50 @@ html{
     }
 }
 .bg-image{
-
-
 }
-
  .autoCompleteForm{
   display : inline-block;
   padding: 1vh 5vw 1vh 5vw;
-
   .autocomplete{
     display : block;
     position : relative;
   }
-
   .autocomplete-active{
     background : blue;
   }
-
   .autocomplete > *{
     width : 100%
   }
-
   #searchBar{
     height:5vh;
     margin-top: 3%;
     margin-bottom: 4%;
     min-height: 40px;
     z-index: 10;
-
   }
   #searchBarautocomplete-list{
     position : absolute;
     top : 100%;
-    background : rgba(0, 0, 0, 0.521);
+    background : white;
     z-index: 8;
-    font-size: 32px;
-    color: white;
+    font-size: 20px;
   }
-
   #searchBarautocomplete-list:hover{
     cursor : pointer;
   }
 }
-
   .logoMobile{
-    display: inline-flex;
+    display: flex;
     width: 100%;
     margin-bottom: 5%;
     max-height: 35vh;
     justify-content: center;
     img{
         width:50vw;
-        min-height: 220px;
-        min-width: 220px;
-        max-width: 220px;
-        max-height: 220px;
+        min-width: 200px;
+        min-width: 200px;
+        max-width: 250px;
+        max-height: 250px;
     }
 }
   .indicator{
@@ -643,7 +582,6 @@ html{
     width: 100vw;
     padding-left:5vw;
     padding-right: 5vw;
-
   li {
     float: left;
     font-size: 9px;
@@ -664,7 +602,6 @@ html{
       padding: 12px 10px 12px 10px;
       display: block;
       z-index: 5;
-
       i {
         font-size: 8px !important;
         position: absolute;
@@ -696,7 +633,6 @@ html{
         a {
           border-top: none;
           width: 100%;
-          font-size: 9px;
           padding: 3px 2px 3px 2px;
           
           
