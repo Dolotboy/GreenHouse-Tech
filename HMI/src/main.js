@@ -52,7 +52,7 @@ const messages = {
         search: 'Rechercher',
         type: 'Type',
         easy: 'Facile',
-        medium: 'Intermédiaire',
+        medium: 'Moyen',
         hard: 'Difficile',
         alphabetical: 'alphabétique'
       }
@@ -78,8 +78,8 @@ const messages = {
         daysConservation: 'Conservation time',
         plantDistance: 'Plant distance ',
         groundType: 'Ground type',
-        description: 'Functionning',
-        neighboor: 'Neighboor',
+        description: 'Functioning',
+        neighboor: 'Neighbor',
         difficulty: 'Difficulty',
         family: 'Family',
         favCond: 'Favorable conditions',

@@ -11,6 +11,7 @@
     "jquery": "^3.6.0",
     "vue": "^3.2.22",
     "vue-cli": "^2.9.6",
+    "vue-i18n": "^9.2.0-beta.22",
     "vue-router": "^4.0.12",
     "vue-scrollto": "^2.20.0"
   },

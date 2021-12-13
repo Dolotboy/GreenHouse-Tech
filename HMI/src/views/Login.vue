@@ -1,8 +1,7 @@
 <template>
     <div class="login">
-          <div>
+
           <h1>{{ $t("message.login") }}</h1>
-          </div>
         <div class="loginImage">
            <img class="imageIcon" src="../assets/LogoV2.png">
        </div>
@@ -143,12 +142,13 @@ export default {
   .login{
     -webkit-tap-highlight-color: transparent;
     z-index:100;
-    //justify-content: space-evenly;
+    justify-content: space-evenly;
     position : fixed;
     color:white;
     gap:5vh;
     display : flex;
     flex-direction : column;
+    caret-color: transparent;
     top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
@@ -204,8 +204,7 @@ export default {
       height:48px;
       margin-top:20px;
       margin-bottom: 12px;
-      width: 100%;   
-      font-size:16px; 
+      width: 100%;    
     }
     .checks{
       display: flex;
