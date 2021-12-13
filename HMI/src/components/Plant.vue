@@ -7,8 +7,7 @@
     <h1>{{ plant.plantName }}</h1>
   </div>
   <div class="end">
-  <p v-if="isFavorite">{{ $t("message.favoris") }}</p>
-  <input class="star" type="checkbox" title="Favoris" @click="addFavorite()"> 
+  <input class="star" type="checkbox" :checked="isFavorite" title="Favoris" @click="toggleFavorite"> 
   </div>
 </div>
 </template>
@@ -18,7 +17,15 @@ import $ from '../../node_modules/jquery/dist/jquery.js'
 import toolbox from '../toolbox.js';
 
 export default {
-    props : ['plant', 'idProfile', 'isFavorite'],
+    props : ['plant', 'idProfile', 'isFavoriteProp'],
+    data(){
+      return{
+        isFavorite : Boolean
+      }
+    },
+    mounted(){
+      this.isFavorite = this.isFavoriteProp
+    },
     methods : {
       addFavorite(){
         let that = this;
@@ -35,6 +42,7 @@ export default {
             data: "{}",
             success: function(status)
             {
+              console.log("ajout favorite");
               let favorites = JSON.parse(localStorage.getItem('favorites'));
               if(favorites == null || favorites == undefined)
                 favorites = [];
@@ -42,14 +50,16 @@ export default {
               let fav = {"tblPlant_idPlant":that.plant.idPlant,"tblProfile_idProfile":that.getLoggedInProfile()};
               favorites.push(fav);
               localStorage.setItem('favorites', JSON.stringify(favorites)); 
+              //that.setAsFavorite();
             }
           });
         })
       },
       deleteFavorite(){
+        console.log("deletefavorite");
         let that = this;
 
-        let url = toolbox.getApiUrl() + "delete/favorite/token";
+        let url = toolbox.getApiUrl() + "delete/favorite/token/";
         let type = "delete";
 
         return new Promise(resolve => {
@@ -79,18 +89,21 @@ export default {
         });
       },
       async toggleFavorite(event){
+        console.log("IS FAVORITE" + this.isFavorite);
         this.$emit('favClicked');
-        console.log(this.getLoggedInProfile());
         if(this.getLoggedInProfile() == null || this.getLoggedInProfile() == undefined || this.getLoggedInProfile() == "" || this.getLoggedInProfile() == "null"){
-          this.$emit("popLogin");
+          this.$router.push('/login');
           event.target.checked = false;
           return;
         }
-        if(this.isFavorite)
+        if(this.isFavorite){
+          this.isFavorite = false;
           await this.deleteFavorite();
-        else
+        }
+        else{
+          this.isFavorite = true;
           await this.addFavorite();
-        console.log(JSON.parse(localStorage.getItem('favorites')));
+        }
       },
       getLoggedInProfile(){
         return localStorage.getItem('loggedInToken');

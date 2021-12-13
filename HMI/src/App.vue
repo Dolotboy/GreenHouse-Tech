@@ -179,7 +179,9 @@ export default {
         })
       })  
     },
-    async downloadFavorites(profileId){
+    async downloadFavorites(profileToken){
+      this.favorites = await this.getFavorites(toolbox.getApiUrl() + "searchAll/favorite/token/" + profileToken);
+      console.log("Favorites" + this.favorites);
       localStorage.setItem('favorites', JSON.stringify(this.favorites));
     },
     getFavorites(url){

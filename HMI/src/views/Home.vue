@@ -229,7 +229,7 @@
       </ul>
     </div>
     <div class="productsGrid">
-      <Plant class="plant" style="margin-top: 6vh" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for="plant in visiblePlants" :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)" />
+      <Plant class="plant" style="margin-top: 6vh" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for="plant in visiblePlants" :plant="plant" :isFavoriteProp="checkIfIsFavorite(plant.idPlant)" />
     </div>
     <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant" />
   </div>
@@ -431,9 +431,12 @@ export default {
       return strings;
     },
     checkIfIsFavorite(idPlant) {
-      if (this.favorites == null) return false;
+      console.log("Favorites : " + JSON.stringify(this.favorites));
+      if (this.favorites == null) 
+        return false;
       for (let i = 0; i < this.favorites.length; i++)
-        if (this.favorites[i].tblPlant_idPlant == idPlant) return true;
+        if (this.favorites[i].tblPlant_idPlant == idPlant) 
+          return true;
       return false;
     },
   },
