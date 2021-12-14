@@ -10,6 +10,7 @@
           <li v-if="!isLoggedIn" @click="toggleRegister"><router-link to="/register">{{ $t("message.signUp") }}</router-link></li>
           <li v-if="!isLoggedIn" @click="toggleLogin"><router-link to="/login">{{ $t("message.signIn") }}</router-link></li>   
           <li v-if="isLoggedIn">{{ $t("message.hi") }}{{ profile.firstName }} !</li>
+          <li v-if="isLoggedIn" @click="logout()">{{ $t("message.disconnect") }}</li> 
       </ul>
     </nav>
     <nav id="navMobile" style="transition: width 0.1s ease-in;">
@@ -27,14 +28,11 @@
           <li @click="toggleNavMobile"><a href="http://apipcst.xyz/fr"><img  src=".\assets\outline_info_white_24dp.png"><p>{{ $t("message.apropos") }}</p></a></li>
           <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>{{ $t("message.signUp") }}</p></li>
           <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>{{ $t("message.signIn") }}</p></li> 
-          
           <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>{{ $t("message.disconnect") }}</p></li> 
-      </ul>    
+      </ul>
     </nav>
-    <router-view @popLogin="toggleLogin"/>  
-    <div @click="login(1)">{{ $t("message.login") }}</div>
-    <div @click="logout">{{ $t("message.logout") }}</div>
-    <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
+    <router-view @loggedIn="Initialisation()"/>
+    <!--<Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
     <Register v-if="showRegister" @close="toggleRegister"/>-->
     <Loading v-if="showLoading"/>  
   </div>
@@ -119,6 +117,7 @@ export default {
       await this.checkToken();
 
       this.showLoading = false;
+      console.log(this.isLoggedIn);
     },
     async ClearDb(){
       let db = await toolbox.setDb();
@@ -155,9 +154,10 @@ export default {
       })
     },
     async login(profileToken){
+      this.profile = await this.getObject(toolbox.getApiUrl() + "search/profile/token/" + profileToken);
+      console.log(this.profile);
       this.downloadFavorites(profileToken);
       this.isLoggedIn = true;
-      this.showLogin = false;
       this.plants = this.plants;
     },
     async logout(){
@@ -167,6 +167,7 @@ export default {
       this.favorites = [];
       localStorage.setItem('favorites', "[]");
       this.plants = this.plants;
+      console.log(this.isLoggedIn);
     },
     async getObject(url){
       return new Promise(resolve => {
@@ -178,7 +179,9 @@ export default {
         })
       })  
     },
-    async downloadFavorites(profileId){
+    async downloadFavorites(profileToken){
+      this.favorites = await this.getFavorites(toolbox.getApiUrl() + "searchAll/favorite/token/" + profileToken);
+      console.log("Favorites" + this.favorites);
       localStorage.setItem('favorites', JSON.stringify(this.favorites));
     },
     getFavorites(url){

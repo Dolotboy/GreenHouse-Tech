@@ -9,8 +9,55 @@
           <h1>{{ $t("message.serreTech") }}</h1>
         </div>  
       </div>      
-  </div>
       <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
+        <div class="autocomplete" style="width:300px;">
+          <input id="searchBar" @input="filterData" type="text" name="myCountry" v-model="searchBarValue" placeholder="Rechercher">
+        </div>
+      </form>
+        <div class="indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="filters" @click="filterData($event)">
+          <ul>
+          <li><a class="item">Type<i class="fas fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a><input type="radio" name="rdPlantType" value="fruit" class="typeFilter">Fruits</a></li>
+              <li><a><input type="radio" name="rdPlantType" value="légume" class="typeFilter">Légumes</a></li>
+              <li><a><input type="radio" name="rdPlantType" value="all" class="typeFilter" checked>Tous</a></li>
+            </ul>
+          </li>
+          <li><a class="item">Famille<i class="fa fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Blue</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Black</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Orange</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Green</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Red</a></li>
+              <li><a href="#"><input type="checkbox" class="chkPlantFamily" value="ALL" checked>All</a></li>
+            </ul>
+          </li>
+          <li><a class="item">Difficulté<i class="fa fa-chevron-down"></i></a>
+            <span class="accent"></span>
+            <ul class="drop-down">
+              <li><a><input type="checkbox" value="1" class="chkPlantDifficulty">Facile</a></li>
+              <li><a><input type="checkbox" value="2" class="chkPlantDifficulty">Intermédiaire</a></li>
+              <li><a><input type="checkbox" value="3" class="chkPlantDifficulty">Difficile</a></li>
+              <li><a><input type="checkbox" value="ALL" class="chkPlantDifficulty" checked>Tous</a></li>
+            </ul>
+          </li>
+          <li class="item"><a><input type="checkbox" id="chkAlphabetical">Alphabétique</a></li>          
+        </ul>
+      </div>
+      <div class="logoMobile">
+        <img src="../assets/LogoV2.png" alt="Logo" />
+      </div>
+    </div>
+    <form class="autoCompleteForm" autocomplete="off" action="/action_page.php">
       <div class="autocomplete" style="width: 300px">
         <input
           id="searchBar"
@@ -20,6 +67,7 @@
           v-model="searchBarValue"
           v-bind:placeholder="$t('message.search')"
         />
+        <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>
       <div class="logoMobile">
         <img src="../assets/LogoV2.png" alt="Logo" />
       </div>
@@ -181,7 +229,7 @@
       </ul>
     </div>
     <div class="productsGrid">
-      <Plant class="plant" style="margin-top: 6vh" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for="plant in visiblePlants" :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)" />
+      <Plant class="plant" style="margin-top: 6vh" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for="plant in visiblePlants" :plant="plant" :isFavoriteProp="checkIfIsFavorite(plant.idPlant)" />
     </div>
     <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant" />
   </div>
@@ -383,9 +431,12 @@ export default {
       return strings;
     },
     checkIfIsFavorite(idPlant) {
-      if (this.favorites == null) return false;
+      console.log("Favorites : " + JSON.stringify(this.favorites));
+      if (this.favorites == null) 
+        return false;
       for (let i = 0; i < this.favorites.length; i++)
-        if (this.favorites[i].tblPlant_idPlant == idPlant) return true;
+        if (this.favorites[i].tblPlant_idPlant == idPlant) 
+          return true;
       return false;
     },
   },
@@ -622,6 +673,9 @@ html {
     border-color: green;
     transform: translate(15px, 15px);
   }
+  100% {
+    border-color: #007200;
+}
 }
 
 

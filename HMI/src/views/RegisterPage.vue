@@ -13,8 +13,8 @@
           </div>  
           <input class="inputBox" type="email" placeholder="Entrez votre adresse email" name="uname" required v-model="email"/>
           <input class="inputBox" v-model="password" type="password" placeholder="Entrez votre mot de passe" name="password" required/>
-          <input class="inputBox" v-model="password" type="password" placeholder="Confirmez votre mot de passe" name="password" required/>
-          <button type="submit" class="btn from-left" @click="postCreateUser()">S'inscrire</button>    
+          <input class="inputBox" v-model="confirmPassword" type="password" placeholder="Confirmez votre mot de passe" name="password" required/>
+          <button type="button" class="btn from-left" @click="postCreateUser()">S'inscrire</button>    
         </div>
       </form>
     </div>
@@ -23,6 +23,7 @@
 
 <script>
 import $ from '../../node_modules/jquery/dist/jquery.js'
+import toolbox from "../toolbox.js";
 
 export default {
     name: "App",
@@ -32,6 +33,7 @@ export default {
         lastName: "",
         email: "",
         password: "",
+        confirmPassword : "",
         access: "user"
         };
     },
@@ -47,25 +49,29 @@ export default {
         return user;
       },
       postCreateUser(){
+        console.log(this.password + this.confirmPassword);
       if(this.password == this.confirmPassword)
       {
         let user = this.createUser();
         console.log(JSON.stringify(user));
         //$.post("https://apitestenv.pcst.xyz/api/new/profile/addProfile", JSON.stringify(user));
         $.ajax({
-          url : 'http://testenv.apipcst.xyz/api/new/profile/addProfile',
-          datatype: 'json',
-          contentType : 'application/json',
-          type: 'post',
+          type: "post",
+          url : toolbox.getApiUrl() + "new/profile/addProfile",
+          datatype: "json",
+          contentType : "application/json",
           data: JSON.stringify(user),
           success: function(status)
           {
+            console.log(JSON.stringify(user) + "success");
             alert(status); 
           }
         });
+        console.log(JSON.stringify(user))
       }
       else
       {
+        console.log("failed to create");
         var element = document.querySelector(".passDiv");
         var text= document.querySelector(".problem");
         text.innerHTML="les mot de passe ne correspondent pas";

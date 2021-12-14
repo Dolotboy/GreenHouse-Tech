@@ -18,7 +18,7 @@
         </div>
         <div>
            <input type="password" class="inputBox" v-model="password" placeholder="Entrez votre mot de passe">
-          <button type="submit" class="btn from-left" @click="postCheckLogin()">Se connecter</button>
+          <button type="button" class="btn from-left" @click="postCheckLogin()">Se connecter</button>
         </div>
       </form>
     </div>
@@ -58,14 +58,15 @@ export default {
       let that = this;
 
       $.ajax({
-        url: toolbox.env + "login/checkLogin/",
+        url: toolbox.getApiUrl() + "login/checkLogin/",
         datatype: "json",
         contentType: "application/json",
         type: "post",
         data: JSON.stringify(user),
         success: function (status) {
           localStorage.setItem("loggedInToken", status.id);
-          that.$emit("loggedIn", status.id);
+          that.$emit("loggedIn");
+          that.$router.push('/');
         },
       });
     },

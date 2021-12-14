@@ -1,12 +1,9 @@
 exports.isProd = false;
 
-//exports.envBack = "http://localhost:8000/api/";
-//exports.env = "http://testenv.apipcst.xyz/api/"
-
 exports.getApiUrl = () =>{
     if(this.isProd)
-        return "http://localhost:8000/api/";
-    return "http://testenv.apipcst.xyz/api/"; 
+        return "http://testenv.apipcst.xyz/api/"; 
+    return "http://localhost:8000/api/";
 }
 
 exports.getScriptUrl = () =>{
