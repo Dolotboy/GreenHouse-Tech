@@ -12,8 +12,8 @@
             <input class="inputBox" name="lastName" v-model="lastName" placeholder="Nom" required>
           </div>  
           <input class="inputBox" type="email" placeholder="Entrez votre adresse email" name="uname" required v-model="email"/>
-          <input class="inputBox" v-model="password" type="password" placeholder="Entrez votre mot de passe" name="password" required/>
-          <input class="inputBox" v-model="confirmPassword" type="password" placeholder="Confirmez votre mot de passe" name="password" required/>
+          <input class="passDiv" v-model="password" type="password" placeholder="Entrez votre mot de passe" name="password" required/>
+          <input class="passDiv" v-model="confirmPassword" type="password" placeholder="Confirmez votre mot de passe" name="confPassword" required/>
           <button type="button" class="btn from-left" @click="postCreateUser()">S'inscrire</button>    
         </div>
       </form>
@@ -87,7 +87,8 @@ body {
 	--def: #fff; 	
 	--inv: #fff;
 }
-
+@media screen and (min-width : 601px) 
+{
 .register {
   position: absolute;
   width: 45vw;
@@ -113,14 +114,6 @@ body {
   display: flex;
   margin: 0;
 }
-@media screen and (max-width: 1100px){
-  .Name{
-    display: inline;
-  }
-  .formLogin{
-    padding: 0 20px 0 20px;
-  }
-}
 .formLogin {
   width: 40vw;
 
@@ -131,6 +124,14 @@ body {
     text-align: left;
     font-size: 20pt;
   }
+  .passDiv
+{
+width: 100%;
+    border-radius: 5px;
+    margin: 0 0 5vh 0;
+    text-align: left;
+    font-size: 20pt;
+}
 }
 .btn {		
 	position: relative;	
@@ -195,4 +196,111 @@ body {
 
 div {margin-bottom: 3rem;}
 div:last-child {margin-bottom: 0;}
+}
+@media screen and (max-width : 600px)
+{
+  .register{
+    position : fixed;
+    height: 100%;
+    overflow-y: auto;
+    width : 100%;
+    color:white;
+    flex-direction: column;
+    align-items: center;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+     background: rgb(53, 54, 53);
+    border: solid;
+    border-color: black;
+    padding : 5% 5%;
+    h1{
+      margin-top:5%;
+      font-size: 4rem;
+  }
+  
+}
+
+.Name{
+
+display: flex;
+  margin: 0;
+  
+}
+
+ .logo
+    {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 30%;
+      img{
+        width: 100%;
+        height:100%;
+        min-height: 100px;
+      min-width:100px;
+      max-width: 150px;
+      max-height: 150px;
+    }
+    }
+    
+.close-button {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    font-size: 5rem;
+    &:hover{
+      cursor: pointer;
+      border:solid;
+      border-width: 1px;
+      border-color: grey;
+  }
+}
+     
+.formLogin {
+  width: 85vw;
+  flex-direction: column;
+  justify-content: center;
+
+  .inputBox {
+    width: 100%;
+    border-radius: 5px;
+    margin: 0 0 5vh 0;
+    text-align: left;
+    font-size: 20pt;
+  }
+  .passDiv
+{
+width: 100%;
+    border-radius: 5px;
+    margin: 0 0 5vh 0;
+    text-align: left;
+    font-size: 20pt;
+}
+}
+.btn{
+      font-family: 'Roboto', sans-serif;
+       text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: 500;
+      border: none;
+      border-radius: 45px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease 0s;
+       cursor: pointer;
+      outline: none;
+      margin-top:32px;
+      width: 80vw;
+      height:60px;
+      font-size: 15px;
+      border-radius: 30px;
+      background-color: rgb(4, 63, 9);
+      &:hover{
+        background-color: #2EE59D;
+        box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+        color: #fff;
+        transform: translateY(-7px);
+      }
+    }
+}
 </style>

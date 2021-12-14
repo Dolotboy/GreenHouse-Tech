@@ -6,31 +6,31 @@
            <img class="imageIcon" src="https://www.wingsforkids.org/wp-content/uploads/cropped-placeholder.jpg">
     </div> -->
     
-    <h1>{{ $t("message.signUp") }}</h1>
+    <h1>S'inscrire</h1>
     <div class="problem"></div>
     <div class="form">
     <form @submit.prevent="login">
       <div class="lblInp-div" id="firstName">
-        <label for="firstName">{{ $t("message.firstName") }}</label>
-        <input name="firstName" v-model="firstName"  v-bind:placeholder="$t('message.firstName')" required>
+        <label for="firstName">Prénom</label>
+        <input name="firstName" v-model="firstName" placeholder="Prénom" required>
       </div>
       <div class="lblInp-div" id="lastName">
-        <label for="lastName">{{ $t("message.lastName") }}</label>
-        <input name="lastName" v-model="lastName"  v-bind:placeholder="$t('message.lastName')" required>
+        <label for="lastName">Nom de famille</label>
+        <input name="lastName" v-model="lastName" placeholder="Nom de famille" required>
       </div>
       <div class="lblInp-div" id="email">
-        <label for="email">{{ $t("message.mail") }}</label>
-        <input name="email" v-model="email"  v-bind:placeholder="$t('message.mail')" type="email" required>
+        <label for="email">Adresse courriel</label>
+        <input name="email" v-model="email" placeholder="Adresse Courriel" type="email" required>
       </div>
       <div class="lblInp-div " id="password">
-        <label for="password">{{ $t("message.password") }}</label>
-        <input  class="passDiv" name="password" v-model="password" v-bind:placeholder="$t('message.password')" type="password" required>
+        <label for="password">Mot de passe</label>
+        <input  class="passDiv" name="password" v-model="password" placeholder="Mot de passe" type="password" required>
       </div>
       <div class="lblInp-div" id="confirmPassword">
-        <label for="confirmPassword">{{ $t("message.passwordConfirm") }}</label>
-        <input  class="passDiv" name="confirmpassword" v-model="confirmPassword" v-bind:placeholder="$t('message.passwordConfirm')" type="password" required>
+        <label for="confirmPassword">Confirmer le mot de passe</label>
+        <input  class="passDiv" name="confpassword" v-model="confirmPassword" placeholder="Mot de passe" type="password" required>
       </div>
-      <button type="submit" class="BtnIncription" @click="postCreateUser()">{{ $t("message.signUp") }}</button>      
+      <button type="submit" class="BtnIncription" @click="postCreateUser()">S'inscrire</button>      
     </form>
     </div>    
     <div class="close-button" @click="$emit('close')" >X</div> 
@@ -186,12 +186,11 @@ export default {
   justify-content: center;
 
     font-size: 2rem;
-    gap: 3%;
     margin: 5% 0;
     form{
       input {
         height: 100%;
-        height:40px;
+        height:32px;
         margin: 0 0 0 30px;
   }
       

@@ -1,5 +1,6 @@
 <template>
     <div class="details">
+        <div class="desktop">
         <div class="left">    
             <div>
                 <div class="image">
@@ -25,9 +26,40 @@
                     <FavCondition :plant="plant" v-if="showCondFav" @close="toggleCondFav"/>
                     <Problem :plant="plant" v-if="showProblem" @close="toggleProblem"/>
                 <div class="close-button" @click="$emit('close')" >X</div> 
-            </div>         
+            </div>  
+        </div>       
         </div>
+        <div class="mobile">
+        <div class="column">
+        <div class="top"></div>
+        <div class="detailsTop">
+        <div class="image"><img class="im" :src="plant.plantImg"></div>
+        <div class="infoTop" >
+            <p><span>Nom : </span> {{ plant.plantName }}</p>
+            <p><span>Saison : </span> {{plant.plantSeason}}</p>
+            <p><span>Type : </span> {{plant.plantType}}</p>
+        </div>
+        </div>
+        <div class="info">
+            <div id="desc"><span >Description: </span><p> {{plant.plantDescription}} </p></div> 
+            <div><span >Temps de conservation : </span> <p> {{plant.plantDaysConservation}} jour(s)</p></div>
+            <div><span >Type de sol: </span><p> {{plant.plantGroundType}}</p></div>
+            <div><span >Voisinage: </span><p> {{plant.plantBestNeighbor}}</p></div>
+            <div><span >Difficulté: </span><p> {{plant.plantDifficulty}}</p></div>
+            <div><span >Famille: </span><p> {{plant.plantFamily}}</p></div>
+        </div>
+        
+            <div class="splits">
+            <button class="buttonDetails" @click="toggleCondFav">Conditions Favorables</button>
+            <button class="buttonDetails" @click="toggleProblem">Problèmes</button>
+            </div>
+        </div>
+        <div class="close-button" @click="$emit('close')" >X</div>   
+        <FavCondition :plant="plant" v-if="showCondFav" @close="toggleCondFav"/>
+        <Problem :plant="plant" v-if="showProblem" @close="toggleProblem"/>  
+        </div>   
     </div>
+
 </template>
 
 <script>
@@ -63,7 +95,12 @@ export default {
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
-.details{
+@media screen and (min-width : 601px) {
+    .mobile{
+        display:none;
+    }
+   
+.desktop{
     position: fixed;
     top : 54%;
     left : 50%;
@@ -178,4 +215,166 @@ h2{
     border-width: 1px;
     border-color: transparent;
 }
+}
+
+@media screen and (max-width : 600px) {
+    .desktop{
+        display:none;
+    }
+.top{
+  margin-top: 3%;
+  height: 10vh;
+  max-height:50px;
+  align-items: center;
+  img
+  {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+.details{
+    position: fixed;
+    display: flex;
+    caret-color: transparent;
+    top : 50%;
+    left : 50%;
+    color:white;
+    transform: translate(-50%, -50%);
+    background: rgb(49, 51, 49);
+    border: solid;
+    z-index: 600;
+    
+    border-color: black;
+    width : 100%;
+    height: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    h1{
+        font-size: 35px;
+    }
+.column
+{
+    display:flex;
+    height:98%;
+    flex-direction: column;
+    align-content: space-between;
+ }
+.detailsTop
+{ 
+    display: flex;
+    column-gap: 5%;
+    margin-top: 5%;
+    height: 20%;  
+}
+.image{
+    
+    max-width: 150px;
+    max-height: 150px;
+}
+.im{
+     max-width: 100%;
+    max-height:100%;
+}
+.infoTop
+{
+    display: inline-flex;
+    flex-direction: column;
+    height: 20vh;
+    max-height: 150px;
+    justify-content: space-evenly;
+    min-height: 64px;
+    align-content: flex-start;
+    width: 60vw;
+    background-color: rgb(27, 27, 27);
+    text-align: start;
+    p{
+          
+         line-height: 50%;
+    }
+}
+.info
+{
+    display: flex;
+    max-width: 90vw;
+    min-width: 90vw;
+    max-height: 48%;
+    flex:1,1;
+    padding-right: 5px;
+    flex-direction: column;
+    background-color: rgb(43, 43, 43);
+    margin-top: 48px;
+   min-height: auto;
+    overflow-y:scroll; 
+    div{
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid white;
+    }
+    span
+    {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        height: 100%;
+    }
+    p{
+        display: flex;
+        font-size:12px;
+        text-align: justify;
+        padding:1px 5px 1px 5px;
+    }
+    #desc{
+        min-height: 48px;
+    }
+}
+    .close-button {
+        position: absolute;
+        top: 1%;
+        right: 1%;
+        font-size: 30pt;
+        &:hover{
+            cursor: pointer;
+            border:solid;
+            border-width: 1px;
+            border-color: grey;
+        }
+    }
+    .detailsPlant{
+        display: flex;
+        flex-direction: column;
+        & > p{
+            font-size: 20px;
+            text-align: left;
+            margin:10px 0;
+        }     
+    }
+}
+.detailsPlantP{
+        display:inline;
+}
+.details p:hover{
+    color:dimgrey;
+}
+.buttonDetails{
+  background-color:	black;
+  color : white;
+  border : none;
+  padding : 10px;
+  font-size : 1.4rem;
+  width: 30%;
+  display:inline;
+  &:hover{
+    opacity : .8;
+    cursor : pointer;
+  }
+}
+.splits{
+    display:flex;
+    height: 6%;
+    margin-top:auto;
+    justify-content:space-between;
+}
+}
+
 </style>
+

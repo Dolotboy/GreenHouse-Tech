@@ -17,8 +17,9 @@ export default {
 }
 </script>
 
-
-<style lang="scss" scoped>
+<style scoped>
+  @media screen and (min-width : 601px) 
+  {
 .FavConds{
     position :absolute;
     top : -10%;
@@ -32,6 +33,26 @@ export default {
     padding-right: 5%;
     overflow-y: auto;
 }
+  }
+  @media screen and (max-width : 600px) 
+  {
+  .FavConds
+{
+    height: auto;
+        max-height: 80vh;
+        position: absolute;
+        top : 40%;
+        left :30%;
+        background: gray;
+        border: solid;
+        border-color: black;
+        width : 50vw;
+        padding-left: 5%;
+        padding-right: 5%;
+        overflow-y: auto;
+
+}
+  }
 .close-button {
     position: absolute;
     top: 1%;

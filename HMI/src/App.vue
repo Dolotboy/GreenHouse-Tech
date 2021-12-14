@@ -21,13 +21,14 @@
           <div></div>
         </div>
       </div>
-      
      <ul class="links">
           <li v-if="isLoggedIn">{{ $t("message.profileNumber") }} :{{ profile.idProfile }}</li> 
           <li @click="toggleNavMobile"><a  href="/"><img  src=".\assets\outline_home_white_24dp.png"><p>{{ $t("message.accueil") }}</p></a></li> 
           <li @click="toggleNavMobile"><a href="http://apipcst.xyz/fr"><img  src=".\assets\outline_info_white_24dp.png"><p>{{ $t("message.apropos") }}</p></a></li>
-          <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>{{ $t("message.signUp") }}</p></li>
-          <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>{{ $t("message.signIn") }}</p></li> 
+          <li v-if="!isLoggedIn" @click="toggleRegister"><router-link to="/register"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>{{ $t("message.signUp") }}</p></router-link></li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"><router-link to="/login"><img src=".\assets\outline_login_white_24dp.png"><p>{{ $t("message.signIn") }}</p></router-link></li> 
+          <li><a id="BtnFr"><img src=".\assets\outline_language_white_24dp.png"><p>Francais</p></a></li>
+          <li><a id="BtnEn"><img src=".\assets\outline_language_white_24dp.png"><p>English</p></a></li>
           <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>{{ $t("message.disconnect") }}</p></li> 
       </ul>
     </nav>
@@ -43,7 +44,6 @@ import toolbox from './toolbox.js';
 import Loading from './components/Loading.vue';
 import FavCondition from './components/FavCondition.vue';
 import $ from '../node_modules/jquery/dist/jquery.js';
-
 export default {
   components :{
     FavCondition,
@@ -62,20 +62,7 @@ export default {
           profile : Object
       }
   },
-  
   mounted(){
-    window.onload=function(){
-    document.getElementById("BtnFr").addEventListener("click", function() {
-    localStorage.setItem("locale","fr");
-    location.reload();
-  });
-  
-  document.getElementById("BtnEn").addEventListener("click", function() {
-    localStorage.setItem("locale","en");
-    location.reload();
-  });
-}
-    
       this.Initialisation();
   },
   methods :{
@@ -103,7 +90,6 @@ export default {
     },
     async Initialisation(){
       this.showLoading = true;
-
       let version = localStorage.getItem('apiVersion');
       let apiVersion = await this.GetApiVersion(toolbox.getApiUrl() + "search/last/version");
       if(version == undefined || version != apiVersion){
@@ -115,7 +101,6 @@ export default {
       if(this.plants.length == 0)
         await this.DownloadContent();   
       await this.checkToken();
-
       this.showLoading = false;
       console.log(this.isLoggedIn);
     },
@@ -136,6 +121,8 @@ export default {
     GetApiVersion(url){
       return new Promise(resolve =>{
         $.get(url, function(data, status){
+          console.log(data);
+          console.log(url);
           let json = JSON.parse(data);
           resolve(json.numVersion);
         })
@@ -222,13 +209,11 @@ button{
   border : none;
   padding : 10px;
   font-size : 1.2rem;
-
   &:hover{
     opacity : .8;
     cursor : pointer;
   }
 }
-
 #navDesktop{
   top : 0;
   position : fixed;
@@ -252,7 +237,6 @@ button{
       max-width: 100%;
     }
   } 
-
 ul {
   list-style-type: none;
   overflow: hidden;
@@ -282,7 +266,6 @@ ul li {
   padding: 10px 15px;
 }
 }
-
 .lblInp-div{
   display : flex;
   justify-content : end;
@@ -311,7 +294,6 @@ ul li {
   height : 7.5vh;
   caret-color: transparent;
   z-index:120;
-
   .top-wrapper{
     position : relative;
     top : 0;
@@ -352,8 +334,8 @@ ul li {
     display:none;
   }
  }
-  .links{
-    
+    .links{
+    overflow-y: auto;
     display : none;
     flex-direction: column;
     height: 90vh;
@@ -361,6 +343,7 @@ ul li {
     position : relative;
     bottom : 0;
     left: 0;
+    
     list-style-type: none;
     width: 100%;
     padding: 0;
@@ -377,6 +360,7 @@ ul li {
       text-decoration: none;
       margin: 1%;
       padding: 10px 5px;
+     min-height: 50px;
       width: 99%;
       height: 7vh;    
       text-align: center;
@@ -398,6 +382,7 @@ ul li {
       width :100%;
       height: 7vh;    
       text-align: center;
+      
         
        }
       &:hover{

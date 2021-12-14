@@ -82,6 +82,7 @@ body {
 	--inv: #fff;
 }
 
+@media screen and (min-width : 601px) {
 .login {
   position: absolute;
   width: 45vw;
@@ -179,4 +180,113 @@ body {
 
 div {margin-bottom: 3rem;}
 div:last-child {margin-bottom: 0;}
+}
+@media screen and (max-width : 600px) {
+ .login{
+    -webkit-tap-highlight-color: transparent;
+    z-index:100;
+    justify-content: space-evenly;
+    position : fixed;
+    color:white;
+    gap:5vh;
+    display : flex;
+    overflow-y: auto;
+    flex-direction : column;
+    caret-color: transparent;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(53, 54, 53);
+    border: solid;
+    border-color: black;
+    width : 100%;
+    height:100%;
+    max-width : 100%;
+    padding : 7.5%;
+    overflow-y:auto ;
+    align-items: center;
+    h1{
+      font-size: 5rem;
+      margin-top : 18px;
+      color:white;
+    }
+ 
+    .logo
+    {
+      width: 75%;
+      height: 40%;
+      min-height: 150px;
+      min-width:150px;
+      max-width: 200px;
+      max-height: 200px;
+      img{
+        width: 100%;
+        height:100%;
+    }
+    
+}
+    .close-button {
+      position: absolute;
+      top: 1%;
+      right: 1%;
+      font-size: 5rem;
+      &:hover{
+        cursor: pointer;
+        border:solid;
+        border-width: 1px;
+        border-color: grey;
+      } 
+    }
+    .loginForm{
+      font-size: 1.6rem;
+      flex-direction: column;
+      width: 80vw
+      
+    }
+   
+    .inputBox
+    {
+      height:48px;
+      margin-top:20px;
+      margin-bottom: 12px;
+      width: 100%;    
+    }
+    .checks{
+      display: flex;
+     flex-wrap: wrap;
+      height: 35px;
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 10px;
+    }   
+    .btn{
+      font-family: 'Roboto', sans-serif;
+       text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: 500;
+      border: none;
+      border-radius: 45px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease 0s;
+       cursor: pointer;
+      outline: none;
+      margin-top:32px;
+      width: 80vw;
+      height:60px;
+      font-size: 15px;
+      border-radius: 30px;
+      background-color: rgb(4, 63, 9);
+      &:hover{
+        background-color: #2EE59D;
+        box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+        color: #fff;
+        transform: translateY(-5px);
+      }
+      
+    }
+}
+
+
+}
 </style>

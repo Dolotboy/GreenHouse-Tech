@@ -113,7 +113,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@media screen and (min-width : 601px) {
+@media screen and (max-width : 600px) {
   html{
     font-size : 1.5rem;
     
@@ -123,9 +123,13 @@ export default {
     border : solid 1px black;
     border-radius: 40px;
     margin-bottom: 10px;
+    height: 80px;
+    display:flex;
+    width: 95%;
+    min-width: 380px;
     height: 12vh;
     display:flex;
-    width: 27vw;
+    width: 90vw;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly; 
@@ -161,29 +165,58 @@ export default {
   align-content: center;
 }
 .imageIcon{
-  max-height: 100%;
-  max-width: 100%;
+  width: 100%;
+  height:100%;
+  max-height: 60px;
+  max-width: 50px;
 }
-@media screen and (max-width : 600px) 
+
+
+
+@media screen and (min-width : 601px) 
 {
-.wrapper{
-  position: relative;
-  border : solid 1px #f0e567;
-  border-radius: 40px;
-  margin-bottom: 20px;
-  display: flex;
-  max-width: 500px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;   
+ 
+  .wrapper{
+    position: relative;
+    border : solid 1px black;
+    border-radius: 40px;
+    margin-bottom: 10px;
+    height: 12vh;
+    display:flex;
+    width: 27vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly; 
+}
+.image{
+  width: 15%;
+  height: 60%;
+}
+.imageIcon{
+  max-width: 100%;
+  max-height:100%;
+ 
+}
+.nom h1{
+  max-width: 100%;
+  font-size: 2rem;
+  text-align: center;
+}
+.nom{
+  display:block;
+ width:50%;
+ 
 }
 .end{
   width: 20%;
-  height:5%;
-  position: relative;
+  height:100%
+}
+}
 
-}
-}
+
+
+
+
 .star {
     top: 5px;
     right: 50px;
