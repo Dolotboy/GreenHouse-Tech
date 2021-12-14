@@ -2,8 +2,8 @@ exports.isProd = false;
 
 exports.getApiUrl = () =>{
     if(this.isProd)
-        return "http://testenv.apipcst.xyz/api/"; 
-    return "http://localhost:8000/api/";
+        return "http://localhost:8000/api/"; 
+    return "http://testenv.apipcst.xyz/api/";
 }
 
 exports.getScriptUrl = () =>{
