@@ -49,11 +49,10 @@ export default {
         return user;
       },
       postCreateUser(){
-        console.log(this.password + this.confirmPassword);
       if(this.password == this.confirmPassword)
       {
         let user = this.createUser();
-        console.log(JSON.stringify(user));
+        let that = this;
         //$.post("https://apitestenv.pcst.xyz/api/new/profile/addProfile", JSON.stringify(user));
         $.ajax({
           type: "post",
@@ -63,11 +62,10 @@ export default {
           data: JSON.stringify(user),
           success: function(status)
           {
-            console.log(JSON.stringify(user) + "success");
-            alert(status); 
+            alert("Inscription réussie"); 
+            that.$router.push('/login');
           }
         });
-        console.log(JSON.stringify(user))
       }
       else
       {

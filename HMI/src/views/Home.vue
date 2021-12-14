@@ -33,12 +33,17 @@
           <li><a class="item">Famille<i class="fa fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Blue</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Black</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Orange</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Green</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Red</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily" value="ALL" checked>All</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Asteracées">Asteraceae</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Brassicacées" >Brassicaceae</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Chénopodiacée" >Chénopodiacée</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Cucurbitacée" >Cucurbitacée</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Fabacées" >Fabaceae</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Liliaceae" >Liliaceae</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Ombellifère" >Ombellifère</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Poacée" >Poacée</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Rosacée" >Rosacée</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Solonacée" >Solonacée</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="ALL" checked>All</a></li>
             </ul>
           </li>
           <li><a class="item">Difficulté<i class="fa fa-chevron-down"></i></a>
@@ -50,7 +55,7 @@
               <li><a><input type="checkbox" value="ALL" class="chkPlantDifficulty" checked>Tous</a></li>
             </ul>
           </li>
-          <li class="item"><a><input type="checkbox" id="chkAlphabetical">Alphabétique</a></li>      
+          <li><a class="item"><input type="checkbox" id="chkAlphabetical">Alphabétique</a></li>      
           <button id="BtnFr">Fr</button>
           <button id="BtnEn">En</button>    
         </ul>

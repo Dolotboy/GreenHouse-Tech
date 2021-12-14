@@ -341,7 +341,7 @@ class ControllerAdd extends Controller
 
         Controller::incrementVersion();
         //Mail::to($profile->email)->send(new AccountCreated($profile)); /*->cc("exemple@gmail.com")*/
-        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $profile->idProfile], 200);
+        return response()->json(['message'=> "Everything worked good !", 'success' => true, 'status' => "Request successfull", 'id' => $token], 200);
     }
 
 /* ------------------- FAVORITE CONDITION DATE ------------------- */
