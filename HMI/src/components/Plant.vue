@@ -3,16 +3,12 @@
   <div class="image">
     <img class="imageIcon" :src="plant.plantImg" alt="Image vegetable">
   </div>
-  <div class="nom">
-  <h1>{{ plant.plantName }}</h1>
-  <p>{{ plant.idPlant }}</p>
-
-  
-
+    <div class="nom">
+    <h1>{{ plant.plantName }}</h1>
   </div>
   <div class="end">
-  <p v-if="isFavorite">{{ $t("message.favoris") }}</p>
-  <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
+    <p v-if="isFavorite">{{ $t("message.favoris") }}</p>
+    <input class="star" type="checkbox" title="Favoris" @click="postAddFavourite()"> 
   </div>
 </div>
 </template>
@@ -106,7 +102,7 @@ export default {
 <style scoped lang="scss">
 @media screen and (max-width : 600px) {
   html{
-    font-size : 5pt;
+    font-size : 1.5rem;
     
   }
   .wrapper{
@@ -118,6 +114,9 @@ export default {
     display:flex;
     width: 95%;
     max-width: 380px;
+    height: 12vh;
+    display:flex;
+    width: 90vw;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly; 
@@ -133,7 +132,7 @@ export default {
 }
 .nom h1{
   max-width: 100%;
-  font-size: 16px;
+  font-size: 2rem;
   text-align: center;
 }
 .nom{
@@ -147,8 +146,8 @@ export default {
 }
 }
 .image{
-  width: 20%;
-  height: 60%;
+  width: 25%;
+  height: 80%;
   align-items: center;
   align-content: center;
 }
@@ -163,22 +162,41 @@ export default {
 
 @media screen and (min-width : 601px) 
 {
-.wrapper{
-  position: relative;
-  border : solid 1px #f0e567;
-  border-radius: 40px;
-  margin-bottom: 20px;
-  display: flex;
-  max-width: 500px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;   
+ 
+  .wrapper{
+    position: relative;
+    border : solid 1px black;
+    border-radius: 40px;
+    margin-bottom: 10px;
+    height: 12vh;
+    display:flex;
+    width: 27vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly; 
+}
+.image{
+  width: 15%;
+  height: 60%;
+}
+.imageIcon{
+  max-width: 100%;
+  max-height:100%;
+ 
+}
+.nom h1{
+  max-width: 100%;
+  font-size: 2rem;
+  text-align: center;
+}
+.nom{
+  display:block;
+ width:50%;
+ 
 }
 .end{
   width: 20%;
-  height:5%;
-  position: relative;
-
+  height:100%
 }
 }
 

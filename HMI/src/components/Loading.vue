@@ -20,8 +20,8 @@ export default {
 
 <style>
 .sk-cube-grid {
-  width: 10vw;
-  height: 10vw;
+  width: 8vw;
+  height: 8vw;
   position : absolute;
   top : 50%;
   left : 50%;
@@ -31,8 +31,9 @@ export default {
 .sk-cube-grid .sk-cube {
   width: 33%;
   height: 33%;
-  background-color: white;
+  background-color: rgba(250,250,250,0.7);
   float: left;
+  margin: 0px;
   -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
           animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out; 
 }

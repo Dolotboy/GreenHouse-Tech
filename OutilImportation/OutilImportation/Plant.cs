@@ -20,9 +20,11 @@ namespace OutilImportation
         public string plantDescription { get; set; }
         public string plantDifficulty { get; set; }
         public string plantBestNeighbor { get; set; }
+        public int plantLocalId { get; set; }
         public string create_at { get; set; }
         public string updated_at { get; set; }
         public List<ConditionNb> conditionsNbs { get; set; }
+        public List<Problem> problems { get; set; }
 
         public override string ToString()
         {

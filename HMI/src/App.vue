@@ -5,11 +5,11 @@
         <img src="./assets/LogoV2.png" alt="Logo">
       </div>
       <ul>
-          <li><router-link to="/">Accueil</router-link></li> 
-          <li><a href="http://apipcst.xyz" target="_blank">API Interface</a></li>
-          <li v-if="!isLoggedIn" @click="toggleRegister">S'inscrire</li>
-          <li v-if="!isLoggedIn" @click="toggleLogin">Se connecter</li>   
-          <li v-if="isLoggedIn">Bonjour, {{ profile.firstName }} !</li>       
+          <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
+          <li><a href="http://apipcst.xyz/fr" target="_blank">{{ $t("message.APIInterface") }}</a></li>
+          <li v-if="!isLoggedIn" @click="toggleRegister"><router-link to="/register">{{ $t("message.signUp") }}</router-link></li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"><router-link to="/login">{{ $t("message.signIn") }}</router-link></li>   
+          <li v-if="isLoggedIn">{{ $t("message.hi") }}{{ profile.firstName }} !</li>
       </ul>
     </nav>
     <nav id="navMobile" style="transition: width 0.1s ease-in;">
@@ -21,36 +21,32 @@
         </div>
       </div>
      <ul class="links">
-          <li v-if="isLoggedIn">Profile number :{{ profile.idProfile }}</li> 
-          <li @click="toggleNavMobile"><a  href="/"><img  src=".\assets\outline_home_white_24dp.png"><p>Accueil</p></a></li> 
-          <li @click="toggleNavMobile"><a href="http://apipcst.xyz/fr"><img  src=".\assets\outline_info_white_24dp.png"><p>À propos</p></a></li>
-          <li v-if="!isLoggedIn" @click="toggleRegister"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>Inscription</p></li>
-          <li v-if="!isLoggedIn" @click="toggleLogin"><img src=".\assets\outline_login_white_24dp.png"><p>Connexion</p></li> 
-          
-          <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>Déconnexion</p></li> 
-      </ul>
-     
+          <li v-if="isLoggedIn">{{ $t("message.profileNumber") }} :{{ profile.idProfile }}</li> 
+          <li @click="toggleNavMobile"><a  href="/"><img  src=".\assets\outline_home_white_24dp.png"><p>{{ $t("message.accueil") }}</p></a></li> 
+          <li @click="toggleNavMobile"><a href="http://apipcst.xyz/fr"><img  src=".\assets\outline_info_white_24dp.png"><p>{{ $t("message.apropos") }}</p></a></li>
+          <li v-if="!isLoggedIn" @click="toggleRegister"><router-link to="/register"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>{{ $t("message.signUp") }}</p></router-link></li>
+          <li v-if="!isLoggedIn" @click="toggleLogin"><router-link to="/login"><img src=".\assets\outline_login_white_24dp.png"><p>{{ $t("message.signIn") }}</p></router-link></li> 
+          <li><a id="BtnFr"><img src=".\assets\outline_language_white_24dp.png"><p>Francais</p></a></li>
+          <li><a id="BtnEn"><img src=".\assets\outline_language_white_24dp.png"><p>English</p></a></li>
+          <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>{{ $t("message.disconnect") }}</p></li> 
+      </ul>    
     </nav>
     <router-view @popLogin="toggleLogin"/>  
-    <div @click="login(1)">login</div>
-    <div @click="logout">logout</div>
+    <div @click="login(1)">{{ $t("message.login") }}</div>
+    <div @click="logout">{{ $t("message.logout") }}</div>
     <Login @loggedIn="login" v-if="showLogin" @close="toggleLogin"/>
-    <Register v-if="showRegister" @close="toggleRegister"/>
+    <Register v-if="showRegister" @close="toggleRegister"/>-->
     <Loading v-if="showLoading"/>  
   </div>
 </template>
 
 <script>
 import toolbox from './toolbox.js';
-import Login from './components/Login.vue';
-import Register from './components/Register.vue';
 import Loading from './components/Loading.vue';
 import FavCondition from './components/FavCondition.vue';
 import $ from '../node_modules/jquery/dist/jquery.js';
 export default {
   components :{
-    Login,
-    Register,
     FavCondition,
     Loading
   },
@@ -60,8 +56,6 @@ export default {
           //envBack : "http://testenv.apipcst.xyz/",
           plants : [],
           favorites : [],
-          showLogin : false,
-          showRegister : false,
           showLoading : false,
           isLoggedIn : false,
           apiVersion : 0.0,
@@ -73,12 +67,6 @@ export default {
       this.Initialisation();
   },
   methods :{
-    toggleRegister(){
-      this.showRegister = !this.showRegister;   
-    },
-    toggleLogin(){
-      this.showLogin = !this.showLogin;
-    },
     toggleNavMobile(){
       let links = document.querySelector(".links");
       let navMobile = document.querySelector("#navMobile");
@@ -233,6 +221,8 @@ button{
   font-size: 1.2rem;   
   z-index: 1000; 
   background-color: rgba(0,0,0,0.9);
+  height: 9vh;
+
   .logo{
     width: 60px;
     height: 60px;
@@ -338,8 +328,8 @@ ul li {
     display:none;
   }
  }
-  .links{
-    
+    .links{
+    overflow-y: auto;
     display : none;
     flex-direction: column;
     height: 90vh;
@@ -347,9 +337,11 @@ ul li {
     position : relative;
     bottom : 0;
     left: 0;
+    
     list-style-type: none;
     width: 100%;
     padding: 0;
+
     #logout{
          position: fixed;
          width: 40vw;
@@ -362,6 +354,7 @@ ul li {
       text-decoration: none;
       margin: 1%;
       padding: 10px 5px;
+     min-height: 50px;
       width: 99%;
       height: 7vh;    
       text-align: center;
@@ -383,6 +376,7 @@ ul li {
       width :100%;
       height: 7vh;    
       text-align: center;
+      
         
        }
       &:hover{

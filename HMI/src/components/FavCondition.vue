@@ -1,7 +1,7 @@
 <template>
     <div class="FavConds">
         <div class="FavCondPlant">
-            <p>{{ $t("message.favCond") }}</p>  
+            <h1>{{ $t("message.favCond") }}</h1>  
             <div v-for='fav in plant.favorableConditions' class="FavCondPlantInfo">
                 <p>{{fav.type}} {{ $t("message.optimal") }} {{fav.min}} - {{fav.max}} {{fav.unit}}</p>
             </div> 
@@ -18,19 +18,41 @@ export default {
 </script>
 
 <style scoped>
+  @media screen and (min-width : 601px) 
+  {
 .FavConds{
     position :absolute;
-    top : 50%;
-    left : 50%;
+    top : -10%;
+    left: -75%;
     overflow-y: auto;
-    transform: translate(-50%, -50%);
-    background: rgb(71, 69, 69);
+    background: gray;
     border: solid;
     border-color: black;
-    width : 80vw;
+    width : 28vw;
     padding-left: 5%;
     padding-right: 5%;
+    overflow-y: auto;
 }
+  }
+  @media screen and (max-width : 600px) 
+  {
+  .FavConds
+{
+    height: auto;
+        max-height: 80vh;
+        position: absolute;
+        top : 40%;
+        left :30%;
+        background: gray;
+        border: solid;
+        border-color: black;
+        width : 50vw;
+        padding-left: 5%;
+        padding-right: 5%;
+        overflow-y: auto;
+
+}
+  }
 .close-button {
     position: absolute;
     top: 1%;
@@ -41,20 +63,17 @@ export default {
     cursor: pointer;
     border:solid;
     border-width: 1px;
-    border-color: grey;
+    border-color: transparent;
 }
-.details h1{
-    font-size: 35px;
+.FavCondPlant h1{
+    font-size: 1.2rem;
+    text-decoration: underline;
 }
-.FavCondPlant > p{
-    font-size: 30px;
-    margin:10px 0;
-}   
 .FavCondPlantInfo > p{
-    font-size: 15px;
+    font-size: 1.2rem;
     text-align: left;
     margin:10px 0;
-
+    font-weight: bold;
 }     
 .FavCondPlant{
     display: flex;
