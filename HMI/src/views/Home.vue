@@ -50,7 +50,9 @@
               <li><a><input type="checkbox" value="ALL" class="chkPlantDifficulty" checked>Tous</a></li>
             </ul>
           </li>
-          <li class="item"><a><input type="checkbox" id="chkAlphabetical">Alphabétique</a></li>          
+          <li class="item"><a><input type="checkbox" id="chkAlphabetical">Alphabétique</a></li>      
+          <button id="BtnFr">Fr</button>
+          <button id="BtnEn">En</button>    
         </ul>
       </div>
       <div class="logoMobile">
@@ -64,12 +66,18 @@
       <span></span>
       <span></span>
     </div>
-    <button id="BtnFr">Fr</button>
-        <button id="BtnEn">En</button>
     <div class="productsGrid">
       <Plant class="plant" style="margin-top: 6vh" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for="plant in visiblePlants" :plant="plant" :isFavoriteProp="checkIfIsFavorite(plant.idPlant)" />
     </div>
     <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant" />
+  
+    <footer>
+      <p>Fait par l'équipe de l'aide à la décision pour le Département d'informatique du Cégep de Jonquière</p>
+      <p class="separator"></p>
+      <p>Les images ont été fournies par <span>freepngimg.com</span> que vous pouvez retrouver à l'adresse suivante : </p>
+      <p>https://freepngimg.com/vegetables</p>
+    </footer>
+  
   </div>
 </template>
 
@@ -500,6 +508,32 @@ html {
       left: 30px;
       animation-delay: 0.8s;
     }
+  }
+}
+footer{
+  caret-color: transparent;
+  display : flex;
+  justify-content: center;
+  width : 100%;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.2rem;   
+  z-index: 1000; 
+  background-color: rgba(0,0,0,0.9);
+  height: 18vh;
+  margin-top : 7vh;
+
+  p{
+    color : white;
+    margin : 0;
+  }
+
+  span{
+    font-style: italic;
+  }
+
+  .separator{
+    height : 1vh;
   }
 }
 @keyframes animate {

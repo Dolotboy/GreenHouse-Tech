@@ -1,7 +1,7 @@
 exports.isProd = false;
 
 exports.getApiUrl = () =>{
-    if(this.isProd)
+    if(!this.isProd)
         return "http://localhost:8000/api/"; 
     return "http://testenv.apipcst.xyz/api/";
 }
