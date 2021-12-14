@@ -74,7 +74,7 @@
         </li>
         <li>
           <a class="item"
-            >{{ $t("message.famille") }}<i class="fa fa-chevron-down"></i
+            >{{ $t("message.family") }}<i class="fa fa-chevron-down"></i
           ></a>
           <span class="accent"></span>
           <ul class="drop-down">

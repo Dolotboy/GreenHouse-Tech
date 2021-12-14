@@ -2,7 +2,7 @@
   <div>
     <nav id="navDesktop">
       <div class="logo">
-        <img src="./assets/LogoV2.png" alt="Logo">
+        <router-link to="/"><img src="./assets/LogoV2.png" alt="Logo"></router-link>
       </div>
       <ul>
           <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
