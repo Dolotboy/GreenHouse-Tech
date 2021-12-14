@@ -1,10 +1,18 @@
 <template>
     <div class="login">
+<<<<<<< HEAD:HMI/src/views/Login.vue
 
           <h1>{{ $t("message.login") }}</h1>
         <div class="loginImage">
            <img class="imageIcon" src="../assets/LogoV2.png">
        </div>
+=======
+<<<<<<< HEAD
+       <h1>Connexion</h1>
+        <div class="loginImage">
+           <img class="imageIcon" src="../assets/LogoV2.png">
+       </div>
+        <h1>{{ $t("message.login") }}</h1>
         <div class="loginForm">
           <form >
           <div>
@@ -14,6 +22,23 @@
           <div>
             <!-- <label for="psw"><b>{{ $t("message.password") }}: </b></label> -->
             <input v-model="password" class="inputBox" type="password" v-bind:placeholder="$t('message.password')" name="psw" required>
+=======
+        <h1>Connexion</h1>
+>>>>>>> ca104844fe79e7d6b1b70286e03b92a7858f8281:HMI/src/components/Login.vue
+        <div class="loginForm">
+          <form >
+          <div>
+         <!-- <label for="uname"><b>{{ $t("message.mail") }}: </b></label> -->
+            <input class="inputBox" type="text" v-bind:placeholder="$t('message.mail')" name="uname" required  v-model="email">
+          </div>
+          <div>
+<<<<<<< HEAD:HMI/src/views/Login.vue
+            <!-- <label for="psw"><b>{{ $t("message.password") }}: </b></label> -->
+            <input v-model="password" class="inputBox" type="password" v-bind:placeholder="$t('message.password')" name="psw" required>
+=======
+            <input v-model="password" class="inputBox" type="password" placeholder="Entrez le mot de passe" name="psw" required>
+>>>>>>> a940a3a3af44d773d0d6345e4f4489022888bf1d
+>>>>>>> ca104844fe79e7d6b1b70286e03b92a7858f8281:HMI/src/components/Login.vue
             </div>
           </form>
     <!--
@@ -24,6 +49,7 @@
                 <input type="checkbox" name="remember">{{ $t("message.rememberMe") }}
               </label>
               </div>
+<<<<<<< HEAD:HMI/src/views/Login.vue
             <div class="container">
               <span class="psw"><a href="#">>{{ $t("message.passwordForgot") }}</a></span>
             </div>
@@ -34,6 +60,22 @@
         </div>
     
         <div class="close-button" @click="$emit('close')" >X</div>        
+=======
+<<<<<<< HEAD
+            <div class="container">
+              <span class="psw"><a href="#">>{{ $t("message.passwordForgot") }}</a></span>
+            </div>
+          </div>
+          <button type="submit" class="BtnConnexion" @click="postCheckLogin()">{{ $t("message.login") }}</button>
+        </div>
+        
+        <div class="close-button" @click="$emit('close')" >X</div>        
+=======
+          </div>
+          <button type="submit" class="BtnConnexion" @click="postCheckLogin()">Se connecter</button>
+        </div>      
+>>>>>>> a940a3a3af44d773d0d6345e4f4489022888bf1d
+>>>>>>> ca104844fe79e7d6b1b70286e03b92a7858f8281:HMI/src/components/Login.vue
     </div>
 </template>
 
@@ -125,7 +167,19 @@ export default {
     .loginForm{
       font-size: 1.6rem;
       flex-direction: column;
+<<<<<<< HEAD:HMI/src/views/Login.vue
        width: 70%;
+=======
+<<<<<<< HEAD
+      width: 70%;
+=======
+<<<<<<< HEAD
+       width: 70%;
+=======
+      width: 70vw;
+>>>>>>> request#121
+>>>>>>> a940a3a3af44d773d0d6345e4f4489022888bf1d
+>>>>>>> ca104844fe79e7d6b1b70286e03b92a7858f8281:HMI/src/components/Login.vue
     }
    
     .inputBox
@@ -133,7 +187,19 @@ export default {
       height:5vh;
       margin-top:3%;
       margin-bottom: 3%;
+<<<<<<< HEAD:HMI/src/views/Login.vue
       width: 70vw;
+=======
+<<<<<<< HEAD
+      width: 85%;   
+=======
+<<<<<<< HEAD
+      width: 70vw;
+=======
+      width: 85%;   
+>>>>>>> request#121
+>>>>>>> a940a3a3af44d773d0d6345e4f4489022888bf1d
+>>>>>>> ca104844fe79e7d6b1b70286e03b92a7858f8281:HMI/src/components/Login.vue
     }
 }
 }

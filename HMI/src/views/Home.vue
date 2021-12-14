@@ -256,12 +256,13 @@ export default {
       for(let i = 0; i < this.visiblePlants.length; i++)
           strings.push(this.plants[i].plantName);
       return strings;
-    }, 
-    checkIfIsFavorite(idPlant){
-      if(this.favorites == null)
+    },
+    checkIfIsFavorite(idPlant) {
+      console.log("Favorites : " + JSON.stringify(this.favorites));
+      if (this.favorites == null) 
         return false;
-      for(let i = 0; i < this.favorites.length; i++)
-        if(this.favorites[i].tblPlant_idPlant == idPlant)
+      for (let i = 0; i < this.favorites.length; i++)
+        if (this.favorites[i].tblPlant_idPlant == idPlant) 
           return true;
       return false;
     }
@@ -314,7 +315,10 @@ export default {
   #searchBarautocomplete-list:hover{
     cursor : pointer;
   }
+  
+    border-color: #007200;
 }
+
 
 .filters {
   height: 30px;
