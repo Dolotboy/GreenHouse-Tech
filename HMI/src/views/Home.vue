@@ -33,16 +33,16 @@
           <li><a class="item">Famille<i class="fa fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
-              <li><a><input type="checkbox" class="chkPlantFamily" value="Asteracées">Asteraceae</a></li>
-              <li><a><input type="checkbox" class="chkPlantFamily" value="Brassicacées" >Brassicaceae</a></li>
-              <li><a><input type="checkbox" class="chkPlantFamily" value="Chénopodiacée" >Chénopodiacée</a></li>
-              <li><a><input type="checkbox" class="chkPlantFamily" value="Cucurbitacée" >Cucurbitacée</a></li>
-              <li><a><input type="checkbox" class="chkPlantFamily" value="Fabacées" >Fabaceae</a></li>
-              <li><a><input type="checkbox" class="chkPlantFamily" value="Liliaceae" >Liliaceae</a></li>
-              <li><a><input type="checkbox" class="chkPlantFamily" value="Ombellifère" >Ombellifère</a></li>
-              <li><a><input type="checkbox" class="chkPlantFamily" value="Poacée" >Poacée</a></li>
-              <li><a><input type="checkbox" class="chkPlantFamily" value="Rosacée" >Rosacée</a></li>
-              <li><a><input type="checkbox" class="chkPlantFamily" value="Solonacée" >Solonacée</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Asteracées">Asteracées</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Brassicacées" >Brassicacées</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Chénopodiacées" >Chénopodiacées</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Cucurbitacées" >Cucurbitacées</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Fabacées" >Fabacées</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Liliacées" >Liliacées</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Ombellifères" >Ombellifères</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Poacées" >Poacées</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Rosacées" >Rosacées</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Solonacées" >Solonacées</a></li>
               <li><a><input type="checkbox" class="chkPlantFamily" value="ALL" checked>All</a></li>
             </ul>
           </li>
@@ -56,8 +56,8 @@
             </ul>
           </li>
           <li><a class="item"><input type="checkbox" id="chkAlphabetical">Alphabétique</a></li>      
-          <button id="BtnFr">Fr</button>
-          <button id="BtnEn">En</button>    
+          <button style="display : none;" id="BtnFr">Fr</button>
+          <button style="display : none;" id="BtnEn">En</button>    
         </ul>
       </div>
       <div class="logoMobile">
