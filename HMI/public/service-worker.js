@@ -20,11 +20,7 @@ self.addEventListener('install', function() {
   self.addEventListener("activate", event => {
     console.log('Activate!');
   });
-<<<<<<< HEAD
-  
-=======
  
->>>>>>> 152a9b14dbf7e349a0862bc6048805567c98f966
   self.addEventListener('fetch', function(event) {
     event.respondWith(async function() {
       const cache = await caches.open('my-cache');
@@ -40,8 +36,4 @@ self.addEventListener('install', function() {
       return cachedResponse || networkResponsePromise;
     }());
     //console.log('Fetch! ', event.request);
-<<<<<<< HEAD
   });
-=======
-  });
->>>>>>> 152a9b14dbf7e349a0862bc6048805567c98f966
