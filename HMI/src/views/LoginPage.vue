@@ -58,10 +58,10 @@ export default {
       let that = this;
 
       $.ajax({
+        type: "post",
         url: toolbox.getApiUrl() + "login/checkLogin/",
         datatype: "json",
         contentType: "application/json",
-        type: "post",
         data: JSON.stringify(user),
         success: function (status) {
           localStorage.setItem("loggedInToken", status.id);
