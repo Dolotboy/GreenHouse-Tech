@@ -692,13 +692,13 @@ html{
   .indicator{
     display:none;
   }
-  .filters {
+ .filters {
   height:30px;
   
   ul {
     width: 100vw;
-    padding-left:5vw;
-    padding-right: 5vw;
+    padding-left:5%;
+    padding-right: 5%;
 
   li {
     float: left;
@@ -706,7 +706,7 @@ html{
     list-style: none;
     position: relative;
     z-index : 5;
-    width: 22vw;
+    width: 20%;
        
     a {
       text-transform: uppercase;
