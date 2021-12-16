@@ -182,6 +182,7 @@ export default {
     border-radius: 40px;
     margin-bottom: 10px;
     height: 12vh;
+    min-height: 70px;
     display:flex;
     width: 27vw;
     flex-direction: row;
