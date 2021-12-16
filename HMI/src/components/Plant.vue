@@ -126,7 +126,7 @@ export default {
     height: 80px;
     display:flex;
     width: 95%;
-    max-width: 380px;
+    min-width: 380px;
     height: 12vh;
     display:flex;
     width: 90vw;

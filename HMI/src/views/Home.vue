@@ -37,12 +37,17 @@
           <li><a  class="item">{{$t("message.family") }}<i class="fa fa-chevron-down"></i></a>
             <span class="accent"></span>
             <ul class="drop-down">
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Blue</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Black</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Orange</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Green</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily">Red</a></li>
-              <li><a href="#"><input type="checkbox" class="chkPlantFamily" value="ALL" checked>{{ $t("message.filtreAll") }}</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Asteracées">Asteraceae</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Brassicacées" >Brassicaceae</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Chénopodiacée" >Chénopodiacée</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Cucurbitacée" >Cucurbitacée</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Fabacées" >Fabaceae</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Liliaceae" >Liliaceae</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Ombellifère" >Ombellifère</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Poacée" >Poacée</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Rosacée" >Rosacée</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="Solonacée" >Solonacée</a></li>
+              <li><a><input type="checkbox" class="chkPlantFamily" value="ALL" checked>All</a></li>
             </ul>
           </li>
           <li><a class="item" onclick="" >{{ $t("message.difficulty") }}<i class="fa fa-chevron-down"></i></a>
@@ -54,20 +59,31 @@
               <li><a><input type="checkbox" value="ALL" class="chkPlantDifficulty" checked>{{ $t("message.filtreAll") }}</a></li>
             </ul>
           </li>
-          <li class="filterAlphaWrapper">
-            <div style="color:white; background-color:black ; border:solid 1px white; height:35px;">
-              <label>{{ $t("message.alphabetical") }}</label>
-              <input type="checkbox" checked id="chkAlphabetical">
-            </div>
-          </li>
-      
+          <li><a class="item"><input type="checkbox" id="chkAlphabetical">Alphabétique</a></li>      
+          <button id="BtnFr">Fr</button>
+          <button id="BtnEn">En</button>    
         </ul>
       </div>
-      <div class="productsGrid">
-        <Plant  class="plant" style="margin-top: 6vh;" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for='plant in visiblePlants' :plant="plant" :isFavorite="checkIfIsFavorite(plant.idPlant)"/>    
-      </div>
-        <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant"/>  
-      </div>
+     
+    <div class="indicator">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="productsGrid">
+      <Plant class="plant" style="margin-top: 6vh" @popLogin="this.$emit('popLogin')" @favClicked="toggleDetails(plant.idPlant)" @click="toggleDetails(plant.idPlant)" v-for="plant in visiblePlants" :plant="plant" :isFavoriteProp="checkIfIsFavorite(plant.idPlant)" />
+    </div>
+    <Details @close="toggleDetails" v-if="showDetails" :plant="detailedPlant" />
+  
+    <footer>
+      <p>Fait par l'équipe de l'aide à la décision pour le Département d'informatique du Cégep de Jonquière</p>
+      <p class="separator"></p>
+      <p>Les images ont été fournies par <span>freepngimg.com</span> que vous pouvez retrouver à l'adresse suivante : </p>
+      <p>https://freepngimg.com/vegetables</p>
+    </footer>
+  
+  </div>
 </template>
 
 <style lang="scss">
@@ -307,17 +323,50 @@ export default {
     height:4vh;
 
   }
-  #searchBarautocomplete-list{
-    position : absolute;
-    top : 100%;
-    background : white;
+}
+footer{
+  caret-color: transparent;
+  display : flex;
+  justify-content: center;
+  width : 100%;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.2rem;   
+  z-index: 1000; 
+  background-color: rgba(0,0,0,0.9);
+  height: 18vh;
+  margin-top : 7vh;
+
+  p{
+    color : white;
+    margin : 0;
   }
 
+  span{
+    font-style: italic;
+  }
+
+  .separator{
+    height : 1vh;
+  }
+}
+@keyframes animate {
+  0%{
+    border-color:#fff;
+    transform:translate(0,0);
+  }
+   20%{
+    border-color:#fff;
+     transform:translate(15px,15px);
+  }
+   20.1%,100%{
+    border-color:#007200;
+  }
+}
   #searchBarautocomplete-list:hover{
     cursor : pointer;
   }
   
-    border-color: #007200;
 }
 
 
@@ -427,7 +476,7 @@ export default {
     max-width: 100%;
   }
 }
-}
+
 
 .logoMobile{
   display:none;

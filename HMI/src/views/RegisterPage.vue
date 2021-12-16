@@ -14,7 +14,7 @@
           <input class="inputBox" type="email" placeholder="Entrez votre adresse email" name="uname" required v-model="email"/>
           <input class="passDiv" v-model="password" type="password" placeholder="Entrez votre mot de passe" name="password" required/>
           <input class="passDiv" v-model="confirmPassword" type="password" placeholder="Confirmez votre mot de passe" name="confPassword" required/>
-          <button type="submit" class="btn from-left" @click="postCreateUser()">S'inscrire</button>    
+          <button type="button" class="btn from-left" @click="postCreateUser()">S'inscrire</button>    
         </div>
       </form>
     </div>
@@ -49,11 +49,10 @@ export default {
         return user;
       },
       postCreateUser(){
-        console.log(this.password + this.confirmPassword);
       if(this.password == this.confirmPassword)
       {
         let user = this.createUser();
-        console.log(JSON.stringify(user));
+        let that = this;
         //$.post("https://apitestenv.pcst.xyz/api/new/profile/addProfile", JSON.stringify(user));
         $.ajax({
           type: "post",
@@ -63,11 +62,10 @@ export default {
           data: JSON.stringify(user),
           success: function(status)
           {
-            console.log(JSON.stringify(user) + "success");
-            alert(status); 
+            alert("Inscription réussie"); 
+            that.$router.push('/login');
           }
         });
-        console.log(JSON.stringify(user))
       }
       else
       {

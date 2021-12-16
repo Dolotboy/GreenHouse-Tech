@@ -25,7 +25,7 @@ export default {
     top : -10%;
     left: -75%;
     overflow-y: auto;
-    background: gray;
+    background: white;
     border: solid;
     border-color: black;
     width : 28vw;

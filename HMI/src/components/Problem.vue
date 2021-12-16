@@ -27,7 +27,7 @@ export default {
     position: absolute;
     top : -10%;
     left :10%;
-    background: gray;
+    background: white;
     border: solid;
     border-color: black;
     width : 32vw;
