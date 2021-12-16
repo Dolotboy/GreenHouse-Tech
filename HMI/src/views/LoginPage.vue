@@ -59,7 +59,7 @@ export default {
 
       $.ajax({
         type: "post",
-        url: toolbox.getApiUrl() + "login/checkLogin/",
+        url: toolbox.getApiUrl() + "login/checkLogin",
         datatype: "json",
         contentType: "application/json",
         data: JSON.stringify(user),
