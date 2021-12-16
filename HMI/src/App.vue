@@ -7,6 +7,8 @@
       <ul>
           <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
           <li><a href="http://apipcst.xyz/fr" target="_blank">{{ $t("message.APIInterface") }}</a></li>
+           <li><a id="BtnFr"><p>Francais</p></a></li>
+          <li><a id="BtnEn"><p>English</p></a></li>
           <li v-if="!isLoggedIn" @click="toggleRegister"><router-link to="/register">{{ $t("message.signUp") }}</router-link></li>
           <li v-if="!isLoggedIn" @click="toggleLogin"><router-link to="/login">{{ $t("message.signIn") }}</router-link></li>   
           <li v-if="isLoggedIn">{{ $t("message.hi") }}{{ profile.firstName }} !</li>

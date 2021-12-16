@@ -60,8 +60,7 @@
             </ul>
           </li>
           <li><a class="item"><input type="checkbox" id="chkAlphabetical">Alphabétique</a></li>      
-          <button id="BtnFr">Fr</button>
-          <button id="BtnEn">En</button>    
+          
         </ul>
       </div>
      
