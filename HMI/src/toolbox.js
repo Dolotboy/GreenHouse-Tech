@@ -3,6 +3,7 @@ exports.isProd = false;
 exports.getApiUrl = () =>{
     if(!this.isProd)
         return "http://localhost/Aide_Decision/public/api/"; 
+        //return "http://localhost:8000/api/";
     return "http://testenv.apipcst.xyz/api/";
 }
 
