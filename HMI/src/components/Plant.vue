@@ -183,8 +183,9 @@ export default {
     margin-bottom: 10px;
     height: 12vh;
     min-height: 70px;
+    min-width: 300px;
     display:flex;
-    width: 27vw;
+    width: 25vw;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly; 

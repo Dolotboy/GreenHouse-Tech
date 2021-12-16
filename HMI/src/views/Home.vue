@@ -403,26 +403,29 @@ footer{
     .drop-down {
       position: absolute;
       padding: 0;
+      width: 100%;
       display: none;
       margin: 0;
-
       left: 0;
       z-index: 0;
+      text-align: left;
+      
       
       input {
         display: inline-block;
-        float: left;
-        width: 100%
-        ;
       }  
       li {
         position: relative;
         float: none;
         z-index : 10;
+        width: 100%;
         
         a {
-          border-top: none;
-          width: 150px;
+        border-top: none;
+          width: 100%;
+          font-size: 14px;
+          padding: 3px 2px 3px 2px;
+          height: 5vh;
           
           &:hover {
             background: #000000;
@@ -438,11 +441,6 @@ footer{
   }
   }
 }
-}
-
-
-
-
 .bg-image{
   height: 100vh;
 }
@@ -471,10 +469,16 @@ footer{
   height: 10vh;
 
   img{
+    width: 50px;
     max-height: 100%;
     max-width: 100%;
   }
 }
+}
+
+
+
+
 
 
 .logoMobile{
