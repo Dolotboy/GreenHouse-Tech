@@ -7,7 +7,7 @@
       <ul>
           <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
           <li><a href="http://apipcst.xyz/fr" target="_blank">{{ $t("message.APIInterface") }}</a></li>
-           <li><a id="BtnFr"><p>Francais</p></a></li>
+          <li><a id="BtnFr"><p>Francais</p></a></li>
           <li><a id="BtnEn"><p>English</p></a></li>
           <li v-if="!isLoggedIn" @click="toggleRegister"><router-link to="/register">{{ $t("message.signUp") }}</router-link></li>
           <li v-if="!isLoggedIn" @click="toggleLogin"><router-link to="/login">{{ $t("message.signIn") }}</router-link></li>   
@@ -219,7 +219,7 @@ button{
 #navDesktop{
   top : 0;
   position : fixed;
-  padding : 0 20%;
+  padding : 0 10%;
   caret-color: transparent;
   display : flex;
   justify-content: space-between;
@@ -397,9 +397,9 @@ ul li {
     }
   }
 }
-@media screen and (max-width : 1200px) {
+@media screen and (max-width : 750px) {
   html{
-    font-size : 7.5pt;
+    font-size : 6pt;
   }
   .lblInp-div{
     flex-direction: column;
@@ -408,6 +408,34 @@ ul li {
     input{
       width : 100% !important;
       margin : 0 !important;
+    }
+  }
+  #navDesktop{
+    ul{
+      align-items: center;
+      width: 100%;
+    }
+  }
+}
+@media screen and (min-width : 751px) {
+  html{
+    font-size : 7.5pt;
+  }
+  .lblInp-div{
+    flex-direction: column;
+    align-items: center;
+    height : 7rem;
+    input{
+      width : 100% !important;
+      margin : 0 !important;
+    }
+  }
+  #navDesktop{
+    ul{
+      display: inline-flex;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
     }
   }
 }

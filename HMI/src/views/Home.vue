@@ -697,7 +697,7 @@ display: none;
     display:none;
   }
  .filters {
-  height:30px;
+  height:35px;
   
   ul {
     width: 100vw;
@@ -719,9 +719,9 @@ display: none;
       color: white;
       background-color: black;
       border: 1px solid #fff;
-      height: 35px;
+      height: 40px;
       letter-spacing: 1px;
-      padding: 6px 5px 6px 5px;
+      padding: 9px 5px 9px 5px;
       display: block;
       z-index: 5;
 

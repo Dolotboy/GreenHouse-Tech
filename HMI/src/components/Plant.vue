@@ -185,7 +185,7 @@ export default {
     min-height: 70px;
     min-width: 300px;
     display:flex;
-    width: 25vw;
+    width: 27vw;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly; 
