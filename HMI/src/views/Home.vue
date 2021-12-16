@@ -365,11 +365,7 @@ footer{
   #searchBarautocomplete-list:hover{
     cursor : pointer;
   }
-  
-}
-
-
-.filters {
+  .filters {
   height: 30px;
   ul {
   width:  70vw;
@@ -442,6 +438,10 @@ footer{
   }
   }
 }
+}
+
+
+
 
 .bg-image{
   height: 100vh;
@@ -608,7 +608,7 @@ html{
   color: #FFFFFF;
   text-shadow:  0 -2px 10px #f0e567;
   display : grid;
-  grid-template-columns : repeat(auto-fit, minmax(50%, 1fr));
+  grid-template-columns : repeat(auto-fit, minmax(400px, 1fr));
   justify-content: center;
   justify-items: center;
   width : 100vw;
@@ -633,7 +633,7 @@ html{
 }
 .bg-image{
 
-
+display: none;
 }
 
  .autoCompleteForm{
@@ -706,7 +706,7 @@ html{
     list-style: none;
     position: relative;
     z-index : 5;
-    width: 20%;
+    width: 22vw;
        
     a {
       text-transform: uppercase;
@@ -717,7 +717,7 @@ html{
       border: 1px solid #fff;
       height: 35px;
       letter-spacing: 1px;
-      padding: 12px 10px 12px 10px;
+      padding: 6px 5px 6px 5px;
       display: block;
       z-index: 5;
 
