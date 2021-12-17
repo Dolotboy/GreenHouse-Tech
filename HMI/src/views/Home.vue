@@ -294,9 +294,8 @@ export default {
   color: #FFFFFF;
   text-shadow:  0 -2px 10px #f0e567;
   display : grid;
-  grid-template-columns : repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns : repeat(auto-fit, minmax(500px, 1fr));
   width : 100%;
-  justify-items: center;
   padding : 2vh 5vw 0 5vw;
   column-gap: 30px;
   row-gap: 30px;
@@ -389,7 +388,7 @@ footer{
       letter-spacing: 1px;
       padding: 10px 15px 10px 25px;
       display: block;
-      width: 150px;
+      width: 200px;
       z-index: 500;
 
       i {
