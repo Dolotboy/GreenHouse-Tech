@@ -7,8 +7,8 @@
       <ul style="transform: translateX(-60px);">
           <li><router-link to="/">{{ $t("message.accueil") }}</router-link></li> 
           <li><a href="http://apipcst.xyz/fr" target="_blank">{{ $t("message.APIInterface") }}</a></li>
-          <li style="display : none"><a id="BtnFr"><p>Francais</p></a></li>
-          <li style="display : none"><a id="BtnEn"><p>English</p></a></li>
+          <li><a id="BtnFr" @click="setLanguage('fr')"><p>Francais</p></a></li>
+          <li><a id="BtnEn" @click="setLanguage('en')"><p>English</p></a></li>
           <li v-if="!isLoggedIn" @click="toggleRegister"><router-link to="/register">{{ $t("message.signUp") }}</router-link></li>
           <li v-if="!isLoggedIn" @click="toggleLogin"><router-link to="/login">{{ $t("message.signIn") }}</router-link></li>   
           <li v-if="isLoggedIn">{{ $t("message.hi") }}{{ profile.firstName }} !</li>
@@ -29,8 +29,8 @@
           <li @click="toggleNavMobile"><a href="http://apipcst.xyz/fr"><img  src=".\assets\outline_info_white_24dp.png"><p>{{ $t("message.apropos") }}</p></a></li>
           <li v-if="!isLoggedIn" @click="toggleRegister"><router-link to="/register"><img  src=".\assets\outline_save_alt_white_24dp.png"><p>{{ $t("message.signUp") }}</p></router-link></li>
           <li v-if="!isLoggedIn" @click="toggleLogin"><router-link to="/login"><img src=".\assets\outline_login_white_24dp.png"><p>{{ $t("message.signIn") }}</p></router-link></li> 
-          <li style="display : none"><a id="BtnFr"><img src=".\assets\outline_language_white_24dp.png"><p>Francais</p></a></li>
-          <li style="display : none"><a id="BtnEn"><img src=".\assets\outline_language_white_24dp.png"><p>English</p></a></li>
+          <li><a id="BtnFr" @click="setLanguage('fr')"><img src=".\assets\outline_language_white_24dp.png"><p>Francais</p></a></li>
+          <li><a id="BtnEn" @click="setLanguage('en')"><img src=".\assets\outline_language_white_24dp.png"><p>English</p></a></li>
           <li v-if="isLoggedIn" @click="Logout" id="logout"><img src=".\assets\outline_logout_white_24dp.png"><p>{{ $t("message.disconnect") }}</p></li> 
       </ul>
     </nav>
@@ -68,6 +68,10 @@ export default {
       this.Initialisation();
   },
   methods :{
+    setLanguage(lang){
+      localStorage.setItem("locale", lang);
+      location.reload();
+    },
     toggleNavMobile(){
       let links = document.querySelector(".links");
       let navMobile = document.querySelector("#navMobile");
