@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExcelLoader.cs" />
+    <Compile Include="HttpHelper.cs" />
     <Compile Include="Interface.cs" />
     <Compile Include="Problem.cs" />
     <Compile Include="Response.cs" />
